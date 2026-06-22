@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="theme-color" content="#FAF6EC" />
+<title>go DC Tower — Ramen, La Mian & Asian Fusion im DC Tower Wien</title>
+<meta name="description" content="Ra'mien go DC Tower – Asian Fusion, Ramen, La Mian, Bowls, Sushi & Gyoza im DC Tower Wien. Online bestellen, Tisch reservieren, Catering anfragen." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header class="site-header" id="top">
+  <div class="container header-row">
+    <a href="#top" class="logo" aria-label="go DC Tower – Startseite">
+      <span class="logo-mark" aria-hidden="true">麺</span>
+      <span class="logo-text">
+        <span class="logo-go">go</span><span class="logo-dc">DC&nbsp;Tower</span>
+      </span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Hauptnavigation">
+      <a href="#menu">Menü</a>
+      <a href="#reservieren">Reservieren</a>
+      <a href="#catering">Catering</a>
+      <a href="#standort">Standort</a>
+    </nav>
+
+    <div class="header-ctas">
+      <a href="#reservieren" class="btn btn-outline btn-sm hide-sm">Tisch reservieren</a>
+      <a href="#menu" class="btn btn-primary btn-sm">Online bestellen</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav-mobile" id="navMobile" hidden>
+    <a href="#menu">Menü</a>
+    <a href="#reservieren">Reservieren</a>
+    <a href="#catering">Catering</a>
+    <a href="#standort">Standort</a>
+    <a href="#reservieren" class="btn btn-outline btn-block">Tisch reservieren</a>
+    <a href="#menu" class="btn btn-primary btn-block">Online bestellen</a>
+  </div>
+</header>
+
+<main>
+
+<!-- ========== HERO ========== -->
+<section class="hero">
+  <div class="hero-skyline" aria-hidden="true">
+    <svg viewBox="0 0 1440 600" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <linearGradient id="towerGrad" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0%" stop-color="#16181C" stop-opacity=".06"/>
+          <stop offset="100%" stop-color="#16181C" stop-opacity=".18"/>
+        </linearGradient>
+      </defs>
+      <!-- horizon -->
+      <rect x="0" y="540" width="1440" height="60" fill="#16181C" opacity=".05"/>
+      <!-- city blocks -->
+      <rect x="40"  y="430" width="60"  height="110" fill="url(#towerGrad)"/>
+      <rect x="120" y="380" width="80"  height="160" fill="url(#towerGrad)"/>
+      <rect x="220" y="410" width="50"  height="130" fill="url(#towerGrad)"/>
+      <rect x="290" y="350" width="70"  height="190" fill="url(#towerGrad)"/>
+      <rect x="380" y="400" width="60"  height="140" fill="url(#towerGrad)"/>
+      <rect x="460" y="360" width="55"  height="180" fill="url(#towerGrad)"/>
+      <!-- DC Tower (the hero) -->
+      <polygon points="780,120 880,140 880,540 780,540" fill="#16181C" opacity=".22"/>
+      <rect x="780" y="120" width="100" height="420" fill="url(#towerGrad)"/>
+      <!-- companion tower -->
+      <rect x="900" y="260" width="70" height="280" fill="url(#towerGrad)"/>
+      <!-- right side -->
+      <rect x="1000" y="380" width="60" height="160" fill="url(#towerGrad)"/>
+      <rect x="1080" y="350" width="80" height="190" fill="url(#towerGrad)"/>
+      <rect x="1180" y="400" width="60" height="140" fill="url(#towerGrad)"/>
+      <rect x="1260" y="370" width="70" height="170" fill="url(#towerGrad)"/>
+      <rect x="1350" y="420" width="50" height="120" fill="url(#towerGrad)"/>
+    </svg>
+  </div>
+
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        DC Tower · Wien
+      </span>
+      <h1 class="hero-title">
+        Fresh, healthy<br/>
+        <em>asian.</em><br/>
+        <span class="hero-title-accent">Mitten im DC Tower.</span>
+      </h1>
+      <p class="hero-sub">
+        Ramen, La Mian, Bowls, Wok, Gyoza & Sushi — frisch zubereitet.
+        <span class="hero-motto">From our kitchen to your soul.</span>
+      </p>
+      <div class="hero-ctas">
+        <a href="#menu" class="btn btn-primary btn-xl">
+          Jetzt bestellen
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#reservieren" class="btn btn-outline btn-xl">Tisch reservieren</a>
+      </div>
+      <ul class="hero-meta">
+        <li><strong>11:00–22:30</strong> · täglich</li>
+        <li><strong>Abholung & Lieferung</strong></li>
+        <li><strong>Eventräume</strong> bis 80&nbsp;Personen</li>
+      </ul>
+    </div>
+
+    <aside class="hero-card" aria-hidden="true">
+      <div class="hero-card-tag">Bestseller</div>
+      <div class="hero-card-photo" style="background-image:url('https://images.unsplash.com/photo-1623341214825-9f4f963727da?w=900&amp;q=80&amp;auto=format&amp;fit=crop');">
+        <span class="kanji-watermark">麺</span>
+      </div>
+      <div class="hero-card-body">
+        <div>
+          <div class="hero-card-name">Kokoscurry La Mian</div>
+          <div class="hero-card-desc">Handgezogene Nudeln · Huhn · Kokos · Limettenblatt</div>
+        </div>
+        <div class="hero-card-price">€&nbsp;14,90</div>
+      </div>
+    </aside>
+  </div>
+
+  <span class="tower-accent" aria-hidden="true"></span>
+</section>
+
+<!-- ========== MENU & ORDER ========== -->
+<section class="menu-section" id="menu">
+  <div class="container">
+    <header class="section-head">
+      <div>
+        <span class="eyebrow"><span class="eyebrow-dot"></span>Menü &amp; Bestellen</span>
+        <h2 class="section-title">Such dir was Gutes aus.</h2>
+        <p class="section-sub">Große Portionen, frische Zutaten, faire Preise.<br class="hide-sm"/>
+          Wähle Abholung oder Lieferung beim Checkout.</p>
+      </div>
+      <a href="#cart" class="btn btn-ghost mobile-cart-jump">
+        Warenkorb ansehen
+        <span class="badge" id="cartBadgeJump">0</span>
+      </a>
+    </header>
+
+    <!-- category tabs -->
+    <div class="tabs" role="tablist" aria-label="Menükategorien">
+      <button class="tab is-active" role="tab" aria-selected="true" data-cat="all">Alle</button>
+      <button class="tab" role="tab" aria-selected="false" data-cat="la-mian">La Mian</button>
+      <button class="tab" role="tab" aria-selected="false" data-cat="ramen">Ramen</button>
+      <button class="tab" role="tab" aria-selected="false" data-cat="bowls">Bowls</button>
+      <button class="tab" role="tab" aria-selected="false" data-cat="wok">Wok</button>
+      <button class="tab" role="tab" aria-selected="false" data-cat="gyoza">Gyoza</button>
+      <button class="tab" role="tab" aria-selected="false" data-cat="sushi">Sushi</button>
+    </div>
+
+    <div class="menu-layout">
+
+      <!-- dish grid -->
+      <div class="menu-grid" id="menuGrid">
+        <!-- cards injected by JS -->
+      </div>
+
+      <!-- sticky cart (desktop) -->
+      <aside class="cart" id="cart" aria-label="Warenkorb">
+        <div class="cart-head">
+          <h3>Dein Warenkorb</h3>
+          <span class="badge badge-amber" id="cartBadge">0</span>
+        </div>
+
+        <ul class="cart-list" id="cartList">
+          <li class="cart-empty">Noch nichts ausgewählt.<br/>Tippe auf <span class="plus-mini">+</span>, um Gerichte hinzuzufügen.</li>
+        </ul>
+
+        <div class="cart-foot">
+          <div class="cart-row">
+            <span>Zwischensumme</span>
+            <span id="cartSubtotal">€ 0,00</span>
+          </div>
+          <div class="cart-row cart-total">
+            <span>Gesamt</span>
+            <span id="cartTotal">€ 0,00</span>
+          </div>
+
+          <div class="fulfil">
+            <label><input type="radio" name="fulfil" value="abholung" checked/> <span>Abholung · ~15 min</span></label>
+            <label><input type="radio" name="fulfil" value="lieferung"/> <span>Lieferung · ~35 min</span></label>
+          </div>
+
+          <button class="btn btn-primary btn-block btn-lg" id="checkoutBtn" disabled>
+            Zur Kasse
+          </button>
+          <p class="cart-note">Bezahlung sicher per Karte, Apple Pay oder Bar bei Abholung.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section class="about">
+  <div class="container about-grid">
+    <div class="about-copy">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Über uns</span>
+      <h2 class="section-title">DC&nbsp;Tower's <em>hidden gem</em> in Wien.</h2>
+      <p class="about-text">
+        Asiatische Fusionsküche, mitten in der Donau City. Bei uns gibt's
+        handgezogene La&nbsp;Mian, ehrliche Ramen, bunte Bowls und Sushi —
+        frisch zubereitet, große Portionen, faires Preis-Leistungs-Verhältnis.
+      </p>
+      <p class="about-quote">„From our kitchen to your soul."</p>
+    </div>
+    <ul class="about-pillars">
+      <li>
+        <span class="pillar-num">01</span>
+        <h3>Frisch &amp; gesund</h3>
+        <p>Knackiges Gemüse, klare Brühen, ehrliche Zutaten — kein Fake-Asia.</p>
+      </li>
+      <li>
+        <span class="pillar-num">02</span>
+        <h3>Große Portionen</h3>
+        <p>Wer hungrig kommt, geht satt. Bowls und Ramen sind kein Mini-Snack.</p>
+      </li>
+      <li>
+        <span class="pillar-num">03</span>
+        <h3>Faire Preise</h3>
+        <p>Mittendrin im DC Tower — und trotzdem bezahlbar im Mittagsalltag.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ========== RESERVATION + CATERING ========== -->
+<section class="reserve" id="reservieren">
+  <div class="container reserve-grid">
+
+    <div class="reserve-form-wrap">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Reservieren</span>
+      <h2 class="section-title">Tisch sichern.</h2>
+      <p class="section-sub">In 30 Sekunden erledigt. Wir bestätigen per E-Mail.</p>
+
+      <form class="reserve-form" id="reserveForm" novalidate>
+        <div class="field">
+          <label for="r-date">Datum</label>
+          <input type="date" id="r-date" name="date" required />
+        </div>
+        <div class="field">
+          <label for="r-time">Uhrzeit</label>
+          <select id="r-time" name="time" required>
+            <option value="">Wählen</option>
+            <option>11:30</option><option>12:00</option><option>12:30</option>
+            <option>13:00</option><option>13:30</option><option>18:00</option>
+            <option>18:30</option><option>19:00</option><option>19:30</option>
+            <option>20:00</option><option>20:30</option><option>21:00</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="r-guests">Personen</label>
+          <select id="r-guests" name="guests" required>
+            <option value="">Wählen</option>
+            <option>1</option><option>2</option><option>3</option><option>4</option>
+            <option>5</option><option>6</option><option>7</option><option>8+</option>
+          </select>
+        </div>
+        <div class="field field-wide">
+          <label for="r-name">Name</label>
+          <input type="text" id="r-name" name="name" required placeholder="Vor- und Nachname"/>
+        </div>
+        <div class="field">
+          <label for="r-email">E-Mail</label>
+          <input type="email" id="r-email" name="email" required placeholder="dein@mail.at"/>
+        </div>
+        <div class="field">
+          <label for="r-phone">Telefon</label>
+          <input type="tel" id="r-phone" name="phone" placeholder="+43 …"/>
+        </div>
+        <div class="field field-wide">
+          <label for="r-note">Anmerkung <span class="muted">(optional)</span></label>
+          <textarea id="r-note" name="note" rows="2" placeholder="Allergien, Wünsche, Geburtstag …"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg reserve-submit">Tisch reservieren</button>
+        <p class="form-status" id="reserveStatus" role="status"></p>
+      </form>
+    </div>
+
+    <aside class="events-card" id="catering">
+      <span class="kanji-watermark big" aria-hidden="true">食</span>
+      <span class="eyebrow eyebrow-on-dark"><span class="eyebrow-dot"></span>Events &amp; Catering</span>
+      <h3>Eventräume im DC&nbsp;Tower.</h3>
+      <p>Größere Runde? Wir haben Platz — mit eigenem Menü, Büffet oder Fingerfood.</p>
+
+      <ul class="events-list">
+        <li>
+          <strong>Private Lounge · 1. Stock</strong>
+          <span>bis 45 Gäste</span>
+        </li>
+        <li>
+          <strong>Vorderer Raum mit Bar · Erdgeschoss</strong>
+          <span>bis 80 Personen</span>
+        </li>
+      </ul>
+
+      <a href="mailto:info@godctower.com?subject=Catering-Anfrage" class="btn btn-amber btn-block btn-lg">
+        Catering anfragen
+      </a>
+      <p class="events-fine">Oder ruf uns an: <a href="tel:+4319165156">+43&nbsp;1&nbsp;9165156</a></p>
+    </aside>
+
+  </div>
+</section>
+
+<!-- ========== LOCATION ========== -->
+<section class="location" id="standort">
+  <div class="container loc-grid">
+    <div class="loc-info">
+      <span class="eyebrow"><span class="eyebrow-dot"></span>Standort &amp; Öffnungszeiten</span>
+      <h2 class="section-title">DC Tower. Erdgeschoss.</h2>
+
+      <ul class="loc-list">
+        <li>
+          <span class="loc-label">Adresse</span>
+          <span class="loc-value">Donau-City-Straße 7<br/>1220 Wien</span>
+        </li>
+        <li>
+          <span class="loc-label">Öffnungszeiten</span>
+          <span class="loc-value">Täglich · 11:00 – 22:30</span>
+        </li>
+        <li>
+          <span class="loc-label">Telefon</span>
+          <span class="loc-value"><a href="tel:+4319165156">+43 1 9165156</a></span>
+        </li>
+        <li>
+          <span class="loc-label">E-Mail</span>
+          <span class="loc-value"><a href="mailto:info@godctower.com">info@godctower.com</a></span>
+        </li>
+        <li>
+          <span class="loc-label">Anreise</span>
+          <span class="loc-value">U1 Kaisermühlen-VIC · 4 Min. Fußweg<br/>
+            <span class="muted">Parken in der DC-Tower-Garage mit Vergünstigung.</span>
+          </span>
+        </li>
+      </ul>
+
+      <div class="loc-ctas">
+        <a class="btn btn-primary" href="#menu">Online bestellen</a>
+        <a class="btn btn-outline" href="https://maps.google.com/?q=DC+Tower+Donau-City-Stra%C3%9Fe+7+Wien" target="_blank" rel="noopener">Route planen</a>
+      </div>
+    </div>
+
+    <div class="loc-map" aria-label="Karte zum DC Tower">
+      <iframe
+        title="Karte: DC Tower, Donau-City-Straße 7, 1220 Wien"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=16.4080%2C48.2330%2C16.4250%2C48.2410&amp;layer=mapnik&amp;marker=48.2370%2C16.4165"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <span class="logo">
+        <span class="logo-mark">麺</span>
+        <span class="logo-text"><span class="logo-go">go</span><span class="logo-dc">DC&nbsp;Tower</span></span>
+      </span>
+      <p>Ra'mien go DC Tower<br/>Asian Fusion · Ramen · La Mian</p>
+    </div>
+
+    <div>
+      <h4>Kontakt</h4>
+      <p>Donau-City-Straße 7<br/>1220 Wien</p>
+      <p><a href="tel:+4319165156">+43 1 9165156</a><br/><a href="mailto:info@godctower.com">info@godctower.com</a></p>
+    </div>
+
+    <div>
+      <h4>Öffnungszeiten</h4>
+      <p>Montag – Sonntag<br/>11:00 – 22:30</p>
+    </div>
+
+    <div>
+      <h4>Folgen</h4>
+      <ul class="socials">
+        <li><a href="#" aria-label="Instagram">Instagram</a></li>
+        <li><a href="#" aria-label="Facebook">Facebook</a></li>
+        <li><a href="#" aria-label="TikTok">TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer-bottom">
+    <span>© 2026 go DC Tower</span>
+    <span class="footer-links">
+      <a href="#">Impressum</a> · <a href="#">Datenschutz</a> · <a href="#">AGB</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ========== MOBILE STICKY ORDER BAR ========== -->
+<div class="sticky-mobile" id="stickyMobile" aria-hidden="false">
+  <a href="#menu" class="sticky-mobile-order">
+    <span class="sticky-label">Online bestellen</span>
+    <span class="sticky-pill" id="stickyCount">0 · € 0,00</span>
+  </a>
+  <a href="#reservieren" class="sticky-mobile-res" aria-label="Tisch reservieren">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg>
+  </a>
+</div>
+
+<!-- ========== CHECKOUT MODAL ========== -->
+<div class="modal" id="checkoutModal" hidden>
+  <div class="modal-backdrop" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" data-close aria-label="Schließen">×</button>
+    <h3 id="modalTitle">Bestellung abgeschickt 🍜</h3>
+    <p>Danke! Wir bereiten alles vor — du bekommst gleich eine Bestätigung per E-Mail.</p>
+    <button class="btn btn-primary btn-block" data-close>Schließen</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

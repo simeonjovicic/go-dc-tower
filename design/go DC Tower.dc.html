@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+  body { margin: 0; background: #FAF6EC; color: #16181C; font-family: "DM Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  ::selection { background: #E1391F; color: #FAF6EC; }
+  a { color: inherit; }
+  input, select, button, textarea { font-family: inherit; }
+  :focus-visible { outline: 3px solid #2FA36B; outline-offset: 2px; }
+  @keyframes floatUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  /* Responsive overrides — structural changes that cannot be inline */
+  @media (max-width: 980px) { [data-nav] { display: none !important; } }
+  @media (max-width: 900px) {
+    [data-hero] { grid-template-columns: 1fr !important; }
+    [data-hero-art] { min-height: 280px !important; order: -1; }
+    [data-orderwrap] { flex-direction: column !important; }
+    [data-cart] { position: static !important; width: 100% !important; }
+    [data-mobilebar] { display: flex !important; }
+    [data-h1] { font-size: 15vw !important; }
+    [data-loc] { grid-template-columns: 1fr !important; }
+    [data-pad] { padding-left: 20px !important; padding-right: 20px !important; }
+    [data-resv-grid] { grid-template-columns: 1fr !important; }
+    [data-hidesm] { display: none !important; }
+    body { padding-bottom: 76px; }
+  }
+  @media (max-width: 560px) {
+    [data-menugrid] { grid-template-columns: 1fr !important; }
+  }
+</style>
+</helmet>
+
+<div style="min-height:100vh;">
+
+  <!-- ░░ STICKY HEADER ░░ -->
+  <header style="position:sticky; top:0; z-index:60; background:rgba(250,246,236,0.86); backdrop-filter:blur(12px); border-bottom:1px solid rgba(22,24,28,0.08);">
+    <div data-pad style="max-width:1280px; margin:0 auto; padding:14px 40px; display:flex; align-items:center; gap:28px;">
+      <a href="#top" style="display:flex; align-items:center; gap:12px; text-decoration:none; flex:none;">
+        <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; background:#E1391F; color:#FAF6EC; font-family:'Saira Condensed'; font-weight:800; font-size:22px; line-height:1; border-radius:9px;">麺</span>
+        <span style="font-family:'Saira Condensed'; font-weight:800; font-size:22px; letter-spacing:0.01em; text-transform:uppercase;">go DC Tower</span>
+      </a>
+      <nav data-nav style="display:flex; gap:26px; margin-left:8px; font-weight:600; font-size:15px;">
+        <a href="#menu" style="text-decoration:none;">Menü</a>
+        <a href="#reservieren" style="text-decoration:none;">Reservieren</a>
+        <a href="#catering" style="text-decoration:none;">Catering</a>
+        <a href="#standort" style="text-decoration:none;">Standort</a>
+      </nav>
+      <div style="margin-left:auto; display:flex; align-items:center; gap:10px;">
+        <a href="#reservieren" style="text-decoration:none; padding:11px 18px; border:1.5px solid #16181C; border-radius:999px; font-weight:700; font-size:15px;">Tisch reservieren</a>
+        <a href="#menu" style="text-decoration:none; position:relative; padding:12px 20px; background:#E1391F; color:#FAF6EC; border-radius:999px; font-weight:700; font-size:15px; box-shadow:0 6px 18px rgba(225,57,31,0.28);">Online bestellen
+          <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; top:-7px; right:-7px; min-width:22px; height:22px; padding:0 6px; display:inline-flex; align-items:center; justify-content:center; background:#F4A52C; color:#16181C; border-radius:999px; font-size:12px; font-weight:800;">{{ cartCount }}</span></sc-if>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ░░ HERO ░░ -->
+  <section id="top" data-pad style="max-width:1280px; margin:0 auto; padding:64px 40px 40px;">
+    <div data-hero style="display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center;">
+      <div style="position:relative; padding-left:28px;">
+        <div style="position:absolute; left:0; top:6px; bottom:6px; width:4px; background:linear-gradient(#E1391F, #F4A52C); border-radius:4px;"></div>
+        <div style="display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#E1391F;">
+          <span style="width:7px; height:7px; background:#2FA36B; border-radius:50%;"></span> DC Tower's hidden gem in Vienna
+        </div>
+        <h1 data-h1 style="font-family:'Saira Condensed'; font-weight:900; font-size:88px; line-height:0.92; letter-spacing:-0.01em; text-transform:uppercase; margin:16px 0 0;">From our<br>kitchen to<br>your <span style="color:#E1391F;">soul.</span></h1>
+        <p style="font-size:19px; line-height:1.5; max-width:430px; margin:20px 0 0; color:#3a3d42;">Fresh, healthy asian – mitten im DC Tower. La Mian, Ramen, Bowls &amp; Sushi, frisch aus dem Wok.</p>
+        <div style="display:flex; flex-wrap:wrap; gap:12px; margin-top:30px;">
+          <a href="#menu" style="text-decoration:none; padding:17px 30px; background:#E1391F; color:#FAF6EC; border-radius:999px; font-weight:700; font-size:18px; box-shadow:0 10px 26px rgba(225,57,31,0.3);">Jetzt bestellen</a>
+          <a href="#reservieren" style="text-decoration:none; padding:17px 30px; border:1.5px solid #16181C; border-radius:999px; font-weight:700; font-size:18px;">Tisch reservieren</a>
+        </div>
+        <p style="margin:22px 0 0; font-size:14px; font-weight:600; color:#6b6e73;">Täglich 11:00–22:30 · Donau-City-Straße 7, 1220 Wien</p>
+      </div>
+      <div data-hero-art style="position:relative; min-height:460px; border-radius:22px; overflow:hidden; background-image:repeating-linear-gradient(45deg,#efe7d4,#efe7d4 11px,#f5efdf 11px,#f5efdf 22px); border:1px solid rgba(22,24,28,0.07);">
+        <div style="position:absolute; right:22px; top:-10px; font-family:'Saira Condensed'; font-weight:900; font-size:210px; line-height:1; color:rgba(225,57,31,0.10);">麺</div>
+        <div style="position:absolute; left:22px; top:22px; bottom:22px; width:5px; background:rgba(22,24,28,0.12); border-radius:4px;"></div>
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-family:'DM Sans'; font-weight:600; font-size:13px; letter-spacing:0.08em; color:#9a948280; background:rgba(250,246,236,0.7); padding:8px 14px; border-radius:999px; white-space:nowrap;">FOTO · Ramen-Bowl &amp; DC-Tower-Skyline</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ MENU & ORDER ░░ -->
+  <section id="menu" data-pad style="max-width:1280px; margin:0 auto; padding:48px 40px 24px; scroll-margin-top:84px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap;">
+      <div>
+        <div style="font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#E1391F;">Menü &amp; Bestellen</div>
+        <h2 style="font-family:'Saira Condensed'; font-weight:800; font-size:52px; line-height:1; text-transform:uppercase; margin:10px 0 0;">Wähl dein Gericht</h2>
+      </div>
+      <div data-hidesm style="font-size:14px; font-weight:600; color:#6b6e73; max-width:280px; text-align:right;">Abholung im DC Tower oder Lieferung. Frisch zubereitet in ~20 Min.</div>
+    </div>
+
+    <!-- category tabs -->
+    <div style="display:flex; gap:10px; overflow-x:auto; margin-top:26px; padding-bottom:4px;">
+      <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="6">
+        <button onClick="{{ cat.select }}" style="{{ cat.style }}">{{ cat.label }}</button>
+      </sc-for>
+    </div>
+
+    <!-- order layout: cards + cart -->
+    <div data-orderwrap style="display:flex; gap:32px; align-items:flex-start; margin-top:28px;">
+
+      <div style="flex:1; min-width:0;">
+        <div data-menugrid style="display:grid; grid-template-columns:repeat(2,1fr); gap:18px;">
+          <sc-for list="{{ visibleItems }}" as="item" hint-placeholder-count="4">
+            <article style="display:flex; flex-direction:column; background:#fff; border:1px solid rgba(22,24,28,0.07); border-radius:18px; overflow:hidden;">
+              <div style="position:relative; height:150px; background-image:repeating-linear-gradient(45deg,#efe7d4,#efe7d4 9px,#f5efdf 9px,#f5efdf 18px);">
+                <span style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-family:'DM Sans'; font-size:11px; font-weight:600; letter-spacing:0.06em; color:#a59c86; white-space:nowrap;">FOTO · {{ item.name }}</span>
+                <sc-if value="{{ item.veggie }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; left:12px; top:12px; display:inline-flex; align-items:center; gap:5px; background:#2FA36B; color:#fff; font-size:11px; font-weight:700; padding:4px 9px; border-radius:999px;">● Veggie</span></sc-if>
+                <sc-if value="{{ item.spicy }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; right:12px; top:12px; background:rgba(225,57,31,0.95); color:#fff; font-size:11px; font-weight:700; padding:4px 9px; border-radius:999px;">scharf</span></sc-if>
+              </div>
+              <div style="padding:16px 16px 18px; display:flex; flex-direction:column; flex:1;">
+                <h3 style="font-family:'Saira Condensed'; font-weight:700; font-size:24px; line-height:1.05; margin:0; text-transform:uppercase;">{{ item.name }}</h3>
+                <p style="font-size:14px; line-height:1.45; color:#6b6e73; margin:7px 0 0;">{{ item.desc }}</p>
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-top:auto; padding-top:16px;">
+                  <span style="font-family:'Saira Condensed'; font-weight:800; font-size:24px; color:#16181C;">{{ item.priceFmt }}</span>
+                  <button onClick="{{ item.add }}" aria-label="Zum Warenkorb hinzufügen" style="display:inline-flex; align-items:center; gap:7px; background:#E1391F; color:#fff; border:none; cursor:pointer; padding:10px 16px; border-radius:999px; font-weight:700; font-size:15px;">
+                    <span style="font-size:18px; line-height:1; margin-top:-1px;">+</span> Hinzufügen
+                  </button>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- CART -->
+      <aside id="cart" data-cart style="position:sticky; top:96px; width:360px; flex:none; background:#fff; border:1px solid rgba(22,24,28,0.08); border-radius:20px; padding:22px; box-shadow:0 18px 40px rgba(22,24,28,0.06);">
+        <div style="display:flex; align-items:center; justify-content:space-between;">
+          <h3 style="font-family:'Saira Condensed'; font-weight:800; font-size:26px; text-transform:uppercase; margin:0;">Dein Warenkorb</h3>
+          <span style="background:#F4A52C; color:#16181C; font-weight:800; font-size:13px; padding:4px 10px; border-radius:999px;">{{ cartCount }}</span>
+        </div>
+
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="padding:34px 8px; text-align:center; color:#9a9488;">
+            <div style="font-size:34px;">🍜</div>
+            <p style="font-size:14px; font-weight:600; margin:10px 0 0;">Noch nichts ausgewählt.<br>Füg ein Gericht hinzu.</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:12px; margin-top:18px;">
+            <sc-for list="{{ cartLines }}" as="line" hint-placeholder-count="2">
+              <div style="display:flex; gap:12px; align-items:center;">
+                <div style="flex:1; min-width:0;">
+                  <div style="font-weight:700; font-size:15px; line-height:1.2;">{{ line.name }}</div>
+                  <div style="font-size:13px; color:#6b6e73; font-weight:600;">{{ line.lineFmt }}</div>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; background:#FAF6EC; border-radius:999px; padding:4px;">
+                  <button onClick="{{ line.dec }}" aria-label="Weniger" style="width:30px; height:30px; border:none; background:#fff; border-radius:50%; cursor:pointer; font-size:18px; font-weight:700; line-height:1;">−</button>
+                  <span style="min-width:18px; text-align:center; font-weight:800; font-size:15px;">{{ line.qty }}</span>
+                  <button onClick="{{ line.inc }}" aria-label="Mehr" style="width:30px; height:30px; border:none; background:#16181C; color:#fff; border-radius:50%; cursor:pointer; font-size:18px; font-weight:700; line-height:1;">+</button>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+
+          <!-- fulfillment toggle -->
+          <div style="display:flex; gap:6px; background:#FAF6EC; border-radius:999px; padding:5px; margin-top:20px;">
+            <button onClick="{{ setPickup }}" style="{{ pickupStyle }}">Abholung</button>
+            <button onClick="{{ setDelivery }}" style="{{ deliveryStyle }}">Lieferung</button>
+          </div>
+
+          <div style="margin-top:18px; padding-top:16px; border-top:1px dashed rgba(22,24,28,0.15); display:flex; flex-direction:column; gap:8px; font-size:14px; font-weight:600;">
+            <div style="display:flex; justify-content:space-between; color:#6b6e73;"><span>Zwischensumme</span><span>{{ subtotalFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; color:#6b6e73;"><span>{{ feeLabel }}</span><span>{{ feeFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; margin-top:4px;">
+              <span style="font-family:'Saira Condensed'; font-weight:800; font-size:22px; text-transform:uppercase;">Gesamt</span>
+              <span style="font-family:'Saira Condensed'; font-weight:900; font-size:30px; color:#E1391F;">{{ totalFmt }}</span>
+            </div>
+          </div>
+          <button onClick="{{ openCheckout }}" style="width:100%; margin-top:18px; padding:16px; background:#E1391F; color:#fff; border:none; cursor:pointer; border-radius:999px; font-weight:800; font-size:18px; box-shadow:0 10px 24px rgba(225,57,31,0.28);">Zur Kasse</button>
+        </sc-if>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ░░ ABOUT ░░ -->
+  <section data-pad style="max-width:1280px; margin:0 auto; padding:72px 40px;">
+    <div style="background:#16181C; color:#FAF6EC; border-radius:26px; padding:64px 56px; position:relative; overflow:hidden;">
+      <div style="position:absolute; right:-10px; bottom:-50px; font-family:'Saira Condensed'; font-weight:900; font-size:260px; line-height:1; color:rgba(244,165,44,0.10);">道</div>
+      <div style="position:relative; max-width:760px;">
+        <div style="font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#F4A52C;">Über uns</div>
+        <h2 style="font-family:'Saira Condensed'; font-weight:800; font-size:54px; line-height:0.98; text-transform:uppercase; margin:14px 0 0;">From our kitchen<br>to your soul.</h2>
+        <p style="font-size:19px; line-height:1.55; color:#d9d4c7; margin:22px 0 0;">Asiatische Fusionsküche, frisch &amp; gesund interpretiert: handgezogene La Mian, dampfende Ramen und Bowls voller Geschmack. Große Portionen, faires Preis-Leistungs-Verhältnis – das versteckte Juwel im DC Tower.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ RESERVE + CATERING ░░ -->
+  <section id="reservieren" data-pad style="max-width:1280px; margin:0 auto; padding:24px 40px 40px; scroll-margin-top:84px;">
+    <div data-resv-grid style="display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;">
+      <div>
+        <div style="font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#E1391F;">Reservieren</div>
+        <h2 style="font-family:'Saira Condensed'; font-weight:800; font-size:52px; line-height:1; text-transform:uppercase; margin:10px 0 0;">Tisch sichern</h2>
+        <sc-if value="{{ resvDone }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:24px; background:#2FA36B; color:#fff; border-radius:18px; padding:24px;">
+            <div style="font-family:'Saira Condensed'; font-weight:800; font-size:26px; text-transform:uppercase;">Reservierung angefragt ✓</div>
+            <p style="margin:8px 0 0; font-size:15px; line-height:1.5;">Danke! Wir bestätigen deine Reservierung in Kürze per E-Mail.</p>
+          </div>
+        </sc-if>
+        <sc-if value="{{ resvOpen }}" hint-placeholder-val="{{ true }}">
+          <div style="margin-top:24px; display:flex; flex-direction:column; gap:14px;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+              <label style="display:flex; flex-direction:column; gap:6px; font-weight:700; font-size:13px;">Datum<input type="date" style="padding:13px 14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;"></label>
+              <label style="display:flex; flex-direction:column; gap:6px; font-weight:700; font-size:13px;">Uhrzeit<input type="time" value="19:00" style="padding:13px 14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;"></label>
+            </div>
+            <label style="display:flex; flex-direction:column; gap:6px; font-weight:700; font-size:13px;">Personen<select style="padding:13px 14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;"><option>1 Person</option><option>2 Personen</option><option>3 Personen</option><option>4 Personen</option><option>5 Personen</option><option>6+ Personen</option></select></label>
+            <label style="display:flex; flex-direction:column; gap:6px; font-weight:700; font-size:13px;">Name<input type="text" placeholder="Dein Name" style="padding:13px 14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;"></label>
+            <label style="display:flex; flex-direction:column; gap:6px; font-weight:700; font-size:13px;">Kontakt (Tel. oder E-Mail)<input type="text" placeholder="z. B. +43 …" style="padding:13px 14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;"></label>
+            <button onClick="{{ submitResv }}" style="margin-top:6px; padding:16px; background:#E1391F; color:#fff; border:none; cursor:pointer; border-radius:999px; font-weight:800; font-size:17px;">Reservierung anfragen</button>
+          </div>
+        </sc-if>
+      </div>
+
+      <div id="catering" style="background:#fff; border:1px solid rgba(22,24,28,0.08); border-radius:22px; padding:34px; scroll-margin-top:84px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#F4A52C;"><span style="width:7px;height:7px;background:#F4A52C;border-radius:50%;"></span> Events &amp; Catering</div>
+        <h3 style="font-family:'Saira Condensed'; font-weight:800; font-size:34px; line-height:1; text-transform:uppercase; margin:14px 0 0;">Feiern im DC Tower</h3>
+        <div style="display:flex; flex-direction:column; gap:14px; margin-top:20px;">
+          <div style="display:flex; gap:14px; padding:16px; background:#FAF6EC; border-radius:14px;">
+            <div style="font-family:'Saira Condensed'; font-weight:900; font-size:30px; color:#E1391F; line-height:1; flex:none;">45</div>
+            <div><div style="font-weight:700; font-size:16px;">Private Lounge · 1. Stock</div><div style="font-size:14px; color:#6b6e73;">bis 45 Gäste – eigenes Menü oder Büffet</div></div>
+          </div>
+          <div style="display:flex; gap:14px; padding:16px; background:#FAF6EC; border-radius:14px;">
+            <div style="font-family:'Saira Condensed'; font-weight:900; font-size:30px; color:#E1391F; line-height:1; flex:none;">80</div>
+            <div><div style="font-weight:700; font-size:16px;">Raum mit Bar · Erdgeschoss</div><div style="font-size:14px; color:#6b6e73;">bis 80 Personen – Büffet oder Fingerfood</div></div>
+          </div>
+        </div>
+        <a href="mailto:info@godctower.com" style="display:block; text-align:center; text-decoration:none; margin-top:20px; padding:15px; border:1.5px solid #16181C; border-radius:999px; font-weight:700; font-size:16px;">Catering anfragen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ LOCATION ░░ -->
+  <section id="standort" data-pad style="max-width:1280px; margin:0 auto; padding:40px 40px 64px; scroll-margin-top:84px;">
+    <div data-loc style="display:grid; grid-template-columns:0.85fr 1.15fr; gap:32px; align-items:stretch;">
+      <div>
+        <div style="font-weight:700; font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:#E1391F;">Standort &amp; Öffnungszeiten</div>
+        <h2 style="font-family:'Saira Condensed'; font-weight:800; font-size:48px; line-height:1; text-transform:uppercase; margin:10px 0 18px;">So findest du uns</h2>
+        <div style="display:flex; flex-direction:column; gap:14px; font-size:16px;">
+          <div><div style="font-weight:800;">Adresse</div><div style="color:#3a3d42;">DC Tower, Donau-City-Straße 7, 1220 Wien</div></div>
+          <div><div style="font-weight:800;">Öffnungszeiten</div><div style="color:#3a3d42;">Täglich 11:00–22:30</div></div>
+          <div style="display:flex; gap:28px; flex-wrap:wrap;">
+            <div><div style="font-weight:800;">Telefon</div><a href="tel:+4319165156" style="color:#3a3d42; text-decoration:none;">+43 1 9165156</a></div>
+            <div><div style="font-weight:800;">E-Mail</div><a href="mailto:info@godctower.com" style="color:#3a3d42; text-decoration:none;">info@godctower.com</a></div>
+          </div>
+          <div style="margin-top:4px; padding:14px 16px; background:#fff; border:1px solid rgba(22,24,28,0.08); border-radius:14px; font-size:14px; color:#3a3d42; line-height:1.5;">
+            <span style="font-weight:800; color:#2FA36B;">Anreise:</span> Parken in der DC-Tower-Garage mit Vergünstigung · U-Bahn U1 Kaisermühlen-VIC.
+          </div>
+        </div>
+      </div>
+      <div style="position:relative; min-height:320px; border-radius:20px; overflow:hidden; background-image:repeating-linear-gradient(45deg,#e7e8ea,#e7e8ea 12px,#eef0f2 12px,#eef0f2 24px); border:1px solid rgba(22,24,28,0.1);">
+        <div style="position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); text-align:center;">
+          <div style="width:46px; height:46px; margin:0 auto; background:#E1391F; border-radius:50% 50% 50% 0; transform:rotate(-45deg); box-shadow:0 8px 20px rgba(225,57,31,0.35);"></div>
+          <div style="margin-top:14px; font-weight:600; font-size:13px; letter-spacing:0.06em; color:#7c7f84; background:rgba(255,255,255,0.8); padding:7px 13px; border-radius:999px;">KARTE · DC Tower, Donau City</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ░░ FOOTER ░░ -->
+  <footer style="background:#16181C; color:#FAF6EC;">
+    <div data-pad style="max-width:1280px; margin:0 auto; padding:54px 40px 40px; display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:32px;">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; background:#E1391F; color:#FAF6EC; font-family:'Saira Condensed'; font-weight:800; font-size:22px; border-radius:9px;">麺</span>
+          <span style="font-family:'Saira Condensed'; font-weight:800; font-size:24px; text-transform:uppercase;">go DC Tower</span>
+        </div>
+        <p style="color:#9a9488; font-size:15px; line-height:1.5; margin:16px 0 0; max-width:300px;">Fresh, healthy asian. La Mian, Ramen, Bowls &amp; Sushi – das versteckte Juwel im DC Tower.</p>
+      </div>
+      <div>
+        <div style="font-weight:800; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; color:#F4A52C;">Kontakt</div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px; font-size:15px; color:#d9d4c7;">
+          <span>Donau-City-Straße 7, 1220 Wien</span>
+          <a href="tel:+4319165156" style="color:#d9d4c7; text-decoration:none;">+43 1 9165156</a>
+          <a href="mailto:info@godctower.com" style="color:#d9d4c7; text-decoration:none;">info@godctower.com</a>
+          <span>Täglich 11:00–22:30</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:800; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; color:#F4A52C;">Folge uns</div>
+        <div style="display:flex; flex-direction:column; gap:8px; margin-top:14px; font-size:15px; color:#d9d4c7;">
+          <a href="#top" style="color:#d9d4c7; text-decoration:none;">Instagram</a>
+          <a href="#top" style="color:#d9d4c7; text-decoration:none;">Facebook</a>
+          <a href="#top" style="color:#d9d4c7; text-decoration:none;">TikTok</a>
+        </div>
+      </div>
+    </div>
+    <div data-pad style="max-width:1280px; margin:0 auto; padding:18px 40px 40px; border-top:1px solid rgba(255,255,255,0.1); display:flex; gap:20px; flex-wrap:wrap; justify-content:space-between; font-size:13px; color:#9a9488;">
+      <span>© 2026 Ra'mien Go DC Tower</span>
+      <div style="display:flex; gap:20px;"><a href="#top" style="color:#9a9488; text-decoration:none;">Impressum</a><a href="#top" style="color:#9a9488; text-decoration:none;">Datenschutz</a></div>
+    </div>
+  </footer>
+
+  <!-- ░░ STICKY MOBILE ORDER BAR ░░ -->
+  <div data-mobilebar style="display:none; position:fixed; left:0; right:0; bottom:0; z-index:70; padding:10px 16px calc(10px + env(safe-area-inset-bottom)); background:rgba(250,246,236,0.95); backdrop-filter:blur(12px); border-top:1px solid rgba(22,24,28,0.1); gap:12px; align-items:center;">
+    <div style="flex:1; min-width:0;">
+      <div style="font-weight:700; font-size:13px; color:#6b6e73;">{{ cartCount }} Artikel</div>
+      <div style="font-family:'Saira Condensed'; font-weight:900; font-size:24px; line-height:1; color:#16181C;">{{ totalFmt }}</div>
+    </div>
+    <sc-if value="{{ hasItems }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ openCheckout }}" style="padding:14px 26px; background:#E1391F; color:#fff; border:none; cursor:pointer; border-radius:999px; font-weight:800; font-size:16px;">Zur Kasse</button>
+    </sc-if>
+    <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+      <a href="#menu" style="text-decoration:none; padding:14px 26px; background:#E1391F; color:#fff; border-radius:999px; font-weight:800; font-size:16px;">Bestellen</a>
+    </sc-if>
+  </div>
+
+  <!-- ░░ CHECKOUT OVERLAY ░░ -->
+  <sc-if value="{{ checkoutOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeCheckout }}" style="position:fixed; inset:0; z-index:90; background:rgba(22,24,28,0.5); display:flex; align-items:center; justify-content:center; padding:20px; animation:floatUp 0.2s ease;">
+      <div onClick="{{ stop }}" style="width:100%; max-width:460px; background:#FAF6EC; border-radius:24px; padding:30px; box-shadow:0 30px 80px rgba(0,0,0,0.4); max-height:90vh; overflow:auto;">
+        <sc-if value="{{ orderPlaced }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center; padding:18px 6px;">
+            <div style="width:74px; height:74px; margin:0 auto; background:#2FA36B; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:40px; color:#fff;">✓</div>
+            <h3 style="font-family:'Saira Condensed'; font-weight:900; font-size:34px; text-transform:uppercase; margin:18px 0 0;">Bestellung abgeschickt!</h3>
+            <p style="font-size:16px; color:#3a3d42; line-height:1.5; margin:10px 0 0;">Danke für deine Bestellung. {{ fulfillmentMsg }}</p>
+            <button onClick="{{ closeCheckout }}" style="margin-top:24px; padding:15px 30px; background:#16181C; color:#fff; border:none; cursor:pointer; border-radius:999px; font-weight:700; font-size:16px;">Schließen</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ checkoutForm }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <h3 style="font-family:'Saira Condensed'; font-weight:800; font-size:30px; text-transform:uppercase; margin:0;">Zur Kasse</h3>
+            <button onClick="{{ closeCheckout }}" aria-label="Schließen" style="width:36px; height:36px; border:none; background:rgba(22,24,28,0.07); border-radius:50%; cursor:pointer; font-size:18px;">✕</button>
+          </div>
+          <div style="display:flex; gap:6px; background:#fff; border:1px solid rgba(22,24,28,0.1); border-radius:999px; padding:5px; margin-top:18px;">
+            <button onClick="{{ setPickup }}" style="{{ pickupStyle }}">Abholung</button>
+            <button onClick="{{ setDelivery }}" style="{{ deliveryStyle }}">Lieferung</button>
+          </div>
+          <div style="margin-top:16px; display:flex; flex-direction:column; gap:12px;">
+            <sc-if value="{{ isDelivery }}" hint-placeholder-val="{{ false }}">
+              <input type="text" placeholder="Lieferadresse" style="padding:14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;">
+            </sc-if>
+            <input type="text" placeholder="Name" style="padding:14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;">
+            <input type="text" placeholder="Telefon" style="padding:14px; border:1.5px solid rgba(22,24,28,0.18); border-radius:12px; background:#fff; font-size:15px;">
+          </div>
+          <div style="margin-top:18px; padding-top:14px; border-top:1px dashed rgba(22,24,28,0.2); display:flex; justify-content:space-between; align-items:baseline;">
+            <span style="font-family:'Saira Condensed'; font-weight:800; font-size:22px; text-transform:uppercase;">Gesamt</span>
+            <span style="font-family:'Saira Condensed'; font-weight:900; font-size:30px; color:#E1391F;">{{ totalFmt }}</span>
+          </div>
+          <button onClick="{{ placeOrder }}" style="width:100%; margin-top:16px; padding:17px; background:#E1391F; color:#fff; border:none; cursor:pointer; border-radius:999px; font-weight:800; font-size:18px; box-shadow:0 10px 24px rgba(225,57,31,0.3);">Bestellung abschicken · {{ totalFmt }}</button>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    activeCat: "lamian",
+    cart: {},            // id -> qty
+    fulfillment: "pickup",
+    checkoutOpen: false,
+    orderPlaced: false,
+    resvDone: false,
+  };
+
+  MENU = [
+    { id: "l1", cat: "lamian", name: "Kokoscurry-La-Mian", desc: "Handgezogene Nudeln in cremiger Kokos-Curry-Brühe mit Gemüse.", price: 14.9, veggie: true },
+    { id: "l2", cat: "lamian", name: "Bulgogi La Mian", desc: "La Mian mit mariniertem Rindfleisch & Frühlingszwiebel.", price: 16.5 },
+    { id: "l3", cat: "lamian", name: "Dan Dan La Mian", desc: "Scharfe Sichuan-Sesam-Brühe, Hackfleisch, Pak Choi.", price: 15.5, spicy: true },
+    { id: "l4", cat: "lamian", name: "Wonton La Mian", desc: "Klare Brühe mit gefüllten Wontons & Bok Choy.", price: 15.9 },
+
+    { id: "r1", cat: "ramen", name: "Shoyu Ramen", desc: "Klare Sojabrühe, Chashu, Ei, Nori, Lauch.", price: 15.9 },
+    { id: "r2", cat: "ramen", name: "Miso Ramen", desc: "Kräftige Miso-Brühe, Mais, Lauch, Sprossen.", price: 15.5 },
+    { id: "r3", cat: "ramen", name: "Spicy Tonkotsu", desc: "Cremige Schweinebrühe, Chili-Öl, Ei.", price: 16.9, spicy: true },
+    { id: "r4", cat: "ramen", name: "Veggie Ramen", desc: "Gemüsebrühe, Tofu, Shiitake, Mais, Sprossen.", price: 14.5, veggie: true },
+
+    { id: "b1", cat: "bowls", name: "Bulgogi Huhn Bowl", desc: "Mariniertes Hähnchen, Reis, Kimchi, Edamame.", price: 14.5 },
+    { id: "b2", cat: "bowls", name: "Teriyaki Tofu Bowl", desc: "Knuspriger Tofu, Teriyaki, Avocado, Reis.", price: 13.9, veggie: true },
+    { id: "b3", cat: "bowls", name: "Poke Lachs Bowl", desc: "Lachs, Sushireis, Mango, Edamame, Sesam.", price: 16.5 },
+
+    { id: "w1", cat: "wok", name: "Wok Gemüse", desc: "Saisongemüse, Knoblauch, Sojasauce, Reis.", price: 12.9, veggie: true },
+    { id: "w2", cat: "wok", name: "Wok Beef", desc: "Rindfleisch, Paprika, Zwiebel, Austernsauce.", price: 16.9 },
+    { id: "w3", cat: "wok", name: "Pad Thai Huhn", desc: "Reisnudeln, Erdnuss, Ei, Limette, Sprossen.", price: 14.5 },
+
+    { id: "g1", cat: "gyoza", name: "Gyoza Huhn (6 St.)", desc: "Gebratene Teigtaschen mit Ponzu-Dip.", price: 8.9 },
+    { id: "g2", cat: "gyoza", name: "Gyoza Veggie (6 St.)", desc: "Gemüse-Füllung mit Sesam-Dip.", price: 8.5, veggie: true },
+    { id: "g3", cat: "gyoza", name: "Edamame", desc: "Gedämpft, mit Meersalz.", price: 5.5, veggie: true },
+
+    { id: "s1", cat: "sushi", name: "Maguro Sushi (4 St.)", desc: "Frischer Thunfisch auf Sushireis.", price: 11.9 },
+    { id: "s2", cat: "sushi", name: "Thunfisch Maki (8 St.)", desc: "Thunfisch, Nori, Sushireis.", price: 9.5 },
+    { id: "s3", cat: "sushi", name: "Lachs Maki (8 St.)", desc: "Lachs, Nori, Sushireis.", price: 9.5 },
+    { id: "s4", cat: "sushi", name: "Veggie Summerrolls (4 St.)", desc: "Reispapier, Gemüse, Minze, Erdnuss-Dip.", price: 8.9, veggie: true },
+  ];
+
+  CATS = [
+    { id: "lamian", label: "La Mian" },
+    { id: "ramen", label: "Ramen" },
+    { id: "bowls", label: "Bowls" },
+    { id: "wok", label: "Wok" },
+    { id: "gyoza", label: "Gyoza" },
+    { id: "sushi", label: "Sushi" },
+  ];
+
+  fmt(n) { return "€ " + n.toFixed(2).replace(".", ","); }
+
+  add(id) { this.setState(s => ({ cart: { ...s.cart, [id]: (s.cart[id] || 0) + 1 } })); }
+  inc(id) { this.add(id); }
+  dec(id) {
+    this.setState(s => {
+      const q = (s.cart[id] || 0) - 1;
+      const c = { ...s.cart };
+      if (q <= 0) delete c[id]; else c[id] = q;
+      return { cart: c };
+    });
+  }
+
+  renderVals() {
+    const { activeCat, cart, fulfillment, checkoutOpen, orderPlaced, resvDone } = this.state;
+
+    const tabBase = "white-space:nowrap; cursor:pointer; border:1.5px solid rgba(22,24,28,0.14); padding:11px 20px; border-radius:999px; font-weight:700; font-size:15px; background:#fff; color:#16181C;";
+    const tabActive = "white-space:nowrap; cursor:pointer; border:1.5px solid #E1391F; padding:11px 20px; border-radius:999px; font-weight:700; font-size:15px; background:#E1391F; color:#fff;";
+
+    const categories = this.CATS.map(c => ({
+      label: c.label,
+      style: c.id === activeCat ? tabActive : tabBase,
+      select: () => this.setState({ activeCat: c.id }),
+    }));
+
+    const visibleItems = this.MENU.filter(i => i.cat === activeCat).map(i => ({
+      name: i.name, desc: i.desc, priceFmt: this.fmt(i.price),
+      veggie: !!i.veggie, spicy: !!i.spicy,
+      add: () => this.add(i.id),
+    }));
+
+    const cartLines = Object.keys(cart).map(id => {
+      const item = this.MENU.find(m => m.id === id);
+      const qty = cart[id];
+      return {
+        name: item.name, qty,
+        lineFmt: this.fmt(item.price) + " · " + this.fmt(item.price * qty),
+        inc: () => this.inc(id), dec: () => this.dec(id),
+      };
+    });
+
+    const cartCount = Object.values(cart).reduce((a, b) => a + b, 0);
+    const subtotal = Object.keys(cart).reduce((a, id) => a + this.MENU.find(m => m.id === id).price * cart[id], 0);
+    const isDelivery = fulfillment === "delivery";
+    const fee = isDelivery && subtotal > 0 ? 3.9 : 0;
+    const total = subtotal + fee;
+
+    const segOn = "flex:1; cursor:pointer; border:none; padding:11px; border-radius:999px; font-weight:700; font-size:15px; background:#16181C; color:#fff;";
+    const segOff = "flex:1; cursor:pointer; border:none; padding:11px; border-radius:999px; font-weight:700; font-size:15px; background:transparent; color:#16181C;";
+
+    return {
+      categories, visibleItems, cartLines, cartCount,
+      hasItems: cartCount > 0, cartEmpty: cartCount === 0,
+      subtotalFmt: this.fmt(subtotal),
+      feeLabel: isDelivery ? "Liefergebühr" : "Abholung",
+      feeFmt: fee > 0 ? this.fmt(fee) : "Gratis",
+      totalFmt: this.fmt(total),
+      isDelivery,
+      pickupStyle: isDelivery ? segOff : segOn,
+      deliveryStyle: isDelivery ? segOn : segOff,
+      setPickup: () => this.setState({ fulfillment: "pickup" }),
+      setDelivery: () => this.setState({ fulfillment: "delivery" }),
+
+      checkoutOpen, orderPlaced, checkoutForm: checkoutOpen && !orderPlaced,
+      openCheckout: () => this.setState({ checkoutOpen: true, orderPlaced: false }),
+      closeCheckout: () => this.setState({ checkoutOpen: false, orderPlaced: false, cart: orderPlaced ? {} : cart }),
+      placeOrder: () => this.setState({ orderPlaced: true }),
+      stop: (e) => e.stopPropagation(),
+      fulfillmentMsg: isDelivery ? "Wir liefern in ca. 35–45 Min." : "Abholung im DC Tower in ca. 20 Min.",
+
+      resvDone, resvOpen: !resvDone,
+      submitResv: () => this.setState({ resvDone: true }),
+    };
+  }
+}
+</script>
+</body>
+</html>

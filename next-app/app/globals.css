@@ -1,0 +1,202 @@
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body {
+  margin: 0;
+  background: #FAF6EC;
+  color: #16181C;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #E1391F; color: #FAF6EC; }
+a { color: inherit; }
+input, select, button, textarea { font-family: inherit; }
+:focus-visible { outline: 3px solid #2FA36B; outline-offset: 2px; }
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Hover Utilities ---------- */
+/* Each class targets one CSS property family that does NOT clash with inline styles. */
+
+.hov-lift {
+  transition: transform 0.22s cubic-bezier(.2,.7,.2,1), box-shadow 0.22s ease, filter 0.22s ease;
+  will-change: transform;
+}
+.hov-lift:hover {
+  transform: translateY(-3px);
+}
+
+.hov-lift-sm {
+  transition: transform 0.18s cubic-bezier(.2,.7,.2,1), box-shadow 0.18s ease, filter 0.18s ease;
+}
+.hov-lift-sm:hover {
+  transform: translateY(-1px);
+}
+
+.hov-shine {
+  transition: filter 0.2s ease, transform 0.22s cubic-bezier(.2,.7,.2,1), box-shadow 0.22s ease;
+}
+.hov-shine:hover {
+  filter: brightness(1.06) saturate(1.04);
+  transform: translateY(-2px);
+}
+
+.hov-pop {
+  transition: transform 0.18s cubic-bezier(.2,.7,.2,1), filter 0.18s ease, box-shadow 0.2s ease;
+}
+.hov-pop:hover {
+  transform: scale(1.06);
+  filter: brightness(1.05);
+}
+.hov-pop:active { transform: scale(0.97); }
+
+.hov-fill-dark {
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.18s ease;
+}
+.hov-fill-dark:hover {
+  background-color: #16181C;
+  color: #FAF6EC;
+}
+
+/* Zoom-on-hover container + target */
+.hov-zoom { overflow: hidden; }
+.hov-zoom-img {
+  transition: transform 0.55s cubic-bezier(.2,.7,.2,1);
+  will-change: transform;
+}
+.hov-zoom:hover .hov-zoom-img {
+  transform: scale(1.06);
+}
+
+/* Underline for nav links */
+.hov-nav {
+  position: relative;
+  transition: color 0.15s ease;
+}
+.hov-nav::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  background: #E1391F;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.22s cubic-bezier(.2,.7,.2,1);
+}
+.hov-nav:hover { color: #E1391F; }
+.hov-nav:hover::after { transform: scaleX(1); }
+
+/* Arrow link: arrow slides right */
+.hov-arrow .arrow {
+  display: inline-block;
+  transition: transform 0.22s cubic-bezier(.2,.7,.2,1);
+}
+.hov-arrow:hover .arrow { transform: translateX(4px); }
+
+/* Social pill — background gets stronger */
+.hov-social {
+  transition: background-color 0.18s ease, transform 0.18s ease, color 0.18s ease;
+}
+.hov-social:hover {
+  background-color: #E1391F !important;
+  color: #FAF6EC;
+  transform: translateY(-1px);
+}
+
+/* Info row link — color shift */
+.hov-row {
+  transition: background-color 0.18s ease;
+  border-radius: 8px;
+}
+.hov-row:hover { background-color: rgba(22,24,28,0.04); }
+.hov-row:hover .hov-row-icon { color: #2FA36B; }
+.hov-row-icon {
+  transition: color 0.18s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hov-lift, .hov-lift-sm, .hov-shine, .hov-pop, .hov-fill-dark,
+  .hov-zoom-img, .hov-nav, .hov-arrow .arrow, .hov-social, .hov-row {
+    transition: none !important;
+  }
+  .hov-lift:hover, .hov-lift-sm:hover, .hov-shine:hover, .hov-pop:hover,
+  .hov-zoom:hover .hov-zoom-img, .hov-arrow:hover .arrow, .hov-social:hover {
+    transform: none !important;
+  }
+}
+
+/* ---------- Marquee (reviews conveyor) ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 80px, #000 calc(100% - 80px), transparent 100%);
+}
+.marquee-track {
+  display: flex;
+  gap: 18px;
+  width: max-content;
+  animation: marquee 55s linear infinite;
+}
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+.marquee-card {
+  flex: none;
+  width: 340px;
+}
+@media (max-width: 560px) {
+  .marquee-card { width: 280px; }
+  .marquee-track { gap: 14px; animation-duration: 40s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+  .marquee { overflow-x: auto; }
+}
+
+/* Responsive overrides that can't live inline */
+@media (max-width: 1100px) {
+  [data-ig-grid]      { grid-template-columns: repeat(3, 1fr) !important; }
+}
+@media (max-width: 980px) {
+  [data-nav]          { display: none !important; }
+  [data-resv-btn]     { display: none !important; }
+  [data-hl-grid]      { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 900px) {
+  [data-hero]         { grid-template-columns: 1fr !important; gap: 28px !important; }
+  [data-hero-art]     { min-height: 320px !important; height: auto !important; order: -1; }
+  [data-hero-scroll]  { display: none !important; }
+  [data-welcome-grid] { grid-template-columns: 1fr !important; gap: 28px !important; }
+  [data-welcome-art]  { min-height: 380px !important; }
+  [data-orderwrap]    { flex-direction: column !important; }
+  [data-cart]         { position: static !important; width: 100% !important; }
+  [data-h1]           { font-size: 14vw !important; }
+  [data-loc]          { grid-template-columns: 1fr !important; }
+  [data-park-card]    { grid-template-columns: 1fr !important; padding: 22px !important; }
+  [data-pad]          { padding-left: 20px !important; padding-right: 20px !important; }
+  [data-resv-grid]    { grid-template-columns: 1fr !important; }
+  [data-hidesm]       { display: none !important; }
+  [data-about-card]   { padding: 40px 24px !important; }
+  [data-about-h]      { font-size: 38px !important; }
+}
+@media (max-width: 700px) {
+  [data-ig-grid]      { grid-template-columns: repeat(2, 1fr) !important; }
+  [data-hl-grid]      { grid-template-columns: 1fr !important; }
+  [data-wordmark]     { display: none !important; }
+}
+@media (max-width: 560px) {
+  [data-menugrid]     { grid-template-columns: 1fr !important; }
+  [data-fab]          { padding: 10px 18px 10px 10px !important; gap: 10px !important; }
+  [data-footer-row]   { justify-content: center !important; gap: 14px !important; }
+  [data-footer-divider] { display: none !important; }
+}
