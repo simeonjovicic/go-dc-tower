@@ -1,12 +1,7 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
-import { useCart } from './CartProvider';
 
 export function Header() {
-  const { cartCount, hasItems } = useCart();
-
   return (
     <header
       style={{
@@ -74,7 +69,6 @@ export function Header() {
           }}
         >
           <a href="/#ueber-uns" className="hov-nav" style={{ textDecoration: 'none' }}>Über uns</a>
-          <Link href="/speisekarte" className="hov-nav" style={{ textDecoration: 'none' }}>Speisekarte</Link>
           <a href="/#reservieren" className="hov-nav" style={{ textDecoration: 'none' }}>Reservieren</a>
           <a href="/#catering" className="hov-nav" style={{ textDecoration: 'none' }}>Catering</a>
           <a href="/#standort" className="hov-nav" style={{ textDecoration: 'none' }}>Standort</a>
@@ -89,27 +83,11 @@ export function Header() {
           }}
         >
           <a
-            data-resv-btn
             href="/#reservieren"
-            className="hov-fill-dark"
-            style={{
-              textDecoration: 'none',
-              padding: '11px 18px',
-              border: '1.5px solid #16181C',
-              borderRadius: 999,
-              fontWeight: 700,
-              fontSize: 15,
-            }}
-          >
-            Tisch reservieren
-          </a>
-          <Link
-            href="/speisekarte"
             className="hov-shine"
             style={{
               textDecoration: 'none',
-              position: 'relative',
-              padding: '12px 20px',
+              padding: '12px 22px',
               background: '#E1391F',
               color: '#FAF6EC',
               borderRadius: 999,
@@ -118,30 +96,8 @@ export function Header() {
               boxShadow: '0 6px 18px rgba(225,57,31,0.28)',
             }}
           >
-            Online bestellen
-            {hasItems ? (
-              <span
-                style={{
-                  position: 'absolute',
-                  top: -7,
-                  right: -7,
-                  minWidth: 22,
-                  height: 22,
-                  padding: '0 6px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: '#F4A52C',
-                  color: '#16181C',
-                  borderRadius: 999,
-                  fontSize: 12,
-                  fontWeight: 800,
-                }}
-              >
-                {cartCount}
-              </span>
-            ) : null}
-          </Link>
+            Tisch reservieren
+          </a>
         </div>
       </div>
     </header>

@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export function Hero() {
   return (
     <section
@@ -104,23 +102,24 @@ export function Hero() {
                 marginTop: 32,
               }}
             >
-              <Link
-                href="/speisekarte"
+              <a
+                href="#reservieren"
                 className="hov-shine"
                 style={{
                   textDecoration: 'none',
                   padding: '17px 30px',
-                  background: '#16181C',
+                  background: '#E1391F',
                   color: '#FAF6EC',
                   borderRadius: 999,
                   fontWeight: 700,
                   fontSize: 18,
+                  boxShadow: '0 10px 26px rgba(225,57,31,0.3)',
                 }}
               >
-                Speisekarte ansehen
-              </Link>
+                Tisch reservieren
+              </a>
               <a
-                href="#reservieren"
+                href="#standort"
                 className="hov-fill-dark"
                 style={{
                   textDecoration: 'none',
@@ -131,7 +130,7 @@ export function Hero() {
                   fontSize: 18,
                 }}
               >
-                Tisch reservieren
+                Standort &amp; Öffnungszeiten
               </a>
             </div>
             <p

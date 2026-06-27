@@ -1,6 +1,5 @@
 import { Hero } from '@/components/Hero';
 import { WelcomeSection } from '@/components/WelcomeSection';
-import { HighlightsSection } from '@/components/HighlightsSection';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { InstagramSection } from '@/components/InstagramSection';
 import { AboutSection } from '@/components/AboutSection';
@@ -12,7 +11,6 @@ export default function Page() {
     <main>
       <Hero />
       <WelcomeSection />
-      <HighlightsSection />
       <ReviewsSection />
       <InstagramSection />
       <AboutSection />

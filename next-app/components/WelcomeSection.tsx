@@ -96,11 +96,10 @@ export function WelcomeSection() {
           >
             <VenueTile
               gridRow="1 / 3"
-              img="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&q=80&auto=format&fit=crop"
-              caption="Unser Restaurant · Erdgeschoss"
+              caption="FOTO · Restaurant innen"
             />
-            <VenueTile img="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80&auto=format&fit=crop" />
-            <VenueTile img="https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=600&q=80&auto=format&fit=crop" />
+            <VenueTile caption="FOTO · Detail" />
+            <VenueTile caption="FOTO · Atmosphäre" />
           </div>
         </Reveal>
       </div>
@@ -109,47 +108,40 @@ export function WelcomeSection() {
 }
 
 function VenueTile({
-  img,
   caption,
   gridRow,
 }: {
-  img: string;
   caption?: string;
   gridRow?: string;
 }) {
   return (
     <div
-      className="hov-zoom"
       style={{
         position: 'relative',
         gridRow,
         borderRadius: 20,
+        overflow: 'hidden',
         backgroundColor: '#efe7d4',
+        backgroundImage:
+          'repeating-linear-gradient(45deg, #efe7d4, #efe7d4 11px, #f5efdf 11px, #f5efdf 22px)',
+        border: '1px solid rgba(22,24,28,0.07)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <div
-        className="hov-zoom-img"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          backgroundImage: `url('${img}')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
       {caption ? (
         <span
           style={{
-            position: 'absolute',
-            left: 14,
-            bottom: 14,
-            background: 'rgba(250,246,236,0.95)',
-            padding: '7px 12px',
-            borderRadius: 999,
+            fontFamily: 'var(--font-dm)',
             fontSize: 12,
             fontWeight: 700,
-            letterSpacing: '0.04em',
-            color: '#16181C',
+            letterSpacing: '0.08em',
+            color: '#9a948280',
+            background: 'rgba(250,246,236,0.7)',
+            padding: '7px 12px',
+            borderRadius: 999,
+            whiteSpace: 'nowrap',
           }}
         >
           {caption}

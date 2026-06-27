@@ -1,10 +1,10 @@
-const POSTS: { img: string; likes: string }[] = [
-  { img: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=500&q=80&auto=format&fit=crop', likes: '1.2k' },
-  { img: 'https://images.unsplash.com/photo-1623341214825-9f4f963727da?w=500&q=80&auto=format&fit=crop', likes: '892' },
-  { img: 'https://images.unsplash.com/photo-1611143669185-af224c5e3252?w=500&q=80&auto=format&fit=crop', likes: '740' },
-  { img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80&auto=format&fit=crop', likes: '618' },
-  { img: 'https://images.unsplash.com/photo-1626804475297-41608ea09aeb?w=500&q=80&auto=format&fit=crop', likes: '512' },
-  { img: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=500&q=80&auto=format&fit=crop', likes: '484' },
+const POSTS: { likes: string }[] = [
+  { likes: '1.2k' },
+  { likes: '892' },
+  { likes: '740' },
+  { likes: '618' },
+  { likes: '512' },
+  { likes: '484' },
 ];
 
 export function InstagramSection() {
@@ -101,35 +101,37 @@ export function InstagramSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Instagram-Post mit ${p.likes} Likes`}
-            className="hov-zoom hov-lift-sm"
+            className="hov-lift-sm"
             style={{
               position: 'relative',
-              display: 'block',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               aspectRatio: '1 / 1',
               borderRadius: 14,
+              overflow: 'hidden',
               backgroundColor: '#efe7d4',
+              backgroundImage:
+                'repeating-linear-gradient(45deg, #efe7d4, #efe7d4 9px, #f5efdf 9px, #f5efdf 18px)',
+              border: '1px solid rgba(22,24,28,0.07)',
               textDecoration: 'none',
-              color: '#fff',
+              color: '#16181C',
             }}
           >
-            <div
-              className="hov-zoom-img"
+            <span
               style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundImage: `url('${p.img}')`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
+                fontFamily: 'var(--font-dm)',
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: '0.06em',
+                color: '#9a948280',
+                background: 'rgba(250,246,236,0.7)',
+                padding: '6px 10px',
+                borderRadius: 999,
               }}
-            />
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%)',
-              }}
-            />
+            >
+              FOTO · {i + 1}
+            </span>
             <div
               style={{
                 position: 'absolute',
@@ -140,6 +142,7 @@ export function InstagramSection() {
                 gap: 5,
                 fontSize: 12,
                 fontWeight: 700,
+                color: '#6b6e73',
               }}
             >
               <HeartGlyph /> {p.likes}
