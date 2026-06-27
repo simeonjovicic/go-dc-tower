@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   title: 'go DC Tower — Asian Fusion Restaurant im DC Tower Wien',
   description:
     "Ra'mien Go DC Tower – Fresh, healthy asian. La Mian, Ramen, Bowls & Sushi mitten im DC Tower. Reservieren und Catering anfragen.",
+  icons: { icon: '/favicon.png', apple: '/favicon.png' },
 };
 
 export const viewport: Viewport = {
