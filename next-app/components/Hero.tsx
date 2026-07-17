@@ -1,201 +1,256 @@
+import Image from 'next/image';
+import { ORDER_URL } from './menu-data';
+
 export function Hero() {
   return (
     <section
       id="top"
-      data-hero-section
       style={{
         position: 'relative',
-        minHeight: 'calc(100dvh - 72px)',
+        minHeight: '100dvh',
         display: 'flex',
         alignItems: 'center',
-        paddingTop: 32,
-        paddingBottom: 32,
+        padding: '72px 0 88px',
+        overflow: 'hidden',
       }}
     >
+      {/* full-bleed photo of the actual restaurant */}
+      <Image
+        src="/hero-restaurant.jpg"
+        alt="Gastraum des go DC Tower – helle Tische unter warmer Holzdecke"
+        fill
+        priority
+        sizes="100vw"
+        style={{ objectFit: 'cover', objectPosition: 'center' }}
+      />
+      {/* legibility overlay */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'linear-gradient(100deg, rgba(22,24,28,0.88) 0%, rgba(22,24,28,0.6) 48%, rgba(22,24,28,0.24) 100%), linear-gradient(rgba(22,24,28,0.1) 60%, rgba(22,24,28,0.45) 100%)',
+        }}
+      />
+      {/* kanji watermark */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          right: '3%',
+          top: 10,
+          fontFamily: 'var(--font-saira)',
+          fontWeight: 900,
+          fontSize: 250,
+          lineHeight: 1,
+          color: 'rgba(250,246,236,0.10)',
+          pointerEvents: 'none',
+        }}
+      >
+        麺
+      </div>
+      {/* rotating roundel stamp — same red disc as the logo */}
+      <div
+        data-stamp
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          right: 48,
+          bottom: 48,
+          width: 108,
+          height: 108,
+          filter: 'drop-shadow(0 10px 22px rgba(22,24,28,0.45))',
+        }}
+      >
+        <svg
+          className="spin-slow"
+          width="108"
+          height="108"
+          viewBox="0 0 108 108"
+          style={{ position: 'absolute', inset: 0 }}
+        >
+          <circle cx="54" cy="54" r="54" fill="#D9190F" />
+          <defs>
+            <path
+              id="stamp-arc"
+              d="M 54 13 a 41 41 0 1 1 -0.01 0"
+              fill="none"
+            />
+          </defs>
+          <text
+            style={{
+              fontFamily: 'var(--font-dm), system-ui, sans-serif',
+              fontWeight: 700,
+              fontSize: 11,
+              letterSpacing: '0.14em',
+              fill: '#FAF6EC',
+            }}
+          >
+            <textPath href="#stamp-arc" textLength="255">
+              FROM OUR KITCHEN · TO YOUR SOUL ·{' '}
+            </textPath>
+          </text>
+        </svg>
+        <Image
+          src="/go-dc-tower-logo.png"
+          alt=""
+          width={706}
+          height={706}
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 58,
+            height: 58,
+          }}
+        />
+      </div>
+
       <div
         data-pad
         style={{
+          position: 'relative',
           maxWidth: 1280,
           margin: '0 auto',
           width: '100%',
           padding: '0 40px',
         }}
       >
-        <div
-          data-hero
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1.05fr 0.95fr',
-            gap: 48,
-            alignItems: 'center',
-          }}
-        >
-          <div style={{ position: 'relative', paddingLeft: 28 }}>
-            <div
-              style={{
-                position: 'absolute',
-                left: 0,
-                top: 6,
-                bottom: 6,
-                width: 4,
-                background: 'linear-gradient(#E1391F, #F4A52C)',
-                borderRadius: 4,
-              }}
-            />
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                fontWeight: 700,
-                fontSize: 13,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: '#E1391F',
-              }}
-            >
-              <span
-                style={{
-                  width: 7,
-                  height: 7,
-                  background: '#2FA36B',
-                  borderRadius: '50%',
-                }}
-              />
-              DC Tower&apos;s hidden gem in Vienna
-            </div>
-            <h1
-              data-h1
-              style={{
-                fontFamily: 'var(--font-saira)',
-                fontWeight: 900,
-                fontSize: 96,
-                lineHeight: 0.92,
-                letterSpacing: '-0.01em',
-                textTransform: 'uppercase',
-                margin: '16px 0 0',
-              }}
-            >
-              Willkommen<br />im{' '}
-              <span style={{ color: '#E1391F' }}>DC Tower.</span>
-            </h1>
-            <p
-              style={{
-                fontSize: 20,
-                lineHeight: 1.5,
-                maxWidth: 480,
-                margin: '24px 0 0',
-                color: '#3a3d42',
-              }}
-            >
-              <em style={{ fontStyle: 'normal', fontWeight: 700, color: '#16181C' }}>
-                From our kitchen to your soul.
-              </em>{' '}
-              Asian-Fusion-Restaurant in der Donau City – La Mian, Ramen, Bowls &amp; Sushi,
-              frisch aus dem Wok.
-            </p>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 12,
-                marginTop: 32,
-              }}
-            >
-              <a
-                href="#reservieren"
-                className="hov-shine"
-                style={{
-                  textDecoration: 'none',
-                  padding: '17px 30px',
-                  background: '#E1391F',
-                  color: '#FAF6EC',
-                  borderRadius: 999,
-                  fontWeight: 700,
-                  fontSize: 18,
-                  boxShadow: '0 10px 26px rgba(225,57,31,0.3)',
-                }}
-              >
-                Tisch reservieren
-              </a>
-              <a
-                href="#standort"
-                className="hov-fill-dark"
-                style={{
-                  textDecoration: 'none',
-                  padding: '17px 30px',
-                  border: '1.5px solid #16181C',
-                  borderRadius: 999,
-                  fontWeight: 700,
-                  fontSize: 18,
-                }}
-              >
-                Standort &amp; Öffnungszeiten
-              </a>
-            </div>
-            <p
-              style={{
-                margin: '24px 0 0',
-                fontSize: 14,
-                fontWeight: 600,
-                color: '#6b6e73',
-              }}
-            >
-              Mo–Fr 11:00–22:00 · So 11:00–17:00 · Donau-City-Straße 7, 1220 Wien
-            </p>
-          </div>
-
+        <div style={{ position: 'relative', paddingLeft: 28, maxWidth: 680 }}>
           <div
-            data-hero-art
             style={{
-              position: 'relative',
-              minHeight: 520,
-              height: '70dvh',
-              maxHeight: 680,
-              borderRadius: 22,
-              overflow: 'hidden',
-              backgroundColor: '#efe7d4',
-              backgroundImage:
-                "url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=1400&q=80&auto=format&fit=crop')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              border: '1px solid rgba(22,24,28,0.07)',
-              boxShadow: '0 30px 60px rgba(22,24,28,0.18)',
+              position: 'absolute',
+              left: 0,
+              top: 6,
+              bottom: 6,
+              width: 4,
+              background: 'linear-gradient(var(--go-red), var(--go-red-soft))',
+              borderRadius: 4,
+            }}
+          />
+          <div
+            className="intro-rise"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              fontWeight: 700,
+              fontSize: 13,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              color: 'var(--go-red-soft)',
+              animationDelay: '1.15s',
             }}
           >
-            <div
+            <span
               style={{
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(160deg, rgba(22,24,28,0) 30%, rgba(22,24,28,0.55) 100%)',
+                width: 7,
+                height: 7,
+                background: 'var(--go-red-soft)',
+                borderRadius: '50%',
               }}
             />
-            <div
+            DC Tower&apos;s hidden gem in Vienna
+          </div>
+          <h1
+            data-h1
+            className="intro-rise"
+            style={{
+              fontFamily: 'var(--font-saira)',
+              fontWeight: 900,
+              fontSize: 96,
+              lineHeight: 0.92,
+              letterSpacing: '-0.01em',
+              textTransform: 'uppercase',
+              margin: '16px 0 0',
+              color: '#FAF6EC',
+              animationDelay: '1.25s',
+            }}
+          >
+            Willkommen<br />im{' '}
+            <span style={{ color: 'var(--go-red-soft)' }}>DC Tower.</span>
+          </h1>
+          <p
+            className="intro-rise"
+            style={{
+              fontSize: 20,
+              lineHeight: 1.5,
+              maxWidth: 500,
+              margin: '24px 0 0',
+              color: 'rgba(250,246,236,0.88)',
+              animationDelay: '1.35s',
+            }}
+          >
+            <em style={{ fontStyle: 'normal', fontWeight: 700, color: '#FAF6EC' }}>
+              From our kitchen to your soul.
+            </em>{' '}
+            Asian-Fusion-Restaurant in der Donau City – La Mian, Ramen, Bowls &amp; Sushi,
+            frisch aus dem Wok.
+          </p>
+          <div
+            className="intro-rise"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 12,
+              marginTop: 32,
+              animationDelay: '1.45s',
+            }}
+          >
+            <a
+              href={ORDER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hov-shine"
               style={{
-                position: 'absolute',
-                right: 18,
-                top: -14,
-                fontFamily: 'var(--font-saira)',
-                fontWeight: 900,
-                fontSize: 240,
-                lineHeight: 1,
-                color: 'rgba(250,246,236,0.18)',
-                pointerEvents: 'none',
+                textDecoration: 'none',
+                padding: '17px 30px',
+                background: 'var(--go-red)',
+                color: '#FAF6EC',
+                borderRadius: 999,
+                fontWeight: 700,
+                fontSize: 18,
+                boxShadow: '0 10px 26px rgba(217,25,15,0.4)',
               }}
             >
-              麺
-            </div>
-            <div
+              Jetzt bestellen
+            </a>
+            <a
+              href="#reservieren"
+              className="hov-fill-light"
               style={{
-                position: 'absolute',
-                left: 20,
-                bottom: 20,
+                textDecoration: 'none',
+                padding: '17px 30px',
+                border: '1.5px solid rgba(250,246,236,0.75)',
+                color: '#FAF6EC',
+                borderRadius: 999,
+                fontWeight: 700,
+                fontSize: 18,
+              }}
+            >
+              Tisch reservieren
+            </a>
+          </div>
+          <div
+            className="intro-rise"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexWrap: 'wrap',
+              gap: 14,
+              marginTop: 26,
+              animationDelay: '1.55s',
+            }}
+          >
+            <span
+              style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: 10,
+                gap: 9,
                 background: 'rgba(250,246,236,0.95)',
-                padding: '10px 14px',
+                padding: '9px 14px',
                 borderRadius: 999,
                 fontWeight: 700,
                 fontSize: 13,
@@ -212,38 +267,47 @@ export function Hero() {
                 }}
               />
               Jetzt geöffnet
-            </div>
+            </span>
+            <span
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: 'rgba(250,246,236,0.8)',
+              }}
+            >
+              Mo–Fr 11:00–22:00 · So 11:00–17:00 · Donau-City-Straße 7, 1220 Wien
+            </span>
           </div>
         </div>
+      </div>
 
-        {/* scroll hint */}
-        <div
-          data-hero-scroll
+      {/* scroll hint */}
+      <div
+        data-hero-scroll
+        style={{
+          position: 'absolute',
+          left: '50%',
+          bottom: 22,
+          transform: 'translateX(-50%)',
+          display: 'inline-flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 8,
+          color: 'rgba(250,246,236,0.75)',
+          fontSize: 12,
+          fontWeight: 700,
+          letterSpacing: '0.16em',
+          textTransform: 'uppercase',
+        }}
+      >
+        Scroll
+        <span
           style={{
-            position: 'absolute',
-            left: '50%',
-            bottom: 24,
-            transform: 'translateX(-50%)',
-            display: 'inline-flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 8,
-            color: '#6b6e73',
-            fontSize: 12,
-            fontWeight: 700,
-            letterSpacing: '0.16em',
-            textTransform: 'uppercase',
+            width: 2,
+            height: 28,
+            background: 'linear-gradient(rgba(250,246,236,0.9), transparent)',
           }}
-        >
-          Scroll
-          <span
-            style={{
-              width: 2,
-              height: 28,
-              background: 'linear-gradient(#16181C, transparent)',
-            }}
-          />
-        </div>
+        />
       </div>
     </section>
   );

@@ -1,10 +1,10 @@
-const POSTS: { likes: string }[] = [
-  { likes: '1.2k' },
-  { likes: '892' },
-  { likes: '740' },
-  { likes: '618' },
-  { likes: '512' },
-  { likes: '484' },
+const POSTS: { likes: string; img: string; alt: string }[] = [
+  { likes: '1.2k', img: '/ig-rainbow-roll.jpg', alt: 'Rainbow Roll auf schwarzem Teller' },
+  { likes: '892', img: '/ig-fried-gyoza.jpg', alt: 'Knusprig gebratene Gyoza' },
+  { likes: '740', img: '/ig-wok-tofu.jpg', alt: 'Wok-Bowl mit Tofu und Sesam' },
+  { likes: '618', img: '/ig-skewers.jpg', alt: 'Knusprige Spieße mit Sauce' },
+  { likes: '512', img: '/ig-veggie-bowl.jpg', alt: 'Bunte Veggie-Bowl mit Glasnudeln' },
+  { likes: '484', img: '/ig-beef-greens.jpg', alt: 'Beef mit Pak Choi' },
 ];
 
 export function InstagramSection() {
@@ -33,7 +33,7 @@ export function InstagramSection() {
               fontSize: 13,
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: '#E1391F',
+              color: 'var(--go-red)',
             }}
           >
             Folge uns
@@ -48,7 +48,7 @@ export function InstagramSection() {
               margin: '10px 0 0',
             }}
           >
-            @<span style={{ color: '#E1391F' }}>godctower</span>
+            @<span style={{ color: 'var(--go-red)' }}>godctower</span>
           </h2>
           <p
             style={{
@@ -70,7 +70,7 @@ export function InstagramSection() {
           style={{
             textDecoration: 'none',
             padding: '14px 22px',
-            background: '#16181C',
+            background: 'var(--go-bark)',
             color: '#FAF6EC',
             borderRadius: 999,
             fontWeight: 700,
@@ -94,58 +94,57 @@ export function InstagramSection() {
           marginTop: 28,
         }}
       >
-        {POSTS.map((p, i) => (
+        {POSTS.map((p) => (
           <a
-            key={i}
+            key={p.img}
             href="https://instagram.com/godctower"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Instagram-Post mit ${p.likes} Likes`}
-            className="hov-lift-sm"
+            aria-label={`Instagram-Post: ${p.alt} – ${p.likes} Likes`}
+            className="hov-lift-sm hov-zoom"
             style={{
               position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              display: 'block',
               aspectRatio: '1 / 1',
               borderRadius: 14,
               overflow: 'hidden',
               backgroundColor: '#efe7d4',
-              backgroundImage:
-                'repeating-linear-gradient(45deg, #efe7d4, #efe7d4 9px, #f5efdf 9px, #f5efdf 18px)',
               border: '1px solid rgba(22,24,28,0.07)',
               textDecoration: 'none',
-              color: '#16181C',
             }}
           >
-            <span
+            <div
+              className="hov-zoom-img"
+              role="img"
+              aria-label={p.alt}
               style={{
-                fontFamily: 'var(--font-dm)',
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: '0.06em',
-                color: '#9a948280',
-                background: 'rgba(250,246,236,0.7)',
-                padding: '6px 10px',
-                borderRadius: 999,
+                position: 'absolute',
+                inset: 0,
+                backgroundImage: `url('${p.img}')`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
               }}
-            >
-              FOTO · {i + 1}
-            </span>
+            />
             <div
               style={{
                 position: 'absolute',
-                left: 10,
+                left: 8,
                 bottom: 8,
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: 5,
-                fontSize: 12,
+                fontSize: 11.5,
                 fontWeight: 700,
-                color: '#6b6e73',
+                color: '#16181C',
+                background: 'rgba(250,246,236,0.92)',
+                padding: '4px 9px',
+                borderRadius: 999,
               }}
             >
-              <HeartGlyph /> {p.likes}
+              <span style={{ color: 'var(--go-red)', display: 'inline-flex' }}>
+                <HeartGlyph />
+              </span>
+              {p.likes}
             </div>
           </a>
         ))}

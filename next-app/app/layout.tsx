@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Saira_Condensed, DM_Sans } from 'next/font/google';
 import { Header } from '@/components/Header';
 import { SiteFooter } from '@/components/SiteFooter';
+import { IntroLoader } from '@/components/IntroLoader';
 import './globals.css';
 
 const saira = Saira_Condensed({
@@ -21,12 +22,12 @@ const dm = DM_Sans({
 export const metadata: Metadata = {
   title: 'go DC Tower — Asian Fusion Restaurant im DC Tower Wien',
   description:
-    "Ra'mien Go DC Tower – Fresh, healthy asian. La Mian, Ramen, Bowls & Sushi mitten im DC Tower. Reservieren und Catering anfragen.",
+    "Ra'mien Go DC Tower – Fresh, healthy asian. La Mian, Ramen, Bowls & Sushi mitten im DC Tower. Online bestellen, Tisch reservieren und Catering anfragen.",
   icons: { icon: '/favicon.png', apple: '/favicon.png' },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FAF6EC',
+  themeColor: '#D9190F',
   width: 'device-width',
   initialScale: 1,
 };
@@ -39,6 +40,7 @@ export default function RootLayout({
   return (
     <html lang="de" data-scroll-behavior="smooth" className={`${saira.variable} ${dm.variable}`}>
       <body style={{ fontFamily: 'var(--font-dm), system-ui, sans-serif' }}>
+        <IntroLoader />
         <Header />
         {children}
         <SiteFooter />

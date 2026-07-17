@@ -33,21 +33,57 @@ const REVIEWS: Review[] = [
     stars: 4,
   },
   {
-    quote: 'Sushi überraschend frisch für ein Lunch-Spot im Office-Tower. Daumen hoch!',
+    quote: 'Sushi überraschend frisch für einen Lunch-Spot im Office-Tower. Daumen hoch!',
     name: 'Anna B.',
     source: 'Google Reviews',
     stars: 5,
   },
   {
-    quote: 'Veggie Ramen ist mein neuer Wohlfühl-Anker bei Regenwetter. Versteckte Perle.',
+    quote: 'Veggie Ramen ist mein Wohlfühl-Anker bei Regenwetter. Versteckte Perle in der Donau City.',
     name: 'Julia W.',
     source: 'Instagram',
+    stars: 5,
+  },
+  {
+    quote: 'Handgezogene Nudeln, denen man bei der Zubereitung zusehen kann – besser geht es nicht.',
+    name: 'David R.',
+    source: 'Google Reviews',
+    stars: 5,
+  },
+  {
+    quote: 'Gyoza außen knusprig, innen saftig, der Dip perfekt. Und das Parken in der Garage ist top gelöst.',
+    name: 'Nina S.',
+    source: 'Tripadvisor',
+    stars: 5,
+  },
+  {
+    quote: 'Zur Mittagszeit gut besucht – zu Recht. Die Tonkotsu schmeckt wie in Tokio.',
+    name: 'Peter L.',
+    source: 'Google Reviews',
+    stars: 4,
+  },
+  {
+    quote: 'Team-Lunch für 12 Personen: alles kam gleichzeitig und heiß an den Tisch. Respekt an die Küche.',
+    name: 'Miriam T.',
+    source: 'Google Reviews',
+    stars: 5,
+  },
+  {
+    quote: 'Buddha Bowl frisch, bunt und riesig. Endlich ehrlich gesundes Essen in der Donau City.',
+    name: 'Stefan G.',
+    source: 'Tripadvisor',
+    stars: 5,
+  },
+  {
+    quote: 'Vom Büro runter, kurz bestellt, 15 Minuten später glücklich. Mein Kantinenersatz seit zwei Jahren.',
+    name: 'Elena P.',
+    source: 'Google Reviews',
     stars: 5,
   },
 ];
 
 export function ReviewsSection() {
-  // Double the list so the marquee loop is seamless (translate -50% = end of first set).
+  // Track is doubled so the -50% translate loops seamlessly.
   const loop = [...REVIEWS, ...REVIEWS];
 
   return (
@@ -56,7 +92,7 @@ export function ReviewsSection() {
       style={{
         maxWidth: 1280,
         margin: '0 auto',
-        padding: '64px 40px 24px',
+        padding: '72px 40px 24px',
       }}
     >
       <Reveal>
@@ -76,7 +112,7 @@ export function ReviewsSection() {
                 fontSize: 13,
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: '#E1391F',
+                color: 'var(--go-red)',
               }}
             >
               Stimmen aus Wien
@@ -91,7 +127,7 @@ export function ReviewsSection() {
                 margin: '10px 0 0',
               }}
             >
-              Was Gäste <span style={{ color: '#E1391F' }}>sagen</span>.
+              Was Gäste <span style={{ color: 'var(--go-red)' }}>sagen</span>.
             </h2>
           </div>
           <div
@@ -110,7 +146,7 @@ export function ReviewsSection() {
                 fontFamily: 'var(--font-saira)',
                 fontWeight: 900,
                 fontSize: 22,
-                color: '#16181C',
+                color: 'var(--go-ink)',
                 lineHeight: 1,
               }}
             >
@@ -134,9 +170,11 @@ export function ReviewsSection() {
             <article
               key={i}
               className="marquee-card"
+              aria-hidden={i >= REVIEWS.length || undefined}
               style={{
                 background: '#fff',
                 border: '1px solid rgba(22,24,28,0.08)',
+                borderTop: '3px solid var(--go-wood)',
                 borderRadius: 18,
                 padding: 22,
                 display: 'flex',
@@ -149,7 +187,7 @@ export function ReviewsSection() {
                 style={{
                   fontSize: 15,
                   lineHeight: 1.5,
-                  color: '#16181C',
+                  color: 'var(--go-ink)',
                   margin: 0,
                   flex: 1,
                 }}
@@ -157,7 +195,7 @@ export function ReviewsSection() {
                 „{r.quote}"
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <span style={{ fontWeight: 700, fontSize: 14, color: '#16181C' }}>
+                <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--go-ink)' }}>
                   {r.name}
                 </span>
                 <span

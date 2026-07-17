@@ -41,7 +41,7 @@ export function ReserveSection() {
             fontSize: 13,
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: '#E1391F',
+            color: 'var(--go-red)',
           }}
         >
           Reservieren
@@ -93,7 +93,7 @@ export function ReserveSection() {
               height: '100%',
             }}
           >
-            {/* vermillion accent bar */}
+            {/* brand red accent bar */}
             <span
               style={{
                 position: 'absolute',
@@ -101,7 +101,7 @@ export function ReserveSection() {
                 right: 0,
                 top: 0,
                 height: 5,
-                background: 'linear-gradient(90deg, #E1391F 0%, #F4A52C 100%)',
+                background: 'linear-gradient(90deg, var(--go-red-deep) 0%, var(--go-red) 55%, var(--go-red-soft) 100%)',
               }}
             />
             {/* kanji watermark */}
@@ -115,7 +115,7 @@ export function ReserveSection() {
                 fontWeight: 900,
                 fontSize: 200,
                 lineHeight: 1,
-                color: 'rgba(225,57,31,0.05)',
+                color: 'rgba(217,25,15,0.05)',
                 pointerEvents: 'none',
               }}
             >
@@ -196,7 +196,7 @@ export function ReserveSection() {
                   style={{
                     marginTop: 10,
                     padding: '16px 22px',
-                    background: '#E1391F',
+                    background: 'var(--go-red)',
                     color: '#fff',
                     border: 'none',
                     cursor: 'pointer',
@@ -207,7 +207,7 @@ export function ReserveSection() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 10,
-                    boxShadow: '0 12px 28px rgba(225,57,31,0.32)',
+                    boxShadow: '0 12px 28px rgba(217,25,15,0.32)',
                   }}
                 >
                   Reservierung anfragen
@@ -240,7 +240,7 @@ export function ReserveSection() {
             id="catering"
             style={{
               position: 'relative',
-              background: '#16181C',
+              background: 'var(--go-bark)',
               color: '#FAF6EC',
               borderRadius: 22,
               padding: '34px 30px 28px',
@@ -259,7 +259,7 @@ export function ReserveSection() {
                 fontWeight: 900,
                 fontSize: 240,
                 lineHeight: 1,
-                color: 'rgba(244,165,44,0.07)',
+                color: 'rgba(199,154,107,0.14)',
                 pointerEvents: 'none',
               }}
             >
@@ -276,14 +276,14 @@ export function ReserveSection() {
                 fontSize: 13,
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: '#F4A52C',
+                color: 'rgba(250,246,236,0.92)',
               }}
             >
               <span
                 style={{
                   width: 7,
                   height: 7,
-                  background: '#F4A52C',
+                  background: 'var(--go-red-soft)',
                   borderRadius: '50%',
                 }}
               />
@@ -356,13 +356,13 @@ export function ReserveSection() {
                   justifyContent: 'center',
                   gap: 8,
                   padding: '13px 14px',
-                  background: '#F4A52C',
-                  color: '#16181C',
+                  background: 'var(--go-red)',
+                  color: '#FAF6EC',
                   borderRadius: 999,
                   fontWeight: 800,
                   fontSize: 14,
                   textDecoration: 'none',
-                  boxShadow: '0 10px 22px rgba(244,165,44,0.25)',
+                  boxShadow: '0 10px 22px rgba(217,25,15,0.35)',
                 }}
               >
                 <Mail size={16} />
@@ -449,7 +449,7 @@ function Field({
           transition: 'border-color 0.15s',
         }}
       >
-        <span style={{ color: '#E1391F', display: 'inline-flex' }}>{icon}</span>
+        <span style={{ color: 'var(--go-red)', display: 'inline-flex' }}>{icon}</span>
         {children}
       </span>
     </label>
@@ -491,7 +491,7 @@ function RoomCard({
             fontFamily: 'var(--font-saira)',
             fontWeight: 900,
             fontSize: 30,
-            color: '#E1391F',
+            color: 'var(--go-red-soft)',
             lineHeight: 1,
           }}
         >

@@ -29,7 +29,7 @@ export function LocationSection() {
             fontSize: 13,
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: '#E1391F',
+            color: 'var(--go-red)',
           }}
         >
           Standort &amp; Öffnungszeiten
@@ -101,7 +101,7 @@ export function LocationSection() {
                 alignSelf: 'flex-start',
                 gap: 8,
                 padding: '13px 22px',
-                background: '#16181C',
+                background: 'var(--go-bark)',
                 color: '#FAF6EC',
                 borderRadius: 999,
                 fontWeight: 800,
@@ -194,7 +194,7 @@ export function LocationSection() {
                 margin: '14px 0 10px',
               }}
             >
-              Parken mit <span style={{ color: '#E1391F' }}>Vergünstigung</span>.
+              Parken mit <span style={{ color: 'var(--go-red)' }}>Vergünstigung</span>.
             </h3>
             <p
               style={{
@@ -220,7 +220,7 @@ export function LocationSection() {
                 color: '#16181C',
               }}
             >
-              <span style={{ color: '#2FA36B', display: 'inline-flex' }}>
+              <span style={{ color: 'var(--go-red)', display: 'inline-flex' }}>
                 <Train size={18} />
               </span>
               U1 Kaisermühlen-VIC · 4 Min. zu Fuß
@@ -279,7 +279,7 @@ function InfoRow({
     <>
       <span
         style={{
-          color: '#E1391F',
+          color: 'var(--go-red)',
           display: 'inline-flex',
           alignItems: 'center',
           justifyContent: 'center',
