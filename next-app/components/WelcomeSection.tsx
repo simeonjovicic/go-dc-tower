@@ -1,4 +1,3 @@
-import { CountUp } from './CountUp';
 import { Reveal } from './Reveal';
 
 export function WelcomeSection() {
@@ -29,7 +28,7 @@ export function WelcomeSection() {
               fontSize: 13,
               letterSpacing: '0.14em',
               textTransform: 'uppercase',
-              color: '#E1391F',
+              color: 'var(--go-red)',
             }}
           >
             Willkommen
@@ -44,7 +43,7 @@ export function WelcomeSection() {
               margin: '10px 0 0',
             }}
           >
-            Liebe Gäste, <span style={{ color: '#E1391F' }}>schön</span>,<br />dass ihr da seid.
+            Liebe Gäste, <span style={{ color: 'var(--go-red)' }}>schön</span>,<br />dass ihr da seid.
           </h2>
           <p
             style={{
@@ -58,7 +57,40 @@ export function WelcomeSection() {
             Wir sind das Asian-Fusion-Restaurant im Erdgeschoss des DC&nbsp;Towers –
             ein kleines, lebendiges Stück Asien mitten in der Donau&nbsp;City.
             Handgezogene La&nbsp;Mian, dampfende Ramen, frische Bowls und
-            knuspriges Sushi. Große Portionen, faires Preis-Leistungs-Verhältnis.
+            knuspriges Sushi – frisch &amp; gesund interpretiert, große Portionen,
+            faires Preis-Leistungs-Verhältnis. Das versteckte Juwel im DC&nbsp;Tower.
+          </p>
+          <p
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              margin: '18px 0 0',
+            }}
+          >
+            <span
+              aria-hidden="true"
+              style={{
+                width: 26,
+                height: 3,
+                background: 'var(--go-red)',
+                borderRadius: 2,
+                flex: 'none',
+              }}
+            />
+            <em
+              style={{
+                fontFamily: 'var(--font-saira)',
+                fontStyle: 'normal',
+                fontWeight: 800,
+                fontSize: 19,
+                letterSpacing: '0.02em',
+                textTransform: 'uppercase',
+                color: 'var(--go-red)',
+              }}
+            >
+              From our kitchen to your soul.
+            </em>
           </p>
           <div
             style={{
@@ -68,18 +100,10 @@ export function WelcomeSection() {
               marginTop: 26,
             }}
           >
-            <Stat label="Eröffnet">
-              <CountUp end={2018} start={1990} duration={1800} />
-            </Stat>
-            <Stat label="Gerichte">
-              <CountUp end={22} suffix="+" />
-            </Stat>
-            <Stat label="Plätze">
-              <CountUp end={80} />
-            </Stat>
-            <Stat label="Tripadvisor">
-              <CountUp end={4.6} decimals={1} suffix="★" />
-            </Stat>
+            <Stat label="Eröffnet">2018</Stat>
+            <Stat label="Gerichte">22+</Stat>
+            <Stat label="Plätze">80</Stat>
+            <Stat label="Tripadvisor">4,6★</Stat>
           </div>
         </Reveal>
 
@@ -96,10 +120,17 @@ export function WelcomeSection() {
           >
             <VenueTile
               gridRow="1 / 3"
-              caption="FOTO · Restaurant innen"
+              img="/go-wok-bowl.jpg"
+              alt="Wok-Gericht mit Garnelen in einer go-Schüssel"
             />
-            <VenueTile caption="FOTO · Detail" />
-            <VenueTile caption="FOTO · Atmosphäre" />
+            <VenueTile
+              img="/go-shumai.jpg"
+              alt="Shumai im Bambusdämpfer"
+            />
+            <VenueTile
+              img="/go-interior-tables.jpg"
+              alt="Heller Gastraum mit weißen Tischen im go DC Tower"
+            />
           </div>
         </Reveal>
       </div>
@@ -110,20 +141,29 @@ export function WelcomeSection() {
 function VenueTile({
   caption,
   gridRow,
+  img,
+  alt,
 }: {
   caption?: string;
   gridRow?: string;
+  img?: string;
+  alt?: string;
 }) {
   return (
     <div
+      role={img ? 'img' : undefined}
+      aria-label={img ? alt : undefined}
       style={{
         position: 'relative',
         gridRow,
         borderRadius: 20,
         overflow: 'hidden',
         backgroundColor: '#efe7d4',
-        backgroundImage:
-          'repeating-linear-gradient(45deg, #efe7d4, #efe7d4 11px, #f5efdf 11px, #f5efdf 22px)',
+        backgroundImage: img
+          ? `url('${img}')`
+          : 'repeating-linear-gradient(45deg, #efe7d4, #efe7d4 11px, #f5efdf 11px, #f5efdf 22px)',
+        backgroundSize: img ? 'cover' : undefined,
+        backgroundPosition: img ? 'center' : undefined,
         border: '1px solid rgba(22,24,28,0.07)',
         display: 'flex',
         alignItems: 'center',
@@ -166,7 +206,7 @@ function Stat({
           fontWeight: 900,
           fontSize: 38,
           lineHeight: 1,
-          color: '#16181C',
+          color: 'var(--go-wood-deep)',
         }}
       >
         {children}
