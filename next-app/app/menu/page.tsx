@@ -19,97 +19,84 @@ export const metadata: Metadata = {
 export default function MenuPage() {
   return (
     <main style={{ paddingTop: 84 }}>
-      {/* page head */}
-      <section
-        data-pad
-        style={{
-          maxWidth: 1280,
-          margin: '0 auto',
-          padding: '48px 40px 36px',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-            flexWrap: 'wrap',
-            gap: 18,
-          }}
-        >
-          <div>
-            <div
-              style={{
-                fontWeight: 700,
-                fontSize: 13,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: 'var(--go-red)',
-              }}
-            >
-              Menü
+      {/* Photo-led menu head, using the same bamboo and warm light as the food. */}
+      <section className="menu-page-hero">
+        <div className="menu-page-hero__inner">
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              flexWrap: 'wrap',
+              gap: 18,
+            }}
+          >
+            <div>
+              <div className="section-kicker" style={{ color: 'var(--go-red-soft)' }}>
+                Frisch aus unserer Küche
+              </div>
+              <h1
+                style={{
+                  fontFamily: 'var(--font-saira)',
+                  fontWeight: 900,
+                  fontSize: 64,
+                  lineHeight: 0.95,
+                  textTransform: 'uppercase',
+                  margin: '10px 0 0',
+                }}
+              >
+                Die <span style={{ color: 'var(--go-red-soft)' }}>Speisekarte</span>.
+              </h1>
+              <p
+                style={{
+                  fontSize: 16,
+                  color: 'rgba(250,246,236,0.82)',
+                  margin: '14px 0 0',
+                  maxWidth: 520,
+                  lineHeight: 1.55,
+                }}
+              >
+                La Mian, Ramen, Bowls, Wok, Gyoza und Sushi – frisch zubereitet
+                in unserer offenen Küche. Abholung oder Lieferung wählst du beim
+                Bestellpartner.
+              </p>
             </div>
-            <h1
-              style={{
-                fontFamily: 'var(--font-saira)',
-                fontWeight: 900,
-                fontSize: 64,
-                lineHeight: 0.95,
-                textTransform: 'uppercase',
-                margin: '10px 0 0',
-              }}
-            >
-              Die <span style={{ color: 'var(--go-red)' }}>Speisekarte</span>.
-            </h1>
-            <p
-              style={{
-                fontSize: 16,
-                color: '#3a3d42',
-                margin: '14px 0 0',
-                maxWidth: 520,
-              }}
-            >
-              Frisch zubereitet, große Portionen, faire Preise. Abholung oder
-              Lieferung wählst du beim Bestellpartner.
-            </p>
+            <OrderButton />
           </div>
-          <OrderButton />
-        </div>
 
-        {/* category quick-nav */}
-        <nav
-          aria-label="Menükategorien"
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 8,
-            marginTop: 26,
-          }}
-        >
-          {CATEGORIES.map((cat) => (
-            <a
-              key={cat.id}
-              href={`#${cat.id}`}
-              className="hov-lift-sm"
-              style={{
-                padding: '9px 16px',
-                borderRadius: 999,
-                border: '1.5px solid rgba(22,24,28,0.14)',
-                background: '#fff',
-                color: 'var(--go-ink)',
-                fontWeight: 700,
-                fontSize: 13.5,
-                textDecoration: 'none',
-              }}
-            >
-              {cat.label}
-            </a>
-          ))}
-        </nav>
+          <nav
+            className="menu-page-nav"
+            aria-label="Menükategorien"
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 8,
+              marginTop: 28,
+            }}
+          >
+            {CATEGORIES.map((cat) => (
+              <a
+                key={cat.id}
+                href={`#${cat.id}`}
+                className="hov-lift-sm"
+                style={{
+                  padding: '9px 16px',
+                  borderRadius: 999,
+                  border: '1.5px solid rgba(250,246,236,0.28)',
+                  fontWeight: 700,
+                  fontSize: 13.5,
+                  textDecoration: 'none',
+                }}
+              >
+                {cat.label}
+              </a>
+            ))}
+          </nav>
+        </div>
       </section>
 
       {/* full menu on the warm sand band */}
-      <section style={{ background: 'var(--go-sand)' }}>
+      <section className="menu-paper-section" style={{ background: 'var(--go-sand)' }}>
         <div
           data-pad
           style={{
@@ -133,10 +120,11 @@ export default function MenuPage() {
                 <Reveal key={cat.id} delay={ci * 60}>
                   <div
                     id={cat.id}
+                    className="menu-list-card"
                     style={{
                       background: '#fff',
                       border: '1px solid rgba(22,24,28,0.06)',
-                      borderTop: '3px solid var(--go-wood)',
+                      borderTop: '3px solid var(--go-red)',
                       borderRadius: 18,
                       padding: '22px 22px 12px',
                       height: '100%',

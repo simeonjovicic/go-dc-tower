@@ -2,19 +2,18 @@ const POSTS: { likes: string; img: string; alt: string }[] = [
   { likes: '1.2k', img: '/ig-rainbow-roll.jpg', alt: 'Rainbow Roll auf schwarzem Teller' },
   { likes: '892', img: '/ig-fried-gyoza.jpg', alt: 'Knusprig gebratene Gyoza' },
   { likes: '740', img: '/ig-wok-tofu.jpg', alt: 'Wok-Bowl mit Tofu und Sesam' },
-  { likes: '618', img: '/ig-skewers.jpg', alt: 'Knusprige Spieße mit Sauce' },
   { likes: '512', img: '/ig-veggie-bowl.jpg', alt: 'Bunte Veggie-Bowl mit Glasnudeln' },
-  { likes: '484', img: '/ig-beef-greens.jpg', alt: 'Beef mit Pak Choi' },
 ];
 
 export function InstagramSection() {
   return (
     <section
       data-pad
+      className="instagram-section"
       style={{
         maxWidth: 1280,
         margin: '0 auto',
-        padding: '64px 40px 24px',
+        padding: '54px 40px 20px',
       }}
     >
       <div
@@ -89,7 +88,7 @@ export function InstagramSection() {
         data-ig-grid
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
+          gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 12,
           marginTop: 28,
         }}
@@ -101,7 +100,7 @@ export function InstagramSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Instagram-Post: ${p.alt} – ${p.likes} Likes`}
-            className="hov-lift-sm hov-zoom"
+            className="hov-lift-sm hov-zoom instagram-photo"
             style={{
               position: 'relative',
               display: 'block',

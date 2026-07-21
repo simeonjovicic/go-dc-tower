@@ -18,6 +18,7 @@ export function MenuTeaser() {
   return (
     <section
       id="menu"
+      className="menu-teaser-section"
       style={{
         background: 'var(--go-sand)',
         scrollMarginTop: 84,
@@ -141,7 +142,7 @@ export function MenuTeaser() {
               <Reveal key={cat.id} delay={ci * 60}>
                 <Link
                   href={`/menu#${cat.id}`}
-                  className="hov-lift hov-zoom"
+                  className="hov-lift hov-zoom menu-category-card"
                   aria-label={`${cat.label} – ${count} Gerichte ansehen`}
                   style={{
                     position: 'relative',

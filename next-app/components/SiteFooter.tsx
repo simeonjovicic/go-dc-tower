@@ -3,6 +3,7 @@ import Image from 'next/image';
 export function SiteFooter() {
   return (
     <footer
+      className="site-footer"
       style={{
         background: 'var(--go-bark)',
         color: 'rgba(250,246,236,0.72)',

@@ -27,6 +27,7 @@ export function ReserveSection() {
     <section
       id="reservieren"
       data-pad
+      className="reservation-section"
       style={{
         maxWidth: 1280,
         margin: '0 auto',
@@ -83,6 +84,7 @@ export function ReserveSection() {
         {/* ─── FORM CARD ─── */}
         <Reveal>
           <div
+            className="reservation-form-card"
             style={{
               position: 'relative',
               background: '#fff',
@@ -104,24 +106,6 @@ export function ReserveSection() {
                 background: 'linear-gradient(90deg, var(--go-red-deep) 0%, var(--go-red) 55%, var(--go-red-soft) 100%)',
               }}
             />
-            {/* kanji watermark */}
-            <span
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                right: -10,
-                bottom: -40,
-                fontFamily: 'var(--font-saira)',
-                fontWeight: 900,
-                fontSize: 200,
-                lineHeight: 1,
-                color: 'rgba(217,25,15,0.05)',
-                pointerEvents: 'none',
-              }}
-            >
-              席
-            </span>
-
             {done ? (
               <SuccessBlock />
             ) : (
@@ -238,6 +222,7 @@ export function ReserveSection() {
         <Reveal delay={120}>
           <div
             id="catering"
+            className="catering-photo-card"
             style={{
               position: 'relative',
               background: 'var(--go-bark)',
@@ -249,23 +234,6 @@ export function ReserveSection() {
               scrollMarginTop: 84,
             }}
           >
-            <span
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                right: -20,
-                top: -50,
-                fontFamily: 'var(--font-saira)',
-                fontWeight: 900,
-                fontSize: 240,
-                lineHeight: 1,
-                color: 'rgba(199,154,107,0.14)',
-                pointerEvents: 'none',
-              }}
-            >
-              宴
-            </span>
-
             <div
               style={{
                 position: 'relative',

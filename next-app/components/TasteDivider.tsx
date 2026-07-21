@@ -1,42 +1,24 @@
-/** Quiet, static divider line in the wood tone — replaces the animated ticker. */
+/** A restrained dark brand bridge between the hero and the content. */
 export function TasteDivider() {
   return (
     <div
+      className="taste-divider"
       aria-hidden="true"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        gap: 18,
-        padding: '30px 20px 4px',
-        fontFamily: 'var(--font-saira)',
-        fontWeight: 700,
-        fontSize: 13,
-        letterSpacing: '0.3em',
-        textTransform: 'uppercase',
-        color: 'var(--go-wood-deep)',
-        textAlign: 'center',
-      }}
     >
-      {['La Mian', 'Ramen', 'Bowls', 'Sushi'].map((label, i) => (
-        <span
-          key={label}
-          style={{ display: 'inline-flex', alignItems: 'center', gap: 18 }}
-        >
-          {i > 0 && (
+      <div className="taste-divider__inner">
+        <span className="taste-divider__label">Frisch aus unserer Küche</span>
+        <div className="taste-divider__items">
+          {['La Mian', 'Ramen', 'Bowls', 'Sushi'].map((label, i) => (
             <span
-              style={{
-                width: 5,
-                height: 5,
-                borderRadius: '50%',
-                background: 'var(--go-red)',
-              }}
-            />
-          )}
-          {label}
-        </span>
-      ))}
+              key={label}
+              style={{ display: 'inline-flex', alignItems: 'center', gap: 18 }}
+            >
+              {i > 0 && <span className="taste-divider__dot" />}
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
