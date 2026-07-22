@@ -411,7 +411,7 @@ function Field({
           alignItems: 'center',
           gap: 10,
           padding: '4px 14px',
-          background: '#FAF6EC',
+          background: 'var(--go-silver-light)',
           borderRadius: 12,
           border: '1.5px solid transparent',
           transition: 'border-color 0.15s',

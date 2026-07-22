@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function MenuPage() {
   return (
     <main style={{ paddingTop: 84 }}>
-      {/* Photo-led menu head, using the same bamboo and warm light as the food. */}
+      {/* Photo-led menu head, using the same restaurant imagery as the homepage. */}
       <section className="menu-page-hero">
         <div className="menu-page-hero__inner">
           <div
@@ -31,7 +31,7 @@ export default function MenuPage() {
               gap: 18,
             }}
           >
-            <div>
+            <div className="menu-page-hero__copy">
               <div className="section-kicker" style={{ color: 'var(--go-red-soft)' }}>
                 Frisch aus unserer Küche
               </div>
@@ -45,7 +45,7 @@ export default function MenuPage() {
                   margin: '10px 0 0',
                 }}
               >
-                Die <span style={{ color: 'var(--go-red-soft)' }}>Speisekarte</span>.
+                Die <span style={{ color: 'var(--go-red)' }}>Speisekarte</span>.
               </h1>
               <p
                 style={{
@@ -95,7 +95,7 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* full menu on the warm sand band */}
+      {/* Full menu on a light silver surface. */}
       <section className="menu-paper-section" style={{ background: 'var(--go-sand)' }}>
         <div
           data-pad

@@ -15,6 +15,7 @@ export function LocationSection() {
     <section
       id="standort"
       data-pad
+      className="location-section"
       style={{
         maxWidth: 1280,
         margin: '0 auto',
@@ -121,6 +122,7 @@ export function LocationSection() {
         {/* ─── MAP ─── */}
         <Reveal delay={120}>
           <div
+            className="location-map"
             style={{
               position: 'relative',
               minHeight: 420,
@@ -172,7 +174,7 @@ export function LocationSection() {
                 alignItems: 'center',
                 gap: 8,
                 padding: '6px 12px 6px 8px',
-                background: '#005ca9',
+                background: 'var(--go-bark)',
                 color: '#fff',
                 borderRadius: 8,
                 fontWeight: 800,
@@ -194,7 +196,7 @@ export function LocationSection() {
                 margin: '14px 0 10px',
               }}
             >
-              Parken mit <span style={{ color: 'var(--go-red)' }}>Vergünstigung</span>.
+              Parken mit <span style={{ color: 'var(--go-silver-deep)' }}>Vergünstigung</span>.
             </h3>
             <p
               style={{
@@ -213,7 +215,7 @@ export function LocationSection() {
                 alignItems: 'center',
                 gap: 10,
                 padding: '10px 14px',
-                background: '#FAF6EC',
+                background: 'var(--go-silver-light)',
                 borderRadius: 12,
                 fontSize: 13.5,
                 fontWeight: 600,
@@ -242,7 +244,7 @@ export function LocationSection() {
               }}
             >
               <thead>
-                <tr style={{ background: '#FAF6EC' }}>
+                <tr style={{ background: 'var(--go-silver-light)' }}>
                   <th style={th}>Dauer</th>
                   <th style={th}>Mo–Fr<br />11:00–18:00</th>
                   <th style={th}>Mo–Fr 18:00–24:00<br />&amp; Sa–So (ganzer Tag)</th>

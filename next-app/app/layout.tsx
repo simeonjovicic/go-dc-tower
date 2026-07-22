@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Saira_Condensed, DM_Sans } from 'next/font/google';
 import { Header } from '@/components/Header';
 import { SiteFooter } from '@/components/SiteFooter';
-import { IntroLoader } from '@/components/IntroLoader';
+import { ScrollMotion } from '@/components/ScrollMotion';
 import './globals.css';
 
 const saira = Saira_Condensed({
@@ -40,8 +40,8 @@ export default function RootLayout({
   return (
     <html lang="de" data-scroll-behavior="smooth" className={`${saira.variable} ${dm.variable}`}>
       <body style={{ fontFamily: 'var(--font-dm), system-ui, sans-serif' }}>
-        <IntroLoader />
         <Header />
+        <ScrollMotion />
         {children}
         <SiteFooter />
       </body>

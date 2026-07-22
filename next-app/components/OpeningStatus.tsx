@@ -96,7 +96,7 @@ export function OpeningStatus() {
 
   return (
     <div
-      className="intro-rise hero-hours"
+      className="hero-hours"
       aria-live="polite"
       style={{
         display: 'flex',
@@ -104,7 +104,6 @@ export function OpeningStatus() {
         flexWrap: 'wrap',
         gap: 14,
         marginTop: 26,
-        animationDelay: '1.55s',
       }}
     >
       <span
