@@ -1,33 +1,43 @@
 import type { Metadata, Viewport } from 'next';
-import { Saira_Condensed, DM_Sans } from 'next/font/google';
-import { Header } from '@/components/Header';
-import { SiteFooter } from '@/components/SiteFooter';
-import { IntroLoader } from '@/components/IntroLoader';
+import { Inter, Noto_Sans_SC, Outfit } from 'next/font/google';
 import './globals.css';
 
-const saira = Saira_Condensed({
+const outfit = Outfit({
   subsets: ['latin'],
-  weight: ['500', '600', '700', '800', '900'],
-  variable: '--font-saira',
+  weight: ['300', '400', '500', '600', '800'],
+  variable: '--font-outfit',
   display: 'swap',
 });
 
-const dm = DM_Sans({
+const inter = Inter({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-dm',
+  weight: ['300', '400', '500'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
+const notoSansSc = Noto_Sans_SC({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-noto-sc',
   display: 'swap',
 });
 
 export const metadata: Metadata = {
-  title: 'go DC Tower — Asian Fusion Restaurant im DC Tower Wien',
+  title: 'go DC Tower — Asiatische Küche, Catering & Feiern im DC Tower Wien',
   description:
-    "Ra'mien Go DC Tower – Fresh, healthy asian. La Mian, Ramen, Bowls & Sushi mitten im DC Tower. Online bestellen, Tisch reservieren und Catering anfragen.",
+    'Frische asiatische Küche im DC Tower, Wien. La Mian, Wok, Dim Sum, Reisschalen, Catering fürs Büro und Feiern bis 80 Gäste.',
   icons: { icon: '/favicon.png', apple: '/favicon.png' },
+  openGraph: {
+    type: 'website',
+    locale: 'de_AT',
+    title: 'go DC Tower — Asiatische Küche, Catering & Feiern',
+    description: 'La Mian, Wok und Dim Sum im DC Tower. Online bestellen, Catering fürs Büro und Feiern bis 80 Gäste.',
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#D9190F',
+  themeColor: '#F7F3EC',
   width: 'device-width',
   initialScale: 1,
 };
@@ -38,13 +48,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" data-scroll-behavior="smooth" className={`${saira.variable} ${dm.variable}`}>
-      <body style={{ fontFamily: 'var(--font-dm), system-ui, sans-serif' }}>
-        <IntroLoader />
-        <Header />
-        {children}
-        <SiteFooter />
-      </body>
+    <html lang="de" className={`${outfit.variable} ${inter.variable} ${notoSansSc.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }
