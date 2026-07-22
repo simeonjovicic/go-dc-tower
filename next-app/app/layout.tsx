@@ -1,9 +1,8 @@
 import type { Metadata, Viewport } from 'next';
-import { Saira_Condensed, DM_Sans } from 'next/font/google';
-import { Header } from '@/components/Header';
-import { SiteFooter } from '@/components/SiteFooter';
-import { IntroLoader } from '@/components/IntroLoader';
+import { Saira_Condensed, DM_Sans, Italiana } from 'next/font/google';
+import { SiteShell } from '@/components/SiteShell';
 import './globals.css';
+import './high-class.css';
 
 const saira = Saira_Condensed({
   subsets: ['latin'],
@@ -19,6 +18,13 @@ const dm = DM_Sans({
   display: 'swap',
 });
 
+const italiana = Italiana({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-italiana',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
   title: 'go DC Tower — Asian Fusion Restaurant im DC Tower Wien',
   description:
@@ -27,7 +33,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#D9190F',
+  themeColor: '#11110F',
   width: 'device-width',
   initialScale: 1,
 };
@@ -38,12 +44,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" data-scroll-behavior="smooth" className={`${saira.variable} ${dm.variable}`}>
+    <html lang="de" data-scroll-behavior="smooth" className={`${saira.variable} ${dm.variable} ${italiana.variable}`}>
       <body style={{ fontFamily: 'var(--font-dm), system-ui, sans-serif' }}>
-        <IntroLoader />
-        <Header />
-        {children}
-        <SiteFooter />
+        <SiteShell>{children}</SiteShell>
       </body>
     </html>
   );
