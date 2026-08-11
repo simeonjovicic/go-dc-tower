@@ -39,6 +39,18 @@ const DISHES = [
   },
 ] as const;
 
+/* Preview switcher — lets the hero photo be picked in the browser instead of in code.
+   Strip this (and HERO_STORAGE_KEY) once the final image is settled. */
+/* Ramen leads: it is the only motif with a portrait crop, so it is the one that renders
+   correctly on phones. The others fall back to a cropped landscape frame. */
+const HERO_IMAGES = [
+  { key: 'ramen', wide: '/hero-ramen-dark.jpg', tall: '/hero-ramen-dark-tall.jpg', label: 'Ramen' },
+  { key: 'lamian', wide: '/hero-lamian-dark.jpg', tall: null, label: 'La Mian' },
+  { key: 'beef', wide: '/hero-beef-dark.jpg', tall: null, label: 'Beef' },
+] as const;
+
+const HERO_STORAGE_KEY = 'hc-hero-image';
+
 const MOBILE_LINKS = [
   ['#philosophie', 'Philosophie'],
   ['#signature', 'Menü'],
@@ -50,6 +62,20 @@ export function HighClassHome() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  // read after mount so the server and first client render agree
+  useEffect(() => {
+    const stored = Number(window.localStorage.getItem(HERO_STORAGE_KEY));
+    if (Number.isInteger(stored) && stored >= 0 && stored < HERO_IMAGES.length) {
+      setHeroIndex(stored);
+    }
+  }, []);
+
+  const pickHero = (index: number) => {
+    setHeroIndex(index);
+    window.localStorage.setItem(HERO_STORAGE_KEY, String(index));
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48);
@@ -114,6 +140,11 @@ export function HighClassHome() {
         className={`hc-site-header${scrolled ? ' is-scrolled' : ''}${menuOpen ? ' menu-header' : ''}`}
       >
         <div className="hc-nav-shell">
+          <nav className="hc-split-nav hc-split-nav--left" aria-label="Hauptnavigation">
+            <a href="#philosophie">Philosophie</a>
+            <a href="#signature">Karte</a>
+          </nav>
+
           <a className="hc-brand" href="#top" aria-label="go DC Tower – Startseite">
             <Image
               src="/go-dc-tower-logo.png"
@@ -122,25 +153,12 @@ export function HighClassHome() {
               height={706}
               priority
             />
-            <span className="hc-brand-copy">
-              <b>go DC Tower</b>
-              <span>Asian Kitchen · Vienna</span>
-            </span>
           </a>
 
-          <nav className="hc-desktop-nav" aria-label="Hauptnavigation">
-            <a href="#philosophie">Philosophie</a>
-            <a href="#signature">Menü</a>
+          <nav className="hc-split-nav hc-split-nav--right" aria-label="Service">
             <a href="#raum">Restaurant</a>
-            <a href="#kontakt">Kontakt</a>
+            <a href="#reservieren">Reservieren</a>
           </nav>
-
-          <a className="hc-nav-action" href="#reservieren">
-            Tisch reservieren
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2 12 12 2M4 2h8v8" stroke="currentColor" strokeWidth="1.2" />
-            </svg>
-          </a>
 
           <button
             className="hc-menu-button"
@@ -170,32 +188,64 @@ export function HighClassHome() {
       </div>
 
       <main id="main">
-        <section className="hc-hero" id="top">
+        <section
+          className={`hc-hero${HERO_IMAGES[heroIndex].tall ? ' hc-hero--tall' : ''}`}
+          id="top"
+        >
+          {/* native <picture> rather than next/image: the project exports statically with
+              images.unoptimized, so next/image adds nothing here — and <source media> is
+              the only way to hand phones a genuinely different crop instead of one file */}
           <div className="hc-hero-media" aria-hidden="true">
-            <Image
-              src="/hero-restaurant.jpg"
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-            />
+            {HERO_IMAGES.map((image, index) => (
+              <picture
+                key={image.key}
+                className={`hc-hero-img hc-hero-img--${image.key}${index === heroIndex ? ' is-active' : ''}`}
+              >
+                {image.tall && <source media="(max-width: 640px)" srcSet={image.tall} />}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={image.wide}
+                  alt=""
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  fetchPriority={index === 0 ? 'high' : 'auto'}
+                />
+              </picture>
+            ))}
           </div>
+
           <div className="hc-hero-shell">
-            <div className="hc-hero-copy">
-              <div className="hc-hero-kicker">
-                <i />Asian kitchen · ground floor · DC Tower
-              </div>
-              <h1 className="hc-display">Above the<br /><span>ordinary.</span></h1>
-            </div>
-            <div className="hc-hero-bottom">
-              <p className="hc-hero-intro">
-                Handgezogene Nudeln, dampfende Brühen und präzise Wok-Küche — mitten in der klaren Architektur der Donau City.
-              </p>
-              <div className="hc-hero-fact"><span>Heute</span>11:00 — 22:00</div>
-              <div className="hc-hero-fact"><span>Vienna</span>48.2327° N</div>
-            </div>
+            <h1 className="hc-hero-wordmark">
+              <span>go</span> <span>DC Tower</span>
+            </h1>
           </div>
-          <div className="hc-hero-index">Scroll to discover</div>
+
+          <div className="hc-hero-badge">
+            <Image src="/go-dc-tower-logo.png" alt="" width={706} height={706} />
+            <span>
+              DC Tower
+              <b>Wien 1220</b>
+            </span>
+          </div>
+
+          <a className="hc-hero-scroll" href="#philosophie">
+            <span>Entdecken</span>
+            <i aria-hidden="true" />
+          </a>
+
+          <div className="hc-hero-switch" role="group" aria-label="Hero-Motiv wählen">
+            <span className="hc-hero-switch-label">Motiv</span>
+            {HERO_IMAGES.map((image, index) => (
+              <button
+                key={image.key}
+                type="button"
+                className={index === heroIndex ? 'is-active' : undefined}
+                aria-pressed={index === heroIndex}
+                onClick={() => pickHero(index)}
+              >
+                {image.label}
+              </button>
+            ))}
+          </div>
         </section>
 
         <div className="hc-ticker" aria-label="Kulinarisches Angebot">
