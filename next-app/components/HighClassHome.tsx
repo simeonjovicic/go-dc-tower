@@ -39,17 +39,12 @@ const DISHES = [
   },
 ] as const;
 
-/* Preview switcher — lets the hero photo be picked in the browser instead of in code.
-   Strip this (and HERO_STORAGE_KEY) once the final image is settled. */
-/* Ramen leads: it is the only motif with a portrait crop, so it is the one that renders
-   correctly on phones. The others fall back to a cropped landscape frame. */
-const HERO_IMAGES = [
-  { key: 'ramen', wide: '/hero-ramen-dark.jpg', tall: '/hero-ramen-dark-tall.jpg', label: 'Ramen' },
-  { key: 'lamian', wide: '/hero-lamian-dark.jpg', tall: null, label: 'La Mian' },
-  { key: 'beef', wide: '/hero-beef-dark.jpg', tall: null, label: 'Beef' },
-] as const;
-
-const HERO_STORAGE_KEY = 'hc-hero-image';
+/* Settled hero motif. Ramen is the only one shot with a portrait crop, so phones
+   get a genuine vertical frame instead of a cropped landscape one. */
+const HERO = {
+  wide: '/hero-ramen-dark.jpg',
+  tall: '/hero-ramen-dark-tall.jpg',
+} as const;
 
 const MOBILE_LINKS = [
   ['#philosophie', 'Philosophie'],
@@ -62,20 +57,6 @@ export function HighClassHome() {
   const rootRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [heroIndex, setHeroIndex] = useState(0);
-
-  // read after mount so the server and first client render agree
-  useEffect(() => {
-    const stored = Number(window.localStorage.getItem(HERO_STORAGE_KEY));
-    if (Number.isInteger(stored) && stored >= 0 && stored < HERO_IMAGES.length) {
-      setHeroIndex(stored);
-    }
-  }, []);
-
-  const pickHero = (index: number) => {
-    setHeroIndex(index);
-    window.localStorage.setItem(HERO_STORAGE_KEY, String(index));
-  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48);
@@ -188,29 +169,16 @@ export function HighClassHome() {
       </div>
 
       <main id="main">
-        <section
-          className={`hc-hero${HERO_IMAGES[heroIndex].tall ? ' hc-hero--tall' : ''}`}
-          id="top"
-        >
+        <section className="hc-hero hc-hero--tall" id="top">
           {/* native <picture> rather than next/image: the project exports statically with
               images.unoptimized, so next/image adds nothing here — and <source media> is
               the only way to hand phones a genuinely different crop instead of one file */}
           <div className="hc-hero-media" aria-hidden="true">
-            {HERO_IMAGES.map((image, index) => (
-              <picture
-                key={image.key}
-                className={`hc-hero-img hc-hero-img--${image.key}${index === heroIndex ? ' is-active' : ''}`}
-              >
-                {image.tall && <source media="(max-width: 640px)" srcSet={image.tall} />}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={image.wide}
-                  alt=""
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  fetchPriority={index === 0 ? 'high' : 'auto'}
-                />
-              </picture>
-            ))}
+            <picture className="hc-hero-img hc-hero-img--ramen is-active">
+              <source media="(max-width: 640px)" srcSet={HERO.tall} />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={HERO.wide} alt="" loading="eager" fetchPriority="high" />
+            </picture>
           </div>
 
           <div className="hc-hero-shell">
@@ -232,20 +200,6 @@ export function HighClassHome() {
             <i aria-hidden="true" />
           </a>
 
-          <div className="hc-hero-switch" role="group" aria-label="Hero-Motiv wählen">
-            <span className="hc-hero-switch-label">Motiv</span>
-            {HERO_IMAGES.map((image, index) => (
-              <button
-                key={image.key}
-                type="button"
-                className={index === heroIndex ? 'is-active' : undefined}
-                aria-pressed={index === heroIndex}
-                onClick={() => pickHero(index)}
-              >
-                {image.label}
-              </button>
-            ))}
-          </div>
         </section>
 
         <div className="hc-ticker" aria-label="Kulinarisches Angebot">

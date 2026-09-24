@@ -273,10 +273,7 @@
   animation: hcHeroIn 2.4s cubic-bezier(.2, .7, .2, 1) forwards;
 }
 
-/* per-motif framing — the beef plate sits further right in its own frame */
-.hc-hero-img--lamian img { object-position: 50% center; }
 .hc-hero-img--ramen img { object-position: 50% center; }
-.hc-hero-img--beef img { object-position: 54% center; }
 
 /* Minimal grade: the photo carries its own darkness. Only the nav strip and the
    badge corner need help, plus a whisper of vignette to hold the frame. */
@@ -381,58 +378,6 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, .6), rgba(255, 255, 255, 0));
   animation: hcScrollPulse 2.6s ease-in-out infinite;
 }
-
-/* Preview-only control for choosing the hero photo — remove with HERO_IMAGES */
-.hc-hero-switch {
-  position: absolute;
-  z-index: 5;
-  bottom: 38px;
-  right: max(24px, calc((100% - var(--hc-page-width)) / 2));
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  opacity: 0;
-  animation: hcFadeIn 1s 1.3s ease forwards;
-}
-
-.hc-hero-switch-label {
-  color: rgba(255, 255, 255, .4);
-  font-size: 9px;
-  letter-spacing: .26em;
-  text-transform: uppercase;
-}
-
-.hc-hero-switch button {
-  position: relative;
-  padding: 4px 0;
-  border: 0;
-  background: transparent;
-  color: rgba(255, 255, 255, .52);
-  font-size: 9px;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: color .3s ease;
-}
-
-.hc-hero-switch button::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 100%;
-  bottom: 0;
-  height: 1px;
-  background: currentColor;
-  transition: right .3s ease;
-}
-
-.hc-hero-switch button:hover { color: rgba(255, 255, 255, .85); }
-
-.hc-hero-switch button.is-active {
-  color: #fff;
-}
-
-.hc-hero-switch button.is-active::after { right: .22em; }
 
 .hc-ticker {
   position: relative;
@@ -1108,9 +1053,7 @@
   .hc-hero { min-height: 640px; }
   /* motifs without a portrait file get cropped out of their landscape frame and land on
      the bowl — the wordmark then sits over food, so it needs more help than on desktop */
-  .hc-hero-img--lamian img,
   .hc-hero-img--ramen img { object-position: 64% center; }
-  .hc-hero-img--beef img { object-position: 62% center; }
   .hc-hero-media::after {
     background:
       radial-gradient(130% 85% at 50% 50%, rgba(8, 5, 3, 0) 40%, rgba(8, 5, 3, .42) 100%),
@@ -1138,18 +1081,6 @@
   .hc-hero-badge img { width: 28px; height: 28px; }
   .hc-hero-scroll { bottom: 30px; }
   .hc-hero-scroll i { height: 32px; }
-
-  /* bottom edge is already occupied by badge and scroll cue — park the switcher up top */
-  .hc-hero-switch {
-    bottom: auto;
-    top: 86px;
-    right: auto;
-    left: 50%;
-    gap: 14px;
-    transform: translateX(-50%);
-  }
-
-  .hc-hero-switch-label { display: none; }
 
   .hc-ticker-track { padding: 13px 0 12px; }
 
