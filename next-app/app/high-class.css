@@ -1141,3 +1141,689 @@
 
   .hc-reveal { opacity: 1; transform: none; }
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Hero: Ortszeile unter der Wortmarke
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hc-hero-place {
+  margin: 18px 0 0;
+  color: rgba(255, 255, 255, .62);
+  font-size: 10px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0;
+  animation: hcFadeIn 1s 1.2s ease forwards;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Catering & Events — helle Zäsur zwischen der dunklen Galerie und dem roten
+   Reservierungsband.
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hc-catering {
+  background: var(--hc-paper);
+  padding: 118px 0 126px;
+  scroll-margin-top: 70px;
+}
+
+.hc-catering-head {
+  width: var(--hc-page-width);
+  margin-inline: auto;
+}
+
+.hc-catering-head h2 {
+  margin: 34px 0 0;
+  font-size: clamp(46px, 6.6vw, 104px);
+  line-height: .9;
+}
+
+.hc-catering-head h2 i { color: var(--hc-red); font-style: italic; }
+
+.hc-catering-head > p {
+  max-width: 46ch;
+  margin: 26px 0 0;
+  color: var(--hc-muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+
+.hc-catering-list {
+  width: var(--hc-page-width);
+  margin: 68px auto 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 38px;
+}
+
+.hc-catering-item {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  border-top: 1px solid var(--hc-ink);
+}
+
+.hc-catering-media {
+  position: relative;
+  order: -1;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 26px;
+  overflow: hidden;
+  background: var(--hc-paper-deep);
+}
+
+.hc-catering-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.1s cubic-bezier(.2, .7, .2, 1);
+}
+
+.hc-catering-item:hover .hc-catering-media img { transform: scale(1.04); }
+
+.hc-catering-no {
+  color: var(--hc-red);
+  font-size: 10px;
+  letter-spacing: .18em;
+}
+
+.hc-catering-item h3 {
+  margin: 14px 0 0;
+  font-family: var(--hc-serif);
+  font-size: 27px;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.hc-catering-item p {
+  margin: 14px 0 0;
+  color: var(--hc-muted);
+  font-size: 14.5px;
+  line-height: 1.72;
+}
+
+.hc-catering-foot {
+  width: var(--hc-page-width);
+  margin: 72px auto 0;
+  padding-top: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 34px;
+  border-top: 1px solid var(--hc-line);
+}
+
+.hc-catering-foot p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--hc-muted);
+  font-size: 14.5px;
+  line-height: 1.72;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Anfahrt und Öffnungszeiten im dunklen Kontaktband
+   ───────────────────────────────────────────────────────────────────────── */
+
+.hc-anfahrt {
+  list-style: none;
+  margin: 46px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+  max-width: 44ch;
+}
+
+.hc-anfahrt li {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, .14);
+}
+
+.hc-anfahrt small {
+  color: rgba(255, 255, 255, .35);
+  font-size: 9px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+
+.hc-anfahrt span {
+  color: rgba(255, 255, 255, .78);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.hc-hours {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.hc-hours th,
+.hc-hours td {
+  padding: 5px 0;
+  color: rgba(255, 255, 255, .78);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  vertical-align: top;
+}
+
+.hc-hours td { text-align: right; }
+
+.hc-hours em {
+  display: block;
+  color: rgba(255, 255, 255, .38);
+  font-size: 11.5px;
+  font-style: normal;
+}
+
+.hc-hours tr.is-closed th,
+.hc-hours tr.is-closed td { color: rgba(255, 255, 255, .38); }
+
+.hc-reserve-note a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .4);
+}
+
+@media (max-width: 980px) {
+  .hc-catering { padding: 84px 0 92px; }
+  .hc-catering-list {
+    margin-top: 48px;
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .hc-catering-foot {
+    grid-template-columns: 1fr;
+    align-items: start;
+    margin-top: 52px;
+  }
+  .hc-anfahrt { max-width: none; }
+}
+
+@media (max-width: 640px) {
+  .hc-hero-place { font-size: 9px; letter-spacing: .28em; }
+  .hc-catering { padding: 68px 0 76px; }
+  .hc-catering-head h2 { font-size: 44px; }
+  .hc-catering-item h3 { font-size: 23px; }
+  .hc-anfahrt li { grid-template-columns: 1fr; gap: 6px; }
+  .hc-hours th, .hc-hours td { font-size: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hc-hero-place { animation: none; opacity: 1; }
+  .hc-catering-item:hover .hc-catering-media img { transform: none; }
+}
+
+/* ═════════════════════════════════════════════════════════════════════════════
+   Unterseiten (Karte, Impressum) — gleiche Sprache wie die Startseite, aber ohne
+   den Vollbild-Hero: schlanke Kopfzeile, Papier als Grundton.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+.hc-sub-page { background: var(--hc-paper); }
+
+.hc-sub-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  width: var(--hc-page-width);
+  margin-inline: auto;
+  padding: 20px 0 16px;
+  border-bottom: 1px solid var(--hc-line);
+  background: var(--hc-paper);
+}
+
+.hc-sub-brand {
+  display: block;
+  width: 42px;
+  flex: none;
+}
+
+.hc-sub-brand img {
+  width: 100%;
+  height: auto;
+}
+
+.hc-sub-header nav {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.hc-sub-header nav a {
+  color: var(--hc-ink);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s ease;
+}
+
+.hc-sub-header nav a:hover,
+.hc-sub-header nav a[aria-current='page'] { border-bottom-color: var(--hc-red); }
+
+.hc-sub-footer {
+  margin-top: 96px;
+  padding: 44px 0 40px;
+  background: var(--hc-ink);
+  color: rgba(255, 255, 255, .6);
+}
+
+.hc-sub-footer-shell {
+  width: var(--hc-page-width);
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.hc-sub-footer p { margin: 0; }
+
+.hc-sub-footer a {
+  color: rgba(255, 255, 255, .78);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .22);
+}
+
+.hc-sub-footer-name {
+  margin-bottom: 6px !important;
+  font-family: var(--hc-serif);
+  font-size: 22px;
+  color: #fff;
+}
+
+.hc-sub-footer-name span { color: var(--hc-red); }
+
+.hc-sub-footer-links {
+  display: flex;
+  gap: 22px;
+  align-items: flex-start;
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+.hc-sub-footer-links a { border-bottom-color: rgba(255, 255, 255, .3); }
+
+/* ── Kopf der Karte ──────────────────────────────────────────────────────── */
+
+.hc-menu-head { padding: 72px 0 0; }
+
+.hc-menu-head-shell {
+  width: var(--hc-page-width);
+  margin-inline: auto;
+}
+
+.hc-menu-head h1 {
+  margin: 20px 0 0;
+  font-size: clamp(56px, 9vw, 132px);
+  line-height: .86;
+}
+
+.hc-menu-head h1 i { color: var(--hc-red); font-style: italic; }
+
+.hc-menu-intro {
+  max-width: 58ch;
+  margin: 26px 0 0;
+  color: var(--hc-muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.hc-menu-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.hc-menu-actions .hc-text-link { margin-top: 0; }
+
+.hc-menu-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 46px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hc-ink);
+}
+
+.hc-menu-nav a {
+  color: var(--hc-ink);
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s ease;
+}
+
+.hc-menu-nav a:hover { border-bottom-color: var(--hc-red); }
+
+/* ── Kategorien ──────────────────────────────────────────────────────────── */
+
+.hc-menu-cat { padding: 78px 0 0; scroll-margin-top: 78px; }
+
+.hc-menu-cat-shell {
+  width: var(--hc-page-width);
+  margin-inline: auto;
+}
+
+.hc-menu-cat-head {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--hc-ink);
+}
+
+.hc-menu-cat-head h2 {
+  display: inline;
+  margin: 0;
+  font-family: var(--hc-serif);
+  font-size: clamp(34px, 4.4vw, 58px);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--hc-red);
+}
+
+.hc-menu-cat-head span {
+  margin-left: 12px;
+  color: var(--hc-muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.hc-menu-cat-head p {
+  max-width: 62ch;
+  margin: 16px 0 0;
+  color: var(--hc-muted);
+  font-size: 14.5px;
+  line-height: 1.7;
+}
+
+.hc-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 56px;
+}
+
+.hc-menu-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--hc-line);
+}
+
+.hc-menu-item.has-photo { grid-template-columns: 96px 1fr; }
+
+.hc-menu-photo {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--hc-paper-deep);
+}
+
+.hc-menu-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.hc-menu-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hc-menu-line h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.hc-menu-sub {
+  margin-left: 8px;
+  color: var(--hc-muted);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hc-menu-allergen {
+  margin-left: 5px;
+  color: var(--hc-muted);
+  font-size: 9px;
+  letter-spacing: .06em;
+  vertical-align: super;
+}
+
+.hc-menu-tag {
+  display: inline-block;
+  margin-left: 7px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  vertical-align: 2px;
+}
+
+.hc-menu-tag--vegan,
+.hc-menu-tag--vegetarisch { background: #1f5c3d; color: #f2eee5; }
+.hc-menu-tag--scharf { background: var(--hc-red); color: #fff; }
+
+.hc-menu-price {
+  flex: none;
+  font-family: var(--hc-serif);
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.hc-menu-desc {
+  margin: 6px 0 0;
+  color: var(--hc-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+.hc-menu-variants {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.hc-menu-variants li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  font-size: 13.5px;
+  color: var(--hc-ink);
+}
+
+.hc-menu-variants .hc-menu-price { font-size: 15px; }
+
+.hc-menu-note {
+  margin: 22px 0 0;
+  color: var(--hc-muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.hc-menu-note strong { color: var(--hc-ink); font-weight: 500; }
+
+.hc-menu-note--flag {
+  padding: 14px 18px;
+  border-left: 2px solid var(--hc-red);
+  background: var(--hc-paper-deep);
+}
+
+/* ── Getränke ────────────────────────────────────────────────────────────── */
+
+.hc-drinks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 56px;
+}
+
+.hc-drink-group h3 {
+  margin: 28px 0 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--hc-red);
+}
+
+.hc-drink-group ul { list-style: none; margin: 0; padding: 0; }
+
+.hc-drink-group li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--hc-line);
+  font-size: 14px;
+}
+
+.hc-drink-name em {
+  display: block;
+  color: var(--hc-muted);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.5;
+}
+
+.hc-drink-price {
+  flex: none;
+  font-family: var(--hc-serif);
+  font-size: 16px;
+}
+
+/* ── Allergene und Impressum ─────────────────────────────────────────────── */
+
+.hc-menu-legend { padding: 86px 0 0; }
+
+.hc-menu-legend h2 {
+  margin: 0 0 16px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.hc-menu-legend p {
+  max-width: 76ch;
+  margin: 0 0 20px;
+  color: var(--hc-muted);
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+.hc-menu-legend ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 6px 20px;
+  font-size: 12.5px;
+  color: var(--hc-muted);
+}
+
+.hc-menu-legend ul b { color: var(--hc-ink); font-weight: 500; }
+
+.hc-menu-source {
+  margin-top: 26px !important;
+  padding-top: 16px;
+  border-top: 1px solid var(--hc-line);
+  font-size: 11px !important;
+  letter-spacing: .04em;
+}
+
+.hc-legal { padding: 64px 0 0; }
+
+.hc-legal-list {
+  margin: 0 0 48px;
+  display: grid;
+  gap: 0;
+}
+
+.hc-legal-list > div {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 24px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--hc-line);
+}
+
+.hc-legal-list dt {
+  color: var(--hc-muted);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+
+.hc-legal-list dd {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.hc-legal h2 {
+  margin: 34px 0 12px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+
+.hc-legal p {
+  max-width: 74ch;
+  margin: 0;
+  color: var(--hc-muted);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.hc-legal a,
+.hc-legal-list a { color: var(--hc-ink); }
+
+@media (max-width: 980px) {
+  .hc-menu-list,
+  .hc-drinks { grid-template-columns: 1fr; }
+  .hc-menu-head { padding-top: 48px; }
+  .hc-menu-cat { padding-top: 58px; }
+  .hc-legal-list > div { grid-template-columns: 1fr; gap: 4px; }
+}
+
+@media (max-width: 640px) {
+  .hc-sub-header { padding: 14px 0 12px; gap: 14px; }
+  .hc-sub-header nav { gap: 16px; }
+  .hc-sub-brand { width: 34px; }
+  .hc-menu-item.has-photo { grid-template-columns: 68px 1fr; gap: 14px; }
+  .hc-menu-line { flex-wrap: wrap; gap: 4px 12px; }
+  .hc-menu-actions { gap: 16px; }
+}

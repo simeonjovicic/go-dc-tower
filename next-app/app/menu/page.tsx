@@ -1,284 +1,216 @@
 import type { Metadata } from 'next';
-import { Reveal } from '@/components/Reveal';
-import { ArrowRight } from '@/components/Icons';
-import { OrderFab } from '@/components/OrderFab';
+import Image from 'next/image';
+import { HcHeader, HcFooter } from '@/components/HcChrome';
 import {
+  ALLERGENS,
   CATEGORIES,
-  DISHES,
+  DRINKS,
+  EXTRAS,
   ORDER_URL,
-  TAG_COLORS,
+  POKE_SAUCEN,
+  TAG_LABEL,
+  dishesOf,
   fmt,
+  type Dish,
 } from '@/components/menu-data';
+import { BRAND, CONTACT } from '@/components/site-data';
 
 export const metadata: Metadata = {
-  title: 'Speisekarte — go DC Tower',
+  title: `Speisekarte — ${BRAND.name} ${BRAND.place}`,
   description:
-    'Die ganze Speisekarte vom go DC Tower: La Mian, Ramen, Bowls, Wok, Gyoza & Sushi – frisch zubereitet, große Portionen, faire Preise.',
+    'Die ganze Karte: La Mien und Pho, hausgemachte Gyoza, Wok- und Reisgerichte, Poké Bowls, Vorspeisen und Dessert. Frisch gekocht im Erdgeschoß des DC Tower.',
 };
 
 export default function MenuPage() {
   return (
-    <main style={{ paddingTop: 84 }}>
-      {/* Photo-led menu head, using the same bamboo and warm light as the food. */}
-      <section className="menu-page-hero">
-        <div className="menu-page-hero__inner">
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'flex-end',
-              justifyContent: 'space-between',
-              flexWrap: 'wrap',
-              gap: 18,
-            }}
-          >
-            <div>
-              <div className="section-kicker" style={{ color: 'var(--go-red-soft)' }}>
-                Frisch aus unserer Küche
-              </div>
-              <h1
-                style={{
-                  fontFamily: 'var(--font-saira)',
-                  fontWeight: 900,
-                  fontSize: 64,
-                  lineHeight: 0.95,
-                  textTransform: 'uppercase',
-                  margin: '10px 0 0',
-                }}
-              >
-                Die <span style={{ color: 'var(--go-red-soft)' }}>Speisekarte</span>.
-              </h1>
-              <p
-                style={{
-                  fontSize: 16,
-                  color: 'rgba(250,246,236,0.82)',
-                  margin: '14px 0 0',
-                  maxWidth: 520,
-                  lineHeight: 1.55,
-                }}
-              >
-                La Mian, Ramen, Bowls, Wok, Gyoza und Sushi – frisch zubereitet
-                in unserer offenen Küche. Abholung oder Lieferung wählst du beim
-                Bestellpartner.
-              </p>
-            </div>
-            <OrderButton />
-          </div>
+    <div className="hc-page hc-sub-page">
+      <HcHeader current="/menu" />
 
-          <nav
-            className="menu-page-nav"
-            aria-label="Menükategorien"
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 8,
-              marginTop: 28,
-            }}
-          >
-            {CATEGORIES.map((cat) => (
+      <main id="main">
+        <section className="hc-menu-head">
+          <div className="hc-menu-head-shell">
+            <p className="hc-eyebrow">Abendküche</p>
+            <h1 className="hc-display">
+              Die ganze <i>Karte.</i>
+            </h1>
+            <p className="hc-menu-intro">
+              Alle Preise in Euro, inklusive aller Abgaben. Die Buchstaben hinter den Gerichten sind
+              die gesetzlichen Allergenkennzeichnungen — die Auflösung steht am Ende der Seite.
+            </p>
+            <div className="hc-menu-actions">
               <a
-                key={cat.id}
-                href={`#${cat.id}`}
-                className="hov-lift-sm"
-                style={{
-                  padding: '9px 16px',
-                  borderRadius: 999,
-                  border: '1.5px solid rgba(250,246,236,0.28)',
-                  fontWeight: 700,
-                  fontSize: 13.5,
-                  textDecoration: 'none',
-                }}
+                className="hc-button-dark"
+                href={ORDER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                {cat.label}
+                Online bestellen <span>↗</span>
               </a>
-            ))}
-          </nav>
-        </div>
-      </section>
+              <a className="hc-text-link" href={CONTACT.phoneHref}>
+                Oder anrufen: {CONTACT.phone}
+              </a>
+            </div>
 
-      {/* full menu on the warm sand band */}
-      <section className="menu-paper-section" style={{ background: 'var(--go-sand)' }}>
-        <div
-          data-pad
-          style={{
-            maxWidth: 1280,
-            margin: '0 auto',
-            padding: '56px 40px 72px',
-          }}
-        >
-          <div
-            data-hl-grid
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3, 1fr)',
-              gap: 18,
-              alignItems: 'start',
-            }}
-          >
-            {CATEGORIES.map((cat, ci) => {
-              const dishes = DISHES.filter((d) => d.cat === cat.id);
-              return (
-                <Reveal key={cat.id} delay={ci * 60}>
-                  <div
-                    id={cat.id}
-                    className="menu-list-card"
-                    style={{
-                      background: '#fff',
-                      border: '1px solid rgba(22,24,28,0.06)',
-                      borderTop: '3px solid var(--go-red)',
-                      borderRadius: 18,
-                      padding: '22px 22px 12px',
-                      height: '100%',
-                      scrollMarginTop: 100,
-                    }}
-                  >
-                    <h2
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: 9,
-                        fontFamily: 'var(--font-saira)',
-                        fontWeight: 800,
-                        fontSize: 22,
-                        textTransform: 'uppercase',
-                        margin: '0 0 6px',
-                      }}
-                    >
-                      <span
-                        aria-hidden="true"
-                        style={{
-                          width: 8,
-                          height: 8,
-                          borderRadius: '50%',
-                          background: 'var(--go-red)',
-                          flex: 'none',
-                        }}
-                      />
-                      {cat.label}
-                    </h2>
-                    {dishes.map((d, i) => (
-                      <div
-                        key={d.id}
-                        style={{
-                          padding: '11px 0',
-                          borderBottom:
-                            i === dishes.length - 1
-                              ? 'none'
-                              : '1px solid rgba(22,24,28,0.06)',
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'baseline',
-                            gap: 12,
-                          }}
-                        >
-                          <span
-                            style={{
-                              fontWeight: 700,
-                              fontSize: 14.5,
-                              lineHeight: 1.3,
-                            }}
-                          >
-                            {d.name}
-                            {d.tag && d.tagText ? (
-                              <span
-                                style={{
-                                  marginLeft: 7,
-                                  padding: '2px 8px',
-                                  borderRadius: 999,
-                                  fontSize: 10,
-                                  fontWeight: 800,
-                                  letterSpacing: '0.05em',
-                                  textTransform: 'uppercase',
-                                  verticalAlign: 'middle',
-                                  background: TAG_COLORS[d.tag].bg,
-                                  color: TAG_COLORS[d.tag].fg,
-                                  whiteSpace: 'nowrap',
-                                }}
-                              >
-                                {d.tagText}
-                              </span>
-                            ) : null}
-                          </span>
-                          <span
-                            style={{
-                              fontFamily: 'var(--font-saira)',
-                              fontWeight: 800,
-                              fontSize: 16,
-                              color: 'var(--go-red)',
-                              whiteSpace: 'nowrap',
-                            }}
-                          >
-                            {fmt(d.price)}
-                          </span>
-                        </div>
-                        <div
-                          style={{
-                            fontSize: 12.5,
-                            lineHeight: 1.45,
-                            color: '#6b6e73',
-                            marginTop: 3,
-                          }}
-                        >
-                          {d.desc}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </Reveal>
-              );
-            })}
+            <nav className="hc-menu-nav" aria-label="Kategorien">
+              {CATEGORIES.map((c) => (
+                <a key={c.id} href={`#${c.id}`}>
+                  {c.label}
+                </a>
+              ))}
+              <a href="#getraenke">Getränke</a>
+            </nav>
           </div>
+        </section>
 
-          {/* bottom CTA */}
-          <div style={{ textAlign: 'center', marginTop: 40 }}>
-            <OrderButton large />
-            <p
-              style={{
-                margin: '12px 0 0',
-                fontSize: 13,
-                fontWeight: 600,
-                color: '#6b6e73',
-              }}
-            >
-              Abholung oder Lieferung · Bestellung über unseren Bestellpartner.
+        {CATEGORIES.map((cat) => {
+          const dishes = dishesOf(cat.id);
+          if (!dishes.length) return null;
+          return (
+            <section className="hc-menu-cat" id={cat.id} key={cat.id}>
+              <div className="hc-menu-cat-shell">
+                <header className="hc-menu-cat-head">
+                  <h2>{cat.label}</h2>
+                  {cat.en ? <span>{cat.en}</span> : null}
+                  {cat.intro ? <p>{cat.intro}</p> : null}
+                </header>
+
+                <ul className="hc-menu-list">
+                  {dishes.map((dish) => (
+                    <DishRow dish={dish} key={dish.id} />
+                  ))}
+                </ul>
+
+                {cat.id === 'poke' ? (
+                  <p className="hc-menu-note">
+                    <strong>Saucen:</strong> {POKE_SAUCEN.join(' · ')}
+                  </p>
+                ) : null}
+
+                {cat.id === 'main' ? (
+                  <p className="hc-menu-note">
+                    {EXTRAS.map((e) => `${e.label} € ${fmt(e.price)}`).join(' · ')}
+                  </p>
+                ) : null}
+
+                {cat.id === 'sushi' ? (
+                  <p className="hc-menu-note hc-menu-note--flag">
+                    Unsere Sushi-Karte wechselt. Die aktuelle Auswahl und die Preise erfahrt ihr im
+                    Restaurant oder telefonisch unter {CONTACT.phone}.
+                  </p>
+                ) : null}
+              </div>
+            </section>
+          );
+        })}
+
+        <section className="hc-menu-cat" id="getraenke">
+          <div className="hc-menu-cat-shell">
+            <header className="hc-menu-cat-head">
+              <h2>Getränke</h2>
+              <span>drinks</span>
+            </header>
+            <div className="hc-drinks">
+              {DRINKS.map((group) => (
+                <div className="hc-drink-group" key={group.group}>
+                  <h3>{group.group}</h3>
+                  <ul>
+                    {group.items.map((item) => (
+                      <li key={item.name}>
+                        <span className="hc-drink-name">
+                          {item.name}
+                          {item.detail ? <em>{item.detail}</em> : null}
+                        </span>
+                        <span className="hc-drink-price">{item.price}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="hc-menu-legend">
+          <div className="hc-menu-cat-shell">
+            <h2>Allergene</h2>
+            <p>
+              Unsere Mitarbeiter informieren euch gerne über allergene Zutaten in unserem Speisen-
+              und Getränkeangebot. Die Kennzeichnung der 14 Hauptallergene erfolgt entsprechend der
+              EU-Lebensmittelinformationsverordnung 1169/2011. Trotz sorgfältiger Herstellung können
+              unsere Gerichte Spuren anderer Stoffe enthalten, die im Produktionsprozess in der
+              Küche verwendet werden.
+            </p>
+            <ul>
+              {Object.entries(ALLERGENS).map(([code, label]) => (
+                <li key={code}>
+                  <b>{code}</b> {label}
+                </li>
+              ))}
+            </ul>
+            <p className="hc-menu-source">
+              Stand der Karte: 05/2026 · alle Preise in Euro, inkl. aller Abgaben · Lin &amp; Huang
+              GmbH
             </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      <OrderFab reserveHref="/#reservieren" />
-    </main>
+      <HcFooter />
+    </div>
   );
 }
 
-function OrderButton({ large }: { large?: boolean }) {
+function DishRow({ dish }: { dish: Dish }) {
+  const hasVariants = Boolean(dish.variants?.length);
+
   return (
-    <a
-      href={ORDER_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="hov-shine hov-arrow"
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 10,
-        textDecoration: 'none',
-        padding: large ? '17px 32px' : '14px 24px',
-        background: 'var(--go-red)',
-        color: '#FAF6EC',
-        borderRadius: 999,
-        fontWeight: 800,
-        fontSize: large ? 18 : 15,
-        boxShadow: '0 10px 26px rgba(217,25,15,0.3)',
-      }}
-    >
-      Online bestellen
-      <span className="arrow" style={{ display: 'inline-flex' }}>
-        <ArrowRight size={large ? 18 : 16} />
-      </span>
-    </a>
+    <li className={`hc-menu-item${dish.img ? ' has-photo' : ''}`}>
+      {dish.img ? (
+        <div className="hc-menu-photo">
+          <Image src={dish.img} alt={dish.name} fill sizes="120px" />
+        </div>
+      ) : null}
+
+      <div className="hc-menu-body">
+        <div className="hc-menu-line">
+          <h3>
+            {dish.name}
+            {dish.sub ? <span className="hc-menu-sub">{dish.sub}</span> : null}
+            {dish.allergens ? <sup className="hc-menu-allergen">{dish.allergens}</sup> : null}
+            {dish.tags?.map((t) => (
+              <span className={`hc-menu-tag hc-menu-tag--${t}`} key={t}>
+                {TAG_LABEL[t]}
+              </span>
+            ))}
+          </h3>
+          {!hasVariants ? (
+            <span className="hc-menu-price">
+              {dish.priceOpen ? 'auf Anfrage' : typeof dish.price === 'number' ? fmt(dish.price) : ''}
+            </span>
+          ) : null}
+        </div>
+
+        {dish.desc ? <p className="hc-menu-desc">{dish.desc}</p> : null}
+
+        {hasVariants ? (
+          <ul className="hc-menu-variants">
+            {dish.variants!.map((v) => (
+              <li key={v.label}>
+                <span>
+                  {v.label}
+                  {v.allergens ? <sup className="hc-menu-allergen">{v.allergens}</sup> : null}
+                  {v.tags?.map((t) => (
+                    <span className={`hc-menu-tag hc-menu-tag--${t}`} key={t}>
+                      {TAG_LABEL[t]}
+                    </span>
+                  ))}
+                </span>
+                <span className="hc-menu-price">{fmt(v.price)}</span>
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+    </li>
   );
 }

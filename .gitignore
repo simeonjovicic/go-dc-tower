@@ -16,3 +16,8 @@ next-env.d.ts
 # Editor
 .vscode/
 .idea/
+
+# Fotoarchiv und Stil-Altbestand: Quellmaterial, bleibt lokal.
+# Die ausgewählten, web-optimierten Bilder liegen in next-app/public/foto/.
+/Foto-alle/
+/_style-archive/
