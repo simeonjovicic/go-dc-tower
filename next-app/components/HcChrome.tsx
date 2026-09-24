@@ -9,10 +9,10 @@ import { BRAND, CONTACT, SOCIAL } from '@/components/site-data';
  */
 export function HcHeader({ current }: { current?: string }) {
   const links = [
-    { href: '/#philosophie', label: 'Haus' },
-    { href: '/menu', label: 'Karte' },
-    { href: '/#catering', label: 'Catering' },
-    { href: '/#reservieren', label: 'Reservieren' },
+    { href: '/menu', label: 'Speisekarte' },
+    { href: '/#raum', label: 'Restaurant' },
+    { href: '/#catering', label: 'Feiern & Catering' },
+    { href: '/#reservieren', label: 'Tisch anfragen' },
   ];
 
   return (
