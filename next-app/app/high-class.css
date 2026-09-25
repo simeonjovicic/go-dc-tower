@@ -181,7 +181,7 @@
 .hc-taste-hint { max-width: 29ch; margin: 26px 0 0; color: #a7a299; font-size: 12px; line-height: 1.7; }
 .hc-taste-choices, .hc-taste-preview { min-width: 0; }
 .hc-taste-panel:not([hidden]) { animation: hcPanelIn .35s ease both; }
-.hc-taste-image { position: relative; display: block; aspect-ratio: 1.47; overflow: hidden; background: #e9e4db; }
+.hc-taste-image { position: relative; display: block; aspect-ratio: 1.25; overflow: hidden; background: #e9e4db; }
 .hc-taste-image img { object-fit: cover; transition: transform .6s ease; }
 .hc-taste-image:hover img { transform: scale(1.025); }
 .hc-taste-photo-note {
@@ -325,7 +325,7 @@
   .hc-taste-tabs strong { font-size: clamp(21px, 6.5vw, 30px); }
   .hc-taste-tabs button > span:last-child { display: none; }
   .hc-taste-hint { display: none; }
-  .hc-taste-image { aspect-ratio: 1.35; }
+  .hc-taste-image { aspect-ratio: 1.25; }
   .hc-taste-title h3 { font-size: 32px; }
   .hc-taste-description { min-height: 224px; padding-top: 22px; }
   .hc-taste-description > p { min-height: 74px; }

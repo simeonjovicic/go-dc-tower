@@ -7,8 +7,11 @@ import { BRAND, CONTACT, SOCIAL } from '@/components/site-data';
  * Hero abgestimmte Kopfzeile mit — hier zeigen die Links zurück auf die Anker
  * der Startseite, statt auf Abschnitte, die es auf dieser Seite nicht gibt.
  */
-export function HcHeader({ current }: { current?: string }) {
-  const links = [
+export function HcHeader({ current, compact = false }: { current?: string; compact?: boolean }) {
+  const links = compact ? [
+    { href: '/', label: 'Restaurant' },
+    { href: '/#reservieren', label: 'Tisch anfragen' },
+  ] : [
     { href: '/menu', label: 'Speisekarte' },
     { href: '/#raum', label: 'Restaurant' },
     { href: '/#catering', label: 'Feiern & Catering' },

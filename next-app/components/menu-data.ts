@@ -91,19 +91,19 @@ export const CATEGORIES: {
 
 export const DISHES: Dish[] = [
   // ── VORSPEISEN ────────────────────────────────────────────────────────────
-  { id: 'miso-suppe', cat: 'vorspeisen', name: 'Miso Suppe', sub: 'miso soup', price: 3.8, allergens: 'A', tags: ['vegan'], img: '/foto/gericht/misosuppe.webp' },
-  { id: 'wantan-suppe', cat: 'vorspeisen', name: 'Wantan Suppe', sub: 'wonton soup', price: 6.2, allergens: 'AHF', img: '/foto/gericht/wantansuppe.webp' },
-  { id: 'edamame', cat: 'vorspeisen', name: 'Edamame', desc: 'gedämpfte japanische Sojabohnen', price: 6.0, tags: ['vegan'], img: '/foto/gericht/edamame.webp' },
-  { id: 'wakame', cat: 'vorspeisen', name: 'Wakame Seetang Salat', desc: 'jap. Algensalat', price: 6.0, allergens: 'AN', tags: ['vegan'], img: '/foto/gericht/wakame.webp' },
-  { id: 'fruehlingsrollen', cat: 'vorspeisen', name: 'Frühlingsrollen', sub: '3 Stk.', desc: 'hausgemacht, gefüllt mit Gemüse, Tofu und Glasnudel', price: 7.2, allergens: 'A', img: '/foto/gericht/fruehlingsrollen.webp' },
-  { id: 'chaoshou', cat: 'vorspeisen', name: 'Chao Shou', desc: 'Wantan gefüllt mit Schweinefleisch und Garnelen in Szechuan-Sauce', price: 6.8, allergens: 'AHN', tags: ['scharf'], img: '/foto/gericht/chaoshou.webp' },
-  { id: 'tuna-tataki', cat: 'vorspeisen', name: 'Tuna-Tataki', desc: 'kurz angebratener Thunfisch mit Koriander-Sauce', price: 12.0, allergens: 'ADFS', img: '/foto/gericht/tuna-tataki.webp' },
-  { id: 'chicken-tempura', cat: 'vorspeisen', name: 'Chicken Tempura', desc: 'Chicken Steak Tempura, Chili-Mayo', price: 7.2, allergens: 'AGO', img: '/foto/gericht/chicken-tempura.webp' },
-  { id: 'garnelen-tempura', cat: 'vorspeisen', name: 'Garnelen Tempura', sub: '3 Stk.', desc: 'Shrimps Tempura, Chili-Mayo', price: 6.8, allergens: 'AHCF', img: '/foto/gericht/garnelen-tempura.webp' },
-  { id: 'xiao-long-bao', cat: 'vorspeisen', name: 'Xiao Long Bao', sub: '4 Stk.', desc: "gedämpfte 'Shanghai'-Teigtaschen mit Schweinefleisch", price: 6.9, allergens: 'AF', img: '/foto/gericht/xiao-long-bao.webp' },
-  { id: 'gebackene-wantan', cat: 'vorspeisen', name: 'Gebackene Wantan', sub: '3 Stk.', desc: 'mit Garnelen und Schweinefleisch', price: 6.2, allergens: 'ABCF', img: '/foto/gericht/gebackene-wantan.webp' },
+  { id: 'miso-suppe', cat: 'vorspeisen', name: 'Miso Suppe', sub: 'miso soup', price: 3.8, allergens: 'A', tags: ['vegan'], img: '/foto/gericht-enhanced/misosuppe.webp' },
+  { id: 'wantan-suppe', cat: 'vorspeisen', name: 'Wantan Suppe', sub: 'wonton soup', price: 6.2, allergens: 'AHF', img: '/foto/gericht-enhanced/wantansuppe.webp' },
+  { id: 'edamame', cat: 'vorspeisen', name: 'Edamame', desc: 'gedämpfte japanische Sojabohnen', price: 6.0, tags: ['vegan'], img: '/foto/gericht-enhanced/edamame.webp' },
+  { id: 'wakame', cat: 'vorspeisen', name: 'Wakame Seetang Salat', desc: 'jap. Algensalat', price: 6.0, allergens: 'AN', tags: ['vegan'], img: '/foto/gericht-enhanced/wakame.webp' },
+  { id: 'fruehlingsrollen', cat: 'vorspeisen', name: 'Frühlingsrollen', sub: '3 Stk.', desc: 'hausgemacht, gefüllt mit Gemüse, Tofu und Glasnudel', price: 7.2, allergens: 'A', img: '/foto/gericht-enhanced/fruehlingsrollen.webp' },
+  { id: 'chaoshou', cat: 'vorspeisen', name: 'Chao Shou', desc: 'Wantan gefüllt mit Schweinefleisch und Garnelen in Szechuan-Sauce', price: 6.8, allergens: 'AHN', tags: ['scharf'], img: '/foto/gericht-enhanced/chaoshou.webp' },
+  { id: 'tuna-tataki', cat: 'vorspeisen', name: 'Tuna-Tataki', desc: 'kurz angebratener Thunfisch mit Koriander-Sauce', price: 12.0, allergens: 'ADFS', img: '/foto/gericht-enhanced/tuna-tataki.webp' },
+  { id: 'chicken-tempura', cat: 'vorspeisen', name: 'Chicken Tempura', desc: 'Chicken Steak Tempura, Chili-Mayo', price: 7.2, allergens: 'AGO', img: '/foto/gericht-enhanced/chicken-tempura.webp' },
+  { id: 'garnelen-tempura', cat: 'vorspeisen', name: 'Garnelen Tempura', sub: '3 Stk.', desc: 'Shrimps Tempura, Chili-Mayo', price: 6.8, allergens: 'AHCF', img: '/foto/gericht-enhanced/garnelen-tempura.webp' },
+  { id: 'xiao-long-bao', cat: 'vorspeisen', name: 'Xiao Long Bao', sub: '4 Stk.', desc: "gedämpfte 'Shanghai'-Teigtaschen mit Schweinefleisch", price: 6.9, allergens: 'AF', img: '/foto/gericht-enhanced/xiao-long-bao.webp' },
+  { id: 'gebackene-wantan', cat: 'vorspeisen', name: 'Gebackene Wantan', sub: '3 Stk.', desc: 'mit Garnelen und Schweinefleisch', price: 6.2, allergens: 'ABCF', img: '/foto/gericht-enhanced/gebackene-wantan.webp' },
   { id: 'garnelenrollen', cat: 'vorspeisen', name: 'Garnelenrollen', sub: '3 Stk.', desc: 'gebacken mit Bambussprossen', price: 7.8, allergens: 'ABCF' },
-  { id: 'gruener-salat', cat: 'vorspeisen', name: 'Grüner Salat', price: 6.0, tags: ['vegan'], img: '/foto/gericht/gruener-salat.webp' },
+  { id: 'gruener-salat', cat: 'vorspeisen', name: 'Grüner Salat', price: 6.0, tags: ['vegan'], img: '/foto/gericht-enhanced/gruener-salat.webp' },
 
   // ── GYOZA ─────────────────────────────────────────────────────────────────
   { id: 'gyoza-veg', cat: 'gyoza', name: 'Vegetarisch', sub: 'vegetables', allergens: 'AFN', tags: ['vegetarisch'], variants: [{ label: '6 Stk.', price: 8.8 }, { label: '10 Stk.', price: 13.2 }] },
@@ -116,7 +116,7 @@ export const DISHES: Dish[] = [
   {
     id: 'lamien', cat: 'nudelsuppen', name: 'La Mien', sub: '[laa miaehn]',
     desc: 'Fliegende Nudeln aus Weizenmehl, à la minute gehobelt in feiner Hühnerbrühe, serviert mit Pakchoi und Koriander',
-    img: '/foto/gericht/lamien-rind.webp',
+    img: '/foto/gericht-enhanced/lamien-rind.webp',
     variants: [
       { label: 'mit Gemüse', price: 13.5, allergens: 'AFL', tags: ['vegetarisch'] },
       { label: 'mit Huhn', price: 13.5, allergens: 'AFL' },
@@ -137,14 +137,14 @@ export const DISHES: Dish[] = [
       { label: 'mit Meeresfrüchten', price: 15.8, allergens: 'ABFLR' },
     ],
   },
-  { id: 'udon-meeresfruechte', cat: 'nudelsuppen', name: 'Udon-Nudelsuppe mit Meeresfrüchte', sub: 'udon noodle soup with seafood', price: 15.8, allergens: 'ABFRL', img: '/foto/gericht/udon-meeresfruechte.webp' },
-  { id: 'wantansuppe-ente', cat: 'nudelsuppen', name: 'Wantansuppe mit Shrimpsnudel und Ente', price: 14.8, allergens: 'AHCFL', img: '/foto/gericht/wantansuppe-ente.webp' },
+  { id: 'udon-meeresfruechte', cat: 'nudelsuppen', name: 'Udon-Nudelsuppe mit Meeresfrüchte', sub: 'udon noodle soup with seafood', price: 15.8, allergens: 'ABFRL', img: '/foto/gericht-enhanced/udon-meeresfruechte.webp' },
+  { id: 'wantansuppe-ente', cat: 'nudelsuppen', name: 'Wantansuppe mit Shrimpsnudel und Ente', price: 14.8, allergens: 'AHCFL', img: '/foto/gericht-enhanced/wantansuppe-ente.webp' },
   { id: 'wantansuppe-10', cat: 'nudelsuppen', name: 'Wantansuppe', sub: '10 Stück, nur Wantan', price: 14.2, allergens: 'AHCFL' },
 
   // ── MAIN ──────────────────────────────────────────────────────────────────
   {
     id: 'kokos-curry', cat: 'main', name: 'Kokos-Curry mit Reis', sub: 'coconut curry with rice',
-    allergens: 'AF', tags: ['scharf'], img: '/foto/gericht/kokos-curry.webp',
+    allergens: 'AF', tags: ['scharf'], img: '/foto/gericht-enhanced/kokos-curry.webp',
     variants: [
       { label: 'Garnelen', price: 17.2, allergens: 'H' },
       { label: 'Huhn', price: 16.2 },
@@ -153,7 +153,7 @@ export const DISHES: Dish[] = [
   },
   {
     id: 'wok-nudeln', cat: 'main', name: 'Wok Nudeln', sub: 'fried noodles',
-    allergens: 'AFR', img: '/foto/gericht/wok-nudeln-rind.webp',
+    allergens: 'AFR', img: '/foto/gericht-enhanced/wok-nudeln-rind.webp',
     variants: [
       { label: 'Rind', price: 16.8 },
       { label: 'Huhn', price: 16.2 },
@@ -162,7 +162,7 @@ export const DISHES: Dish[] = [
   },
   {
     id: 'eierreis', cat: 'main', name: 'Gebratener Eierreis', sub: 'fried egg rice',
-    allergens: 'ACF', img: '/foto/gericht/eierreis-rind.webp',
+    allergens: 'ACF', img: '/foto/gericht-enhanced/eierreis-rind.webp',
     variants: [
       { label: 'Rind', price: 16.8, allergens: 'R' },
       { label: 'Huhn', price: 16.2 },
@@ -172,7 +172,7 @@ export const DISHES: Dish[] = [
   },
   {
     id: 'chili-basilikum', cat: 'main', name: 'Chili & Basilikum', sub: 'chili and thai basil',
-    allergens: 'AFRLO', tags: ['scharf'], img: '/foto/gericht/chili-rind.webp',
+    allergens: 'AFRLO', tags: ['scharf'], img: '/foto/gericht-enhanced/chili-rind.webp',
     variants: [
       { label: 'Huhn', price: 16.8 },
       { label: 'Beef', price: 16.8 },
@@ -182,20 +182,20 @@ export const DISHES: Dish[] = [
   },
   {
     id: 'bulgogi', cat: 'main', name: 'Bulgogi', desc: 'koreanische marinierte Fleischspezialität mit Spiegelei und Reis',
-    price: 16.9, allergens: 'ACFNOR', img: '/foto/gericht/bulgogi-rind.webp',
+    price: 16.9, allergens: 'ACFNOR', img: '/foto/gericht-enhanced/bulgogi-rind.webp',
     variants: [{ label: 'mit Rind', price: 16.9 }, { label: 'mit Huhn', price: 16.9 }],
   },
-  { id: 'knusprige-ente', cat: 'main', name: 'Knusprige Ente', desc: 'mit Teriyakisauce oder Knoblauchsauce, dazu gebratenes Gemüse', price: 18.9, allergens: 'AFLR', img: '/foto/gericht/knusprige-ente.webp' },
-  { id: 'lachs-gegrillt', cat: 'main', name: 'Lachs gegrillt', desc: 'mit Mangosauce oder Teriyakisauce, dazu gebratenes Gemüse', price: 17.2, allergens: 'ADFNO', img: '/foto/gericht/lachs-gegrillt.webp' },
+  { id: 'knusprige-ente', cat: 'main', name: 'Knusprige Ente', desc: 'mit Teriyakisauce oder Knoblauchsauce, dazu gebratenes Gemüse', price: 18.9, allergens: 'AFLR', img: '/foto/gericht-enhanced/knusprige-ente.webp' },
+  { id: 'lachs-gegrillt', cat: 'main', name: 'Lachs gegrillt', desc: 'mit Mangosauce oder Teriyakisauce, dazu gebratenes Gemüse', price: 17.2, allergens: 'ADFNO', img: '/foto/gericht-enhanced/lachs-gegrillt.webp' },
   { id: 'tofu-teriyaki', cat: 'main', name: 'Tofu', desc: 'gegrillt mit Gemüse und Teriyakisauce', price: 15.8, allergens: 'AF', tags: ['vegetarisch'] },
-  { id: 'mapo-tofu', cat: 'main', name: 'Mapo Tofu', price: 15.8, allergens: 'AF', tags: ['scharf'], img: '/foto/gericht/mapo-tofu.webp' },
+  { id: 'mapo-tofu', cat: 'main', name: 'Mapo Tofu', price: 15.8, allergens: 'AF', tags: ['scharf'], img: '/foto/gericht-enhanced/mapo-tofu.webp' },
 
   // ── POKÉ BOWL ─────────────────────────────────────────────────────────────
-  { id: 'poke-lachs', cat: 'poke', name: 'Lachs', sub: 'salmon', price: 15.2, allergens: 'D', img: '/foto/gericht/poke-lachs.webp' },
-  { id: 'poke-maguro', cat: 'poke', name: 'Maguro', sub: 'Thunfisch | tuna', price: 16.8, allergens: 'D', img: '/foto/gericht/poke-maguro.webp' },
-  { id: 'poke-shrimps', cat: 'poke', name: 'Shrimps gegrillt', sub: 'grilled shrimps', price: 15.2, allergens: 'B', img: '/foto/gericht/poke-shrimps.webp' },
-  { id: 'poke-tofu', cat: 'poke', name: 'Tofu', price: 13.8, allergens: 'A', tags: ['vegan'], img: '/foto/gericht/poke-tofu.webp' },
-  { id: 'poke-crispy-chicken', cat: 'poke', name: 'Crispy Chicken', price: 14.2, allergens: 'ACF', img: '/foto/gericht/poke-crispy-chicken.webp' },
+  { id: 'poke-lachs', cat: 'poke', name: 'Lachs', sub: 'salmon', price: 15.2, allergens: 'D', img: '/foto/gericht-enhanced/poke-lachs.webp' },
+  { id: 'poke-maguro', cat: 'poke', name: 'Maguro', sub: 'Thunfisch | tuna', price: 16.8, allergens: 'D', img: '/foto/gericht-enhanced/poke-maguro.webp' },
+  { id: 'poke-shrimps', cat: 'poke', name: 'Shrimps gegrillt', sub: 'grilled shrimps', price: 15.2, allergens: 'B', img: '/foto/gericht-enhanced/poke-shrimps.webp' },
+  { id: 'poke-tofu', cat: 'poke', name: 'Tofu', price: 13.8, allergens: 'A', tags: ['vegan'], img: '/foto/gericht-enhanced/poke-tofu.webp' },
+  { id: 'poke-crispy-chicken', cat: 'poke', name: 'Crispy Chicken', price: 14.2, allergens: 'ACF', img: '/foto/gericht-enhanced/poke-crispy-chicken.webp' },
 
   // ── SUSHI ─────────────────────────────────────────────────────────────────
   // ACHTUNG: Die Sushi-Karte liegt uns noch nicht vor. Namen sind hier nach den
@@ -228,9 +228,9 @@ export const DISHES: Dish[] = [
   { id: 'kinder-crispy-chicken', cat: 'kinder', name: 'Crispy Chicken mit Reis', desc: 'Mangosauce oder Teriyakisauce · mit Gemüse +1,00', price: 10.8, allergens: 'ACF' },
 
   // ── DESSERT ───────────────────────────────────────────────────────────────
-  { id: 'hong-tang-ci-ba', cat: 'dessert', name: 'Hong Tang Ci Ba', sub: '3 Stk.', desc: 'gebackene chinesische Reiskuchen gefüllt mit Braunzucker', price: 5.0, allergens: 'FA', img: '/foto/gericht/hong-tang-ci-ba.webp' },
-  { id: 'mochi', cat: 'dessert', name: 'Mochi', sub: '1 Stk.', desc: 'hausgemachter jap. sticky rice cake, verschiedene Sorten', price: 4.0, tags: ['vegan'], img: '/foto/gericht/mochi.webp' },
-  { id: 'eis-mochi', cat: 'dessert', name: 'Eis Mochi', sub: '1 Stk.', desc: 'verschiedene Sorten', price: 2.5, tags: ['vegan'], img: '/foto/gericht/eis-mochi.webp' },
+  { id: 'hong-tang-ci-ba', cat: 'dessert', name: 'Hong Tang Ci Ba', sub: '3 Stk.', desc: 'gebackene chinesische Reiskuchen gefüllt mit Braunzucker', price: 5.0, allergens: 'FA', img: '/foto/gericht-enhanced/hong-tang-ci-ba.webp' },
+  { id: 'mochi', cat: 'dessert', name: 'Mochi', sub: '1 Stk.', desc: 'hausgemachter jap. sticky rice cake, verschiedene Sorten', price: 4.0, tags: ['vegan'], img: '/foto/gericht-enhanced/mochi.webp' },
+  { id: 'eis-mochi', cat: 'dessert', name: 'Eis Mochi', sub: '1 Stk.', desc: 'verschiedene Sorten', price: 2.5, tags: ['vegan'], img: '/foto/gericht-enhanced/eis-mochi.webp' },
   { id: 'eiscreme', cat: 'dessert', name: 'Eiscreme', desc: 'Matcha | Schwarzer Sesam', price: 2.5, allergens: 'G' },
 ];
 
