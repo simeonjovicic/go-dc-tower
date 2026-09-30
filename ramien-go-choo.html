@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hango — Angebot · GO DC Tower</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1d1d1f;
+    --soft:#424245;
+    --faint:#86868b;
+    --line:#e5e5ea;
+    --line-2:#d2d2d7;
+    --wash:#f5f5f7;
+    --paper:#ffffff;
+    --accent:#ef4444;
+    --accent-dark:#dc2626;
+    --accent-soft:#fef2f2;
+    --accent-line:#fecaca;
+    --display:'Inter',sans-serif;
+    --body:'Inter',sans-serif;
+    --mono:'Inter',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{background:#f5f5f7;font-family:var(--body);color:var(--ink);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+  @page{size:A4;margin:0;}
+  .page{
+    width:210mm;min-height:297mm;background:var(--paper);
+    margin:22px auto;padding:16mm 17mm 12mm;
+    box-shadow:0 6px 40px rgba(0,0,0,.10);
+    display:flex;flex-direction:column;position:relative;
+  }
+  .pagebreak{break-before:page;}
+  .bk-li .t.accent b{color:var(--accent);}
+  .plans{display:grid;grid-template-columns:1fr 1fr;gap:4mm;padding:1mm 0 1.5mm;}
+  .plan{position:relative;border:1px solid var(--line-2);border-radius:12px;padding:4.5mm 5mm;background:var(--paper);}
+  .plan.reco{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent);background:var(--paper);}
+  .plan-badge{position:absolute;top:-9px;right:12px;font-family:var(--mono);font-size:7.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#fff;padding:3px 8px;border-radius:980px;}
+  .plan-n{font-family:var(--display);font-size:14px;font-weight:600;letter-spacing:-.01em;}
+  .plan-p{font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:-.02em;margin-top:1mm;}
+  .plan-p span{font-size:10px;font-weight:400;color:var(--soft);margin-left:2px;}
+  .plan.reco .plan-p{color:var(--accent);}
+  .plan-d{font-size:9px;line-height:1.45;color:var(--soft);margin-top:2mm;}
+  .plan-f{list-style:none;margin-top:3mm;display:flex;flex-direction:column;gap:1.6mm;}
+  .plan-f li{position:relative;padding-left:14px;font-size:9.5px;line-height:1.35;color:var(--ink);}
+  .plan-f li::before{content:'✓';position:absolute;left:0;color:var(--accent);font-weight:700;font-size:9px;}
+  .plan-note{font-size:8.5px;color:var(--faint);line-height:1.4;margin-top:1mm;}
+  .pdf-fab{position:fixed;top:50%;right:24px;transform:translateY(-50%);z-index:999;display:flex;align-items:center;gap:9px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:12px 19px;border-radius:980px;box-shadow:0 8px 26px rgba(239,68,68,.34);transition:transform .15s ease,box-shadow .15s ease,background .15s ease;}
+  .pdf-fab:hover{background:var(--accent-dark);transform:translateY(-50%) scale(1.03);box-shadow:0 10px 30px rgba(239,68,68,.42);}
+  .pdf-fab svg{width:17px;height:17px;flex:none;}
+  @media print{.pdf-fab{display:none !important;}.page{margin:0 auto !important;box-shadow:none !important;}}
+  @media(max-width:800px){.pdf-fab{top:auto;bottom:20px;right:20px;transform:none;}.pdf-fab:hover{transform:scale(1.04);}}
+
+  /* ---- shared bits ---- */
+  .mono{font-family:var(--mono);}
+  .label{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);}
+  .rule{height:1px;background:var(--line);border:0;}
+  .rule-ink{height:1.5px;background:var(--ink);border:0;}
+
+  /* ---- top bar ---- */
+  .topbar{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:6mm;}
+  .wordmark{font-family:var(--display);font-size:21px;font-weight:700;letter-spacing:-.02em;}
+  .wordmark span{color:var(--accent);}
+  .topmeta{font-family:var(--mono);font-size:9px;letter-spacing:.12em;color:var(--faint);text-transform:uppercase;text-align:right;line-height:1.7;}
+
+  /* ---- cover hero ---- */
+  .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.26em;color:var(--accent);text-transform:uppercase;font-weight:700;}
+  .hero-h{font-family:var(--display);font-weight:600;font-size:40px;line-height:1.04;letter-spacing:-.03em;margin-top:7mm;}
+  .hero-h .dim{color:var(--line-2);}
+  .hero-sub{font-size:12.5px;line-height:1.65;color:var(--soft);max-width:150mm;margin-top:6mm;}
+  .claim{margin-top:6mm;padding-top:5mm;border-top:1px solid var(--line);display:flex;gap:7mm;align-items:baseline;}
+  .claim-k{font-family:var(--mono);font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:1px;}
+  .claim-t{font-size:12px;line-height:1.55;color:var(--ink);max-width:128mm;font-weight:500;}
+  .claim-t b{font-weight:600;}
+  .factline{display:flex;gap:0;margin-top:8mm;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .fact{flex:1;padding:4mm 0;border-right:1px solid var(--line);padding-right:5mm;}
+  .fact:last-child{border-right:0;}
+  .fact:not(:first-child){padding-left:5mm;}
+  .fact .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);}
+  .fact .v{font-size:12px;font-weight:600;margin-top:3px;color:var(--ink);}
+
+  /* ---- section heading ---- */
+  .sec{display:flex;align-items:baseline;gap:10px;margin-bottom:5mm;}
+  .sec .no{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--accent);}
+  .sec .ti{font-family:var(--display);font-size:17px;font-weight:600;letter-spacing:-.01em;}
+  .sec .line{flex:1;height:1px;background:var(--line);align-self:center;}
+
+  /* ---- at a glance ---- */
+  .glance{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;margin-top:2mm;}
+  .g-row{display:grid;grid-template-columns:auto 1fr auto auto;gap:5mm;align-items:center;padding:3.6mm 6mm;border-bottom:1px solid var(--line);}
+  .g-row:last-of-type{border-bottom:0;}
+  .g-no{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--faint);}
+  .g-main{}
+  .g-title{font-size:12px;font-weight:600;}
+  .g-desc{font-size:10px;color:var(--soft);margin-top:1px;}
+  .pill{display:inline-flex;align-items:center;justify-content:center;width:max-content;max-width:100%;min-width:0;font-family:var(--mono);font-size:7.2px;line-height:1;letter-spacing:.12em;text-transform:uppercase;font-weight:700;padding:2.2px 7px;border-radius:980px;white-space:nowrap;}
+  .pill.now{background:var(--accent);color:#fff;}
+  .pill.next{background:#fff;color:var(--soft);border:1px solid var(--line-2);}
+  .pill.later{background:#fff;color:var(--faint);border:1px solid var(--line-2);}
+  .g-row > div:nth-child(3){justify-self:start;align-self:center;}
+  .g-price{font-family:var(--mono);font-size:13px;font-weight:700;text-align:right;white-space:nowrap;min-width:24mm;}
+  .g-price.soft{font-size:9px;font-weight:400;color:var(--faint);letter-spacing:.04em;}
+  .g-total{display:flex;justify-content:space-between;align-items:center;padding:5mm 6mm;background:var(--ink);color:#fff;}
+  .g-total .l{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.7;}
+  .g-total .l b{display:block;font-family:var(--body);font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;opacity:1;margin-top:2px;}
+  .g-total .r{text-align:right;}
+  .g-total .amt{font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-.02em;}
+  .g-total .amt small{font-size:10px;opacity:.7;}
+  .g-total .mo{font-family:var(--mono);font-size:9.5px;opacity:.8;margin-top:3px;}
+
+  /* ---- process ---- */
+  .proc{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:7mm;}
+  .proc-i{padding-right:6mm;border-right:1px solid var(--line);}
+  .proc-i:last-child{border-right:0;padding-right:0;}
+  .proc-i:not(:first-child){padding-left:6mm;}
+  .proc-n{font-family:var(--mono);font-size:9.5px;color:var(--ink);font-weight:700;letter-spacing:.12em;}
+  .proc-t{font-family:var(--display);font-size:12.5px;font-weight:600;margin-top:3mm;}
+  .proc-d{font-size:9.5px;line-height:1.55;color:var(--soft);margin-top:2mm;}
+
+  /* ---- phase card ---- */
+  .pc{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;margin-bottom:4mm;}
+  .pc.lead{border-color:var(--ink);}
+  .pc-h{display:flex;justify-content:space-between;align-items:flex-start;gap:6mm;padding:5mm 6mm;border-bottom:1px solid var(--line);}
+  .pc.lead .pc-h{background:var(--ink);color:#fff;border-bottom:0;}
+  .pc-id{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);}
+  .pc.lead .pc-id{color:rgba(255,255,255,.6);}
+  .pc-name{font-family:var(--display);font-size:16px;font-weight:600;letter-spacing:-.01em;margin-top:3px;}
+  .pc-tag{display:inline-flex;margin-top:4px;}
+  .pc-amt{font-family:var(--mono);font-size:20px;font-weight:700;letter-spacing:-.02em;text-align:right;white-space:nowrap;}
+  .pc.lead .pc-amt{color:#fff;}
+  .pc-amt .u{display:block;font-size:8.5px;font-weight:400;color:var(--faint);letter-spacing:.04em;margin-top:2px;}
+  .pc.lead .pc-amt .u{color:rgba(255,255,255,.6);}
+  .pc-amt.spec{font-size:10px;font-weight:400;color:var(--faint);text-align:right;line-height:1.5;}
+  .pc-body{padding:5mm 6mm;}
+  .li{display:grid;grid-template-columns:1fr auto;gap:6mm;padding:2.7mm 0;border-bottom:1px solid var(--line);align-items:start;}
+  .li:last-child{border-bottom:0;}
+  .li .t{font-size:10.5px;line-height:1.5;color:var(--ink);}
+  .li .t b{font-weight:600;}
+  .li .t .sub{display:block;color:var(--faint);font-size:9px;line-height:1.5;margin-top:2px;}
+  .li .t.accent b{color:var(--accent);}
+  .li .y{font-family:var(--mono);font-size:8.5px;color:var(--faint);font-weight:600;text-transform:uppercase;letter-spacing:.1em;white-space:nowrap;padding-top:2px;}
+  .li .p{font-family:var(--mono);font-size:11px;font-weight:700;white-space:nowrap;text-align:right;}
+  .li .p.spec{font-size:8.5px;font-weight:400;color:var(--faint);line-height:1.4;}
+  .callout{margin-top:4mm;font-size:9.5px;line-height:1.6;color:var(--soft);background:var(--wash);border:0;border-left:2px solid var(--ink);padding:3.5mm 5mm;}
+  .callout b{color:var(--ink);font-weight:600;}
+
+  /* ---- cost buckets ---- */
+  .bucket{border:1px solid var(--line-2);border-radius:12px;overflow:hidden;margin-bottom:3mm;}
+  .bk-h{display:flex;justify-content:space-between;align-items:center;padding:3mm 5mm;background:var(--wash);border-bottom:1px solid var(--line);}
+  .bk-h .t{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--ink);}
+  .bk-h .who{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:980px;}
+  .who.hango{background:var(--accent-soft);color:var(--accent-dark);border:1px solid var(--accent-line);}
+  .who.third{background:#fff;color:var(--soft);border:1px solid var(--line-2);}
+  .who.once{background:#fff;color:var(--soft);border:1px solid var(--line-2);}
+  .bk-b{padding:2mm 5mm;}
+  .bk-li{display:flex;justify-content:space-between;gap:6mm;padding:2.6mm 0;border-bottom:1px solid var(--line);font-size:10.5px;align-items:baseline;}
+  .bk-li:last-child{border-bottom:0;}
+  .bk-li .t{color:var(--ink);}
+  .bk-li .t b{font-weight:600;}
+  .bk-li .t .s{display:block;color:var(--faint);font-size:9px;margin-top:1px;line-height:1.45;}
+  .bk-li .p{font-family:var(--mono);font-size:10.5px;font-weight:700;white-space:nowrap;text-align:right;}
+  .bk-li .p.muted{font-weight:400;color:var(--faint);font-size:9px;}
+
+  /* ---- timeline ---- */
+  .tl{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line-2);border-radius:12px;overflow:hidden;}
+  .tl-i{padding:4.5mm 5mm;border-right:1px solid var(--line);}
+  .tl-i:last-child{border-right:0;}
+  .tl-k{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:700;}
+  .tl-v{font-size:10px;color:var(--ink);margin-top:3mm;line-height:1.45;font-weight:500;}
+
+  /* ---- terms ---- */
+  .terms{display:grid;grid-template-columns:1fr 1fr;gap:0 8mm;}
+  .tm{display:grid;grid-template-columns:30mm 1fr;gap:4mm;padding:2.6mm 0;border-bottom:1px solid var(--line);align-items:baseline;}
+  .tm .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);font-weight:700;}
+  .tm .v{font-size:9.5px;line-height:1.5;color:var(--ink);}
+
+  /* ---- footer ---- */
+  .foot{margin-top:auto;padding-top:6mm;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:6mm;}
+  .foot .fl{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:2.5mm;}
+  .foot .ft{font-size:9px;line-height:1.6;color:var(--soft);}
+  .pagenum{position:absolute;bottom:9mm;right:17mm;font-family:var(--mono);font-size:8.5px;color:var(--faint);letter-spacing:.1em;}
+</style>
+</head>
+<body>
+<button class="pdf-fab" onclick="window.print()" aria-label="Als PDF herunterladen" title="Als PDF speichern / drucken">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 11 5 4 5-4"/><path d="M5 21h14"/></svg>
+  Als PDF
+</button>
+
+<!-- ===================== SEITE 1 · COVER ===================== -->
+<div class="page">
+  <div class="topbar">
+    <div class="wordmark">Hango<span>.</span></div>
+    <div class="topmeta">Marketing &amp; Web Agentur<br>Wien · Österreich</div>
+  </div>
+
+  <div style="margin-top:4mm;">
+    <div class="eyebrow">Angebot — Gastro-WebApp</div>
+    <h1 class="hero-h">Eine Plattform, die<br>GO DC Tower <span class="dim">gehört.</span></h1>
+    <p class="hero-sub">Keine Lösung von der Stange — eine maßgeschneiderte Bestell- &amp; Treue-Plattform, schlicht und elegant. Take-Away ohne Provision, Catering im Mittelpunkt. Gebaut in klaren Phasen: erst live, dann wächst sie mit.</p>
+    <div class="claim">
+      <span class="claim-k">Anspruch</span>
+      <p class="claim-t"><b>Maßarbeit statt Baukasten.</b> Jedes Detail von Hand gestaltet — auf das Niveau, das eure Marke verdient.</p>
+    </div>
+  </div>
+
+  <div class="factline">
+    <div class="fact"><div class="k">Für</div><div class="v">Lisa · GO DC Tower</div></div>
+    <div class="fact"><div class="k">Datum</div><div class="v">22.07.2026</div></div>
+    <div class="fact"><div class="k">Erstellt von</div><div class="v">Hango — business@hango.at</div></div>
+  </div>
+
+  <div style="margin-top:6mm;">
+    <div class="sec"><span class="no">01</span><span class="ti">Auf einen Blick</span><span class="line"></span></div>
+    <div class="glance">
+      <div class="g-row">
+        <div class="g-no">P0</div>
+        <div class="g-main"><div class="g-title">Auftrag &amp; Setup</div><div class="g-desc">Projektstart, Reservierung der Kapazitäten &amp; Design-Mockup.</div></div>
+        <div><span class="pill now">Jetzt</span></div>
+        <div class="g-price">€ 500</div>
+      </div>
+      <div class="g-row">
+        <div class="g-no">P1</div>
+        <div class="g-main"><div class="g-title">Website (Redesign)</div><div class="g-desc">Umsetzung und Go-Live der neuen Website.</div></div>
+        <div><span class="pill next">Go-Live</span></div>
+        <div class="g-price">€ 500</div>
+      </div>
+      <div class="g-row">
+        <div class="g-no">P2</div>
+        <div class="g-main"><div class="g-title">Take-Away-Bestellung + Online-Zahlung</div><div class="g-desc">Bestellen ohne Provision — direkt auf eurer Seite.</div></div>
+        <div><span class="pill next">Danach</span></div>
+        <div class="g-price">€ 1.600</div>
+      </div>
+      <div class="g-row">
+        <div class="g-no">P3</div>
+        <div class="g-main"><div class="g-title">Konten, Treue, Reservierung &amp; Newsletter</div><div class="g-desc">Modularer Ausbau nach dem Go-Live.</div></div>
+        <div><span class="pill later">Später</span></div>
+        <div class="g-price">€ 1.800</div>
+      </div>
+      <div class="g-total">
+        <div class="l">Investition gesamt<b>Phase 0 + 1 + 2 + 3, beauftragt</b></div>
+        <div class="r"><div class="amt">€ 4.400 <small>zzgl. USt</small></div><div class="mo">+ Betreuung Aktiv · € 69 / Monat</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:6mm;">
+    <div class="sec"><span class="no">02</span><span class="ti">So läuft die Umsetzung</span><span class="line"></span></div>
+    <div class="proc">
+      <div class="proc-i"><div class="proc-n">01 — Phase 0 / Mockup</div><div class="proc-t">Erst sehen, dann bauen</div><div class="proc-d">Ein erster Design-Entwurf liegt dieser E-Mail bei.</div></div>
+      <div class="proc-i"><div class="proc-n">02 — Phase 1 / Go-Live</div><div class="proc-t">Die Website geht online</div><div class="proc-d">Das Redesign geht zuerst live — sofort einsatzbereit.</div></div>
+      <div class="proc-i"><div class="proc-n">03 — Ausbau</div><div class="proc-t">Schritt für Schritt</div><div class="proc-d">Take-Away, Konten &amp; Treue modular dazu — ihr entscheidet wann.</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="fl">Unternehmen</div><div class="ft">HANGO · Marketing &amp; Web Agentur<br>UID ATU81775624</div></div>
+    <div><div class="fl">Kontakt</div><div class="ft">business@hango.at<br>www.hango.at</div></div>
+    <div><div class="fl">Bankverbindung</div><div class="ft">Erste Bank<br>AT28 2011 1842 3371 5200</div></div>
+  </div>
+  <div class="pagenum">01 / 04</div>
+</div>
+
+<!-- ===================== SEITE 2 · LEISTUNGSUMFANG (PHASE 0, 1 + 2) ===================== -->
+<div class="page pagebreak">
+  <div class="topbar">
+    <div class="wordmark">Hango<span>.</span></div>
+    <div class="topmeta">Angebot · GO DC Tower<br>22.07.2026</div>
+  </div>
+
+  <div class="sec"><span class="no">03</span><span class="ti">Leistungsumfang</span><span class="line"></span></div>
+
+  <!-- PHASE 0 · AUFTRAG & SETUP -->
+  <div class="pc lead">
+    <div class="pc-h">
+      <div>
+        <div class="pc-id">Phase 0 — Upfront</div>
+        <div class="pc-name">Auftrag &amp; Setup</div>
+        <span class="pc-tag"><span class="pill now">Jetzt</span></span>
+      </div>
+      <div class="pc-amt">€ 500<span class="u">einmalig, zzgl. USt</span></div>
+    </div>
+    <div class="pc-body">
+      <div class="li"><div class="t"><b>Projektstart &amp; Kapazitäten</b><span class="sub">Auftragserteilung und Reservierung unseres Teams</span></div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Design-Mockup</b><span class="sub">Der erste Design-Entwurf (liegt bei)</span></div><div class="y">inkl.</div></div>
+    </div>
+  </div>
+
+  <!-- PHASE 1 · WEBSITE -->
+  <div class="pc">
+    <div class="pc-h">
+      <div>
+        <div class="pc-id">Phase 1 — bei Fertigstellung / Go-Live</div>
+        <div class="pc-name">Website (Redesign)</div>
+        <span class="pc-tag"><span class="pill next">Als Nächstes</span></span>
+      </div>
+      <div class="pc-amt">€ 500<span class="u">einmalig, zzgl. USt</span></div>
+    </div>
+    <div class="pc-body">
+      <div class="li"><div class="t"><b>Individuelles Redesign</b><span class="sub">responsive für Handy, Tablet &amp; Desktop</span></div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Domain-Übernahme &amp; Tech Setup</b><span class="sub">godctower.com inkl. SSL, Rechtstexte, Cookie-Hinweis</span></div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Seitenstruktur</b> — Start, Speisekarte, Catering, Über&nbsp;uns, Kontakt, Standort</div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Catering prominent platziert</b><span class="sub">eigener Bereich mit Bildern &amp; Anfrage-Button</span></div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Selbst pflegbar (CMS)</b> — Speisekarte, Preise, Bilder &amp; Texte</div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Eine Sprache nach Wahl</b> (DE, EN oder CN)<span class="sub">weitere optional</span></div><div class="y">inkl.</div></div>
+    </div>
+  </div>
+
+  <!-- PHASE 2 · TAKE-AWAY -->
+  <div class="pc">
+    <div class="pc-h">
+      <div>
+        <div class="pc-id">Phase 2 — Fixpreis, nach Go-Live</div>
+        <div class="pc-name">Take-Away-Bestellung + Online-Zahlung</div>
+        <span class="pc-tag"><span class="pill next">Danach</span></span>
+      </div>
+      <div class="pc-amt">€ 1.600<span class="u">einmalig, zzgl. USt</span></div>
+    </div>
+    <div class="pc-body">
+      <div class="li"><div class="t"><b>Take-Away-Bestellung</b> — Speisekarte, Warenkorb, Checkout, Abholzeit<span class="sub">bis 6 Kategorien / 60 Artikel; selbst erweiterbar.</span></div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t accent"><b>Online-Zahlung (Stripe/Mollie)</b><span class="sub">Vollständiges Setup und Integration der Infrastruktur für Online-Zahlungen.</span></div><div class="y">inkl.</div></div>
+      <div class="li"><div class="t"><b>Bestelleingang</b> am Tablet<span class="sub">Übernahme in die Kasse von Hand</span></div><div class="y">inkl.</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="fl">Unternehmen</div><div class="ft">HANGO · Marketing &amp; Web Agentur<br>UID ATU81775624</div></div>
+    <div><div class="fl">Kontakt</div><div class="ft">business@hango.at<br>www.hango.at</div></div>
+    <div><div class="fl">Bankverbindung</div><div class="ft">Erste Bank<br>AT28 2011 1842 3371 5200</div></div>
+  </div>
+  <div class="pagenum">02 / 04</div>
+</div>
+
+<!-- ===================== SEITE 3 · PHASE 3 + INVESTITION ===================== -->
+<div class="page pagebreak">
+  <div class="topbar">
+    <div class="wordmark">Hango<span>.</span></div>
+    <div class="topmeta">Angebot · GO DC Tower<br>22.07.2026</div>
+  </div>
+
+  <!-- PHASE 3 · KONTEN, TREUE, RESERVIERUNG & NEWSLETTER -->
+  <div class="pc">
+    <div class="pc-h">
+      <div>
+        <div class="pc-id">Phase 3 — modular, je einzeln beauftragbar</div>
+        <div class="pc-name">Konten, Treue, Reservierung &amp; Newsletter</div>
+        <span class="pc-tag"><span class="pill later">Nach Go-Live</span></span>
+      </div>
+      <div class="pc-amt">€ 1.800<span class="u">Module 1–3, zzgl. USt</span></div>
+    </div>
+    <div class="pc-body">
+      <div class="li"><div class="t"><b>Kundenkonten + Treuesystem</b><span class="sub">Login, Punkte je Bestellung, Einlösung als Rabatt</span></div><div class="p">€ 800</div></div>
+      <div class="li"><div class="t"><b>Reservierung</b><span class="sub">Anfrage mit Datum/Uhrzeit/Personen + Bestätigung per E-Mail</span></div><div class="p">€ 600</div></div>
+      <div class="li"><div class="t"><b>Newsletter-Anbindung</b><span class="sub">Formular + E-Mail-Tool (z.B. Brevo), DSGVO Double-Opt-In</span></div><div class="p">€ 400</div></div>
+      <div class="li"><div class="t"><b>Catering-Buchungsmodul</b><span class="sub">Umfang nach euren Angaben, separat bepreist</span></div><div class="p spec">nach<br>Spezifikation</div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:5mm;"><span class="no">04</span><span class="ti">Investition &amp; Kosten</span><span class="line"></span></div>
+  <p style="font-size:10px;color:var(--soft);line-height:1.6;margin:-2mm 0 3mm;max-width:155mm;">Getrennt nach <b style="color:var(--ink);">einmalig</b> / <b style="color:var(--ink);">laufend</b> und <b style="color:var(--accent);">an Hango</b> / <b style="color:var(--ink);">an Dritte</b> — keine Überraschungen.</p>
+
+  <!-- BUCKET A -->
+  <div class="bucket">
+    <div class="bk-h"><span class="t">A · Einmalig — beauftragte Leistung</span><span class="who hango">an Hango</span></div>
+    <div class="bk-b">
+      <div class="bk-li"><div class="t"><b>Phase 0</b> — Auftrag &amp; Setup</div><div class="p">€ 500</div></div>
+      <div class="bk-li"><div class="t"><b>Phase 1</b> — Website (Redesign) Go-Live</div><div class="p">€ 500</div></div>
+      <div class="bk-li"><div class="t"><b>Phase 2</b> — Take-Away-Bestellung + Online-Zahlung</div><div class="p">€ 1.600</div></div>
+      <div class="bk-li"><div class="t"><b>Phase 3</b> — Konten &amp; Treue, Reservierung, Newsletter</div><div class="p">€ 1.800</div></div>
+      <div class="bk-li"><div class="t"><b>Gesamt jetzt</b> <span class="s">zzgl. 20% USt</span></div><div class="p" style="color:var(--accent);font-size:13px;">€ 4.400</div></div>
+    </div>
+  </div>
+
+  <!-- BUCKET B -->
+  <div class="bucket">
+    <div class="bk-h"><span class="t">B · Einmalig optional — nur auf Wunsch</span><span class="who once">an Hango</span></div>
+    <div class="bk-b">
+      <div class="bk-li"><div class="t"><b>Weitere Sprache</b> — je Sprache</div><div class="p">€ 250</div></div>
+      <div class="bk-li"><div class="t"><b>Catering-Buchungsmodul</b> (Phase 3)</div><div class="p muted">nach Spezifikation</div></div>
+      <div class="bk-li"><div class="t"><b>Foto-/Video-Produktion</b> · <b>Texterstellung</b></div><div class="p muted">auf Anfrage</div></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <div><div class="fl">Unternehmen</div><div class="ft">HANGO · Marketing &amp; Web Agentur<br>UID ATU81775624</div></div>
+    <div><div class="fl">Kontakt</div><div class="ft">business@hango.at<br>www.hango.at</div></div>
+    <div><div class="fl">Bankverbindung</div><div class="ft">Erste Bank<br>AT28 2011 1842 3371 5200</div></div>
+  </div>
+  <div class="pagenum">03 / 04</div>
+</div>
+
+<!-- ===================== SEITE 4 · BETREUUNG, ZEITPLAN & KONDITIONEN ===================== -->
+<div class="page pagebreak">
+  <div class="topbar">
+    <div class="wordmark">Hango<span>.</span></div>
+    <div class="topmeta">Angebot · GO DC Tower<br>22.07.2026</div>
+  </div>
+
+  <!-- BUCKET C -->
+  <div class="bucket">
+    <div class="bk-h"><span class="t">C · Laufend — Betreuung durch Hango</span><span class="who hango">an Hango</span></div>
+    <div class="bk-b">
+      <div class="plans" style="grid-template-columns:1fr;">
+        <div class="plan reco">
+          <div class="plan-badge">Heute beauftragt</div>
+          <div class="plan-n">Aktiv — Betreuung durch Hango</div>
+          <div class="plan-p">€ 69<span>/ Monat</span></div>
+          <div class="plan-d">Das einzige laufende Betreuungsmodell: technisch abgesichert, laufend gepflegt und inklusive Domain-Verwaltung samt jährlicher Registrierung.</div>
+          <ul class="plan-f" style="display:grid;grid-template-columns:1fr 1fr;gap:1.6mm 8mm;">
+            <li>Hosting, Updates &amp; Backups</li>
+            <li>Sicherheit</li>
+            <li>Bis zu 3 Anpassungen / Monat</li>
+            <li>Speisekarten-Updates</li>
+            <li><b>Domain-Verwaltung &amp; jährliche Registrierung</b></li>
+            <li>Schnellere Reaktion</li>
+          </ul>
+        </div>
+      </div>
+      <div class="plan-note">Beauftragt am 22.07.2026 · Verrechnung ab Go-Live · € 69 pro Monat.</div>
+    </div>
+  </div>
+
+  <!-- BUCKET D -->
+  <div class="bucket">
+    <div class="bk-h"><span class="t">D · Laufend — Kosten Dritter (nicht an Hango)</span><span class="who third">an Dritte</span></div>
+    <div class="bk-b">
+      <div class="bk-li"><div class="t"><b>Zahlungsanbieter</b> — Transaktionsgebühren (bei Online-Zahlung)</div><div class="p muted">pro Transaktion</div></div>
+      <div class="bk-li"><div class="t"><b>Newsletter-Tool</b> — Abo (bei Newsletter-Modul)</div><div class="p muted">lt. Anbieter</div></div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:8mm;"><span class="no">05</span><span class="ti">Zeitplan</span><span class="line"></span></div>
+  <div class="tl" style="grid-template-columns:1fr;">
+    <div class="tl-i" style="border-right:0;display:grid;grid-template-columns:38mm 1fr;gap:8mm;align-items:center;">
+      <div class="tl-k">Finale Deadline</div>
+      <div class="tl-v" style="margin-top:0;"><b>April 2027.</b> Dieser Termin ist realistisch und wird von Hango für die vollständige Umsetzung übernommen. Zwischenstände und die genaue Reihenfolge der Module stimmen wir gemeinsam ab.</div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:8mm;"><span class="no">06</span><span class="ti">Konditionen</span><span class="line"></span></div>
+  <div class="terms">
+    <div class="tm"><div class="k">Preise</div><div class="v">Alle Beträge in Euro, zzgl. 20% USt.</div></div>
+    <div class="tm"><div class="k">Zahlung P0 &amp; P1</div><div class="v">€ 500 (Phase 0) bei Auftrag · € 500 (Phase 1) bei Abnahme / Go-Live.</div></div>
+    <div class="tm"><div class="k">Zahlung P2 &amp; P3</div><div class="v">50% bei Beauftragung · 50% bei Abnahme.</div></div>
+    <div class="tm"><div class="k">Korrekturen</div><div class="v">2 Runden pro Phase inkl. (Feedback gesammelt in einem Durchgang).</div></div>
+    <div class="tm"><div class="k">Mitwirkung</div><div class="v">Inhalte &amp; Rechtstexte werden von euch bereitgestellt.</div></div>
+    <div class="tm"><div class="k">Preisbindung</div><div class="v">Preise P2 &amp; P3 gelten bei Beauftragung binnen 6 Monaten nach P1-Abnahme.</div></div>
+    <div class="tm"><div class="k">Nutzungsrechte</div><div class="v">Gehen nach vollständiger Zahlung der Phase an euch über.</div></div>
+    <div class="tm"><div class="k">Referenz</div><div class="v">GO DC Tower wird als ausgewähltes Referenzprojekt umgesetzt.</div></div>
+  </div>
+
+  <div class="foot">
+    <div><div class="fl">Unternehmen</div><div class="ft">HANGO · Marketing &amp; Web Agentur<br>UID ATU81775624</div></div>
+    <div><div class="fl">Kontakt</div><div class="ft">business@hango.at<br>www.hango.at</div></div>
+    <div><div class="fl">Bankverbindung</div><div class="ft">Erste Bank<br>AT28 2011 1842 3371 5200</div></div>
+  </div>
+  <div class="pagenum">04 / 04</div>
+</div>
+
+</body>
+</html>

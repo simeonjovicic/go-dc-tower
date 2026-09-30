@@ -123,11 +123,17 @@
 .hc-hero-shell { position: relative; z-index: 2; width: var(--hc-page-width); margin: 60px auto 30px; padding-left: 24px; }
 .hc-hero-place { margin: 0 0 28px; color: #e0d9cb; font-size: 10px; letter-spacing: .22em; text-transform: uppercase; }
 .hc-hero-wordmark {
-  margin: 0; color: #fdfbf7; font-family: var(--hc-serif); font-size: clamp(58px, 6.4vw, 100px);
+  margin: 0; color: #fdfbf7; font-family: var(--hc-serif); font-size: clamp(34px, 3.4vw, 54px);
   font-weight: 400; line-height: 1.17; letter-spacing: .25em; text-transform: uppercase;
   text-shadow: 0 2px 40px #0005; animation: hcRise .9s ease-out both;
 }
 .hc-hero-wordmark span { display: block; }
+/* 面 (miàn, Nudeln) ist das Hauptmotiv; die Wortmarke steht klein darunter. */
+.hc-hero-glyph {
+  display: block; margin: 0 0 32px -0.04em; color: #fdfbf7;
+  font-family: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif; font-size: clamp(150px, 20vw, 300px);
+  font-weight: 400; line-height: .9; text-shadow: 0 4px 60px #0007; animation: hcRise .9s ease-out both;
+}
 .hc-hero-invitation { margin: 28px 0 0; color: #e5ded2; font-size: 17px; line-height: 1.65; }
 .hc-hero-actions { display: flex; align-items: center; gap: 28px; margin-top: 28px; }
 .hc-hero-reserve { display: inline-flex; min-height: 44px; align-items: center; gap: 18px; font-size: 11px; text-decoration: none; border-bottom: 1px solid #ffffff70; }
@@ -269,6 +275,70 @@
 .hc-footer-links { display: flex; justify-self: end; gap: 24px; }
 .hc-footer-links a { padding: 12px 0; text-decoration: none; }
 .hc-footer-links a:hover { color: #fff; }
+/* Karten als PDF und Onlinebestellung. */
+.hc-menu-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin-top: 48px; background: #ffffff25; border: 1px solid #ffffff25; }
+.hc-menu-cards a { display: grid; gap: 10px; padding: 26px 28px; background: var(--hc-ink); text-decoration: none; transition: background .25s; }
+.hc-menu-cards a:hover { background: #ffffff09; }
+.hc-menu-cards small { color: #b7b2a8; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.hc-menu-cards strong { font-family: var(--hc-serif); font-size: clamp(30px, 3vw, 42px); font-weight: 400; line-height: 1.1; }
+.hc-menu-cards span { display: flex; justify-content: space-between; color: #ee786a; font-size: 11px; }
+.hc-menu-cards b { font-weight: 400; font-size: 16px; }
+
+/* Etagen, Firmenreservierung und Anreise. */
+.hc-floors { width: var(--hc-page-width); margin: auto; padding-bottom: 96px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.hc-floor { display: flex; flex-direction: column; align-items: start; }
+.hc-floor-media { position: relative; width: 100%; aspect-ratio: 1.4; overflow: hidden; margin-bottom: 22px; }
+.hc-floor-media img { object-fit: cover; }
+.hc-floor > small { color: #a1372d; font-size: 9px; letter-spacing: .14em; text-transform: uppercase; }
+.hc-floor h3 { margin: 12px 0 10px; font-family: var(--hc-serif); font-size: 32px; font-weight: 400; letter-spacing: -.02em; line-height: 1.1; }
+.hc-floor p { margin: 0 0 16px; color: #625c52; font-size: 13px; line-height: 1.8; }
+.hc-floor--company { padding: 32px; background: var(--hc-paper); justify-content: end; }
+.hc-floor--company .hc-text-link { margin-top: auto; }
+.hc-arrival { width: var(--hc-page-width); margin: auto; padding: 64px 0 104px; display: grid; grid-template-columns: .8fr 1.2fr; gap: 64px; border-top: 1px solid var(--hc-line); }
+.hc-arrival-copy { display: grid; gap: 24px; align-content: start; }
+.hc-arrival-copy h3 { margin: 0 0 6px; font-size: 14px; font-weight: 500; }
+.hc-arrival-copy p:not(.hc-eyebrow) { max-width: 44ch; margin: 0; color: #575248; font-size: 13px; line-height: 1.8; }
+.hc-arrival-copy strong { color: var(--hc-ink); font-weight: 600; }
+.hc-arrival-videos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.hc-arrival-videos figure { margin: 0; }
+.hc-arrival-videos video, .hc-video-placeholder { display: block; width: 100%; aspect-ratio: 9 / 16; max-height: 480px; background: var(--hc-ink); object-fit: cover; }
+.hc-video-placeholder { display: grid; place-items: center; color: #b4afa5; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; border: 1px dashed #ffffff40; }
+.hc-arrival-videos figcaption { display: grid; gap: 4px; margin-top: 14px; color: #625c52; font-size: 12px; line-height: 1.6; }
+.hc-arrival-videos figcaption strong { color: var(--hc-ink); font-size: 13px; font-weight: 500; }
+.hc-catering-fine { color: var(--hc-ink) !important; font-size: 12px !important; }
+.hc-catering-note a { color: inherit; }
+
+/* Newsletter: vorerst per E-Mail, siehe subscribe() in HighClassHome. */
+.hc-newsletter { background: var(--hc-paper-deep); }
+.hc-newsletter-shell { width: var(--hc-page-width); margin: auto; padding: 80px 0; display: grid; grid-template-columns: 1.2fr 1fr; gap: 100px; align-items: center; }
+.hc-newsletter h2 { margin-top: 24px; font-size: clamp(48px, 5vw, 76px); line-height: .98; }
+.hc-newsletter-form > p { margin: 0 0 20px; color: #575248; font-size: 14px; line-height: 1.8; }
+.hc-newsletter-row { display: flex; gap: 8px; }
+.hc-newsletter-row input { flex: 1; min-width: 0; min-height: 54px; padding: 0 16px; border: 1px solid var(--hc-ink); background: var(--hc-paper); color: var(--hc-ink); font: inherit; font-size: 14px; border-radius: 0; }
+.hc-newsletter-row input:focus-visible { outline: 2px solid var(--hc-red); outline-offset: 2px; }
+.hc-newsletter-row .hc-button-dark { flex-shrink: 0; color: #fff; cursor: pointer; }
+.hc-newsletter-consent { display: flex; gap: 10px; align-items: start; margin-top: 14px; color: #625c52; font-size: 11px; line-height: 1.6; cursor: pointer; }
+.hc-newsletter-consent input { margin: 2px 0 0; accent-color: var(--hc-red); }
+.hc-visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 980px) {
+  .hc-floors { grid-template-columns: 1fr 1fr; }
+  .hc-floor--company { grid-column: 1 / -1; }
+  .hc-arrival { grid-template-columns: 1fr; gap: 40px; }
+  .hc-newsletter-shell { gap: 56px; }
+}
+@media (max-width: 760px) {
+  .hc-menu-cards { grid-template-columns: 1fr; margin-top: 36px; }
+  .hc-menu-cards a { padding: 20px; }
+  .hc-floors { grid-template-columns: 1fr; gap: 40px; padding-bottom: 66px; }
+  .hc-floor--company { padding: 24px; }
+  .hc-arrival { padding: 48px 0 66px; }
+  .hc-arrival-videos { gap: 16px; }
+  .hc-newsletter-shell { grid-template-columns: 1fr; gap: 32px; padding: 60px 0; }
+  .hc-newsletter h2 { font-size: 52px; }
+  .hc-newsletter-row { flex-direction: column; }
+}
+
 .hc-reveal { transition: opacity .6s ease, transform .6s ease; }
 .hc-reveal.will-reveal { opacity: 0; transform: translateY(20px); }
 @keyframes hcHeroIn { from { transform: scale(1.035); } to { transform: scale(1); } }
@@ -376,7 +446,8 @@
   .hc-hero-media img { object-position: center; }
   .hc-hero-media::after { background: linear-gradient(180deg, #08050375, #0805031a 44%, transparent 68%, #08050399); }
   .hc-hero-place { font-size: 9px; letter-spacing: .14em; margin-bottom: 22px; }
-  .hc-hero-wordmark { font-size: clamp(44px, 11.8vw, 68px); letter-spacing: .21em; line-height: 1.14; }
+  .hc-hero-glyph { font-size: clamp(120px, 38vw, 170px); margin-bottom: 14px; }
+  .hc-hero-wordmark { font-size: clamp(28px, 8vw, 40px); letter-spacing: .21em; line-height: 1.14; }
   .hc-hero-invitation { margin-top: 20px; font-size: 14px; line-height: 1.65; }
   .hc-hero-actions { margin-top: 20px; gap: 22px; }
   .hc-hero-actions .hc-button-red { padding: 14px 17px; min-height: 48px; font-size: 9px; gap: 22px; }

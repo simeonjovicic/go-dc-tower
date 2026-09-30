@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
-import { ANFAHRT, BRAND, CONTACT, HOURS, KAPAZITAET, SOCIAL } from '@/components/site-data';
+import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
+import {
+  ANFAHRT, ANFAHRT_VIDEOS, BRAND, CATERING, CONTACT, HOURS, KAPAZITAET, MENU_CARDS, SOCIAL,
+} from '@/components/site-data';
 import { DISHES, fmt, ORDER_URL, priceFrom } from '@/components/menu-data';
 
 // The preview and menu share dish names, photos and prices.
@@ -34,34 +36,21 @@ const TASTES = [
   },
 ] as const;
 
-const OCCASIONS = [
-  {
-    title: 'Feiern im go', label: 'Euer eigener Bereich',
-    image: '/foto/haus/obergeschoss.webp', alt: 'Gedeckte Tische im ersten Stock des Restaurants',
-    text: `Geburtstag oder Firmenfeier: Im ersten Stock bleibt ihr mit bis zu ${KAPAZITAET[0].zahl} Gästen unter euch. Dazu ein Sharing-Buffet oder ein serviertes Menü.`,
-    action: 'Feier anfragen', subject: 'Anfrage: Feier im go DC Tower',
-  },
-  {
-    title: 'Lunch fürs Team', label: 'Bei euch im Büro',
-    image: '/foto/leben/sackerl-tower.webp', alt: 'Gast mit einer ra’mien-go-Tragetasche vor dem DC Tower',
-    text: 'Lieblingsgerichte aus der Karte oder eine gemeinsam zusammengestellte Lunchbox mit Vorspeisen. Wir bringen das Mittagessen zu euch.',
-    action: 'Business Lunch anfragen', subject: 'Anfrage: Business Lunch',
-  },
-  {
-    title: 'Catering für euch', label: 'An eurem Lieblingsort',
-    image: '/foto/leben/tafel-oben.webp', alt: 'Tafel mit verschiedenen asiatischen Gerichten zum Teilen',
-    text: 'Warme und kalte Vorspeisen, Hauptgerichte und Nudelsuppe als Sharing-Buffet. Gemeinsam planen wir, was zu eurem Anlass passt.',
-    action: 'Catering anfragen', subject: 'Anfrage: Catering',
-  },
-] as const;
-
 const MOBILE_LINKS = [
-  ['/menu', 'Speisekarte'], ['#raum', 'Restaurant'], ['#catering', 'Feiern & Catering'],
-  ['#kontakt', 'Anfahrt & Zeiten'], ['#reservieren', 'Tisch anfragen'],
+  ['/menu', 'Speisekarte'], ['#raum', 'Restaurant'], ['#reservieren', 'Tisch anfragen'],
+  ['#catering', 'Feiern & Catering'], ['#newsletter', 'Newsletter'], ['#kontakt', 'Anfahrt & Zeiten'],
 ] as const;
 
 function inquiry(subject: string, body?: string) {
   return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
+}
+
+// TODO: an einen Newsletter-Anbieter (Brevo/Mailchimp) anbinden; bis dahin geht die Anmeldung per E-Mail ans Haus.
+function subscribe(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+  const email = new FormData(event.currentTarget).get('email');
+  window.location.href = inquiry('Newsletter-Anmeldung',
+    `Hallo liebes go-Team,\n\nbitte nehmt mich in euren Newsletter auf: ${email}\n\nIch bin mit dem Erhalt einverstanden und kann mich jederzeit wieder abmelden.`);
 }
 
 export function HighClassHome() {
@@ -199,6 +188,7 @@ export function HighClassHome() {
             </picture>
           </div>
           <div className="hc-hero-shell">
+            <span className="hc-hero-glyph" lang="zh" aria-hidden="true">面</span>
             <p className="hc-hero-place">Asian Fusion · DC Tower · Wien</p>
             <h1 className="hc-hero-wordmark"><span>ra&rsquo;mien</span><span>go</span></h1>
             <p className="hc-hero-invitation">Deine Mittagspause.<br />Euer Abend. Unsere Küche.</p>
@@ -219,6 +209,7 @@ export function HighClassHome() {
           <a href={ORDER_URL} target="_blank" rel="noopener noreferrer"><small>Lieber mitnehmen?</small><span>Online bestellen <b aria-hidden="true">↗</b></span></a>
         </nav>
 
+        {/* Philosophie: Text kommt von Lee, bis dahin bleibt die Begrüßung. */}
         <section className="hc-welcome hc-reveal" id="philosophie">
           <p className="hc-eyebrow">Willkommen im go</p>
           <h2 className="hc-display">Mitten in Wien.<br /><i>Ein Stück Asien.</i></h2>
@@ -270,14 +261,24 @@ export function HighClassHome() {
               <span>Auch vegetarisch &amp; vegan: zum Beispiel Poké mit Tofu, Edamame oder Gemüse-Gyoza.</span>
               <Link href="/menu#sushi">Lust auf Sushi? <span aria-hidden="true">↗</span></Link>
             </div>
+            <div className="hc-menu-cards hc-reveal">
+              {MENU_CARDS.map((card) => (
+                <a key={card.id} href={card.href} target="_blank" rel="noopener noreferrer">
+                  <small>{card.times.join(' · ')}</small><strong>{card.title}</strong><span>PDF ansehen <b aria-hidden="true">↗</b></span>
+                </a>
+              ))}
+              <a href={ORDER_URL} target="_blank" rel="noopener noreferrer">
+                <small>Abholen oder liefern lassen</small><strong>Online bestellen</strong><span>Zur Bestellung <b aria-hidden="true">↗</b></span>
+              </a>
+            </div>
           </div>
         </section>
 
         <section className="hc-experience" id="raum">
           <div className="hc-experience-shell">
             <div className="hc-experience-photos hc-reveal">
-              <div className="hc-experience-media"><Image src="/foto/haus/saal-holzdecke.webp"
-                alt="Heller Gastraum mit Holzdecke, gedeckten Tischen und offener Küche" fill sizes="(max-width: 760px) 90vw, 48vw" /></div>
+              <div className="hc-experience-media"><Image src="/foto/haus/dc-tower-aussen.webp"
+                alt="Der DC Tower in der Donau City, in dessen Erdgeschoß das go liegt" fill sizes="(max-width: 760px) 90vw, 48vw" /></div>
               <div className="hc-experience-detail"><Image src="/foto/leben/anstossen.webp"
                 alt="Freunde stoßen beim gemeinsamen Essen im go an" fill sizes="(max-width: 760px) 44vw, 23vw" /></div>
               <span className="hc-photo-caption">Ein Platz für deine Pause. Und eure Runde.</span>
@@ -294,25 +295,50 @@ export function HighClassHome() {
               <a className="hc-text-link" href="#reservieren">Wir halten euch einen Platz frei <span className="hc-arrow" aria-hidden="true">↗</span></a>
             </div>
           </div>
-        </section>
-
-        <section className="hc-catering" id="catering">
-          <div className="hc-catering-head hc-reveal">
-            <div><p className="hc-eyebrow">Feiern &amp; Catering</p><h2 className="hc-display">Mehr Leute.<br /><i>Mehr zu teilen.</i></h2></div>
-            <p>Bei uns, bei euch im Büro oder an eurem Lieblingsort. Ihr bringt den Anlass, wir kümmern uns ums Essen.</p>
+          <div className="hc-floors">
+            <article className="hc-floor hc-reveal">
+              <div className="hc-floor-media"><Image src="/foto/haus/saal-holzdecke.webp"
+                alt="Heller Gastraum mit Holzdecke, gedeckten Tischen und offener Küche" fill sizes="(max-width: 760px) calc(100vw - 40px), 31vw" /></div>
+              <small>Erdgeschoss</small>
+              <h3>Bis zu {KAPAZITAET.erdgeschoss.plaetze} Sitzplätze</h3>
+              <p>Unter der Holzdecke, mit Blick in die offene Küche. Für Gruppen bis {KAPAZITAET.erdgeschoss.gruppe} Personen.</p>
+            </article>
+            <article className="hc-floor hc-reveal">
+              <div className="hc-floor-media"><Image src="/foto/haus/obergeschoss.webp"
+                alt="Gedeckte Tische im Obergeschoss des Restaurants" fill sizes="(max-width: 760px) calc(100vw - 40px), 31vw" /></div>
+              <small>Obergeschoss</small>
+              <h3>Bis zu {KAPAZITAET.obergeschoss.plaetze} Sitzplätze</h3>
+              <p>Ein Stock höher und etwas ruhiger. Ideal, wenn ihr als Runde unter euch sein wollt.</p>
+            </article>
+            <article className="hc-floor hc-floor--company hc-reveal">
+              <small>Firmenreservierungen</small>
+              <h3>Mittagessen mit dem ganzen Team</h3>
+              <p>Für ein gemeinsames Mittagessen mit eurem Team nehmen wir gerne Firmenreservierungen für bis zu {KAPAZITAET.firma.personen} Personen an.</p>
+              <a className="hc-text-link" href={inquiry('Firmenreservierung', 'Hallo liebes go-Team,\n\nwir möchten für unser Team reservieren:\nFirma: \nDatum: \nUhrzeit: \nPersonenanzahl: \n\nName und Telefonnummer: ')}>
+                Firmenreservierung anfragen <span className="hc-arrow" aria-hidden="true">↗</span>
+              </a>
+            </article>
           </div>
-          <div className="hc-catering-list">
-            {OCCASIONS.map((item) => (
-              <article className="hc-catering-item hc-reveal" key={item.title}>
-                <div className="hc-catering-media"><Image src={item.image} alt={item.alt} fill sizes="(max-width: 760px) calc(100vw - 40px), 31vw" /></div>
-                <small>{item.label}</small><h3>{item.title}</h3><p>{item.text}</p>
-                <a className="hc-text-link" href={inquiry(item.subject, 'Hallo liebes go-Team,\n\nwir planen ein gemeinsames Essen:\nDatum: \nPersonenanzahl: \nOrt / Anlass: \n\nUnsere Wünsche: \n\nName und Telefonnummer: ')}>
-                  {item.action} <span className="hc-arrow" aria-hidden="true">↗</span>
-                </a>
-              </article>
-            ))}
+          <div className="hc-arrival">
+            <div className="hc-arrival-copy hc-reveal">
+              <p className="hc-eyebrow">So kommst du zu uns</p>
+              <div><h3>Parken</h3><p>Parken in der DC Tower Garage. Lass dein Parkticket bei uns abstempeln und parke für <strong>1 € pro Stunde</strong>.</p></div>
+              <div><h3>Anreise mit der U-Bahn</h3><p>Mit der U1 bis Kaisermühlen · VIC, von dort sind es zwei Gehminuten. Die Videos zeigen dir den Weg.</p></div>
+              <a className="hc-text-link" href="#reservieren">Tisch reservieren <span className="hc-arrow" aria-hidden="true">↗</span></a>
+            </div>
+            <div className="hc-arrival-videos">
+              {ANFAHRT_VIDEOS.map((video) => (
+                <figure key={video.title} className="hc-reveal">
+                  {video.src ? (
+                    <video src={video.src} poster={video.poster} controls preload="none" playsInline />
+                  ) : (
+                    <div className="hc-video-placeholder" role="img" aria-label={`Video folgt: ${video.title}`}><span>Video folgt</span></div>
+                  )}
+                  <figcaption><strong>{video.title}</strong>{video.text}</figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
-          <p className="hc-catering-note">Für eure Anfrage helfen uns Datum, Personenanzahl und Anlass. Den Rest planen wir gemeinsam.</p>
         </section>
 
         <section className="hc-reserve" id="reservieren">
@@ -326,6 +352,43 @@ export function HighClassHome() {
               <a className="hc-reserve-phone" href={CONTACT.phoneHref}>Lieber anrufen? <span>{CONTACT.phone} ↗</span></a>
               <small>Reservierungen sind nach unserer Bestätigung fix.</small>
             </div>
+          </div>
+        </section>
+
+        <section className="hc-catering" id="catering">
+          <div className="hc-catering-head hc-reveal">
+            <div><p className="hc-eyebrow">Feiern &amp; Catering</p><h2 className="hc-display">Mehr Leute.<br /><i>Mehr zu teilen.</i></h2></div>
+            <p>Bei uns, bei euch im Büro oder an eurem Lieblingsort. Ihr bringt den Anlass, wir kümmern uns ums Essen.</p>
+          </div>
+          <div className="hc-catering-list">
+            {CATERING.map((item) => (
+              <article className="hc-catering-item hc-reveal" key={item.id}>
+                <div className="hc-catering-media"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 760px) calc(100vw - 40px), 31vw" /></div>
+                <small>{item.label}</small><h3>{item.title}</h3><p>{item.text}</p><p className="hc-catering-fine">{item.fine}</p>
+                <a className="hc-text-link" href={inquiry(item.subject, 'Hallo liebes go-Team,\n\nwir planen ein gemeinsames Essen:\nDatum: \nPersonenanzahl: \nOrt / Anlass: \n\nUnsere Wünsche: \n\nName und Telefonnummer: ')}>
+                  {item.action} <span className="hc-arrow" aria-hidden="true">↗</span>
+                </a>
+              </article>
+            ))}
+          </div>
+          <p className="hc-catering-note">Catering und Events bitte per E-Mail an <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> anfragen – so bekommt ihr unsere Zusage schriftlich. Uns helfen Datum, Personenanzahl und Anlass, den Rest planen wir gemeinsam.</p>
+        </section>
+
+        <section className="hc-newsletter" id="newsletter" aria-labelledby="newsletter-heading">
+          <div className="hc-newsletter-shell hc-reveal">
+            <div><p className="hc-eyebrow">Newsletter</p><h2 id="newsletter-heading" className="hc-display">Neues aus <i>dem go.</i></h2></div>
+            <form className="hc-newsletter-form" onSubmit={subscribe}>
+              <p>Neue Gerichte, saisonale Specials und Events – ab und zu per E-Mail.</p>
+              <div className="hc-newsletter-row">
+                <label className="hc-visually-hidden" htmlFor="newsletter-email">E-Mail-Adresse</label>
+                <input id="newsletter-email" name="email" type="email" required autoComplete="email" placeholder="deine@email.at" />
+                <button className="hc-button-dark" type="submit">Anmelden <span aria-hidden="true">↗</span></button>
+              </div>
+              <label className="hc-newsletter-consent">
+                <input type="checkbox" name="consent" required />
+                <span>Ich möchte den Newsletter erhalten und kann mich jederzeit wieder abmelden.</span>
+              </label>
+            </form>
           </div>
         </section>
 

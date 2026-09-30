@@ -42,43 +42,68 @@ export const HOURS: Hours[] = [
 
 export const ANFAHRT = [
   { label: 'U-Bahn', text: 'U1 Kaisermühlen · VIC, zwei Gehminuten' },
-  { label: 'Auto', text: 'Parken direkt in der Garage des DC Tower, vergünstigter Tarif für Gäste' },
+  { label: 'Auto', text: 'Parken in der DC Tower Garage. Lass dein Parkticket bei uns abstempeln und parke für 1 € pro Stunde.' },
   { label: 'Im Haus', text: 'Erdgeschoß des DC Tower, barrierefrei erreichbar' },
 ] as const;
 
+/** Wegbeschreibungen als Video. TODO: Dateien nach /public/videos legen und `src` setzen. */
+export const ANFAHRT_VIDEOS: { title: string; text: string; src: string | null; poster?: string }[] = [
+  { title: 'Von der U1 zu uns', text: 'Aussteigen in Kaisermühlen · VIC, dann zwei Minuten zu Fuß bis zum Eingang.', src: null },
+  { title: 'Aus der Garage zu uns', text: 'Von der DC Tower Garage direkt ins Erdgeschoß.', src: null },
+];
+
+/** Die beiden Karten als PDF. TODO: PDFs nach /public/karten legen. */
+export const MENU_CARDS = [
+  { id: 'lunch', title: 'Lunchkarte', times: ['Mo–Fr 11:00 – 17:00'], href: '/karten/lunchkarte.pdf' },
+  { id: 'abend', title: 'Abendkarte', times: ['Mo–Fr 17:00 – 21:00', 'So 11:00 – 17:00'], href: '/karten/abendkarte.pdf' },
+] as const;
+
 /**
- * Catering-Angebote — Texte wörtlich aus dem Word-Dokument des Hauses.
- * Kapazitäten ebenfalls von dort (die Website nennt abweichende Zahlen).
+ * Catering-Angebote — Texte aus dem Word-Dokument des Hauses, ergänzt um die
+ * Vorgaben der Inhaberin: Catering ohne Service-Personal, servierte Menüs mit
+ * mehreren Gängen nur bei uns im Restaurant, Anfragen bevorzugt per E-Mail.
  */
 export const CATERING = [
   {
     id: 'zuhause',
-    kicker: '01',
+    label: 'Wir liefern, ihr feiert',
     title: 'Catering für zu Hause oder deine Wunschlocation',
     text: 'Ob bei dir zu Hause oder an deinem Lieblingsort – wir begleiten deine Party mit einem köstlichen Catering. Gemeinsam mit dir planen wir ein abwechslungsreiches Sharing-Buffet mit warmen oder kalten Vorspeisen, leckeren Hauptspeisen und wohltuender Nudelsuppe. Zum Teilen, Genießen und Zusammenkommen – ganz nach deinen Wünschen.',
+    fine: 'Wir liefern das Buffet, ohne Service-Personal vor Ort.',
     img: '/foto/leben/tafel-oben.webp',
+    alt: 'Tafel mit verschiedenen asiatischen Gerichten zum Teilen',
+    action: 'Catering anfragen',
+    subject: 'Anfrage: Catering',
   },
   {
     id: 'business',
-    kicker: '02',
+    label: 'Bei euch im Büro',
     title: 'Business Lunch direkt ins Büro',
     text: 'Wir bringen euren Business Lunch direkt zu euch ins Büro – frisch, lecker und unkompliziert. Wählt eure Lieblingsgerichte aus unserer Speisekarte oder lasst uns gemeinsam eine Lunchbox mit passenden Vorspeisen für euch zusammenstellen. Für eine genussvolle Mittagspause oder ein gemeinsames Essen mit dem Team.',
+    fine: 'Geliefert ins Büro, ohne Service-Personal vor Ort.',
     img: '/foto/leben/sackerl-tower.webp',
+    alt: 'Gast mit einer ra’mien-go-Tragetasche vor dem DC Tower',
+    action: 'Business Lunch anfragen',
+    subject: 'Anfrage: Business Lunch',
   },
   {
     id: 'event',
-    kicker: '03',
-    title: 'Dein Event im Haus',
+    label: 'Bei uns im Restaurant',
+    title: 'Dein Event im Ra’miengo DC Tower',
     text: 'Ob Weihnachtsfeier, Geburtstagsparty oder ein entspanntes Beisammensein – wir unterstützen dich bei der Planung deines Events und verwöhnen deine Gäste mit einem abwechslungsreichen Sharing-Buffet oder einem servierten Menü.',
+    fine: 'Menüs mit mehreren Gängen servieren wir ausschließlich bei uns im Restaurant.',
     img: '/foto/haus/obergeschoss.webp',
+    alt: 'Gedeckte Tische im Obergeschoss des Restaurants',
+    action: 'Event anfragen',
+    subject: 'Anfrage: Event im go DC Tower',
   },
 ] as const;
 
-export const KAPAZITAET = [
-  { zahl: 40, ort: 'Erster Stock', detail: 'in geschlossener Gesellschaft' },
-  { zahl: 65, ort: 'Erdgeschoss', detail: 'für größere Runden' },
-  { zahl: 50, ort: 'Firmenreservierung', detail: 'für das Mittagessen mit dem Team' },
-] as const;
+export const KAPAZITAET = {
+  erdgeschoss: { plaetze: 80, gruppe: 65 },
+  obergeschoss: { plaetze: 45 },
+  firma: { personen: 50 },
+} as const;
 
 export const LEGAL = {
   company: 'Lin & Huang GmbH',
