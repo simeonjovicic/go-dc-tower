@@ -14,7 +14,7 @@ export function HcHeader({ current, compact = false }: { current?: string; compa
   ] : [
     { href: '/menu', label: 'Speisekarte' },
     { href: '/#raum', label: 'Restaurant' },
-    { href: '/#catering', label: 'Feiern & Catering' },
+    { href: '/catering', label: 'Feiern & Catering' },
     { href: '/#reservieren', label: 'Tisch anfragen' },
   ];
 
@@ -61,6 +61,7 @@ export function HcFooter() {
             Facebook
           </a>
           <Link href="/impressum">Impressum</Link>
+          <Link href="/datenschutz">Datenschutz</Link>
         </div>
       </div>
     </footer>

@@ -1,13 +1,16 @@
 import type { Metadata, Viewport } from 'next';
-import { Saira_Condensed, DM_Sans, Italiana } from 'next/font/google';
+import { Shippori_Mincho_B1, DM_Sans, Italiana } from 'next/font/google';
 import './globals.css';
 import './high-class.css';
 
-const saira = Saira_Condensed({
-  subsets: ['latin'],
-  weight: ['500', '600', '700', '800', '900'],
-  variable: '--font-saira',
+/** Titel: japanische Mincho mit Gewicht. Die Wortmarke im Hero bleibt Italiana. */
+const mincho = Shippori_Mincho_B1({
+  subsets: ['latin', 'latin-ext'],
+  weight: ['500', '600', '800'],
+  variable: '--font-mincho',
   display: 'swap',
+  // Die Schrift ist in viele Teildateien zerlegt; der Browser lädt nur die benötigten.
+  preload: false,
 });
 
 const dm = DM_Sans({
@@ -43,7 +46,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="de" data-scroll-behavior="smooth" className={`${saira.variable} ${dm.variable} ${italiana.variable}`}>
+    <html lang="de" data-scroll-behavior="smooth" className={`${mincho.variable} ${dm.variable} ${italiana.variable}`}>
       <body style={{ fontFamily: 'var(--font-dm), system-ui, sans-serif' }}>
         {children}
       </body>

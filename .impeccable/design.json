@@ -1,0 +1,606 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-02T11:11:33+00:00",
+  "title": "Design System: ra'mien go DC Tower",
+  "extensions": {
+    "colorMeta": {
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "cssVar": "--hc-ink",
+        "tonalRamp": [
+          "#0a0a09",
+          "#11110f",
+          "#1f1e1b",
+          "#30302b",
+          "#4a4842",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "night": {
+        "role": "neutral",
+        "displayName": "Night",
+        "cssVar": "--hx-ink",
+        "tonalRamp": [
+          "#080807",
+          "#0d0d0b",
+          "#1a1916",
+          "#2c2b27",
+          "#46443e",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "hero-black": {
+        "role": "neutral",
+        "displayName": "Hero Black",
+        "tonalRamp": [
+          "#0a0a09",
+          "#11110f",
+          "#1f1e1b",
+          "#30302b",
+          "#4a4842",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "ink-hover": {
+        "role": "neutral",
+        "displayName": "Ink Hover",
+        "tonalRamp": [
+          "#0a0a09",
+          "#11110f",
+          "#1f1e1b",
+          "#30302b",
+          "#4a4842",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "cream": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "cssVar": "--hc-paper",
+        "tonalRamp": [
+          "#2b2924",
+          "#4f4b43",
+          "#7a746a",
+          "#a8a196",
+          "#cfc8bb",
+          "#e7e0d3",
+          "#f2eee5",
+          "#fbf9f5"
+        ]
+      },
+      "cream-deep": {
+        "role": "neutral",
+        "displayName": "Cream Deep",
+        "cssVar": "--hc-paper-deep",
+        "tonalRamp": [
+          "#2b2924",
+          "#4f4b43",
+          "#7a746a",
+          "#a8a196",
+          "#cfc8bb",
+          "#e7e0d3",
+          "#f2eee5",
+          "#fbf9f5"
+        ]
+      },
+      "ivory": {
+        "role": "neutral",
+        "displayName": "Ivory",
+        "tonalRamp": [
+          "#2b2924",
+          "#4f4b43",
+          "#7a746a",
+          "#a8a196",
+          "#cfc8bb",
+          "#e7e0d3",
+          "#f2eee5",
+          "#fbf9f5"
+        ]
+      },
+      "go-red": {
+        "role": "primary",
+        "displayName": "Go Red",
+        "cssVar": "--hc-red",
+        "tonalRamp": [
+          "#3a0604",
+          "#650c08",
+          "#8f120d",
+          "#bd1812",
+          "#df1d16",
+          "#ee5a4c",
+          "#f59a8f",
+          "#fbd5d0"
+        ]
+      },
+      "go-red-hover": {
+        "role": "primary",
+        "displayName": "Go Red Hover",
+        "tonalRamp": [
+          "#3a0604",
+          "#650c08",
+          "#8f120d",
+          "#bd1812",
+          "#df1d16",
+          "#ee5a4c",
+          "#f59a8f",
+          "#fbd5d0"
+        ]
+      },
+      "brick": {
+        "role": "primary",
+        "displayName": "Brick",
+        "tonalRamp": [
+          "#3a0604",
+          "#650c08",
+          "#8f120d",
+          "#bd1812",
+          "#df1d16",
+          "#ee5a4c",
+          "#f59a8f",
+          "#fbd5d0"
+        ]
+      },
+      "menu-red": {
+        "role": "primary",
+        "displayName": "Menu Red",
+        "tonalRamp": [
+          "#3a0604",
+          "#650c08",
+          "#8f120d",
+          "#bd1812",
+          "#df1d16",
+          "#ee5a4c",
+          "#f59a8f",
+          "#fbd5d0"
+        ]
+      },
+      "coral-on-ink": {
+        "role": "primary",
+        "displayName": "Coral on Ink",
+        "tonalRamp": [
+          "#3a0604",
+          "#650c08",
+          "#8f120d",
+          "#bd1812",
+          "#df1d16",
+          "#ee5a4c",
+          "#f59a8f",
+          "#fbd5d0"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted",
+        "cssVar": "--hc-muted",
+        "tonalRamp": [
+          "#0a0a09",
+          "#11110f",
+          "#1f1e1b",
+          "#30302b",
+          "#4a4842",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Stone",
+        "tonalRamp": [
+          "#0a0a09",
+          "#11110f",
+          "#1f1e1b",
+          "#30302b",
+          "#4a4842",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "ash-on-ink": {
+        "role": "neutral",
+        "displayName": "Ash on Ink",
+        "tonalRamp": [
+          "#2b2924",
+          "#4f4b43",
+          "#7a746a",
+          "#a8a196",
+          "#cfc8bb",
+          "#e7e0d3",
+          "#f2eee5",
+          "#fbf9f5"
+        ]
+      },
+      "bone-on-ink": {
+        "role": "neutral",
+        "displayName": "Bone on Ink",
+        "tonalRamp": [
+          "#2b2924",
+          "#4f4b43",
+          "#7a746a",
+          "#a8a196",
+          "#cfc8bb",
+          "#e7e0d3",
+          "#f2eee5",
+          "#fbf9f5"
+        ]
+      },
+      "second-line": {
+        "role": "neutral",
+        "displayName": "Second Line",
+        "tonalRamp": [
+          "#2b2924",
+          "#4f4b43",
+          "#7a746a",
+          "#a8a196",
+          "#cfc8bb",
+          "#e7e0d3",
+          "#f2eee5",
+          "#fbf9f5"
+        ]
+      },
+      "smoke": {
+        "role": "neutral",
+        "displayName": "Smoke",
+        "tonalRamp": [
+          "#0a0a09",
+          "#11110f",
+          "#1f1e1b",
+          "#30302b",
+          "#4a4842",
+          "#69645c",
+          "#a39d93",
+          "#e7e0d3"
+        ]
+      },
+      "stage-dim": {
+        "role": "neutral",
+        "displayName": "Stage Dim"
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "cssVar": "--hc-line"
+      },
+      "hairline-on-ink": {
+        "role": "neutral",
+        "displayName": "Hairline on Ink"
+      },
+      "hairline-on-night": {
+        "role": "neutral",
+        "displayName": "Hairline on Night"
+      }
+    },
+    "typographyMeta": {
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Hero wordmark RA'MIEN GO only; uppercase, letter-spacing .25em (.21em mobile)."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Largest home-page titles (welcome, room over photo, reservation); Shippori Mincho B1 600, line-by-line reveal."
+      },
+      "section-title": {
+        "displayName": "Section Title",
+        "purpose": "Home-page section titles in short lines; second line in Second Line grey (Ink on the red field). No eyebrow."
+      },
+      "stage-row": {
+        "displayName": "Stage Row",
+        "purpose": "Menu-stage category names; dimmed to Stage Dim, lit to cream when active."
+      },
+      "mincho-title": {
+        "displayName": "Mincho Title",
+        "purpose": "Order paths, company row, arrival head, catering items (22-44px)."
+      },
+      "figure": {
+        "displayName": "Figure",
+        "purpose": "Seat counts on the floor cards; the only Mincho 800."
+      },
+      "display": {
+        "displayName": "Display",
+        "purpose": "Subpage heads in Italiana; one italic phrase may be red."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Secondary heads on subpages."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Dish names, card titles, legal subheads, order-slip legend (25-36px)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running copy, 36-62ch."
+      },
+      "body-small": {
+        "displayName": "Body Small",
+        "purpose": "Captions, notes, dish descriptions."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Buttons, navigation, text links; uppercase."
+      },
+      "label-fine": {
+        "displayName": "Fine Label",
+        "purpose": "Card labels, field labels, dt labels; uppercase."
+      }
+    },
+    "shadows": [
+      {
+        "name": "wordmark-glow",
+        "value": "text-shadow: 0 2px 40px #0005",
+        "purpose": "Wordmark legibility on the hero photograph."
+      },
+      {
+        "name": "mobile-bar",
+        "value": "0 -4px 20px #0000000a",
+        "purpose": "Fixed mobile action bar."
+      },
+      {
+        "name": "title-on-photo",
+        "value": "text-shadow: 0 2px 40px #0006",
+        "purpose": "Room title over its photograph, with a night scrim."
+      }
+    ],
+    "motion": [
+      {
+        "name": "hero-settle",
+        "value": "hcHeroIn 2s ease-out (scale 1.035 -> 1)",
+        "purpose": "Hero photograph settles on load."
+      },
+      {
+        "name": "wordmark-rise",
+        "value": "hcRise .9s ease-out (translateY 14px, fade)",
+        "purpose": "Hero wordmark entrance."
+      },
+      {
+        "name": "ease-hx",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "The single easing curve for home-page scroll motion, stage crossfade and arrow shifts (--hx-ease)."
+      },
+      {
+        "name": "reveal-lines",
+        "value": "translateY(110%) -> 0, 1.1s, 90ms stagger",
+        "purpose": "Title lines rise inside clipping line boxes (data-reveal=\"lines\")."
+      },
+      {
+        "name": "reveal-fade",
+        "value": "opacity 0 + translateY(18px) -> rest, 1s",
+        "purpose": "Paragraphs and blocks (data-reveal=\"fade\")."
+      },
+      {
+        "name": "reveal-curtain",
+        "value": "clip-path inset(100% 0 0 0) -> inset(0), 1.3s; image scale 1.12 -> 1, 1.6s",
+        "purpose": "Photo and video entrances (data-reveal=\"curtain\"); the observer watches the parent element."
+      },
+      {
+        "name": "parallax",
+        "value": "translate3d clamped to +-40px, image overscanned 40px, scale 1.1",
+        "purpose": "Room photograph drifts against the scroll (data-parallax)."
+      },
+      {
+        "name": "stage-crossfade",
+        "value": "opacity .9s, scale 1.06 -> 1 1.6s",
+        "purpose": "Menu-stage photo follows the row nearest the viewport centre."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "all off",
+        "purpose": "Under prefers-reduced-motion nothing is hidden, parallax is off and the stage swaps instantly."
+      },
+      {
+        "name": "state",
+        "value": ".25s",
+        "purpose": "Colour and arrow-shift transitions on buttons and links."
+      },
+      {
+        "name": "stamp",
+        "value": "hcStamp .55s cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "go logo stamp lands on the order slip after a sent inquiry (scale 2.4 + blur -> .94 -> 1, rotate -11deg)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "menu-wide",
+        "value": "1200px"
+      },
+      {
+        "name": "lg",
+        "value": "1100px"
+      },
+      {
+        "name": "nav",
+        "value": "980px"
+      },
+      {
+        "name": "home",
+        "value": "900px"
+      },
+      {
+        "name": "md",
+        "value": "760px"
+      },
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "home-xs",
+        "value": "520px"
+      },
+      {
+        "name": "xs",
+        "value": "380px"
+      }
+    ],
+    "provenance": {
+      "photos": "Restaurant's own photography, indexed in docs/fotoarchiv.md. Hero JPGs pre-existed.",
+      "aiEdits": "foto/gericht-enhanced/ are AI background edits (walnut tabletop) of the originals in foto/gericht/, used on /menu; see docs/food-photography.md."
+    }
+  },
+  "components": [
+    {
+      "name": "Red Button",
+      "kind": "button",
+      "refersTo": "button-red",
+      "description": "Primary action, one per view.",
+      "html": "<a class=\"ds-btn-red\" href=\"#\">Speisekarte <span>&#8599;</span></a>",
+      "css": ".ds-btn-red{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-height:54px;padding:17px 22px;border:1px solid #df1d16;background:#df1d16;color:#fff;font-family:'DM Sans',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;border-radius:0;transition:background .25s}.ds-btn-red span{font-size:18px;line-height:1}.ds-btn-red:hover{background:#bd1812;border-color:#bd1812}.ds-btn-red:focus-visible{outline:2px solid #df1d16;outline-offset:3px}"
+    },
+    {
+      "name": "Dark Button",
+      "kind": "button",
+      "refersTo": "button-dark",
+      "description": "Secondary filled action on cream or red grounds.",
+      "html": "<button class=\"ds-btn-dark\">Online bestellen <span>&#8599;</span></button>",
+      "css": ".ds-btn-dark{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;min-height:54px;padding:17px 22px;border:1px solid #11110f;background:#11110f;color:#fff;font-family:'DM Sans',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;border-radius:0;cursor:pointer;transition:background .25s}.ds-btn-dark span{font-size:18px;line-height:1}.ds-btn-dark:hover{background:#30302b}.ds-btn-dark:focus-visible{outline:2px solid #df1d16;outline-offset:3px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "text-link",
+      "description": "Underlined uppercase link; the default secondary action.",
+      "html": "<a class=\"ds-text-link\" href=\"#\">Die ganze Speisekarte <span class=\"ds-arrow\">&#8599;</span></a>",
+      "css": ".ds-text-link{display:inline-flex;align-items:center;gap:22px;min-height:44px;padding:12px 0 8px;border-bottom:1px solid currentColor;color:#11110f;font-family:'DM Sans',Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-decoration:none}.ds-arrow{display:inline-block;font-size:17px;transition:transform .25s ease}.ds-text-link:hover .ds-arrow{transform:translate(3px,-3px)}.ds-text-link:focus-visible{outline:2px solid #df1d16;outline-offset:3px}"
+    },
+    {
+      "name": "Underline Field",
+      "kind": "input",
+      "refersTo": "input-underline",
+      "description": "Field on the ink order slip.",
+      "html": "<div class=\"ds-slip\"><label class=\"ds-field\"><span>Personen</span><input placeholder=\"z. B. 20\"></label></div>",
+      "css": ".ds-slip{background:#11110f;padding:32px}.ds-field{display:grid;gap:6px;font-family:'DM Sans',Arial,sans-serif}.ds-field span{color:#b7b2a8;font-size:9px;letter-spacing:.14em;text-transform:uppercase}.ds-field input{min-height:44px;padding:8px 0;border:0;border-bottom:1px solid #ffffff40;border-radius:0;background:transparent;color:#f2eee5;font:inherit;font-size:15px}.ds-field input::placeholder{color:#8f8a80}.ds-field input:focus{outline:none;border-color:#df1d16}"
+    },
+    {
+      "name": "Tick",
+      "kind": "input",
+      "refersTo": "tick-box-checked",
+      "description": "Square choice box on the order slip; red when checked.",
+      "html": "<div class=\"ds-slip2\"><label class=\"ds-tick\"><input type=\"checkbox\" checked><span class=\"ds-box\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m5 12.5 4.5 4.5L19 7.5\"/></svg></span><span><strong>Business Lunch direkt ins B&uuml;ro</strong><small>Geliefert ins B&uuml;ro, ohne Service-Personal vor Ort.</small></span></label></div>",
+      "css": ".ds-slip2{background:#11110f;color:#f2eee5;padding:24px 32px;font-family:'DM Sans',Arial,sans-serif}.ds-tick{position:relative;display:grid;grid-template-columns:22px 1fr;gap:16px;align-items:start;padding:16px 0;border-bottom:1px solid #ffffff25;cursor:pointer}.ds-tick input{position:absolute;opacity:0;width:1px;height:1px}.ds-box{display:grid;place-items:center;width:20px;height:20px;margin-top:2px;border:1px solid #ffffff80;color:transparent;transition:background-color .2s,border-color .2s,color .2s}.ds-tick input:checked+.ds-box{background:#df1d16;border-color:#df1d16;color:#fff}.ds-tick input:focus-visible+.ds-box{outline:2px solid #df1d16;outline-offset:3px}.ds-tick strong{display:block;font-weight:500;font-size:14px}.ds-tick small{display:block;margin-top:4px;color:#b7b2a8;font-size:12px;line-height:1.6}"
+    },
+    {
+      "name": "Subpage Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Sticky cream subpage header; red rule marks hover and current page.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\">Speisekarte</a><a href=\"#\">Restaurant</a><a href=\"#\" aria-current=\"page\">Feiern &amp; Catering</a><a href=\"#\">Tisch anfragen</a></nav>",
+      "css": ".ds-nav{display:flex;gap:26px;padding:20px 0 16px;border-bottom:1px solid rgba(17,17,15,.16);background:#f2eee5;font-family:'DM Sans',Arial,sans-serif}.ds-nav a{color:#11110f;font-size:10px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:border-color .3s ease}.ds-nav a:hover,.ds-nav a[aria-current=page]{border-bottom-color:#df1d16}.ds-nav a:focus-visible{outline:2px solid #df1d16;outline-offset:3px}"
+    },
+    {
+      "name": "Hero Wordmark",
+      "kind": "custom",
+      "refersTo": "wordmark",
+      "description": "Single hero anchor: letterspaced Italiana wordmark over a faint 面 watermark on dark photography.",
+      "html": "<div class=\"ds-hero\"><span class=\"ds-glyph\" aria-hidden=\"true\">面</span><p class=\"ds-place\">Asian Fusion · DC Tower · Wien</p><h1 class=\"ds-wordmark\">Ra&rsquo;mien<br>go</h1></div>",
+      "css": ".ds-hero{position:relative;overflow:hidden;padding:56px 40px;background:#0a0806;color:#fff}.ds-glyph{position:absolute;top:50%;left:24px;transform:translateY(-52%);color:#fdfbf7;opacity:.08;font-family:'Noto Serif SC','Songti SC',serif;font-size:260px;line-height:1;pointer-events:none}.ds-place{position:relative;margin:0 0 24px;color:#e0d9cb;font-family:'DM Sans',Arial,sans-serif;font-size:10px;letter-spacing:.22em;text-transform:uppercase}.ds-wordmark{position:relative;margin:0;color:#fdfbf7;font-family:Italiana,'Times New Roman',serif;font-size:64px;font-weight:400;line-height:1.17;letter-spacing:.25em;text-transform:uppercase;text-shadow:0 2px 40px #0005}"
+    },
+    {
+      "name": "Order Slip Stamp",
+      "kind": "card",
+      "refersTo": "order-slip",
+      "description": "Ink inquiry panel; the go stamp lands after a successful send.",
+      "html": "<div class=\"ds-order\"><span class=\"ds-stamp\">go</span><h3>Danke, eure Anfrage ist da.</h3><p>Wir melden uns schriftlich per E-Mail.</p></div>",
+      "css": ".ds-order{position:relative;background:#11110f;color:#f2eee5;padding:40px;font-family:'DM Sans',Arial,sans-serif}.ds-order h3{font-family:Italiana,'Times New Roman',serif;font-weight:400;font-size:36px;max-width:14ch;line-height:1.05;margin:0 0 16px}.ds-order p{color:#cfc9be;font-size:14px;line-height:1.8}.ds-stamp{position:absolute;top:24px;right:24px;display:grid;place-items:center;width:92px;height:92px;border-radius:50%;background:#df1d16;color:#fff;font-size:30px;transform:rotate(-11deg);animation:dsStamp .55s cubic-bezier(.16,1,.3,1) both}@keyframes dsStamp{0%{opacity:0;transform:rotate(-24deg) scale(2.4);filter:blur(2px)}60%{opacity:1;transform:rotate(-9deg) scale(.94);filter:blur(0)}100%{opacity:.95;transform:rotate(-11deg) scale(1)}}"
+    },
+    {
+      "name": "Menu Stage",
+      "kind": "custom",
+      "refersTo": "stage-row",
+      "description": "Signature: sticky photo crossfades to the category nearest the viewport centre; Mincho rows dim to Stage Dim and light when active.",
+      "html": "<div class=\"ds-stage\"><div class=\"ds-stage-photo\"><span>Tuna-Tataki mit Koriander-Sauce</span></div><ol class=\"ds-stage-list\"><li><span class=\"ds-stage-row\"><strong>Gyoza</strong><em>ab € 8,80</em></span><span class=\"ds-stage-text\">Hausgemacht, zum Teilen.</span></li><li class=\"is-active\"><span class=\"ds-stage-row\"><strong>Zum Anfangen</strong><em>ab € 3,80</em></span><span class=\"ds-stage-text\">Ein guter Anfang, bei dem alle mitprobieren.</span></li><li><span class=\"ds-stage-row\"><strong>Wok &amp; Reis</strong><em>ab € 15,20</em></span><span class=\"ds-stage-text\">Für den großen Hunger.</span></li></ol></div>",
+      "css": ".ds-stage{display:grid;grid-template-columns:1fr 1fr;gap:48px;background:#0d0d0b;padding:32px;font-family:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif}.ds-stage-photo{position:relative;min-height:320px;background:linear-gradient(135deg,#5a3a24,#2a1a10)}.ds-stage-photo span{position:absolute;left:16px;bottom:14px;color:#e9e3d8;font:10px/1 'DM Sans',Arial,sans-serif;letter-spacing:.1em}.ds-stage-list{list-style:none;margin:0;padding:0}.ds-stage-list li{display:grid;gap:10px;padding:28px 0;border-top:1px solid #ffffff1c;cursor:pointer}.ds-stage-row{display:flex;justify-content:space-between;align-items:baseline;gap:24px}.ds-stage-row strong{font-weight:600;font-size:40px;line-height:1.05;color:#ffffff38;transition:color .6s cubic-bezier(.16,1,.3,1)}.ds-stage-row em{font:normal 11px 'DM Sans',Arial,sans-serif;letter-spacing:.12em;color:#8f8a80;transition:color .6s}.ds-stage-text{font:14px/1.8 'DM Sans',Arial,sans-serif;color:#8f8a80;opacity:.55;transition:opacity .6s,color .6s}.ds-stage-list li.is-active strong,.ds-stage-list li:hover strong{color:#f2eee5}.ds-stage-list li.is-active em{color:#df1d16}.ds-stage-list li.is-active .ds-stage-text{opacity:1;color:#cfc8bb}"
+    },
+    {
+      "name": "Mincho Section Title",
+      "kind": "custom",
+      "refersTo": "section-title",
+      "description": "Two-line home-page title on Night; the second line steps down to Second Line grey and lines rise in on scroll.",
+      "html": "<section class=\"ds-hx\"><h2 class=\"ds-hx-title\"><span class=\"ds-line\"><span>Mitten in Wien.</span></span><span class=\"ds-line\"><span>Ein Stück Asien.</span></span></h2><a class=\"ds-hx-link\" href=\"#\">Die ganze Speisekarte</a></section>",
+      "css": ".ds-hx{background:#0d0d0b;color:#f2eee5;padding:64px 32px;text-align:center}.ds-hx-title{margin:0;font-family:'Shippori Mincho B1','Hiragino Mincho ProN','Yu Mincho',serif;font-weight:600;font-size:56px;line-height:1.06;letter-spacing:-.01em}.ds-line{display:block;overflow:hidden}.ds-line>span{display:block;animation:dsLine 1.1s cubic-bezier(.16,1,.3,1) both}.ds-line:nth-child(2)>span{color:#a9a296;animation-delay:90ms}.ds-hx-link{display:inline-flex;align-items:center;min-height:44px;margin-top:32px;color:#f2eee5;font:600 10px 'DM Sans',Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;border-bottom:1px solid currentColor;transition:color .3s}.ds-hx-link:hover,.ds-hx-link:focus-visible{color:#df1d16}.ds-hx-link:focus-visible{outline:2px solid #df1d16;outline-offset:2px}@keyframes dsLine{from{transform:translateY(110%)}to{transform:none}}@media (prefers-reduced-motion:reduce){.ds-line>span{animation:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Evening Table",
+    "overview": "**Creative North Star: \"The Evening Table\"**\n\nThe site is a dark, quiet restaurant room. A full-bleed photograph of the restaurant's own ramen on dark wood sets the first viewport. On the home page, everything below the hero is a near-black Night ground. The section titles are set in a weighty Japanese Mincho (Shippori Mincho B1), and each one reveals line by line. Cream appears once, for catering. Red appears as one large reservation field and as single action fills. Every surface has square corners and hairline rules, and no element casts a heavy shadow. The world reads as elegant and evening-lit, never as a bright paper menu.\n\nThe user chose this world on 2026-10-02, after rejecting a light paper and porcelain-blue direction (\"Der Bestellzettel\") as too white and not elegant. That decision is durable. The cream is a warm ground that sits between dark masses. It is never the only colour on a page. On the home page, the cream catering section is the one light field between dark masses. The page opens on the dark hero and closes on the night location block. Subpages end in an ink footer, and the catering page puts its form on an ink slip.\n\nThe hero has a single anchor: the uppercase, widely letterspaced Italiana wordmark \"RA'MIEN GO\". The character 面 sits behind it as a very faint watermark (opacity .08, .09 on mobile) and never overlaps the bowl. A small location line sits above the wordmark and the two actions sit below it. The hero carries no slogan.",
+    "keyCharacteristics": [
+      "Black, cream and red. The night grounds and the photography carry the mood.",
+      "Home-page titles in Shippori Mincho B1, with a muted second line. The hero wordmark and subpage headings stay in Italiana. DM Sans carries text and small letterspaced uppercase labels.",
+      "The menu stage is the signature. A sticky photograph changes with the category nearest the centre of the viewport.",
+      "Square corners everywhere, 1px hairlines and underline links.",
+      "The restaurant's own photography in every image slot.",
+      "Slow, quiet motion on one easing curve: a hero settle, line, fade and curtain reveals, a parallax of at most 40px and a stamp on form success. All of it is off under reduced motion."
+    ],
+    "rules": [
+      {
+        "name": "The Dark Mass Rule",
+        "body": "Every page carries at least one ink or photographic mass. A page that is all cream and white is off-world. The user rejected that look on 2026-10-02.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Light Field Rule",
+        "body": "On the home page, cream is used only for the catering section. Every other section below the hero is Night.",
+        "section": "colors"
+      },
+      {
+        "name": "The Signal Red Rule",
+        "body": "Red appears as a fill for one primary action per view and as one full-width field at most per page (reservation, on the home page). It also appears as small marks: the active price and the arrows of the order paths. It is never a wash and never body text.",
+        "section": "colors"
+      },
+      {
+        "name": "The No Pure White Ground Rule",
+        "body": "Grounds are cream, cream deep, ink or photography. Pure #fff appears only as text on dark or red.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif Speaks, Sans Informs Rule",
+        "body": "The serifs (Mincho, Italiana) are used only for titles, figures, the wordmark and one short lead paragraph. They are never used for labels. DM Sans carries every fact, price and form element.",
+        "section": "typography"
+      },
+      {
+        "name": "The Quiet Second Line Rule",
+        "body": "A two-line home-page title stresses its second line by stepping it down to a muted tone, not by turning it red or italic. The title carries no eyebrow label above it.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Wordmark Rule",
+        "body": "The letterspaced uppercase wordmark exists only in the hero. Other headings use normal-case Italiana.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Room Rule",
+        "body": "Cards and buttons never cast shadows. Separation comes from a hairline, a tonal ground or an 8px cream-deep frame around an inset photo.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep every page anchored by an ink or photographic mass (the hero, a night section, the ink slip or the ink footer).",
+      "Do set home-page section titles in Shippori Mincho B1 600 as short lines that reveal line by line, with the second line in Second Line grey. Keep Italiana for the hero wordmark and the subpage heads.",
+      "Do keep home-page sections on Night, with cream only for catering and one red reservation field.",
+      "Do drive every scroll movement through `useScrollMotion` with `cubic-bezier(.16, 1, .3, 1)`, keep parallax at or below ±40px, and switch it all off under reduced motion.",
+      "Do keep every corner square and every divider a 1px hairline.",
+      "Do use small red text in Brick or Menu Red on cream. Go Red is for fills and large display italics.",
+      "Do route reservations and orders through `GlfButton`, styled with the class of the hc element it replaces.",
+      "Do use 1.5-stroke line SVGs from `Icon.tsx` for any new icon.",
+      "Do use only the restaurant's own photography, and label AI-background edits as such."
+    ],
+    "donts": [
+      "Don't build light paper, white-dominant or porcelain-blue pages. The user rejected them on 2026-10-02 as not elegant.",
+      "Don't add a slogan or a second headline to the hero, and don't let 面 rise above about 9% opacity or overlap the bowl.",
+      "Don't round corners, add drop shadows to cards or buttons, or let the GloriaFood widget restyle its buttons.",
+      "Don't use Go Red as a background wash beyond one field per page, or as body text.",
+      "Don't colour or italicise part of a home-page Mincho title in red. The second line steps down in tone instead.",
+      "Don't reuse the letterspaced uppercase wordmark outside the hero.",
+      "Don't add new eyebrow labels above headings or new text-glyph arrows (↗). The home page has dropped its eyebrows. Eyebrows remain on the subpages and ↗ arrows remain throughout as incumbent defects, but neither is a pattern for new surfaces."
+    ]
+  }
+}

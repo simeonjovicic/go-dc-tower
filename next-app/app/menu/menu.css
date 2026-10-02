@@ -6,7 +6,7 @@
 }
 .mc-page-head h1 { margin: 18px 0 14px; font-size: clamp(52px, 6vw, 88px); line-height: .96; }
 .mc-page-head > div > p:last-child { margin: 0; color: var(--mc-muted); font-size: 14px; line-height: 1.6; }
-.mc-page-head > a { flex-shrink: 0; }
+.mc-page-head > :is(a, .glf-button) { flex-shrink: 0; }
 .mc-layout { width: var(--hc-page-width); margin: auto; display: grid; grid-template-columns: 208px minmax(0, 1fr); gap: 60px; align-items: start; }
 .mc-sidebar { position: sticky; top: 112px; }
 .mc-nav-label { margin: 0 0 16px; padding-left: 16px; font-size: 10px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--mc-muted); }
@@ -162,7 +162,7 @@
   .mc-mobile-category { min-width: 0; display: grid; gap: 3px; flex: 1; }
   .mc-mobile-category label { color: var(--mc-muted); font-size: 9px; }
   .mc-mobile-switch select { width: 100%; min-height: 30px; padding: 0 20px 0 0; border: 0; background: transparent; color: var(--hc-ink); font: inherit; font-size: 16px; cursor: pointer; }
-  .mc-mobile-switch > a { min-height: 44px; padding: 14px 18px; display: inline-flex; align-items: center; gap: 20px; background: var(--hc-red); color: #fff; font-size: 11px; text-decoration: none; }
+  .mc-mobile-switch > :is(a, .glf-button) { min-height: 44px; padding: 14px 18px; display: inline-flex; align-items: center; gap: 20px; background: var(--hc-red); color: #fff; font-size: 11px; text-decoration: none; }
   .mc-dish, .mc-variants, .mc-allergens { scroll-margin-bottom: 86px; }
 }
 @media (max-width: 380px) {

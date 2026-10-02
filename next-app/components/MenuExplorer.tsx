@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
+import { GlfButton } from '@/components/GloriaFood';
 import { useEffect, useRef, useState } from 'react';
 import {
   ALLERGENS, CATEGORIES, DISHES, DRINKS, EXTRAS, POKE_SAUCEN,
-  ORDER_URL, TAG_LABEL, fmt, priceFrom, type CategoryId, type Dish,
+  TAG_LABEL, fmt, priceFrom, type CategoryId, type Dish,
 } from '@/components/menu-data';
 import { CONTACT } from '@/components/site-data';
 
@@ -191,7 +192,7 @@ export function MenuExplorer() {
       </div>
       <nav className="mc-mobile-switch" aria-label="Schnellzugriff zur Speisekarte">
         <div className="mc-mobile-category"><label htmlFor="menu-category">Kategorie</label><select id="menu-category" value={searching ? 'alle' : active} onChange={(event) => chooseCategory(event.target.value as Selection)}>{SECTIONS.map((section) => <option key={section.id} value={section.id}>{section.label}</option>)}</select></div>
-        <a href={ORDER_URL} target="_blank" rel="noopener noreferrer">Bestellen <span aria-hidden="true">↗</span></a>
+        <GlfButton kind="order">Bestellen <span aria-hidden="true">↗</span></GlfButton>
       </nav>
     </div>
   );

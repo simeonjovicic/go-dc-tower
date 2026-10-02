@@ -21,3 +21,12 @@ next-env.d.ts
 # Die ausgewählten, web-optimierten Bilder liegen in next-app/public/foto/.
 /Foto-alle/
 /_style-archive/
+/Location/
+/SEP2021_Ramiengo/
+/Nov2021_Ramiengo/
+/MRZ2022_Ramiengo/
+/Woltbilder_2026/
+
+# Lokale Werkzeug-Ausgaben (Screenshots, Browser-Logs)
+.playwright-mcp/
+.impeccable/review/
