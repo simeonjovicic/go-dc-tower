@@ -1092,8 +1092,8 @@
 .hx-btn:active { transform: scale(.98); }
 .hx-btn--solid { background: var(--hc-red); color: #fff; font-weight: 600; }
 .hx-btn--solid:hover { background: #bd1812; }
-.hx-btn--line { background: transparent; color: inherit; border-color: color-mix(in srgb, currentColor 40%, transparent); }
-.hx-btn--line:hover { border-color: currentColor; background: color-mix(in srgb, currentColor 8%, transparent); }
+.hx-btn--line { background: var(--hc-red); color: #fff; border-color: var(--hc-red); font-weight: 600; }
+.hx-btn--line:hover { background: #bd1812; border-color: #bd1812; }
 .hx-btn--ink { background: #17110d; color: var(--hx-paper); }
 .hx-btn--ink:hover { background: #000; }
 .hx-btn--line-light { background: transparent; color: #fff; border-color: #ffffff80; }
@@ -1137,7 +1137,7 @@
 .hx-catering-card .hx-parallax { position: absolute; inset: -30px 0; }
 .hx-catering-card strong { font-family: var(--hx-mincho); font-weight: 600; font-size: clamp(22px, 1.9vw, 28px); line-height: 1.2; }
 .hx-catering-short { color: #b3a899; font-size: 14px; line-height: 1.75; max-width: 36ch; margin-bottom: 8px; }
-.hx-catering-card:hover .hx-btn--line { border-color: currentColor; }
+.hx-catering-card:hover .hx-btn--line { background: #bd1812; border-color: #bd1812; }
 [data-reveal="rise"] { transition: opacity 1s var(--hx-ease), transform 1.1s var(--hx-ease); }
 [data-reveal="rise"].is-pending { opacity: 0; transform: translateY(60px); }
 
@@ -1161,7 +1161,7 @@
 
 /* Handy-Schnellzugriff mit denselben Pillen */
 .hc-mobile-actions .hx-btn { min-height: 46px; padding: 0 16px; border-radius: 999px; font-size: 14px; letter-spacing: 0; }
-.hc-mobile-actions .hx-btn--line { border-color: #ffecd640; }
+.hc-mobile-actions .hx-btn--line { border-color: var(--hc-red); }
 
 @media (max-width: 900px) {
   .hx-reel-window { padding-left: 0; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; scrollbar-width: none; }
@@ -1176,7 +1176,7 @@
 @media (max-width: 760px) {
   .hc-mobile-actions { background: rgba(18, 13, 10, .96); border-top-color: #ffecd614; color: var(--hx-paper); box-shadow: none; }
   .hc-mobile-actions .hx-btn:is(a, .glf-button) { justify-content: center; border-radius: 999px; font-size: 14px; }
-  .hc-mobile-actions .hx-btn--line:is(a, .glf-button) { background: transparent; color: var(--hx-paper); border: 1px solid #ffecd640; }
+  .hc-mobile-actions .hx-btn--line:is(a, .glf-button) { background: var(--hc-red); color: #fff; border: 1px solid var(--hc-red); }
   .hc-mobile-actions .hx-btn--solid:is(a, .glf-button):last-child { background: var(--hc-red); border-color: var(--hc-red); color: #fff; }
   .hc-hero-actions .hx-btn { min-height: 48px; padding: 0 22px; font-size: 14px; }
 }
