@@ -123,8 +123,8 @@ export function CateringForm() {
       </label>
 
       <div className="order-submit">
-        <button type="submit" className="hc-button-red" disabled={state.kind === 'sending'}>
-          {state.kind === 'sending' ? 'Wird gesendet …' : 'Anfrage senden'} <span aria-hidden="true">↗</span>
+        <button type="submit" className="hx-btn hx-btn--solid" disabled={state.kind === 'sending'} aria-busy={state.kind === 'sending'}>
+          {state.kind === 'sending' ? 'Wird gesendet …' : 'Anfrage senden'}
         </button>
         <p>Unverbindlich. Ihr bekommt unsere Zusage schriftlich per E-Mail.</p>
       </div>

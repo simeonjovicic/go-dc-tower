@@ -18,7 +18,7 @@ export default function MenuPage() {
       <main id="speisekarte">
         <section className="mc-page-head">
           <div><p className="hc-eyebrow">ra’mien go · DC Tower</p><h1 className="hc-display">Die ganze <i>Karte.</i></h1><p>Wähle eine Kategorie. Finde dein Lieblingsgericht.</p></div>
-          <GlfButton kind="order" className="hc-button-dark">Online bestellen <span aria-hidden="true">↗</span></GlfButton>
+          <GlfButton kind="order" className="hx-btn hx-btn--ink">Online bestellen</GlfButton>
         </section>
         <MenuExplorer />
       </main>
