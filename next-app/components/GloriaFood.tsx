@@ -9,6 +9,12 @@ let requested = false;
 function loadWidget() {
   if (requested) return;
   requested = true;
+  // Das Skript hängt order-online.css an, das alle .glf-button orange/blau färbt.
+  // Wir entfernen es (disabled greift nicht zuverlässig, wenn es später fertig lädt);
+  // die Overlay-Regeln liegen in high-class.css.
+  new MutationObserver(() => {
+    document.head.querySelectorAll('link[href*="order-online.css"]').forEach((link) => link.remove());
+  }).observe(document.head, { childList: true });
   const script = document.createElement('script');
   script.src = GLORIAFOOD.script;
   script.async = true;

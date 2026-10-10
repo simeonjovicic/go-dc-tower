@@ -5,7 +5,8 @@ import { useEffect, type RefObject } from 'react';
 /**
  * Dezente Scroll-Momente für die Startseite.
  * - [data-reveal="lines" | "curtain" | "fade"]: Einblenden, sobald das Element in den Bildschirm kommt.
- * - [data-parallax="0.1"]: leichte Verschiebung gegen die Scrollrichtung, höchstens ±40 px.
+ * - [data-parallax="0.1"]: leichte Verschiebung gegen die Scrollrichtung, höchstens ±40 px
+ *   (oder ±[data-parallax-max] px für stärkere Ebenen).
  * Inhalte sind ohne JS sichtbar; nur Elemente unterhalb des ersten Bildschirms bekommen einen Auftritt.
  * Bei „Bewegung reduzieren“ passiert nichts.
  */
@@ -44,7 +45,8 @@ export function useScrollMotion(rootRef: RefObject<HTMLElement | null>) {
         const rect = el.getBoundingClientRect();
         if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
         const factor = Number(el.dataset.parallax) || 0.1;
-        const offset = Math.max(-40, Math.min(40, (rect.top + rect.height / 2 - mid) * -factor));
+        const max = Number(el.dataset.parallaxMax) || 40;
+        const offset = Math.max(-max, Math.min(max, (rect.top + rect.height / 2 - mid) * -factor));
         el.style.transform = `translate3d(0, ${offset.toFixed(1)}px, 0) scale(1.1)`;
       });
     };

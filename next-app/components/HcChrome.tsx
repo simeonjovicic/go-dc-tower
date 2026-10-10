@@ -1,43 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { BRAND, CONTACT, SOCIAL } from '@/components/site-data';
 
-/**
- * Kopf und Fuß für die Unterseiten. Die Startseite bringt ihre eigene, auf den
- * Hero abgestimmte Kopfzeile mit — hier zeigen die Links zurück auf die Anker
- * der Startseite, statt auf Abschnitte, die es auf dieser Seite nicht gibt.
- */
-export function HcHeader({ current, compact = false }: { current?: string; compact?: boolean }) {
-  const links = compact ? [
-    { href: '/', label: 'Restaurant' },
-    { href: '/#reservieren', label: 'Tisch anfragen' },
-  ] : [
-    { href: '/menu', label: 'Speisekarte' },
-    { href: '/#raum', label: 'Restaurant' },
-    { href: '/catering', label: 'Feiern & Catering' },
-    { href: '/#reservieren', label: 'Tisch anfragen' },
-  ];
-
-  return (
-    <header className="hc-sub-header">
-      <Link className="hc-sub-brand" href="/" aria-label={`${BRAND.name} ${BRAND.place} – Startseite`}>
-        <Image src="/go-dc-tower-logo.png" alt="" width={706} height={706} priority />
-      </Link>
-      <nav aria-label="Hauptnavigation">
-        {links.map((l) => (
-          <Link
-            key={l.href}
-            href={l.href}
-            aria-current={l.href === current ? 'page' : undefined}
-          >
-            {l.label}
-          </Link>
-        ))}
-      </nav>
-    </header>
-  );
-}
-
+/** Fuß für die Unterseiten. Die Navigation aller Seiten ist `SiteHeader`. */
 export function HcFooter() {
   return (
     <footer className="hc-sub-footer">

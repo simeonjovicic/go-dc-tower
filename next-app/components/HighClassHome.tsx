@@ -2,13 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import {
-  ANFAHRT_VIDEOS, BRAND, CATERING, CONTACT, HOURS, KAPAZITAET, SOCIAL,
+  ANFAHRT_VIDEOS, BRAND, CATERING, CONTACT, HOURS, KAPAZITAET, MENU_CARDS, SOCIAL,
 } from '@/components/site-data';
 import { DISHES, dishesOf, fmt, priceFrom, type CategoryId } from '@/components/menu-data';
 import { useScrollMotion } from '@/components/useScrollMotion';
 import { GlfButton } from '@/components/GloriaFood';
+import { SiteHeader } from '@/components/SiteHeader';
 
 /** Eine Auswahl, kein Katalog: die Bildreihe gleitet beim Scrollen seitwärts. */
 const REEL: { name: string; cat: CategoryId; dish?: string; img: string; alt: string }[] = [
@@ -38,77 +39,196 @@ function Lines({ lines, as: Tag = 'h2', className, id }: { lines: string[]; as?:
   );
 }
 
-const MOBILE_LINKS = [
-  ['/menu', 'Speisekarte'], ['#raum', 'Restaurant'], ['#reservieren', 'Tisch anfragen'],
-  ['#catering', 'Feiern & Catering'], ['#newsletter', 'Newsletter'], ['#kontakt', 'Anfahrt & Zeiten'],
-] as const;
+const BUSINESS = CATERING.find((item) => item.id === 'business')!;
+
 
 function inquiry(subject: string, body?: string) {
   return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ''}`;
 }
 
-// TODO: an einen Newsletter-Anbieter (Brevo/Mailchimp) anbinden; bis dahin geht die Anmeldung per E-Mail ans Haus.
-function subscribe(event: FormEvent<HTMLFormElement>) {
-  event.preventDefault();
-  const email = new FormData(event.currentTarget).get('email');
-  window.location.href = inquiry('Newsletter-Anmeldung',
-    `Hallo liebes go-Team,\n\nbitte nehmt mich in euren Newsletter auf: ${email}\n\nIch bin mit dem Erhalt einverstanden und kann mich jederzeit wieder abmelden.`);
+/** Business Lunch: drei Wege, je mit Bild, Satz und passendem Button. */
+const LUNCH_TABS = [
+  { id: 'tisch', label: 'Am Tisch', img: '/foto/leben/tafel-haende.webp', alt: 'Ein Team teilt sich viele asiatische Gerichte an einem Holztisch' },
+  { id: 'mitnehmen', label: 'Zum Mitnehmen', img: '/foto/leben/sackerl-tower.webp', alt: 'Gast mit einer ra’mien-go-Tragetasche vor dem DC Tower' },
+  { id: 'buero', label: 'Ins Büro', img: '/foto/leben/tafel-oben.webp', alt: 'Gedeckte Tafel mit Gyoza, Curry und Tofu von oben' },
+] as const;
+
+/**
+ * Reiter über einem großen Bild. Alle Panels bleiben im DOM (nur `hidden`),
+ * damit das GloriaFood-Widget sich auch an die Knöpfe in verdeckten Panels hängt.
+ */
+function LunchTabs() {
+  const [active, setActive] = useState(0);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const onKey = (event: KeyboardEvent) => {
+    const step = event.key === 'ArrowRight' ? 1 : event.key === 'ArrowLeft' ? -1 : 0;
+    if (!step) return;
+    event.preventDefault();
+    const next = (active + step + LUNCH_TABS.length) % LUNCH_TABS.length;
+    setActive(next);
+    tabs.current[next]?.focus();
+  };
+
+  return (
+    <div className="hx-shell hx-lunch" data-reveal="fade">
+      <div className="hx-lunch-tabs" role="tablist" aria-label="Business Lunch" onKeyDown={onKey}>
+        {LUNCH_TABS.map((tab, i) => (
+          <button key={tab.id} ref={(el) => { tabs.current[i] = el; }} type="button" role="tab" id={`lunch-tab-${tab.id}`}
+            aria-selected={i === active} aria-controls={`lunch-panel-${tab.id}`} tabIndex={i === active ? 0 : -1}
+            onClick={() => setActive(i)}>
+            {tab.label}
+          </button>
+        ))}
+      </div>
+      <div className="hx-lunch-stage">
+        <div className="hx-lunch-photo">
+          {LUNCH_TABS.map((tab, i) => (
+            <Image key={tab.id} src={tab.img} alt={tab.alt} fill sizes="(max-width: 900px) calc(100vw - 40px), 60vw" className={i === active ? 'is-active' : undefined} aria-hidden={i !== active} />
+          ))}
+        </div>
+        <div className="hx-lunch-copy">
+          <div role="tabpanel" id="lunch-panel-tisch" aria-labelledby="lunch-tab-tisch" hidden={active !== 0}>
+            <h3>Team-Lunch für bis zu {KAPAZITAET.firma.personen} Personen.</h3>
+            <p>Für ein gemeinsames Mittagessen mit eurem Team nehmen wir gerne Firmenreservierungen für bis zu {KAPAZITAET.firma.personen} Personen an.</p>
+            <div className="hx-lunch-actions">
+              <a className="hx-btn hx-btn--solid" href={inquiry('Firmenreservierung', 'Hallo liebes go-Team,\n\nwir möchten für unser Team reservieren:\nFirma: \nDatum: \nUhrzeit: \nPersonenanzahl: \n\nName und Telefonnummer: ')}>Firmenreservierung anfragen</a>
+              <GlfButton kind="reservation" className="hx-link">Tisch reservieren <span aria-hidden="true">↗</span></GlfButton>
+            </div>
+          </div>
+          <div role="tabpanel" id="lunch-panel-mitnehmen" aria-labelledby="lunch-tab-mitnehmen" hidden={active !== 1}>
+            <h3>Online bestellen, im Erdgeschoss abholen.</h3>
+            <p>Bestell vom Schreibtisch aus und hol dein Essen bei uns im Erdgeschoss des DC Tower ab.</p>
+            <div className="hx-lunch-actions">
+              <GlfButton kind="order" className="hx-btn hx-btn--solid">Online bestellen</GlfButton>
+            </div>
+          </div>
+          <div role="tabpanel" id="lunch-panel-buero" aria-labelledby="lunch-tab-buero" hidden={active !== 2}>
+            <h3>Business Lunch, frisch ins Büro.</h3>
+            <p>{BUSINESS.short} Ohne Service-Personal vor Ort.</p>
+            <div className="hx-lunch-actions">
+              <Link className="hx-btn hx-btn--solid" href={`/catering/?angebot=${BUSINESS.id}#anfrage`}>{BUSINESS.action}</Link>
+              <a className="hx-link" href="#catering">Alle Catering-Angebote <span aria-hidden="true">↓</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** Die zwei Etagen; auf dem Desktop bleibt der Block stehen und wechselt beim Scrollen. */
+const FLOORS = [
+  { label: 'Erdgeschoss', plaetze: KAPAZITAET.erdgeschoss.plaetze, text: `Unter der Holzdecke, mit Blick in die offene Küche. Für Teamlunch und Gruppen bis ${KAPAZITAET.erdgeschoss.gruppe} Personen.`, img: '/foto/haus/obergeschoss.webp', alt: 'Gastraum im Erdgeschoss mit Holzdecke und offener Küche' },
+  { label: 'Obergeschoss', plaetze: KAPAZITAET.obergeschoss.plaetze, text: 'Ein Stock höher und etwas ruhiger. Ideal für Teamrunden und Geschäftsessen unter euch.', img: '/foto/haus/saal-lang.webp', alt: 'Langer, ruhiger Gastraum im Obergeschoss mit gedeckten Tischen' },
+] as const;
+
+function FloorsScroll() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+  const [sticky, setSticky] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)');
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const track = trackRef.current;
+      if (!track) return;
+      const rect = track.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, -rect.top / Math.max(1, rect.height - window.innerHeight)));
+      setActive(Math.min(FLOORS.length - 1, Math.floor(progress * FLOORS.length)));
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const sync = () => {
+      setSticky(query.matches);
+      window.removeEventListener('scroll', onScroll);
+      if (query.matches) { window.addEventListener('scroll', onScroll, { passive: true }); update(); }
+    };
+    sync();
+    query.addEventListener('change', sync);
+    return () => {
+      query.removeEventListener('change', sync);
+      window.removeEventListener('scroll', onScroll);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  return (
+    <div className="hx-floors-track" ref={trackRef}>
+      <div className="hx-shell hx-floors-sticky">
+        <p className="hx-floors-head">Der Raum</p>
+        <div className="hx-floors-stage">
+          {FLOORS.map((floor, i) => (
+            <article key={floor.label} className={`hx-floor${i === active ? ' is-active' : ''}`} aria-hidden={sticky && i !== active ? true : undefined}>
+              <div className="hx-floor-copy">
+                <small>{floor.label}</small>
+                <p className="hx-floor-number"><b>{floor.plaetze}</b><span>Sitzplätze</span></p>
+                <p>{floor.text}</p>
+                <div className="hx-floor-progress" aria-hidden="true">
+                  {FLOORS.map((f, j) => <span key={f.label} className={j === i ? 'is-on' : undefined} />)}
+                </div>
+              </div>
+              <div className="hx-floor-photo"><Image src={floor.img} alt={floor.alt} fill sizes="(max-width: 900px) calc(100vw - 40px), 60vw" /></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Wegvideo im Handy-Format. Auf dem Desktop läuft es stumm, sobald es sichtbar ist; auf dem
+ * Handy und bei „Bewegung reduzieren“ startet es erst auf Tipp (die Datei ist groß).
+ */
+function ArrivalVideo({ src, poster, title, text }: { src: string; poster?: string; title: string; text: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [auto, setAuto] = useState(false);
+  const [muted, setMuted] = useState(true);
+
+  useEffect(() => {
+    const video = ref.current;
+    if (!video || !window.matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)').matches) return;
+    setAuto(true);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) video.play().catch(() => {});
+      else video.pause();
+    }, { threshold: 0.5 });
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <figure className="hx-arrival-video" data-reveal="fade">
+      <div className="hx-arrival-frame">
+        <video ref={ref} src={src} poster={poster} muted={muted} loop playsInline preload="none" controls={!auto} aria-label={title} />
+        {auto && (
+          <button type="button" className="hx-arrival-sound" aria-pressed={!muted} onClick={() => setMuted((m) => !m)}>
+            {muted ? 'Ton an' : 'Ton aus'}
+          </button>
+        )}
+      </div>
+      <figcaption><strong>{title}</strong>{text}</figcaption>
+    </figure>
+  );
 }
 
 export function HighClassHome() {
   const rootRef = useRef<HTMLDivElement>(null);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const mobilePanelRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [showQuickActions, setShowQuickActions] = useState(false);
   useScrollMotion(rootRef);
 
   useEffect(() => {
     const onScroll = () => {
-      setScrolled(window.scrollY > 48);
       const actions = rootRef.current?.querySelector('.hc-hero-actions');
       setShowQuickActions(Boolean(actions && actions.getBoundingClientRect().bottom < 68));
     };
-    const onResize = () => { if (window.innerWidth > 980) setMenuOpen(false); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onResize);
-    };
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  useEffect(() => {
-    if (!menuOpen) return;
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    // Keep focus on the disclosure button; Tab enters the navigation.
-    const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setMenuOpen(false);
-        menuButtonRef.current?.focus();
-      }
-      if (event.key === 'Tab') {
-        const links = mobilePanelRef.current?.querySelectorAll<HTMLAnchorElement>('a');
-        const first = links?.[0];
-        const last = links?.[links.length - 1];
-        if (event.shiftKey && document.activeElement === menuButtonRef.current) {
-          event.preventDefault(); last?.focus();
-        } else if (!event.shiftKey && document.activeElement === last) {
-          event.preventDefault(); menuButtonRef.current?.focus();
-        } else if (event.shiftKey && document.activeElement === first) {
-          event.preventDefault(); menuButtonRef.current?.focus();
-        }
-      }
-    };
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      document.removeEventListener('keydown', onKeyDown);
-    };
-  }, [menuOpen]);
 
   useEffect(() => {
     // Desktop: die Bildreihe gleitet seitwärts, während die Sektion durchs Bild scrollt.
@@ -139,43 +259,13 @@ export function HighClassHome() {
   }, []);
 
   return (
-    <div ref={rootRef} className={`hc-page${menuOpen ? ' menu-open' : ''}`}>
+    <div ref={rootRef} className="hc-page">
       <a className="hc-skip-link" href="#main">Zum Inhalt springen</a>
       <div className="hc-noise" aria-hidden="true" />
 
-      <header className={`hc-site-header${scrolled ? ' is-scrolled' : ''}${menuOpen ? ' menu-header' : ''}`}>
-        <div className="hc-nav-shell">
-          <nav className="hc-split-nav hc-split-nav--left" aria-label="Hauptnavigation" inert={menuOpen}>
-            <Link href="/menu">Speisekarte</Link><a href="#raum">Restaurant</a>
-          </nav>
-          <a className="hc-brand" href="#top" inert={menuOpen} aria-label={`${BRAND.name} ${BRAND.place} – Startseite`}>
-            <Image src="/go-dc-tower-logo.png" alt="" width={706} height={706} priority />
-          </a>
-          <nav className="hc-split-nav hc-split-nav--right" aria-label="Service" inert={menuOpen}>
-            <a href="#catering">Feiern &amp; Catering</a>
-            <GlfButton kind="reservation" className="hx-btn hx-btn--line hx-btn--sm">Tisch reservieren</GlfButton>
-          </nav>
-          <button ref={menuButtonRef} className="hc-menu-button" type="button"
-            aria-label={menuOpen ? 'Menü schließen' : 'Menü öffnen'} aria-expanded={menuOpen}
-            aria-controls="mobile-navigation" onClick={() => setMenuOpen((open) => !open)}>
-            <span /><span />
-          </button>
-        </div>
-      </header>
+      <SiteHeader home onMenuChange={setMenuOpen} />
 
-      <div ref={mobilePanelRef} id="mobile-navigation" className="hc-mobile-panel" inert={!menuOpen} aria-hidden={!menuOpen}>
-        <nav aria-label="Mobile Navigation">
-          {MOBILE_LINKS.map(([href, label]) => href.startsWith('/') ? (
-            <Link key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</Link>
-          ) : <a key={href} href={href} onClick={() => setMenuOpen(false)}>{label}</a>)}
-        </nav>
-        <div className="hc-mobile-meta">
-          <span>{CONTACT.street}<br />{CONTACT.zip} {CONTACT.city}</span>
-          <a href={CONTACT.phoneHref}>{CONTACT.phone}</a>
-        </div>
-      </div>
-
-      <main id="main" inert={menuOpen}>
+      <main id="main">
         <section className="hc-hero" id="top" aria-label="Willkommen im ra’mien go DC Tower">
           <div className="hc-hero-media" aria-hidden="true">
             <picture>
@@ -191,7 +281,7 @@ export function HighClassHome() {
             <h1 className="hc-hero-wordmark"><span>ra&rsquo;mien</span><span>go</span></h1>
             <div className="hc-hero-actions">
               <GlfButton kind="reservation" className="hx-btn hx-btn--solid">Tisch reservieren</GlfButton>
-              <Link className="hx-btn hx-btn--line" href="/menu">Speisekarte</Link>
+              <Link className="hx-btn hx-btn--line" href="/catering#anfrage">Catering anfragen</Link>
             </div>
           </div>
           <div className="hc-hero-bottom">
@@ -218,7 +308,14 @@ export function HighClassHome() {
         <section className="hx-reel" id="signature" aria-labelledby="menu-title">
           <div className="hx-shell hx-reel-head">
             <Lines id="menu-title" className="hx-title" lines={['Worauf hast du Lust?']} />
-            <p data-reveal="fade">Lunch Mo–Fr 11–17 · Abendkarte ab 17 Uhr · Sonntag 11–17</p>
+            <nav className="hx-menu-cards" aria-label="Unsere Karten" data-reveal="fade">
+              {MENU_CARDS.map((card) => (
+                <Link key={card.id} href={card.href}>
+                  <strong>{card.title} <span aria-hidden="true">↗</span></strong>
+                  <span>{card.times.join(' · ')}</span>
+                </Link>
+              ))}
+            </nav>
           </div>
           <div className="hx-reel-window">
             <ul className="hx-reel-track">
@@ -240,61 +337,56 @@ export function HighClassHome() {
         </section>
 
         <section className="hx-room" id="raum" aria-labelledby="room-title">
-          <figure className="hx-room-hero">
-            <div className="hx-parallax" data-parallax="0.12">
+          <figure className="hx-room-hero" id="firmen">
+            <div className="hx-parallax" data-parallax="0.35" data-parallax-max="160">
               <Image src="/foto/haus/saal-holzdecke.webp" alt="Heller Gastraum mit Holzdecke, gedeckten Tischen und offener Küche" fill sizes="100vw" />
             </div>
             <figcaption className="hx-shell">
-              <Lines id="room-title" className="hx-title hx-title--on-photo" lines={['Kurz raus.', 'Gerne länger bleiben.']} />
+              <p className="hc-eyebrow">Business Lunch · Mo–Fr ab 11 Uhr</p>
+              <Lines id="room-title" className="hx-title hx-title--on-photo" lines={['Lunch im DC Tower.', 'Für dich und dein Team.']} />
             </figcaption>
           </figure>
-          <div className="hx-shell hx-room-intro">
-            <p data-reveal="fade">Durch die Glastür, unter die Holzdecke, an deinen Tisch. Bei uns sitzt du mitten
-              in der Donau City — und bist für eine Weile ganz woanders.</p>
-            <div className="hx-moments" data-reveal="fade">
-              <div><h3>Mittags eine gute Pause.</h3><p>Mit den Kollegen an den Tisch oder dein Lieblingsgericht mitnehmen. Unter der Woche ab 11 Uhr.</p></div>
-              <div><h3>Abends zusammenkommen.</h3><p>Vorspeisen teilen, etwas Neues probieren und noch auf ein Getränk bleiben. Mo–Fr bis 22 Uhr, Küche bis 21 Uhr.</p></div>
-            </div>
-          </div>
-          <div className="hx-shell hx-floors">
-            <article>
-              <div className="hx-floor-photo" data-reveal="curtain"><Image src="/foto/haus/saal-lang.webp" alt="Langer Gastraum im Erdgeschoss mit gedeckten Tischen" fill sizes="(max-width: 760px) calc(100vw - 40px), 44vw" /></div>
-              <p className="hx-floor-figure"><b>{KAPAZITAET.erdgeschoss.plaetze}</b><span>Sitzplätze im Erdgeschoss</span></p>
-              <p>Unter der Holzdecke, mit Blick in die offene Küche. Für Gruppen bis {KAPAZITAET.erdgeschoss.gruppe} Personen.</p>
-            </article>
-            <article>
-              <div className="hx-floor-photo" data-reveal="curtain"><Image src="/foto/haus/obergeschoss.webp" alt="Gedeckte Tische im Obergeschoss des Restaurants" fill sizes="(max-width: 760px) calc(100vw - 40px), 44vw" /></div>
-              <p className="hx-floor-figure"><b>{KAPAZITAET.obergeschoss.plaetze}</b><span>Sitzplätze im Obergeschoss</span></p>
-              <p>Ein Stock höher und etwas ruhiger. Ideal, wenn ihr als Runde unter euch sein wollt.</p>
-            </article>
-          </div>
-          <div className="hx-shell hx-company" data-reveal="fade">
-            <h3>Mittagessen mit dem ganzen Team</h3>
-            <p>Für ein gemeinsames Mittagessen mit eurem Team nehmen wir gerne Firmenreservierungen für bis zu {KAPAZITAET.firma.personen} Personen an.</p>
-            <a className="hx-btn hx-btn--line hx-btn--sm" href={inquiry('Firmenreservierung', 'Hallo liebes go-Team,\n\nwir möchten für unser Team reservieren:\nFirma: \nDatum: \nUhrzeit: \nPersonenanzahl: \n\nName und Telefonnummer: ')}>
-              Firmenreservierung anfragen
-            </a>
-          </div>
+          <LunchTabs />
+          <FloorsScroll />
           <div className="hx-shell hx-arrival">
-            <div className="hx-arrival-copy" data-reveal="fade">
-              <h3>So kommst du zu uns</h3>
-              <dl>
-                <div><dt>Parken</dt><dd>Parken in der DC Tower Garage. Lass dein Parkticket bei uns abstempeln und parke für 1 € pro Stunde.</dd></div>
-                <div><dt>U-Bahn</dt><dd>Mit der U1 bis Kaisermühlen · VIC, von dort sind es zwei Gehminuten. Oder ab Donauinsel in rund fünf Minuten – das Video zeigt dir den Weg.</dd></div>
-              </dl>
+            {ANFAHRT_VIDEOS.filter((video) => video.src).slice(0, 1).map((video) => (
+              <ArrivalVideo key={video.title} src={video.src!} poster={video.poster} title={video.title} text={video.text} />
+            ))}
+            <div className="hx-arrival-route" data-reveal="fade">
+              <h3>So kommst du zu uns.</h3>
+              <ol className="hx-arrival-steps">
+                <li><span>01</span><div><strong>U1 bis Kaisermühlen · VIC</strong><p>Oder ab Donauinsel – von dort rund fünf Minuten zu Fuß, das Video zeigt dir den Weg.</p></div></li>
+                <li><span>02</span><div><strong>Zwei Minuten zu Fuß</strong><p>Vom Ausgang Kaisermühlen · VIC sind es zwei Gehminuten bis zum DC Tower.</p></div></li>
+                <li><span>03</span><div><strong>Erdgeschoss DC Tower</strong><p>{CONTACT.street}, {CONTACT.zip} {CONTACT.city} – durch die Glastür, und du bist da.</p></div></li>
+              </ol>
+              <div className="hx-arrival-park">
+                <b aria-hidden="true">P</b>
+                <p><strong>Mit dem Auto</strong>Parken in der DC Tower Garage. Lass dein Parkticket bei uns abstempeln und parke für 1 € pro Stunde.</p>
+              </div>
+              <a className="hx-btn hx-btn--solid" href={CONTACT.maps} target="_blank" rel="noopener noreferrer">Route planen <span aria-hidden="true">↗</span></a>
             </div>
-            <div className="hx-arrival-videos">
-              {ANFAHRT_VIDEOS.map((video) => (
-                <figure key={video.title} data-reveal="curtain">
-                  {video.src ? (
-                    <video src={video.src} poster={video.poster} controls preload="none" playsInline aria-label={video.title} />
-                  ) : (
-                    <div className="hx-video-placeholder" role="img" aria-label={`Video folgt: ${video.title}`}><span>Video folgt</span></div>
-                  )}
-                  <figcaption><strong>{video.title}</strong>{video.text}</figcaption>
-                </figure>
-              ))}
+          </div>
+        </section>
+
+        <section className="hx-catering" id="catering" aria-labelledby="catering-title">
+          <figure className="hx-room-hero hx-catering-hero">
+            <div className="hx-parallax" data-parallax="0.35" data-parallax-max="160">
+              <Image src="/foto/leben/anstossen.webp" alt="Gäste stoßen am gedeckten Tisch mit Drinks und Bier an" fill sizes="100vw" />
             </div>
+            <figcaption className="hx-shell">
+              <p className="hc-eyebrow">Catering &amp; Events</p>
+              <Lines id="catering-title" className="hx-title hx-title--on-photo" lines={['Mehr Leute.', 'Mehr zu teilen.']} />
+            </figcaption>
+          </figure>
+          <div className="hx-shell hx-catering-list">
+            {CATERING.map((item, i) => (
+              <Link key={item.id} id={`angebot-${item.id}`} className="hx-catering-card" href={`/catering/?angebot=${item.id}#anfrage`} data-reveal="rise" style={{ transitionDelay: `${i * 120}ms` }}>
+                <span className="hx-catering-photo"><span className="hx-parallax" data-parallax="0.06"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 900px) calc(100vw - 40px), 31vw" /></span></span>
+                <strong>{item.title}</strong>
+                <span className="hx-catering-short">{item.short}</span>
+                <span className="hx-btn hx-btn--line hx-btn--sm">{item.action}</span>
+              </Link>
+            ))}
           </div>
         </section>
 
@@ -309,40 +401,6 @@ export function HighClassHome() {
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="hx-catering" id="catering" aria-labelledby="catering-title">
-          <div className="hx-shell hx-catering-head">
-            <Lines id="catering-title" className="hx-title" lines={['Mehr Leute.', 'Mehr zu teilen.']} />
-            <p data-reveal="fade">Bei uns, bei euch im Büro oder an eurem Lieblingsort.</p>
-          </div>
-          <div className="hx-shell hx-catering-list">
-            {CATERING.map((item, i) => (
-              <Link key={item.id} className="hx-catering-card" href={`/catering/?angebot=${item.id}#anfrage`} data-reveal="rise" style={{ transitionDelay: `${i * 120}ms` }}>
-                <span className="hx-catering-photo"><span className="hx-parallax" data-parallax="0.06"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 900px) calc(100vw - 40px), 31vw" /></span></span>
-                <strong>{item.title}</strong>
-                <span className="hx-catering-short">{item.short}</span>
-                <span className="hx-btn hx-btn--line hx-btn--sm">{item.action}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="hx-newsletter" id="newsletter" aria-labelledby="newsletter-heading">
-          <form className="hx-shell hx-newsletter-shell" onSubmit={subscribe} data-reveal="fade">
-            <h2 id="newsletter-heading" className="hx-title hx-title--small">Neues aus dem go.</h2>
-            <div className="hx-newsletter-fields">
-              <div className="hx-newsletter-row">
-                <label className="hc-visually-hidden" htmlFor="newsletter-email">E-Mail-Adresse</label>
-                <input id="newsletter-email" name="email" type="email" required autoComplete="email" placeholder="deine@email.at" />
-                <button className="hx-btn hx-btn--solid" type="submit">Anmelden</button>
-              </div>
-              <label className="hx-consent">
-                <input type="checkbox" name="consent" required />
-                <span>Ich möchte den Newsletter erhalten und kann mich jederzeit abmelden.</span>
-              </label>
-            </div>
-          </form>
         </section>
 
         <section className="hc-location hx-location" id="kontakt" aria-labelledby="contact-title">

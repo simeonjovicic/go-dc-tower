@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { HcHeader, HcFooter } from '@/components/HcChrome';
+import { HcFooter } from '@/components/HcChrome';
+import { SiteHeader } from '@/components/SiteHeader';
 import { BRAND, CONTACT, LEGAL } from '@/components/site-data';
 
 export const metadata: Metadata = {
@@ -41,7 +42,7 @@ const ROWS: { label: string; value: React.ReactNode }[] = [
 export default function ImpressumPage() {
   return (
     <div className="hc-page hc-sub-page">
-      <HcHeader />
+      <SiteHeader solid />
 
       <main id="main">
         <section className="hc-menu-head">

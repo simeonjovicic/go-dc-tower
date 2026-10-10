@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
-import { HcFooter, HcHeader } from '@/components/HcChrome';
+import { HcFooter } from '@/components/HcChrome';
+import { SiteHeader } from '@/components/SiteHeader';
 import { CONTACT, LEGAL } from '@/components/site-data';
 
 export const metadata: Metadata = {
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 export default function DatenschutzPage() {
   return (
     <div className="hc-page hc-sub-page">
-      <HcHeader />
+      <SiteHeader solid />
       <main id="main">
         <section className="hc-page-head">
           <p className="hc-eyebrow">Datenschutz</p>

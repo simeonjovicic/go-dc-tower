@@ -164,7 +164,7 @@ export function MenuExplorer() {
               {category.id === 'sushi' ? (
                 <div className="mc-sushi">
                   <div className="mc-sushi-photo"><Image src="/foto/sushi/sushi-platte.webp" alt="Sushi-Auswahl im go DC Tower" fill sizes="(max-width: 760px) 90vw, 45vw" /></div>
-                  <div><h3>Sushi nach Tagesangebot.</h3><p>Die aktuelle Auswahl und Preise erfährst du im Restaurant oder telefonisch. Wir helfen dir gerne bei der Auswahl.</p><a className="hc-text-link" href={CONTACT.phoneHref}>{CONTACT.phone} <span aria-hidden="true">↗</span></a></div>
+                  <div><h3>Sushi nach Tagesangebot.</h3><p>Die aktuelle Auswahl und Preise erfährst du im Restaurant oder telefonisch. Wir helfen dir gerne bei der Auswahl.</p><a className="hx-link" href={CONTACT.phoneHref}>{CONTACT.phone} <span aria-hidden="true">↗</span></a></div>
                 </div>
               ) : (
                 <ul className="mc-dishes">

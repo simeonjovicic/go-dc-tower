@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
-import Image from 'next/image';
 import { CateringForm } from '@/components/CateringForm';
-import { HcFooter, HcHeader } from '@/components/HcChrome';
-import { CATERING, CONTACT, KAPAZITAET } from '@/components/site-data';
+import { PhotoHero } from '@/components/PhotoHero';
+import { CateringOffers } from '@/components/CateringOffers';
+import { HcFooter } from '@/components/HcChrome';
+import { SiteHeader } from '@/components/SiteHeader';
+import { CONTACT, KAPAZITAET } from '@/components/site-data';
 
 export const metadata: Metadata = {
   title: "Catering & Events — ra'mien go DC Tower",
@@ -11,34 +13,27 @@ export const metadata: Metadata = {
 
 export default function CateringPage() {
   return (
-    <div className="hc-page hc-sub-page">
+    <div className="hc-page hc-sub-page hx-sub">
       <a className="hc-skip-link" href="#anfrage">Zum Formular springen</a>
-      <HcHeader current="/catering" />
+      <SiteHeader current="/catering" solid />
       <main id="main">
-        <section className="hc-page-head">
-          <p className="hc-eyebrow">Feiern &amp; Catering</p>
-          <h1 className="hc-display">Mehr Leute.<br /><i>Mehr zu teilen.</i></h1>
-          <p>Wir liefern Sharing-Buffets und Lunchboxen zu euch oder richten eure Feier bei uns im Restaurant aus.</p>
-        </section>
+        <PhotoHero id="catering-title" img="/foto/leben/tafel-haende.webp" alt="Viele Hände teilen sich asiatische Gerichte an einer gedeckten Tafel"
+          eyebrow="Catering & Events" title={['Mehr Leute.', 'Mehr zu teilen.']}
+          lead="Wir liefern Sharing-Buffets und Lunchboxen zu euch oder richten eure Feier bei uns im Restaurant aus.">
+          <a className="hx-btn hx-btn--solid" href="#anfrage">Jetzt anfragen <span aria-hidden="true">↓</span></a>
+        </PhotoHero>
 
-        <div className="hc-catering-list hc-catering-list--page">
-          {CATERING.map((item) => (
-            <article className="hc-catering-item" key={item.id}>
-              <div className="hc-catering-media"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 760px) calc(100vw - 40px), 31vw" /></div>
-              <small>{item.label}</small><h2 className="hc-catering-title">{item.title}</h2><p>{item.text}</p><p className="hc-catering-fine">{item.fine}</p>
-            </article>
-          ))}
-        </div>
+        <CateringOffers />
 
-        <section className="hc-order" id="anfrage" aria-labelledby="anfrage-title">
-          <div className="hc-order-aside">
-            <p className="hc-eyebrow">Anfrage</p>
-            <h2 id="anfrage-title" className="hc-display">Erzählt uns <i>von eurem Anlass.</i></h2>
-            <p>Je genauer Datum, Personenzahl und Ort, desto schneller können wir zusagen. Unsere Zusage bekommt ihr schriftlich per E-Mail.</p>
+        <section className="hx-shell hx-request" id="anfrage" aria-labelledby="anfrage-title">
+          <div className="hx-request-aside">
+            <p className="hc-eyebrow hx-catering-eyebrow">Anfrage</p>
+            <h2 id="anfrage-title" className="hx-title hx-title--small">Erzählt uns von eurem Anlass.</h2>
+            <p>Vier kurze Schritte, dann melden wir uns. Unsere Zusage bekommt ihr schriftlich per E-Mail.</p>
             <dl>
-              <div><dt>Im Restaurant</dt><dd>Erdgeschoss bis {KAPAZITAET.erdgeschoss.gruppe} Personen, Obergeschoss bis {KAPAZITAET.obergeschoss.plaetze}</dd></div>
+              <div><dt>Im Restaurant</dt><dd>Erdgeschoss bis {KAPAZITAET.erdgeschoss.gruppe} Personen, Obergeschoss bis {KAPAZITAET.obergeschoss.event} (geschlossene Gesellschaft)</dd></div>
               <div><dt>Lieferung</dt><dd>Ohne Service-Personal vor Ort</dd></div>
-              <div><dt>Lieber direkt?</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></dd></div>
+              <div><dt>Lieber direkt?</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={CONTACT.phoneHref}>{CONTACT.phone}</a></dd></div>
             </dl>
           </div>
           <CateringForm />
