@@ -30,3 +30,14 @@ next-env.d.ts
 # Lokale Werkzeug-Ausgaben (Screenshots, Browser-Logs)
 .playwright-mcp/
 .impeccable/review/
+
+# Lokal installierte KI-Skills und Tool-Konfiguration (je Werkzeug kopiert)
+/.agent/
+/.agents/
+/.claude/
+/.codex/
+/.cursor/
+/.gemini/
+skills-lock.json
+.impeccable/direction-payload.json
+.impeccable/questions/
