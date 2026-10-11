@@ -8,7 +8,7 @@ import { ReservationLink } from '@/components/ReservationLink';
 import { BRAND, CONTACT, GLORIAFOOD } from '@/components/site-data';
 
 const MOBILE_LINKS = [
-  ['/menu', 'Speisekarte'], ['#raum', 'Restaurant'], ['/catering', 'Feiern & Catering'],
+  ['#raum', 'Restaurant'], ['/menu', 'Speisekarte'], ['/catering', 'Feiern & Catering'],
   [GLORIAFOOD.reservationUrl, 'Tisch reservieren'], ['#kontakt', 'Kontakt'],
 ] as const;
 

@@ -182,7 +182,7 @@
 .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .06)); transform-origin: 60% 50%; }
 /* Desktop: deutlich kräftiger hineinzoomen, solange der Vorhang hochfährt. */
 @media (min-width: 761px) {
-  .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .28)); }
+  .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .38)); }
 }
 .hc-hero-track .hc-hero-glyph { translate: 0 calc(var(--p, 0) * -40px); }
 .hc-hero-track .hc-hero-stage--intro, .hc-hero-track .hc-hero-bottom { opacity: max(0, calc(1 - var(--p, 0) * 1.6)); }
