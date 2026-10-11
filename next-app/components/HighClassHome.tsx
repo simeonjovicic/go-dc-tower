@@ -277,14 +277,17 @@ export function HighClassHome() {
     if (!wrap || !cover) return;
     const animated = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
     wrap.classList.toggle('is-static', !animated);
-    const heroTrack = wrap.querySelector<HTMLElement>('.hc-hero-track');
-    let p = 0;
+    // --p sitzt auf dem Hero selbst, nicht auf dem Wrapper: sonst müsste der Browser bei jedem Frame
+    // auch die Styles der ganzen Speisekarte darunter neu berechnen.
+    const heroTrack = wrap.querySelector<HTMLElement>('.hc-hero-track') ?? wrap;
+    let p = 0, written = '';
     return onScrollFrame(() => {
       const top = cover.getBoundingClientRect().top;
-      const heroHeight = heroTrack?.offsetHeight || window.innerHeight;
+      const heroHeight = heroTrack.offsetHeight || window.innerHeight;
       p = Math.min(1, Math.max(0, 1 - top / heroHeight));
     }, () => {
-      if (animated) wrap.style.setProperty('--p', p.toFixed(3));
+      const value = p.toFixed(3);
+      if (animated && value !== written) { heroTrack.style.setProperty('--p', value); written = value; }
       // Schnellzugriff auf dem Handy, sobald die Hero-Buttons ausgeblendet bzw. vorbei sind.
       setShowQuickActions(p > 0.35);
     });
@@ -360,13 +363,17 @@ export function HighClassHome() {
     const animated = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
     stack.classList.toggle('is-static', !animated);
     if (!animated) return;
-    let underTop = 0, p = 0;
+    // Direkt auf die betroffenen Elemente schreiben statt CSS-Variablen auf den ganzen Stapel,
+    // damit nicht Catering und Wegweiser bei jedem Frame komplett neu gestylt werden.
+    const shade = under.querySelector<HTMLElement>(':scope > .hx-stack-shade');
+    let underTop = 0, p = 0, writtenTop = NaN, writtenShade = '';
     return onScrollFrame(() => {
       underTop = Math.min(0, window.innerHeight - under.offsetHeight);
       p = Math.min(1, Math.max(0, 1 - over.getBoundingClientRect().top / window.innerHeight));
     }, () => {
-      stack.style.setProperty('--under-top', `${underTop}px`);
-      stack.style.setProperty('--p', p.toFixed(3));
+      if (underTop !== writtenTop) { under.style.top = `${underTop}px`; writtenTop = underTop; }
+      const value = (p * 0.45).toFixed(3);
+      if (shade && value !== writtenShade) { shade.style.opacity = value; writtenShade = value; }
     });
   }, []);
 
@@ -380,6 +387,9 @@ export function HighClassHome() {
     if (!section || !win || !track) return;
     const wide = window.matchMedia('(min-width: 901px)');
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Mit Scroll-Animationen übernimmt CSS das Gleiten am Desktop; hier nur noch die Strecke liefern.
+    const scrollDriven = CSS.supports('animation-timeline: view()');
+    let writtenDistance = -1;
     let userTook = false;
     const take = () => { userTook = true; win.classList.remove('is-auto'); };
     win.addEventListener('pointerdown', take, { passive: true });
@@ -395,6 +405,10 @@ export function HighClassHome() {
       if (calm.matches) { track.style.transform = ''; win.classList.remove('is-auto'); return; }
       if (wide.matches) {
         win.classList.remove('is-auto');
+        if (scrollDriven) {
+          if (distance !== writtenDistance) { track.style.setProperty('--reel-distance', `${distance}px`); writtenDistance = distance; }
+          return;
+        }
         track.style.transform = `translate3d(${(-distance * progress).toFixed(1)}px, 0, 0)`;
         return;
       }
@@ -474,7 +488,7 @@ export function HighClassHome() {
               {REEL.map((item) => (
                 <li key={item.name}>
                   <Link href={`/menu#${item.cat}`} aria-label={`${item.name}, ${reelPrice(item)}, in der Speisekarte ansehen`}>
-                    <span className="hx-reel-photo"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 900px) 42vw, 26vw" /></span>
+                    <span className="hx-reel-photo"><Image src={item.img} alt={item.alt} fill sizes="(max-width: 900px) 42vw, 26vw" loading="eager" fetchPriority="low" /></span>
                     <span className="hx-reel-name">{item.name}</span>
                     <span className="hx-reel-price">{reelPrice(item)}</span>
                   </Link>
@@ -507,6 +521,7 @@ export function HighClassHome() {
         {/* Catering bleibt am Ende stehen, der Wegweiser schiebt sich darüber. */}
         <div ref={stackRef} className="hx-stack">
         <section className="hx-catering hx-stack-under" id="catering" aria-labelledby="catering-title">
+          <div className="hx-stack-shade" aria-hidden="true" />
           <figure className="hx-room-hero hx-catering-hero">
             <div className="hx-parallax" data-parallax="0.5" data-parallax-max="200">
               <Image src="/foto/shooting-2021-11/ramien-08102021-wf-34.webp" alt="Sushi, Dim Sum und Drinks auf einem gedeckten Tisch im ra’mien go" fill sizes="100vw" />

@@ -185,9 +185,11 @@
   .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .3)); }
 }
 .hc-hero-track .hc-hero-glyph { translate: 0 calc(var(--p, 0) * -40px); }
+/* Eigene Grafikebenen: Zoom, Verschieben und Ausblenden werden so nur verschoben, nicht neu gezeichnet. */
+.hc-hero-track :is(.hc-hero-media, .hc-hero-glyph, .hc-hero-stage--intro, .hc-hero-bottom) { will-change: transform, opacity; }
 .hc-hero-track .hc-hero-stage--intro, .hc-hero-track .hc-hero-bottom { opacity: max(0, calc(1 - var(--p, 0) * 1.6)); }
 .hc-hero-track .hc-hero-stage--intro { translate: 0 calc(var(--p, 0) * -70px); }
-.hc-cover { position: relative; z-index: 1; overflow: hidden; border-radius: 28px 28px 0 0; background: #120d0a; box-shadow: 0 -24px 60px #0000008c; }
+.hc-cover { position: relative; z-index: 1; overflow: clip; border-radius: 28px 28px 0 0; background: #120d0a; box-shadow: 0 -24px 60px #0000008c; }
 .hc-cover-wrap.is-static .hc-hero-track { position: relative; }
 .hc-cover-wrap.is-static .hc-cover { border-radius: 0; box-shadow: none; }
 
@@ -1138,11 +1140,12 @@
 .hx-way { padding-block: clamp(90px, 9vw, 130px); }
 .hx-way .hx-arrival { margin-top: 0; }
 /* Catering bleibt mit seinem unteren Ende stehen, der Wegweiser schiebt sich mit runden Ecken darüber. */
-.hx-stack-under { position: sticky; top: var(--under-top, 0px); z-index: 0; }
-.hx-stack-under::after { content: ""; position: absolute; inset: 0; background: #000; opacity: calc(var(--p, 0) * .45); pointer-events: none; }
+.hx-stack-under { position: sticky; top: 0; z-index: 0; }
+/* Abdunkeln, während der Wegweiser darüberfährt; die Deckkraft setzt das Skript direkt. */
+.hx-stack-shade { position: absolute; inset: 0; z-index: 3; background: #000; opacity: 0; pointer-events: none; will-change: opacity; }
 .hx-stack-over { position: relative; z-index: 1; border-radius: 28px 28px 0 0; box-shadow: 0 -24px 60px #0000008c; }
 .hx-stack.is-static .hx-stack-under { position: relative; }
-.hx-stack.is-static .hx-stack-under::after { content: none; }
+.hx-stack.is-static .hx-stack-shade { display: none; }
 .hx-stack.is-static .hx-stack-over { border-radius: 0; box-shadow: none; }
 .hx-arrival-video { margin: 0; display: grid; gap: 14px; }
 .hx-arrival-frame { position: relative; width: 100%; }
@@ -1351,6 +1354,16 @@
 .hx-menu-cards a > span { color: #9c9183; font-size: var(--fs-label); letter-spacing: .14em; text-transform: uppercase; }
 .hx-reel-window { padding-left: max(56px, calc((100% - 1328px) / 2)); }
 .hx-reel-track { display: flex; gap: clamp(16px, 2vw, 28px); margin: 0; padding: 0 56px 0 0; list-style: none; will-change: transform; }
+/* Desktop: Die Reihe gleitet per Scroll-Animation. Der Browser koppelt sie selbst ans Scrollen,
+   ohne den Frame Verzögerung, den eine Verschiebung per JavaScript hätte (die Gerichte ruckelten).
+   --reel-distance setzt das Skript; Browser ohne Scroll-Animationen bekommen die JS-Variante. */
+@keyframes hxReelSlide { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(var(--reel-distance, 0px) * -1), 0, 0); } }
+@supports (animation-timeline: view()) {
+  @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+    .hx-reel { view-timeline: --reel block; }
+    .hx-reel-track { animation: hxReelSlide linear both; animation-timeline: --reel; animation-range: cover 0% cover 100%; }
+  }
+}
 .hx-reel-track li { flex: 0 0 clamp(240px, 24vw, 340px); }
 .hx-reel-track a { display: grid; gap: 6px; color: var(--hx-paper); text-decoration: none; }
 .hx-reel-photo { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 18px; background: #1d1612; margin-bottom: 14px; }
