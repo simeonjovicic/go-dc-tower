@@ -91,7 +91,7 @@ export function SiteHeader({ home = false, current, solid = false, onMenuChange 
             {navLink('/menu', 'Speisekarte')}{navLink('/catering', 'Feiern & Catering')}
           </nav>
           <a className="hc-brand" href={home ? '#top' : '/'} inert={menuOpen} aria-label={`${BRAND.name} ${BRAND.place} – Startseite`}>
-            <Image src="/go-dc-tower-logo.png" alt="" width={706} height={706} priority />
+            <Image src="/go-dc-tower-logo.png" alt="" width={706} height={706} sizes="120px" priority />
           </a>
           <nav className="hc-split-nav hc-split-nav--right" aria-label="Service" inert={menuOpen}>
             {navLink('#kontakt', 'Anfahrt & Zeiten')}

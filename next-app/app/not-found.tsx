@@ -9,7 +9,7 @@ export default function NotFound() {
       <SiteHeader solid />
       <main id="main" className="hx-shell hc-not-found-content">
         <Link href="/" className="hc-not-found-brand" aria-label="ra’mien go DC Tower – Startseite">
-          <Image src="/go-dc-tower-logo.png" alt="ra’mien go DC Tower" width={706} height={706} priority />
+          <Image src="/go-dc-tower-logo.png" alt="ra’mien go DC Tower" width={706} height={706} sizes="120px" priority />
         </Link>
         <p className="hc-not-found-code">404</p>
         <h1 className="hx-title">Diese Seite steht<br />nicht auf der Karte.</h1>

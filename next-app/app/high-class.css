@@ -142,7 +142,7 @@
 .hc-hero-media, .hc-hero-media picture { position: absolute; inset: 0; display: block; }
 .hc-hero-media img {
   width: 100%; height: 100%; object-fit: cover; object-position: 50% center;
-  filter: brightness(1.12) saturate(1.04); animation: hcHeroIn 7s cubic-bezier(.08, 1, .25, 1) both;
+  animation: hcHeroIn 7s cubic-bezier(.08, 1, .25, 1) both; /* Helligkeit ist in die WebP-Datei eingerechnet */
 }
 .hc-hero-media::after {
   content: ""; position: absolute; inset: 0;
@@ -187,7 +187,7 @@
 .hc-hero-track .hc-hero-glyph { translate: 0 calc(var(--p, 0) * -40px); }
 .hc-hero-track .hc-hero-stage--intro, .hc-hero-track .hc-hero-bottom { opacity: max(0, calc(1 - var(--p, 0) * 1.6)); }
 .hc-hero-track .hc-hero-stage--intro { translate: 0 calc(var(--p, 0) * -70px); }
-.hc-cover { position: relative; z-index: 1; overflow: hidden; border-radius: calc((1 - var(--p, 0)) * 28px) calc((1 - var(--p, 0)) * 28px) 0 0; background: #120d0a; box-shadow: 0 -24px 60px #0000008c; }
+.hc-cover { position: relative; z-index: 1; overflow: hidden; border-radius: 28px 28px 0 0; background: #120d0a; box-shadow: 0 -24px 60px #0000008c; }
 .hc-cover-wrap.is-static .hc-hero-track { position: relative; }
 .hc-cover-wrap.is-static .hc-cover { border-radius: 0; box-shadow: none; }
 
@@ -1140,7 +1140,7 @@
 /* Catering bleibt mit seinem unteren Ende stehen, der Wegweiser schiebt sich mit runden Ecken darüber. */
 .hx-stack-under { position: sticky; top: var(--under-top, 0px); z-index: 0; }
 .hx-stack-under::after { content: ""; position: absolute; inset: 0; background: #000; opacity: calc(var(--p, 0) * .45); pointer-events: none; }
-.hx-stack-over { position: relative; z-index: 1; border-radius: calc((1 - var(--p, 0)) * 28px) calc((1 - var(--p, 0)) * 28px) 0 0; box-shadow: 0 -24px 60px #0000008c; }
+.hx-stack-over { position: relative; z-index: 1; border-radius: 28px 28px 0 0; box-shadow: 0 -24px 60px #0000008c; }
 .hx-stack.is-static .hx-stack-under { position: relative; }
 .hx-stack.is-static .hx-stack-under::after { content: none; }
 .hx-stack.is-static .hx-stack-over { border-radius: 0; box-shadow: none; }

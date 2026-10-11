@@ -7,7 +7,7 @@ import {
   ANFAHRT_VIDEOS, ARROW_NE, BRAND, CATERING, CONTACT, HOURS, KAPAZITAET, MENU_CARDS, SOCIAL,
 } from '@/components/site-data';
 import { DISHES, dishesOf, fmt, priceFrom, type CategoryId } from '@/components/menu-data';
-import { useScrollMotion } from '@/components/useScrollMotion';
+import { onScrollFrame, requestScrollFrame, useScrollMotion } from '@/components/useScrollMotion';
 import { GlfButton } from '@/components/GloriaFood';
 import { SiteHeader } from '@/components/SiteHeader';
 import { MadeBy } from '@/components/HcChrome';
@@ -173,30 +173,28 @@ function FloorsScroll() {
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: no-preference)');
-    let frame = 0;
-    const update = () => {
-      frame = 0;
+    let progress = 0;
+    let stop: (() => void) | undefined;
+    const read = () => {
       const track = trackRef.current;
       if (!track) return;
       // Fortschritt = wie weit der klebende Block durch seine Strecke gewandert ist.
       const sticky = track.firstElementChild as HTMLElement;
       const rect = track.getBoundingClientRect();
       const travel = Math.max(1, rect.height - sticky.offsetHeight);
-      const progress = Math.max(0, Math.min(1, (sticky.getBoundingClientRect().top - rect.top) / travel));
-      setActive(Math.min(FLOORS.length - 1, Math.floor(progress * FLOORS.length)));
+      progress = Math.max(0, Math.min(1, (sticky.getBoundingClientRect().top - rect.top) / travel));
     };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const write = () => setActive(Math.min(FLOORS.length - 1, Math.floor(progress * FLOORS.length)));
     const sync = () => {
       setSticky(query.matches);
-      window.removeEventListener('scroll', onScroll);
-      if (query.matches) { window.addEventListener('scroll', onScroll, { passive: true }); update(); }
+      stop?.();
+      stop = query.matches ? onScrollFrame(read, write) : undefined;
     };
     sync();
     query.addEventListener('change', sync);
     return () => {
       query.removeEventListener('change', sync);
-      window.removeEventListener('scroll', onScroll);
-      if (frame) cancelAnimationFrame(frame);
+      stop?.();
     };
   }, []);
 
@@ -279,25 +277,17 @@ export function HighClassHome() {
     if (!wrap || !cover) return;
     const animated = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
     wrap.classList.toggle('is-static', !animated);
-    let frame = 0;
-    const update = () => {
-      frame = 0;
+    const heroTrack = wrap.querySelector<HTMLElement>('.hc-hero-track');
+    let p = 0;
+    return onScrollFrame(() => {
       const top = cover.getBoundingClientRect().top;
-      const heroHeight = wrap.querySelector<HTMLElement>('.hc-hero-track')?.offsetHeight || window.innerHeight;
-      const p = Math.min(1, Math.max(0, 1 - top / heroHeight));
+      const heroHeight = heroTrack?.offsetHeight || window.innerHeight;
+      p = Math.min(1, Math.max(0, 1 - top / heroHeight));
+    }, () => {
       if (animated) wrap.style.setProperty('--p', p.toFixed(3));
       // Schnellzugriff auf dem Handy, sobald die Hero-Buttons ausgeblendet bzw. vorbei sind.
       setShowQuickActions(p > 0.35);
-    };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
+    });
   }, []);
 
   useEffect(() => {
@@ -309,41 +299,40 @@ export function HighClassHome() {
     const mobileTrack = route.closest<HTMLElement>('.hx-route-track');
     const deskTrack = route.closest<HTMLElement>('.hx-route-track--desk');
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let frame = 0;
-    const update = () => {
-      frame = 0;
+    let length = 1, p = 0, pinned = false, pinTop = 0;
+    let track: HTMLElement | null | undefined;
+    let reached: boolean[] = [];
+    return onScrollFrame(() => {
       const first = steps[0].offsetTop + 16;
-      const length = Math.max(1, steps[steps.length - 1].offsetTop - steps[0].offsetTop);
+      length = Math.max(1, steps[steps.length - 1].offsetTop - steps[0].offsetTop);
       const desk = window.innerWidth > 760;
       // Desktop pinnt nur, wenn der Block samt Kopfleiste ganz ins Fenster passt.
       const deskPin = deskTrack?.firstElementChild as HTMLElement | null | undefined;
-      deskTrack?.classList.toggle('is-pinned', !calm && desk && !!deskPin && deskPin.offsetHeight + 100 <= window.innerHeight);
-      const track = desk ? deskTrack : mobileTrack;
+      pinned = !calm && desk && !!deskPin && deskPin.offsetHeight + 100 <= window.innerHeight;
+      track = desk ? deskTrack : mobileTrack;
       const pin = track?.firstElementChild as HTMLElement | null | undefined;
       const spacer = track?.querySelector<HTMLElement>(':scope > .hx-route-spacer');
       // Mit Pin: die Linie läuft über die Strecke des Platzhalters, während der Block steht.
       const pinDistance = spacer?.offsetHeight ?? 0;
-      let p: number;
+      pinTop = 0;
       if (calm) p = 1;
       else if (track && pin && pinDistance > 0) {
-        const pinTop = Math.max(84, (window.innerHeight - pin.offsetHeight) / 2);
-        track.style.setProperty('--pin-top', `${pinTop}px`);
+        pinTop = Math.max(84, (window.innerHeight - pin.offsetHeight) / 2);
         p = (pinTop - track.getBoundingClientRect().top) / pinDistance;
       } else p = (window.innerHeight * 0.6 - (route.getBoundingClientRect().top + first)) / length;
       p = Math.min(1, Math.max(0, p));
+      reached = steps.map((step) => step.offsetTop - steps[0].offsetTop <= p * length + 1);
+    }, () => {
+      // Ändert sich der Pin, ändert sich auch die Höhe des Platzhalters: dann gleich noch einmal messen.
+      if (deskTrack && deskTrack.classList.contains('is-pinned') !== pinned) {
+        deskTrack.classList.toggle('is-pinned', pinned);
+        requestScrollFrame();
+      }
+      if (track && pinTop) track.style.setProperty('--pin-top', `${pinTop}px`);
       route.style.setProperty('--route-len', `${length}px`);
       route.style.setProperty('--route', p.toFixed(3));
-      steps.forEach((step) => step.classList.toggle('is-reached', step.offsetTop - steps[0].offsetTop <= p * length + 1));
-    };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
+      steps.forEach((step, i) => step.classList.toggle('is-reached', reached[i]));
+    });
   }, []);
 
   useEffect(() => {
@@ -371,22 +360,14 @@ export function HighClassHome() {
     const animated = window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
     stack.classList.toggle('is-static', !animated);
     if (!animated) return;
-    let frame = 0;
-    const update = () => {
-      frame = 0;
-      stack.style.setProperty('--under-top', `${Math.min(0, window.innerHeight - under.offsetHeight)}px`);
-      const p = Math.min(1, Math.max(0, 1 - over.getBoundingClientRect().top / window.innerHeight));
+    let underTop = 0, p = 0;
+    return onScrollFrame(() => {
+      underTop = Math.min(0, window.innerHeight - under.offsetHeight);
+      p = Math.min(1, Math.max(0, 1 - over.getBoundingClientRect().top / window.innerHeight));
+    }, () => {
+      stack.style.setProperty('--under-top', `${underTop}px`);
       stack.style.setProperty('--p', p.toFixed(3));
-    };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) cancelAnimationFrame(frame);
-    };
+    });
   }, []);
 
   useEffect(() => {
@@ -404,34 +385,29 @@ export function HighClassHome() {
     win.addEventListener('pointerdown', take, { passive: true });
     win.addEventListener('touchstart', take, { passive: true });
     win.addEventListener('wheel', take, { passive: true });
-    let frame = 0;
-    const update = () => {
-      frame = 0;
+    let progress = 0, distance = 0, swipe = 0;
+    const stop = onScrollFrame(() => {
       const rect = section.getBoundingClientRect();
-      const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+      progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+      distance = Math.max(0, track.scrollWidth - track.clientWidth);
+      swipe = win.scrollWidth - win.clientWidth;
+    }, () => {
       if (calm.matches) { track.style.transform = ''; win.classList.remove('is-auto'); return; }
       if (wide.matches) {
         win.classList.remove('is-auto');
-        const distance = Math.max(0, track.scrollWidth - track.clientWidth);
         track.style.transform = `translate3d(${(-distance * progress).toFixed(1)}px, 0, 0)`;
         return;
       }
       track.style.transform = '';
       if (userTook) return;
       win.classList.add('is-auto');
-      win.scrollLeft = progress * (win.scrollWidth - win.clientWidth);
-    };
-    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+      win.scrollLeft = progress * swipe;
+    });
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      stop();
       win.removeEventListener('pointerdown', take);
       win.removeEventListener('touchstart', take);
       win.removeEventListener('wheel', take);
-      if (frame) cancelAnimationFrame(frame);
     };
   }, []);
 
@@ -449,7 +425,10 @@ export function HighClassHome() {
           <div className="hc-hero">
             <div className="hc-hero-media" aria-hidden="true">
               <picture>
+                {/* WebP mit eingerechneter Helligkeit (npm run images); die JPGs bleiben als Fallback. */}
+                <source media="(max-width: 640px)" type="image/webp" srcSet="/_img/hero-ramen-dark-tall.webp" />
                 <source media="(max-width: 640px)" srcSet="/hero-ramen-dark-tall.jpg" />
+                <source type="image/webp" srcSet="/_img/hero-ramen-dark.webp" />
                 {/* The portrait photograph preserves the composition on phones. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/hero-ramen-dark.jpg" alt="" loading="eager" fetchPriority="high" />
@@ -614,7 +593,7 @@ export function HighClassHome() {
             </div>
             <footer className="hc-footer">
               <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.place}</span>
-              <Image className="hc-footer-logo" src="/go-dc-tower-logo.png" alt={`${BRAND.name} ${BRAND.place}`} width={706} height={706} />
+              <Image className="hc-footer-logo" src="/go-dc-tower-logo.png" alt={`${BRAND.name} ${BRAND.place}`} width={706} height={706} sizes="120px" />
               <span className="hc-footer-links"><a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">Instagram</a><a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer">Facebook</a><Link href="/impressum">Impressum</Link><Link href="/datenschutz">Datenschutz</Link></span>
               <MadeBy />
             </footer>

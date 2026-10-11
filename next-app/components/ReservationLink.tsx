@@ -25,7 +25,7 @@ export function ReservationLink({ className, children, onNavigate }: {
     }}>{children}</a>
     {loading && createPortal(
       <div className="hc-page hc-reservation-loading" role="status" aria-live="polite">
-        <Image src="/go-dc-tower-logo.png" alt="ra’mien go DC Tower" width={706} height={706} className="hc-reservation-logo" priority />
+        <Image src="/go-dc-tower-logo.png" alt="ra’mien go DC Tower" width={706} height={706} sizes="120px" className="hc-reservation-logo" priority />
         <span className="hc-reservation-spinner" aria-hidden="true" />
         <p>Reservierung wird geöffnet …</p>
         <a href={GLORIAFOOD.reservationUrl}>Direkt zur Reservierung</a>
