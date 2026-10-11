@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import { BRAND, CONTACT, SOCIAL } from '@/components/site-data';
 
+/** Dezenter Credit der Agentur, ganz unten in beiden Footern. */
+export function MadeBy() {
+  return (
+    <a className="hc-made-by" href="https://hango.at" target="_blank" rel="noopener">
+      Made by Hango
+    </a>
+  );
+}
+
 /** Fuß für die Unterseiten. Die Navigation aller Seiten ist `SiteHeader`. */
 export function HcFooter() {
   return (
@@ -28,6 +37,7 @@ export function HcFooter() {
           <Link href="/datenschutz">Datenschutz</Link>
         </div>
       </div>
+      <MadeBy />
     </footer>
   );
 }

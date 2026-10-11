@@ -6,6 +6,9 @@
  * "Catering_und_Events_Ramiengo_DC_Tower.docx" (Catering-Texte und Kapazitäten).
  */
 
+/** ↗ mit Variation-Selector U+FE0E: erzwingt das Textsymbol, sonst zeigt iOS das bunte Pfeil-Emoji. */
+export const ARROW_NE = '\u2197\uFE0E';
+
 export const BRAND = {
   /** Die Marke, wie sie auf Karte, Sackerl und Leuchtschrift steht. */
   name: "ra'mien go",

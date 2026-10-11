@@ -3,7 +3,7 @@
 import { Icon, type IconName } from '@/components/Icon';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
-import { CATERING, CONTACT, FORM, KAPAZITAET } from '@/components/site-data';
+import { ARROW_NE, CATERING, CONTACT, FORM, KAPAZITAET } from '@/components/site-data';
 
 type OfferId = (typeof CATERING)[number]['id'];
 type State = { kind: 'idle' } | { kind: 'sending' } | { kind: 'sent'; summary: string } | { kind: 'mail' } | { kind: 'error' };
@@ -159,7 +159,7 @@ export function CateringForm() {
         <h3 className="hx-wizard-question">Danke, eure Anfrage ist bei uns.</h3>
         <p className="hx-wizard-hint">Wir melden uns per E-Mail und bestätigen euch alles schriftlich.</p>
         <pre className="hx-wizard-summary">{state.summary}</pre>
-        <Link className="hx-link" href="/">Zurück zur Startseite <span aria-hidden="true">↗</span></Link>
+        <Link className="hx-link" href="/">Zurück zur Startseite <span aria-hidden="true">{ARROW_NE}</span></Link>
       </div>
     );
   }

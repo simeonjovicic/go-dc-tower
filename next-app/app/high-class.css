@@ -493,6 +493,17 @@
 
 .hc-sub-footer-links a { border-bottom-color: rgba(255, 255, 255, .3); }
 
+/* Agentur-Credit: klein und gedämpft, beim Hover heller. */
+.hc-sub-footer a.hc-made-by, a.hc-made-by {
+  display: block; width: fit-content; margin: 36px auto 0;
+  color: rgba(255, 255, 255, .62); border: 0;
+  font-size: var(--fs-meta); letter-spacing: .06em; text-transform: none;
+  text-decoration: underline; text-decoration-color: rgba(255, 255, 255, .3); text-underline-offset: 4px;
+  transition: color .25s, text-decoration-color .25s;
+}
+.hc-sub-footer a.hc-made-by:hover, a.hc-made-by:hover { color: rgba(255, 255, 255, .9); text-decoration-color: currentColor; }
+.hc-footer a.hc-made-by { grid-column: 1 / -1; justify-self: center; margin-top: 8px; }
+
 /* ── Kopf der Karte ──────────────────────────────────────────────────────── */
 
 .hc-menu-head { padding: 72px 0 0; }
@@ -874,6 +885,21 @@
 .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .hc-page.hx-sub { background: var(--hx-ink); color: var(--hx-paper); }
 .hx-sub .hc-sub-footer { margin-top: 0; background: #0c0907; border-top: 1px solid #ffecd612; }
+/* Impressum: dieselbe dunkle Welt wie die übrigen Unterseiten, Liste mit warmen Haarlinien. */
+.hc-legal-page .hc-menu-head { padding: clamp(72px, 9vw, 132px) 0 0; background: var(--hx-glow); }
+.hc-legal-page .hc-menu-head h1 { margin: 22px 0 0; font-size: clamp(48px, 6vw, 92px); }
+.hc-legal-page .hc-menu-head h1 i { color: var(--hc-red); font-style: normal; }
+.hc-legal-page .hc-menu-intro { color: #b3a899; }
+.hc-legal-page .hc-legal { padding: clamp(48px, 6vw, 88px) 0 clamp(88px, 10vw, 140px); }
+.hc-legal-page .hc-legal-list { margin-bottom: clamp(56px, 6vw, 80px); border-top: 1px solid #ffecd61f; }
+.hc-legal-page .hc-legal-list > div { padding: 20px 0; border-bottom-color: #ffecd61f; }
+.hc-legal-page .hc-legal-list dt { color: #8f8578; }
+.hc-legal-page .hc-legal-list dd { color: var(--hx-paper); }
+.hc-legal-page .hc-legal h2 { display: flex; align-items: center; gap: 12px; margin: 48px 0 14px; color: var(--hc-red); font-weight: 600; letter-spacing: .18em; }
+.hc-legal-page .hc-legal h2::before { content: ""; width: 24px; height: 1px; flex: none; background: currentColor; }
+.hc-legal-page .hc-legal p { color: #b3a899; line-height: 1.85; }
+.hc-legal-page .hc-legal a { color: var(--hx-paper); text-decoration: underline; text-decoration-color: #df1d1680; text-underline-offset: 4px; transition: color .25s, text-decoration-color .25s; }
+.hc-legal-page .hc-legal a:hover { color: #fff; text-decoration-color: var(--hc-red); }
 .hx-room-hero.hx-sub-hero { height: clamp(520px, calc(100vh - 84px), 860px); }
 .hx-room-hero.hx-sub-hero--short { height: clamp(380px, 62vh, 660px); }
 @media (max-width: 760px) {
@@ -1398,6 +1424,7 @@
 
 .hx-catering-dots { display: none; }
 .hx-route-icon { display: none; }
+.hx-route-spacer { display: none; }
 
 /* ── Mobile-Feinschliff ─────────────────────────────────────────────── */
 @media (max-width: 760px) {
@@ -1429,7 +1456,7 @@
   .hx-catering-card::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 35%, #120d0af0 100%); pointer-events: none; }
   .hx-catering-card strong { position: absolute; left: 16px; right: 16px; bottom: 64px; z-index: 2; color: #fff; font-size: 19px; line-height: 1.2; }
   /* Deutlicher Knopf statt nur Pfeil, damit klar ist: antippen. */
-  .hx-catering-card::after { content: "Anfragen  ↗"; position: absolute; left: 16px; bottom: 16px; z-index: 2; display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 999px; background: var(--hc-red); color: #fff; font-size: var(--fs-meta); font-weight: 500; white-space: pre; }
+  .hx-catering-card::after { content: "Anfragen  \2197\FE0E"; position: absolute; left: 16px; bottom: 16px; z-index: 2; display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 999px; background: var(--hc-red); color: #fff; font-size: var(--fs-meta); font-weight: 500; white-space: pre; }
   .hx-catering-card:active::after { background: #b8150f; }
   .hx-catering-card .hx-catering-short, .hx-catering-card .hx-btn { display: none; }
   .hx-catering-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
@@ -1457,4 +1484,11 @@
   .hx-arrival-steps::before, .hx-arrival-steps::after { content: ""; position: absolute; left: 15px; top: 16px; width: 2px; height: var(--route-len, 0px); }
   .hx-arrival-steps::before { border-left: 2px dotted #ffecd633; width: 0; }
   .hx-arrival-steps::after { background: var(--hc-red); transform: scaleY(var(--route, 0)); transform-origin: top; }
+  /* Route bleibt stehen, während der Platzhalter darunter durchscrollt und die Linie zeichnet. */
+  .hx-route-pin { position: sticky; top: var(--pin-top, 96px); }
+  .hx-route-spacer { display: block; height: 75svh; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .hx-route-pin { position: static; }
+  .hx-route-spacer { display: none; }
 }

@@ -7,7 +7,7 @@ import {
   ALLERGENS, CATEGORIES, DISHES, DRINKS, EXTRAS, POKE_SAUCEN,
   TAG_LABEL, fmt, priceFrom, type CategoryId, type Dish,
 } from '@/components/menu-data';
-import { CONTACT } from '@/components/site-data';
+import { ARROW_NE, CONTACT } from '@/components/site-data';
 
 type Selection = CategoryId | 'alle' | 'getraenke';
 
@@ -139,14 +139,14 @@ export function MenuExplorer() {
                 event.preventDefault(); chooseCategory(section.id);
               }}>
               <span className="mc-category-full">{section.label}</span><span className="mc-category-short">{section.short}</span>
-              <small>{section.id === 'sushi' ? '↗' : section.id === 'getraenke' ? DRINKS.reduce((n, group) => n + group.items.length, 0) : pricedDishes.filter((dish) => section.id === 'alle' || dish.cat === section.id).length}</small>
+              <small>{section.id === 'sushi' ? ARROW_NE : section.id === 'getraenke' ? DRINKS.reduce((n, group) => n + group.items.length, 0) : pricedDishes.filter((dish) => section.id === 'alle' || dish.cat === section.id).length}</small>
             </a>
           ))}
         </nav>
         <a className="mc-allergen-link" href="#allergene" onClick={() => {
           const details = document.getElementById('allergene') as HTMLDetailsElement | null;
           if (details) details.open = true;
-        }}>Allergene &amp; Hinweise ↗</a>
+        }}>Allergene &amp; Hinweise {ARROW_NE}</a>
       </aside>
 
       <div className="mc-content">
@@ -165,7 +165,7 @@ export function MenuExplorer() {
             <span className="mc-count" role="status">{showSushi && total === 0 ? 'Nach Tagesangebot' : total + (searching ? ' Treffer' : active === 'getraenke' ? ' Getränke' : ' Gerichte')}{showSushi && total > 0 ? ' + Sushi' : ''}</span>
           </div>
           {!searching && current.intro && <p className="mc-intro">{current.intro}</p>}
-          {total === 0 && !showSushi && <div className="mc-empty"><h3>Da haben wir gerade nichts gefunden.</h3><p>Versuch einen anderen Suchbegriff oder schau dir die ganze Karte an.</p><button type="button" onClick={() => chooseCategory('alle')}>Alle Gerichte ansehen <span aria-hidden="true">↗</span></button></div>}
+          {total === 0 && !showSushi && <div className="mc-empty"><h3>Da haben wir gerade nichts gefunden.</h3><p>Versuch einen anderen Suchbegriff oder schau dir die ganze Karte an.</p><button type="button" onClick={() => chooseCategory('alle')}>Alle Gerichte ansehen <span aria-hidden="true">{ARROW_NE}</span></button></div>}
 
           {groups.map((category) => (
             <section className="mc-section" id={category.id} key={category.id} aria-label={categoryName(category.id)}>
@@ -173,7 +173,7 @@ export function MenuExplorer() {
               {category.id === 'sushi' ? (
                 <div className="mc-sushi">
                   <div className="mc-sushi-photo"><Image src="/foto/sushi/sushi-platte.webp" alt="Sushi-Auswahl im go DC Tower" fill sizes="(max-width: 760px) 90vw, 45vw" /></div>
-                  <div><h3>Sushi nach Tagesangebot.</h3><p>Die aktuelle Auswahl und Preise erfährst du im Restaurant oder telefonisch. Wir helfen dir gerne bei der Auswahl.</p><a className="hx-link" href={CONTACT.phoneHref}>{CONTACT.phone} <span aria-hidden="true">↗</span></a></div>
+                  <div><h3>Sushi nach Tagesangebot.</h3><p>Die aktuelle Auswahl und Preise erfährst du im Restaurant oder telefonisch. Wir helfen dir gerne bei der Auswahl.</p><a className="hx-link" href={CONTACT.phoneHref}>{CONTACT.phone} <span aria-hidden="true">{ARROW_NE}</span></a></div>
                 </div>
               ) : (
                 <ul className="mc-dishes">

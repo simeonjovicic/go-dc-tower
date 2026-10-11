@@ -4,12 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import {
-  ANFAHRT_VIDEOS, BRAND, CATERING, CONTACT, HOURS, KAPAZITAET, MENU_CARDS, SOCIAL,
+  ANFAHRT_VIDEOS, ARROW_NE, BRAND, CATERING, CONTACT, HOURS, KAPAZITAET, MENU_CARDS, SOCIAL,
 } from '@/components/site-data';
 import { DISHES, dishesOf, fmt, priceFrom, type CategoryId } from '@/components/menu-data';
 import { useScrollMotion } from '@/components/useScrollMotion';
 import { GlfButton } from '@/components/GloriaFood';
 import { SiteHeader } from '@/components/SiteHeader';
+import { MadeBy } from '@/components/HcChrome';
 
 /** Eine Auswahl, kein Katalog: die Bildreihe gleitet beim Scrollen seitwärts. */
 const REEL: { name: string; cat: CategoryId; dish?: string; img: string; alt: string }[] = [
@@ -134,7 +135,7 @@ function LunchTabs() {
             <p>Für ein gemeinsames Mittagessen mit eurem Team nehmen wir gerne Firmenreservierungen für bis zu {KAPAZITAET.firma.personen} Personen an.</p>
             <div className="hx-lunch-actions">
               <a className="hx-btn hx-btn--solid" href={inquiry('Firmenreservierung', 'Hallo liebes go-Team,\n\nwir möchten für unser Team reservieren:\nFirma: \nDatum: \nUhrzeit: \nPersonenanzahl: \n\nName und Telefonnummer: ')}>Firmenreservierung anfragen</a>
-              <GlfButton kind="reservation" className="hx-link">Tisch reservieren <span aria-hidden="true">↗</span></GlfButton>
+              <GlfButton kind="reservation" className="hx-link">Tisch reservieren <span aria-hidden="true">{ARROW_NE}</span></GlfButton>
             </div>
           </div>
           <div role="tabpanel" id="lunch-panel-mitnehmen" aria-labelledby="lunch-tab-mitnehmen" hidden={active !== 1}>
@@ -142,7 +143,7 @@ function LunchTabs() {
             <p>Bestell vom Schreibtisch aus und hol dein Essen bei uns im Erdgeschoss des DC Tower ab.</p>
             <div className="hx-lunch-actions">
               <GlfButton kind="order" className="hx-btn hx-btn--solid">Online bestellen</GlfButton>
-              <GlfButton kind="reservation" className="hx-link">Tisch reservieren <span aria-hidden="true">↗</span></GlfButton>
+              <GlfButton kind="reservation" className="hx-link">Tisch reservieren <span aria-hidden="true">{ARROW_NE}</span></GlfButton>
             </div>
           </div>
           <div role="tabpanel" id="lunch-panel-buero" aria-labelledby="lunch-tab-buero" hidden={active !== 2}>
@@ -304,14 +305,25 @@ export function HighClassHome() {
     const route = routeRef.current;
     if (!route) return;
     const steps = [...route.querySelectorAll<HTMLLIElement>('li')];
+    const track = route.closest<HTMLElement>('.hx-route-track');
+    const pin = track?.querySelector<HTMLElement>('.hx-route-pin');
+    const spacer = track?.querySelector<HTMLElement>('.hx-route-spacer');
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let frame = 0;
     const update = () => {
       frame = 0;
       const first = steps[0].offsetTop + 16;
       const length = Math.max(1, steps[steps.length - 1].offsetTop - steps[0].offsetTop);
-      const reach = calm ? length : window.innerHeight * 0.6 - (route.getBoundingClientRect().top + first);
-      const p = Math.min(1, Math.max(0, reach / length));
+      // Mit Pin (Handy): die Linie läuft über die Strecke des Platzhalters, während der Block steht.
+      const pinDistance = spacer?.offsetHeight ?? 0;
+      let p: number;
+      if (calm) p = 1;
+      else if (track && pin && pinDistance > 0) {
+        const pinTop = Math.max(84, (window.innerHeight - pin.offsetHeight) / 2);
+        track.style.setProperty('--pin-top', `${pinTop}px`);
+        p = (pinTop - track.getBoundingClientRect().top) / pinDistance;
+      } else p = (window.innerHeight * 0.6 - (route.getBoundingClientRect().top + first)) / length;
+      p = Math.min(1, Math.max(0, p));
       route.style.setProperty('--route-len', `${length}px`);
       route.style.setProperty('--route', p.toFixed(3));
       steps.forEach((step) => step.classList.toggle('is-reached', step.offsetTop - steps[0].offsetTop <= p * length + 1));
@@ -465,7 +477,7 @@ export function HighClassHome() {
             <nav className="hx-menu-cards" aria-label="Unsere Karten" data-reveal="fade">
               {MENU_CARDS.map((card) => (
                 <Link key={card.id} href={card.href}>
-                  <strong>{card.title} <span aria-hidden="true">↗</span></strong>
+                  <strong>{card.title} <span aria-hidden="true">{ARROW_NE}</span></strong>
                   <span>{card.times.join(' · ')}</span>
                 </Link>
               ))}
@@ -539,17 +551,23 @@ export function HighClassHome() {
               <ArrivalVideo key={video.title} src={video.src!} poster={video.poster} title={video.title} text={video.text} />
             ))}
             <div className="hx-arrival-route" data-reveal="fade">
+              {/* Handy: Überschrift und Route bleiben stehen, bis der rote Faden durchgezogen ist. */}
+              <div className="hx-route-track">
+              <div className="hx-route-pin">
               <h2 id="arrival-title">So kommst du zu uns.</h2>
               <ol ref={routeRef} className="hx-arrival-steps">
                 <li><i className="hx-route-icon" aria-hidden="true">U1</i><span>01</span><div><strong>U1 bis Kaisermühlen · VIC</strong><p>Oder ab Donauinsel – von dort rund fünf Minuten zu Fuß, das Video zeigt dir den Weg.</p></div></li>
                 <li><i className="hx-route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="13" cy="4" r="2" /><path d="M10 21l2-6 3 3v3M9 12l2-4 4 1 2 3M11 8l-2 5" /></svg></i><span>02</span><div><strong>Zwei Minuten zu Fuß</strong><p>Vom Ausgang Kaisermühlen · VIC sind es zwei Gehminuten bis zum DC Tower.</p></div></li>
                 <li><i className="hx-route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg></i><span>03</span><div><strong>Erdgeschoss DC Tower</strong><p>{CONTACT.street}, {CONTACT.zip} {CONTACT.city} – durch die Glastür, und du bist da.</p></div></li>
               </ol>
+              </div>
+              <div className="hx-route-spacer" aria-hidden="true" />
+              </div>
               <div className="hx-arrival-park">
                 <b aria-hidden="true">P</b>
                 <p><strong>Mit dem Auto</strong>Parken in der DC Tower Garage. Lass dein Parkticket bei uns abstempeln und parke für 1 € pro Stunde.</p>
               </div>
-              <a className="hx-btn hx-btn--solid" href={CONTACT.maps} target="_blank" rel="noopener noreferrer">Route planen <span aria-hidden="true">↗</span></a>
+              <a className="hx-btn hx-btn--solid" href={CONTACT.maps} target="_blank" rel="noopener noreferrer">Route planen <span aria-hidden="true">{ARROW_NE}</span></a>
             </div>
           </div>
         </section>
@@ -587,6 +605,7 @@ export function HighClassHome() {
               <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.place}</span>
               <Image className="hc-footer-logo" src="/go-dc-tower-logo.png" alt={`${BRAND.name} ${BRAND.place}`} width={706} height={706} />
               <span className="hc-footer-links"><a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">Instagram</a><a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer">Facebook</a><Link href="/impressum">Impressum</Link><Link href="/datenschutz">Datenschutz</Link></span>
+              <MadeBy />
             </footer>
           </div>
         </section>

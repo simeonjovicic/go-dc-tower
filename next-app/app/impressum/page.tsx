@@ -41,14 +41,14 @@ const ROWS: { label: string; value: React.ReactNode }[] = [
 
 export default function ImpressumPage() {
   return (
-    <div className="hc-page hc-sub-page">
+    <div className="hc-page hc-sub-page hx-sub hc-legal-page">
       <SiteHeader solid />
 
       <main id="main">
         <section className="hc-menu-head">
           <div className="hc-menu-head-shell">
             <p className="hc-eyebrow">Offenlegung</p>
-            <h1 className="hc-display">
+            <h1 className="hx-title">
               Impressum<i>.</i>
             </h1>
             <p className="hc-menu-intro">
