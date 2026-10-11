@@ -1423,7 +1423,6 @@
 }
 
 .hx-catering-dots { display: none; }
-.hx-route-icon { display: none; }
 .hx-route-spacer { display: none; }
 
 /* ── Mobile-Feinschliff ─────────────────────────────────────────────── */
@@ -1469,26 +1468,32 @@
   .hc-visit-strip .glf-button { min-height: 44px; }
 }
 
-/* Handy: Wegweiser größer und als Maps-Route (U1 → zu Fuß → Pin), Linie wächst beim Scrollen. */
+/* Wegweiser als Maps-Route (U1 → zu Fuß → Pin): die rote Linie wächst beim Scrollen, erreichte Stationen werden rot. */
+.hx-arrival-steps { position: relative; }
+.hx-arrival-steps li { grid-template-columns: 48px minmax(0, 1fr); gap: 16px; padding: 0 0 34px; border-top: 0; }
+.hx-arrival-steps li > span { display: none; }
+.hx-arrival-steps li + li::before { content: none; }
+.hx-route-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 32px; height: 32px; border: 1.5px solid #ffecd640; border-radius: 50%; background: #1d1612; color: #9c9183; font-style: normal; transition: background .3s, border-color .3s, color .3s; }
+.hx-route-icon svg { width: 16px; height: 16px; }
+.hx-arrival-steps li:first-child .hx-route-icon { border-radius: 8px; border-color: var(--hc-red); background: var(--hc-red); color: #fff; font-size: 13px; font-weight: 700; }
+.hx-arrival-steps li.is-reached .hx-route-icon { border-color: var(--hc-red); background: var(--hc-red); color: #fff; }
+.hx-arrival-steps::before, .hx-arrival-steps::after { content: ""; position: absolute; left: 15px; top: 16px; width: 2px; height: var(--route-len, 0px); }
+.hx-arrival-steps::before { border-left: 2px dotted #ffecd633; width: 0; }
+.hx-arrival-steps::after { background: var(--hc-red); transform: scaleY(var(--route, 0)); transform-origin: top; }
+/* Pin: Der Block bleibt stehen, während der Platzhalter darunter durchscrollt und die Linie zeichnet.
+   Desktop pinnt den ganzen Anfahrt-Block (nur wenn er ins Fenster passt), das Handy nur Überschrift und Route. */
+@media (min-width: 761px) {
+  .hx-route-track--desk.is-pinned > .hx-arrival { position: sticky; top: var(--pin-top, 84px); }
+  .hx-route-track--desk.is-pinned > .hx-route-spacer { display: block; height: 75vh; }
+}
 @media (max-width: 760px) {
   .hx-arrival-video { width: 92%; justify-self: center; }
   .hx-arrival-frame video { object-position: center top; } /* nur unten beschneiden */
-  .hx-arrival-steps { position: relative; }
-  .hx-arrival-steps li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding: 0 0 26px; border-top: 0; }
-  .hx-arrival-steps li > span { display: none; }
-  .hx-arrival-steps li + li::before { content: none; }
-  .hx-route-icon { position: relative; z-index: 1; display: grid; place-items: center; width: 32px; height: 32px; border: 1.5px solid #ffecd640; border-radius: 50%; background: #1d1612; color: #9c9183; font-style: normal; transition: background .3s, border-color .3s, color .3s; }
-  .hx-route-icon svg { width: 16px; height: 16px; }
-  .hx-arrival-steps li:first-child .hx-route-icon { border-radius: 8px; border-color: var(--hc-red); background: var(--hc-red); color: #fff; font-size: 13px; font-weight: 700; }
-  .hx-arrival-steps li.is-reached .hx-route-icon { border-color: var(--hc-red); background: var(--hc-red); color: #fff; }
-  .hx-arrival-steps::before, .hx-arrival-steps::after { content: ""; position: absolute; left: 15px; top: 16px; width: 2px; height: var(--route-len, 0px); }
-  .hx-arrival-steps::before { border-left: 2px dotted #ffecd633; width: 0; }
-  .hx-arrival-steps::after { background: var(--hc-red); transform: scaleY(var(--route, 0)); transform-origin: top; }
-  /* Route bleibt stehen, während der Platzhalter darunter durchscrollt und die Linie zeichnet. */
+  .hx-arrival-steps li { grid-template-columns: 40px minmax(0, 1fr); gap: 14px; padding: 0 0 26px; }
   .hx-route-pin { position: sticky; top: var(--pin-top, 96px); }
-  .hx-route-spacer { display: block; height: 75svh; }
+  .hx-route-pin + .hx-route-spacer { display: block; height: 75svh; }
 }
 @media (max-width: 760px) and (prefers-reduced-motion: reduce) {
   .hx-route-pin { position: static; }
-  .hx-route-spacer { display: none; }
+  .hx-route-pin + .hx-route-spacer { display: none; }
 }

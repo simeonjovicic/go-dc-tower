@@ -305,16 +305,23 @@ export function HighClassHome() {
     const route = routeRef.current;
     if (!route) return;
     const steps = [...route.querySelectorAll<HTMLLIElement>('li')];
-    const track = route.closest<HTMLElement>('.hx-route-track');
-    const pin = track?.querySelector<HTMLElement>('.hx-route-pin');
-    const spacer = track?.querySelector<HTMLElement>('.hx-route-spacer');
+    // Zwei Pins: am Handy nur Überschrift und Route, am Desktop der ganze Anfahrt-Block.
+    const mobileTrack = route.closest<HTMLElement>('.hx-route-track');
+    const deskTrack = route.closest<HTMLElement>('.hx-route-track--desk');
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let frame = 0;
     const update = () => {
       frame = 0;
       const first = steps[0].offsetTop + 16;
       const length = Math.max(1, steps[steps.length - 1].offsetTop - steps[0].offsetTop);
-      // Mit Pin (Handy): die Linie läuft über die Strecke des Platzhalters, während der Block steht.
+      const desk = window.innerWidth > 760;
+      // Desktop pinnt nur, wenn der Block samt Kopfleiste ganz ins Fenster passt.
+      const deskPin = deskTrack?.firstElementChild as HTMLElement | null | undefined;
+      deskTrack?.classList.toggle('is-pinned', !calm && desk && !!deskPin && deskPin.offsetHeight + 100 <= window.innerHeight);
+      const track = desk ? deskTrack : mobileTrack;
+      const pin = track?.firstElementChild as HTMLElement | null | undefined;
+      const spacer = track?.querySelector<HTMLElement>(':scope > .hx-route-spacer');
+      // Mit Pin: die Linie läuft über die Strecke des Platzhalters, während der Block steht.
       const pinDistance = spacer?.offsetHeight ?? 0;
       let p: number;
       if (calm) p = 1;
@@ -546,6 +553,8 @@ export function HighClassHome() {
         </section>
 
         <section className="hx-way hx-stack-over" id="anfahrt" aria-labelledby="arrival-title">
+          {/* Desktop: der ganze Anfahrt-Block bleibt stehen, bis der rote Faden durchgezogen ist. */}
+          <div className="hx-route-track--desk">
           <div className="hx-shell hx-arrival">
             {ANFAHRT_VIDEOS.filter((video) => video.src).slice(0, 1).map((video) => (
               <ArrivalVideo key={video.title} src={video.src!} poster={video.poster} title={video.title} text={video.text} />
@@ -569,6 +578,8 @@ export function HighClassHome() {
               </div>
               <a className="hx-btn hx-btn--solid" href={CONTACT.maps} target="_blank" rel="noopener noreferrer">Route planen <span aria-hidden="true">{ARROW_NE}</span></a>
             </div>
+          </div>
+          <div className="hx-route-spacer" aria-hidden="true" />
           </div>
         </section>
         </div>
