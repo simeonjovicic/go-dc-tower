@@ -1233,17 +1233,17 @@
 .hc-nav-spacer { height: 76px; }
 @media (max-width: 760px) { .hc-nav-spacer { height: 68px; } }
 
-/* ── Buttons: weiche Pillen, warmweiß oder feiner Rand ───────────── */
+/* ── Buttons: schlanke Pillen, feine Typo und Haarlinie ───────────── */
 .hx-btn {
+  position: relative; isolation: isolate; overflow: hidden;
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 50px; padding: 0 26px; border: 1px solid transparent; border-radius: 999px;
-  font-family: var(--hc-sans); font-size: var(--fs-lead); font-weight: 500; letter-spacing: 0; text-transform: none;
+  min-height: 52px; padding: 0 30px; border: 1px solid transparent; border-radius: 999px;
+  font-family: var(--hc-sans); font-size: var(--fs-small); font-weight: 500; letter-spacing: .04em; text-transform: none;
   text-decoration: none; white-space: nowrap; cursor: pointer; user-select: none;
-  transition: background-color .25s var(--hx-ease), color .25s var(--hx-ease),
-              border-color .25s var(--hx-ease), box-shadow .25s var(--hx-ease),
+  transition: background-color .3s var(--hx-ease), color .3s var(--hx-ease),
+              border-color .3s var(--hx-ease), box-shadow .3s var(--hx-ease),
               transform .25s var(--hx-ease), opacity .2s;
 }
-.hx-btn:hover { transform: translateY(-1px); }
 /* Druck sitzt sofort; das Zurückfedern übernimmt die ruhige Basiskurve. */
 .hx-btn:active { transform: translateY(0) scale(.985); transition-duration: .08s; }
 /* Ring, der auf hellem wie dunklem Grund trägt: heller Spalt, dann Rot. */
@@ -1251,18 +1251,24 @@
 .hx-btn:disabled, .hx-btn[aria-disabled="true"] { opacity: .5; cursor: not-allowed; box-shadow: none; }
 .hx-btn[aria-busy="true"] { cursor: progress; }
 .hx-btn:disabled:hover, .hx-btn[aria-disabled="true"]:hover { transform: none; box-shadow: none; }
-.hx-btn--solid { background: var(--hc-red); color: #fff; font-weight: 600; box-shadow: 0 1px 2px rgba(17, 17, 15, .14); }
-.hx-btn--solid:hover { background: #c4170f; box-shadow: 0 8px 20px -8px rgba(223, 29, 22, .6); }
-/* Rote Outline-Pille — Entscheidung aus 265e420, hier beibehalten. */
-.hx-btn--line { background: transparent; color: var(--hx-paper); border: 1.5px solid var(--hc-red); }
-.hx-btn--line:hover { background: var(--hc-red); color: #fff; }
+.hx-btn--solid { background: var(--hc-red); color: #fff; box-shadow: inset 0 1px 0 #ffffff26, 0 1px 2px rgba(17, 17, 15, .14); }
+.hx-btn--solid:hover { background: #c4170f; box-shadow: inset 0 1px 0 #ffffff26, 0 10px 24px -12px rgba(223, 29, 22, .7); }
+/* Dunkle Fläche mit Haarlinie; beim Hover wischt das Rot von links herein. */
+.hx-btn--line { background: rgba(0, 0, 0, .6); color: var(--hx-paper); border: 1px solid #ffffff33; }
+.hx-btn--line::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; background: var(--hc-red);
+  transform: scaleX(0); transform-origin: left; transition: transform .45s var(--hx-ease);
+}
+.hx-btn--line:hover { border-color: var(--hc-red); color: #fff; }
+.hx-btn--line:hover::before { transform: scaleX(1); }
 .hx-btn--ink { background: var(--hx-ink); color: var(--hx-paper); box-shadow: 0 1px 2px rgba(17, 17, 15, .18); }
 .hx-btn--ink:hover { background: #241a13; box-shadow: 0 8px 20px -8px rgba(18, 13, 10, .6); }
 .hx-btn--line-light { background: transparent; color: #fff; border-color: #ffffff59; }
 .hx-btn--line-light:hover { border-color: #fff; background: #ffffff1a; }
-.hx-btn--sm { min-height: 42px; padding: 0 20px; font-size: var(--fs-small); }
+.hx-btn--sm { min-height: 42px; padding: 0 20px; }
 @media (prefers-reduced-motion: reduce) {
   .hx-btn, .hx-btn:hover, .hx-btn:active { transform: none; }
+  .hx-btn--line::before { transition: none; }
 }
 .hx-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .hc-hero-actions { gap: 12px; }
@@ -1330,7 +1336,10 @@
 .hx-catering-card .hx-parallax { position: absolute; inset: -30px 0; }
 .hx-catering-card strong { font-family: var(--hx-mincho); font-weight: 600; font-size: clamp(22px, 1.9vw, 28px); line-height: 1.2; }
 .hx-catering-short { color: #b3a899; font-size: var(--fs-body); line-height: 1.75; max-width: 36ch; margin-bottom: 8px; }
-@media (hover: hover) { .hx-catering-card:hover .hx-btn--line { background: var(--hc-red); color: #fff; } }
+@media (hover: hover) {
+  .hx-catering-card:hover .hx-btn--line { border-color: var(--hc-red); color: #fff; }
+  .hx-catering-card:hover .hx-btn--line::before { transform: scaleX(1); }
+}
 .hx-catering-card { scroll-margin-top: 120px; }
 /* Catering hervorheben: rote Glut, Linie oben, Haupt-CTA und Faktenzeile */
 .hx-catering { background: radial-gradient(ellipse 70% 60% at 85% 0%, #df1d1626 0%, transparent 70%), #160f0b; padding-block: 0 clamp(90px, 9vw, 130px); }
@@ -1355,8 +1364,7 @@
 .hx-location .hc-location-shell { padding-top: clamp(90px, 10vw, 140px); }
 
 /* Handy-Schnellzugriff mit denselben Pillen */
-.hc-mobile-actions .hx-btn { min-height: 46px; padding: 0 16px; border-radius: 999px; font-size: var(--fs-body); letter-spacing: 0; }
-.hc-mobile-actions .hx-btn--line { border-color: var(--hc-red); }
+.hc-mobile-actions .hx-btn { min-height: 46px; padding: 0 16px; border-radius: 999px; font-size: var(--fs-small); letter-spacing: .02em; }
 
 @media (max-width: 900px) {
   .hx-reel-window { padding-left: 0; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: 20px; scrollbar-width: none; }
@@ -1374,14 +1382,14 @@
 }
 @media (max-width: 760px) {
   .hc-mobile-actions { background: rgba(18, 13, 10, .96); border-top-color: #ffecd614; color: var(--hx-paper); box-shadow: none; }
-  .hc-mobile-actions .hx-btn:is(a, .glf-button) { justify-content: center; border-radius: 999px; font-size: var(--fs-body); }
-  .hc-mobile-actions .hx-btn--line:is(a, .glf-button) { background: transparent; color: var(--hx-paper); border: 1.5px solid var(--hc-red); }
+  .hc-mobile-actions .hx-btn:is(a, .glf-button) { justify-content: center; border-radius: 999px; font-size: var(--fs-small); }
+  .hc-mobile-actions .hx-btn--line:is(a, .glf-button) { background: rgba(0, 0, 0, .6); color: var(--hx-paper); border: 1px solid #ffffff33; }
   .hc-mobile-actions .hx-btn--solid:is(a, .glf-button) { background: var(--hc-red); border-color: var(--hc-red); color: #fff; }
   .hx-location .hx-title { font-size: clamp(32px, 9vw, 44px); }
   .hc-footer { grid-template-columns: 1fr; gap: 14px; }
   .hc-footer-logo { grid-column: auto; grid-row: auto; order: -1; width: 44px; height: 44px; }
   .hc-footer-links { flex-wrap: wrap; gap: 0 20px; }
-  .hc-hero-actions .hx-btn { flex: 1 1 0; min-height: 48px; padding: 0 14px; font-size: var(--fs-small); }
+  .hc-hero-actions .hx-btn { flex: 1 1 0; min-height: 48px; padding: 0 14px; letter-spacing: .02em; }
 }
 
 .hx-catering-dots { display: none; }
