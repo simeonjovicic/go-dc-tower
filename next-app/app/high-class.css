@@ -1418,7 +1418,8 @@
   .hx-location .hx-title { font-size: clamp(32px, 9vw, 44px); }
   .hc-footer { grid-template-columns: 1fr; gap: 14px; }
   .hc-footer-logo { grid-column: auto; grid-row: auto; order: -1; width: 44px; height: 44px; }
-  .hc-footer-links { flex-wrap: wrap; gap: 0 20px; }
+  .hc-footer-links { flex-wrap: wrap; gap: 0 20px; font-size: 11px; }
+  .hc-sub-footer-links { font-size: 11px; }
   .hc-hero-actions .hx-btn { flex: 1 1 0; min-height: 48px; padding: 0 14px; letter-spacing: .02em; }
 }
 
