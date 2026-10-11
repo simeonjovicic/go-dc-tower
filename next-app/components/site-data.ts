@@ -19,7 +19,7 @@ export const CONTACT = {
   street: 'Donau-City-Straße 7',
   zip: '1220',
   city: 'Wien',
-  building: 'DC Tower, Erdgeschoß',
+  building: 'DC Tower, Erdgeschoss',
   phone: '+43 1 9165156',
   phoneHref: 'tel:+4319165156',
   email: 'office@godctower.com',
@@ -66,7 +66,7 @@ export const HOURS: Hours[] = [
 export const ANFAHRT = [
   { label: 'U-Bahn', text: 'U1 Kaisermühlen · VIC, zwei Gehminuten' },
   { label: 'Auto', text: 'Parken in der DC Tower Garage. Lass dein Parkticket bei uns abstempeln und parke für 1 € pro Stunde.' },
-  { label: 'Im Haus', text: 'Erdgeschoß des DC Tower, barrierefrei erreichbar' },
+  { label: 'Im Haus', text: 'Erdgeschoss des DC Tower, barrierefrei erreichbar' },
 ] as const;
 
 /** Wegbeschreibungen als Video. TODO: Dateien nach /public/videos legen und `src` setzen. */
@@ -77,7 +77,7 @@ export const ANFAHRT_VIDEOS: { title: string; text: string; src: string | null; 
     src: '/videos/anfahrt-u1-donauinsel.mp4',
     poster: '/videos/anfahrt-u1-donauinsel-poster.webp',
   },
-  { title: 'Aus der Garage zu uns', text: 'Von der DC Tower Garage direkt ins Erdgeschoß.', src: null },
+  { title: 'Aus der Garage zu uns', text: 'Von der DC Tower Garage direkt ins Erdgeschoss.', src: null },
 ];
 
 /**
@@ -127,8 +127,8 @@ export const CATERING = [
     short: 'Weihnachtsfeier, Geburtstag oder Teamabend bei uns, mit Sharing-Buffet oder serviertem Menü.',
     text: 'Ob Weihnachtsfeier, Geburtstagsparty oder ein entspanntes Beisammensein – wir unterstützen dich bei der Planung deines Events und verwöhnen deine Gäste mit einem abwechslungsreichen Sharing-Buffet oder einem servierten Menü. Im ersten Stock bieten wir Platz für bis zu 40 Personen in geschlossener Gesellschaft. Im Erdgeschoss finden bis zu 65 Personen Platz. Gemeinsam gestalten wir deine Feier ganz nach deinen Wünschen.',
     fine: 'Menüs mit mehreren Gängen servieren wir ausschließlich bei uns im Restaurant.',
-    img: '/foto/haus/obergeschoss.webp',
-    alt: 'Gastraum mit Holzdecke und offener Küche',
+    img: '/foto/haus/saal-fenster.webp',
+    alt: 'Gastraum mit Holzbalkendecke, gedeckten Tischen und großen Fenstern',
     action: 'Event anfragen',
     subject: 'Anfrage: Event im go DC Tower',
   },

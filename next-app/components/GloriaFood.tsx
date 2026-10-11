@@ -32,14 +32,27 @@ export function GlfButton({ kind, className, children }: {
   children: ReactNode;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
+  const waiting = useRef(false);
   const attached = () => Boolean(ref.current && /^glfButton/.test(ref.current.id));
 
+  // Erster Tipp vor dem Widget: warten, bis es sich angehängt hat, und den Klick dann
+  // nachreichen. Kommt es nicht, im selben Tab zum Anbieter (ein spätes Popup blockt der Browser).
   const open = () => {
-    if (attached()) return;
+    if (attached() || waiting.current) return;
+    waiting.current = true;
     loadWidget();
-    window.setTimeout(() => {
-      if (!attached()) window.open(GLORIAFOOD.fallback, '_blank', 'noopener');
-    }, 1400);
+    const started = Date.now();
+    const poll = window.setInterval(() => {
+      if (attached()) {
+        window.clearInterval(poll);
+        waiting.current = false;
+        ref.current?.click();
+      } else if (Date.now() - started > 4000) {
+        window.clearInterval(poll);
+        waiting.current = false;
+        window.location.href = GLORIAFOOD.fallback;
+      }
+    }, 100);
   };
 
   if (kind === 'reservation') {

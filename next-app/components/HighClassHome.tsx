@@ -161,8 +161,8 @@ function LunchTabs() {
 
 /** Die zwei Etagen; auf dem Desktop bleibt der Block stehen und wechselt beim Scrollen. */
 const FLOORS = [
-  { label: 'Erdgeschoss', plaetze: KAPAZITAET.erdgeschoss.plaetze, text: `Unter der Holzdecke, mit Blick in die offene Küche. Für Teamlunch und Gruppen bis ${KAPAZITAET.erdgeschoss.gruppe} Personen.`, img: '/foto/haus/obergeschoss.webp', alt: 'Gastraum im Erdgeschoss mit Holzdecke und offener Küche' },
-  { label: 'Obergeschoss', plaetze: KAPAZITAET.obergeschoss.plaetze, text: 'Ein Stock höher und etwas ruhiger. Ideal für Teamrunden und Geschäftsessen unter euch.', img: '/foto/haus/saal-lang.webp', alt: 'Langer, ruhiger Gastraum im Obergeschoss mit gedeckten Tischen' },
+  { label: 'Erdgeschoss', plaetze: KAPAZITAET.erdgeschoss.plaetze, text: `Unter der Holzdecke, mit Blick in die offene Küche. Für Teamlunch und Gruppen bis ${KAPAZITAET.erdgeschoss.gruppe} Personen.`, img: '/foto/haus/erdgeschoss.webp', alt: 'Gastraum im Erdgeschoss mit Holzdecke und offener Küche' },
+  { label: 'Obergeschoss', plaetze: KAPAZITAET.obergeschoss.plaetze, text: `Ein Stock höher und etwas ruhiger. Ideal für Teamrunden und Geschäftsessen, als geschlossene Gesellschaft bis ${KAPAZITAET.obergeschoss.event} Personen.`, img: '/foto/haus/saal-lang.webp', alt: 'Langer, ruhiger Gastraum im Obergeschoss mit gedeckten Tischen' },
 ] as const;
 
 function FloorsScroll() {
@@ -446,7 +446,7 @@ export function HighClassHome() {
               </div>
             </div>
             <div className="hc-hero-bottom">
-              <span>Im Erdgeschoß. Seit {BRAND.since}.</span>
+              <span>Im Erdgeschoss. Seit {BRAND.since}.</span>
               <a href="#signature">Appetit holen <span aria-hidden="true">↓</span></a>
             </div>
           </div>
@@ -573,7 +573,7 @@ export function HighClassHome() {
             <div className="hx-contact">
               <div>
                 <Lines id="contact-title" className="hx-title" lines={['Hoher Tower.', 'Ganz unten bei uns.']} />
-                <p className="hx-contact-address" data-reveal="fade">{CONTACT.street}, {CONTACT.zip} {CONTACT.city}<br />Erdgeschoß DC Tower · U1 Kaisermühlen</p>
+                <p className="hx-contact-address" data-reveal="fade">{CONTACT.street}, {CONTACT.zip} {CONTACT.city}<br />Erdgeschoss DC Tower · U1 Kaisermühlen</p>
                 <div className="hx-actions" data-reveal="fade">
                   <a className="hx-btn hx-btn--line hx-btn--sm" href={CONTACT.maps} target="_blank" rel="noopener noreferrer">Route planen</a>
                   <a className="hx-btn hx-btn--line hx-btn--sm" href={CONTACT.phoneHref}>{CONTACT.phone}</a>

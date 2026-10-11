@@ -3,7 +3,7 @@
 import { Icon, type IconName } from '@/components/Icon';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
-import { CATERING, CONTACT, FORM } from '@/components/site-data';
+import { CATERING, CONTACT, FORM, KAPAZITAET } from '@/components/site-data';
 
 type OfferId = (typeof CATERING)[number]['id'];
 type State = { kind: 'idle' } | { kind: 'sending' } | { kind: 'sent'; summary: string } | { kind: 'mail' } | { kind: 'error' };
@@ -194,7 +194,7 @@ export function CateringForm() {
           <label className="hx-field"><span>Datum</span><input type="date" name="datum" required min={today || undefined} /></label>
           <label className="hx-field"><span>Uhrzeit <em>optional</em></span><input type="time" name="uhrzeit" /></label>
           <label className="hx-field hx-field--wide"><span>Personen</span>
-            <input type="number" name="personen" required min={1} max={isEvent ? 80 : 500} inputMode="numeric" placeholder={isEvent ? 'bis 80' : 'z. B. 20'} />
+            <input type="number" name="personen" required min={1} max={isEvent ? KAPAZITAET.erdgeschoss.gruppe : 500} inputMode="numeric" placeholder={isEvent ? `bis ${KAPAZITAET.erdgeschoss.gruppe}` : 'z. B. 20'} />
           </label>
         </div>
       </fieldset>

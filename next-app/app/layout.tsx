@@ -30,7 +30,7 @@ const italiana = Italiana({
 export const metadata: Metadata = {
   title: "ra'mien go DC Tower — Asian Fusion Kitchen in Wien",
   description:
-    "Handgezogene La Mien, Pho, hausgemachte Gyoza, Wok-Gerichte und Poké Bowls im Erdgeschoß des DC Tower in Wien. Seit 2017. Tisch reservieren, online bestellen oder Catering anfragen.",
+    "Handgezogene La Mien, Pho, hausgemachte Gyoza, Wok-Gerichte und Poké Bowls im Erdgeschoss des DC Tower in Wien. Seit 2017. Tisch reservieren, online bestellen oder Catering anfragen.",
   icons: { icon: '/favicon.png', apple: '/favicon.png' },
 };
 
