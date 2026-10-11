@@ -91,7 +91,7 @@ function LunchTabs() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setHint('done'); return; }
     let timer = 0;
     // Uhr läuft, sobald die Reiterleiste sichtbar ist (unter der Kopfleiste, über der Handy-Leiste),
-    // damit es auf Handy und Desktop gleich 3,5 s dauert, egal wie hoch der Block ist.
+    // damit es auf Handy und Desktop gleich 2,5 s dauert, egal wie hoch der Block ist.
     const observer = new IntersectionObserver(([entry]) => {
       window.clearTimeout(timer);
       if (!entry.isIntersecting) { setHint('idle'); return; }

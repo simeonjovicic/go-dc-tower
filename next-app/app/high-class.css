@@ -142,7 +142,7 @@
 .hc-hero-media, .hc-hero-media picture { position: absolute; inset: 0; display: block; }
 .hc-hero-media img {
   width: 100%; height: 100%; object-fit: cover; object-position: 50% center;
-  filter: brightness(1.12) saturate(1.04); animation: hcHeroIn 2s ease-out both;
+  filter: brightness(1.12) saturate(1.04); animation: hcHeroIn 3.4s cubic-bezier(.16, 1, .3, 1) both;
 }
 .hc-hero-media::after {
   content: ""; position: absolute; inset: 0;
@@ -182,7 +182,7 @@
 .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .06)); transform-origin: 60% 50%; }
 /* Desktop: deutlich kräftiger hineinzoomen, solange der Vorhang hochfährt. */
 @media (min-width: 761px) {
-  .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .38)); }
+  .hc-hero-track .hc-hero-media { transform: scale(calc(1 + var(--p, 0) * .3)); }
 }
 .hc-hero-track .hc-hero-glyph { translate: 0 calc(var(--p, 0) * -40px); }
 .hc-hero-track .hc-hero-stage--intro, .hc-hero-track .hc-hero-bottom { opacity: max(0, calc(1 - var(--p, 0) * 1.6)); }
@@ -347,7 +347,7 @@
 
 .hc-reveal { transition: opacity .6s ease, transform .6s ease; }
 .hc-reveal.will-reveal { opacity: 0; transform: translateY(20px); }
-@keyframes hcHeroIn { from { transform: scale(1.035); } to { transform: scale(1); } }
+@keyframes hcHeroIn { from { transform: scale(1.14); } to { transform: scale(1); } }
 @keyframes hcRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @keyframes hcPanelIn { from { opacity: .35; } to { opacity: 1; } }
 
@@ -481,17 +481,19 @@
 
 .hc-sub-footer-name span { color: var(--hc-red); }
 
+/* Gleiche Linkzeile wie im Footer der Startseite (.hc-footer-links). */
 .hc-sub-footer-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 14px 22px;
+  gap: 0 24px;
   align-items: flex-start;
   font-size: var(--fs-label);
-  letter-spacing: .18em;
+  letter-spacing: .07em;
   text-transform: uppercase;
 }
 
-.hc-sub-footer-links a { border-bottom-color: rgba(255, 255, 255, .3); }
+.hc-sub-footer .hc-sub-footer-links a { padding: 12px 0; color: #aca79d; border-bottom: 0; }
+.hc-sub-footer .hc-sub-footer-links a:hover { color: #fff; }
 
 /* Agentur-Credit: klein und gedämpft, beim Hover heller. */
 .hc-sub-footer a.hc-made-by, a.hc-made-by {
@@ -908,10 +910,9 @@
   .hx-room-hero.hx-sub-hero--short { min-height: 0; }
   .hx-sub-hero--short .hx-sub-hero-caption { padding-top: 140px; }
   .hx-sub-hero .hx-sub-hero-caption { position: relative; bottom: auto; padding: 180px 0 40px; }
-  .hc-menu-page .hx-room-hero.hx-sub-hero,
-  .hc-catering-page .hx-room-hero.hx-sub-hero { height: 560px; min-height: 560px; }
-  .hc-menu-page .hx-sub-hero .hx-sub-hero-caption,
-  .hc-catering-page .hx-sub-hero .hx-sub-hero-caption { padding-top: 40px; }
+  /* Speisekarte und Catering: Foto nur so hoch wie der Text darin, damit der Inhalt schneller kommt. */
+  :is(.hc-menu-page, .hc-catering-page) .hx-room-hero.hx-sub-hero { height: auto; min-height: 0; }
+  :is(.hc-menu-page, .hc-catering-page) .hx-sub-hero .hx-sub-hero-caption { padding: 72px 0 28px; }
 }
 .hx-sub-hero::after { background: linear-gradient(90deg, #120d0a99 0%, #120d0a4d 45%, transparent 75%), linear-gradient(180deg, #120d0a73 0%, #120d0a40 35%, #120d0ad9 75%, #120d0a 100%); }
 .hx-sub-hero-caption { position: absolute; z-index: 1; left: 0; right: 0; bottom: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 28px 64px; align-items: end; }
@@ -1043,7 +1044,7 @@
   .hx-wizard-offer-select { flex-direction: column; gap: 6px; font-size: 11px; }
   .hx-wizard-offer-select svg { width: 24px; height: 24px; padding: 5px; }
   .hx-wizard-offer strong { font-size: 14px; }
-  .hx-wizard-offer small { font-size: 12px; }
+  .hx-wizard-offer small { display: none; } /* Handy: nur Icon und Titel, die Erklärungen fallen weg */
   .hx-wizard-question { font-size: 26px; margin-bottom: 20px; }
   .hx-wizard-actions { margin-top: 24px; }
   .hx-wizard-offer-text { padding: 0; }
@@ -1419,8 +1420,11 @@
   .hc-footer { grid-template-columns: 1fr; gap: 14px; }
   .hc-footer-logo { grid-column: auto; grid-row: auto; order: -1; width: 44px; height: 44px; }
   .hc-footer-links { flex-wrap: wrap; gap: 0 20px; font-size: 11px; }
-  .hc-sub-footer-links { font-size: 11px; }
+  .hc-sub-footer-links { gap: 0 20px; font-size: 11px; }
   .hc-hero-actions .hx-btn { flex: 1 1 0; min-height: 48px; padding: 0 14px; letter-spacing: .02em; }
+  /* Speisekarte / Online bestellen: zwei gleich breite Buttons über die ganze Zeile. */
+  .hx-reel-actions { flex-wrap: nowrap; }
+  .hx-reel-actions .hx-btn { flex: 1 1 0; min-height: 48px; padding: 0 14px; letter-spacing: .02em; }
 }
 
 .hx-catering-dots { display: none; }
