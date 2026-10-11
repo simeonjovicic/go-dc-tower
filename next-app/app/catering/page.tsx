@@ -12,32 +12,36 @@ export const metadata: Metadata = {
 };
 
 export default function CateringPage() {
+  const requestDetails = <dl>
+    <div><dt>Im Restaurant</dt><dd>Erdgeschoss bis {KAPAZITAET.erdgeschoss.gruppe} Personen, Obergeschoss bis {KAPAZITAET.obergeschoss.event} (geschlossene Gesellschaft)</dd></div>
+    <div><dt>Lieferung</dt><dd>Ohne Service-Personal vor Ort</dd></div>
+    <div><dt>Lieber direkt?</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={CONTACT.phoneHref}>{CONTACT.phone}</a></dd></div>
+  </dl>;
   return (
-    <div className="hc-page hc-sub-page hx-sub">
+    <div className="hc-page hc-sub-page hx-sub hc-catering-page">
       <a className="hc-skip-link" href="#anfrage">Zum Formular springen</a>
       <SiteHeader current="/catering" solid />
       <main id="main">
         <PhotoHero id="catering-title" img="/foto/leben/tafel-haende.webp" alt="Viele Hände teilen sich asiatische Gerichte an einer gedeckten Tafel"
-          eyebrow="Catering & Events" title={['Mehr Leute.', 'Mehr zu teilen.']}
+          eyebrow="Catering & Events" title={['Catering & Feiern.', 'Bei euch oder bei uns.']}
           lead="Wir liefern Sharing-Buffets und Lunchboxen zu euch oder richten eure Feier bei uns im Restaurant aus.">
           <a className="hx-btn hx-btn--solid" href="#anfrage">Jetzt anfragen <span aria-hidden="true">↓</span></a>
         </PhotoHero>
-
-        <CateringOffers />
 
         <section className="hx-shell hx-request" id="anfrage" aria-labelledby="anfrage-title">
           <div className="hx-request-aside">
             <p className="hc-eyebrow hx-catering-eyebrow">Anfrage</p>
             <h2 id="anfrage-title" className="hx-title hx-title--small">Erzählt uns von eurem Anlass.</h2>
             <p>Vier kurze Schritte, dann melden wir uns. Unsere Zusage bekommt ihr schriftlich per E-Mail.</p>
-            <dl>
-              <div><dt>Im Restaurant</dt><dd>Erdgeschoss bis {KAPAZITAET.erdgeschoss.gruppe} Personen, Obergeschoss bis {KAPAZITAET.obergeschoss.event} (geschlossene Gesellschaft)</dd></div>
-              <div><dt>Lieferung</dt><dd>Ohne Service-Personal vor Ort</dd></div>
-              <div><dt>Lieber direkt?</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={CONTACT.phoneHref}>{CONTACT.phone}</a></dd></div>
-            </dl>
+            <div className="hx-request-desktop-details">{requestDetails}</div>
           </div>
           <CateringForm />
+          <details className="hx-request-mobile-details">
+            <summary>Kapazitäten, Lieferung & Kontakt</summary>
+            {requestDetails}
+          </details>
         </section>
+        <CateringOffers />
       </main>
       <HcFooter />
     </div>

@@ -1,5 +1,7 @@
 /** Kleine, einheitlich gezeichnete Linien-Icons (24er Raster, 1,5 Strich). */
 const PATHS = {
+  office: <><path d="M5 21V4h14v17M3 21h18M10 21v-5h4v5M8 8h1M15 8h1M8 12h1M15 12h1" /></>,
+  party: <><path d="m4 20 4-12 8 8-12 4ZM13 7l2-4M17 11l4-2M16 7l3-3M8 8l8 8" /><circle cx="11" cy="3" r=".5" /><circle cx="21" cy="14" r=".5" /></>,
   arrow: <path d="M5 12h13M13 6l6 6-6 6" />,
   external: <path d="M8 16 17 7M9 7h8v8" />,
   phone: <path d="M6.5 3.5h3l1.5 4-2 1.3a10 10 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z" />,

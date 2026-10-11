@@ -16,9 +16,7 @@
 html { scroll-behavior: smooth; scroll-padding-top: 84px; }
 body {
   margin: 0;
-  background:
-    radial-gradient(circle at 8% 18%, rgba(217,25,15,0.045), transparent 24rem),
-    linear-gradient(180deg, #fdfbf6 0%, var(--go-cream) 42%, #f6f2eb 100%);
+  background: #000;
   color: var(--go-ink);
   -webkit-font-smoothing: antialiased;
 }

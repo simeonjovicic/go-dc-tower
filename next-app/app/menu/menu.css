@@ -64,7 +64,7 @@
 .mc-variants .mc-tag { margin-left: 8px; }
 .mc-variant-allergens { margin-left: 6px; color: var(--mc-muted); font-size: var(--fs-label); vertical-align: super; }
 .mc-dish-allergens { margin-top: 14px; }
-.mc-dish-allergens summary { width: fit-content; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 16px; min-height: 32px; color: var(--mc-muted); font-size: var(--fs-meta); }
+.mc-dish-allergens summary { width: fit-content; cursor: pointer; list-style: none; display: flex; align-items: center; gap: 16px; min-height: 44px; color: var(--mc-muted); font-size: var(--fs-meta); }
 .mc-dish-allergens summary:hover { color: var(--hx-paper); }
 .mc-dish-allergens p { margin: 6px 0; color: var(--mc-muted); font-size: var(--fs-meta); line-height: 1.7; }
 .mc-dish-allergens[open] summary > span { transform: rotate(45deg); }
@@ -148,7 +148,7 @@
   .mc-mobile-switch { position: fixed; z-index: 60; inset: auto 0 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 10px 20px max(10px, env(safe-area-inset-bottom)); border-top: 1px solid #ffecd614; background: rgba(18, 13, 10, .96); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
   .mc-mobile-category { min-width: 0; display: grid; gap: 2px; flex: 1; }
   .mc-mobile-category label { color: var(--mc-muted); font-size: var(--fs-label); letter-spacing: .1em; text-transform: uppercase; }
-  .mc-mobile-switch select { width: 100%; min-height: 30px; padding: 0 20px 0 0; border: 0; background: transparent; color: var(--hx-paper); font: inherit; font-size: 16px; cursor: pointer; }
+  .mc-mobile-switch select { width: 100%; min-height: 44px; padding: 0 20px 0 0; border: 0; background: transparent; color: var(--hx-paper); font: inherit; font-size: 16px; cursor: pointer; }
   .mc-mobile-switch select option { color: #120d0a; }
   .mc-mobile-switch > :is(a, .glf-button) { min-height: 46px; padding: 0 22px; display: inline-flex; align-items: center; gap: 12px; border-radius: 999px; background: var(--hc-red); color: #fff; font-size: var(--fs-body); font-weight: 500; text-decoration: none; }
   .mc-dish, .mc-variants, .mc-allergens { scroll-margin-bottom: 90px; }

@@ -42,6 +42,7 @@ export const GLORIAFOOD = {
   ruid: '548b70b8-d40c-4821-9093-68a955a5afb5',
   /** Fallback, falls das Widget nicht übernimmt (z. B. Skript blockiert). */
   fallback: 'https://www.restaurantlogin.com/api/fb/m_v_m_d_n',
+  reservationUrl: 'https://www.foodbooking.com/ordering/restaurant/menu/reservation?restaurant_uid=548b70b8-d40c-4821-9093-68a955a5afb5&reservation=true',
 } as const;
 
 /**

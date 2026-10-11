@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { Icon, type IconName } from '@/components/Icon';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent, type KeyboardEvent } from 'react';
 import { CATERING, CONTACT, FORM } from '@/components/site-data';
@@ -14,6 +14,17 @@ const LABELS: Record<string, string> = {
 };
 
 const STEPS = ['Was dürfen wir für euch machen?', 'Wann und für wie viele?', 'Erzählt uns mehr.', 'Wie erreichen wir euch?'];
+const OFFER_TITLES: Record<OfferId, string> = {
+  business: 'Business Lunch',
+  zuhause: 'Catering',
+  event: 'Feiern',
+};
+const OFFER_DESCRIPTIONS: Record<OfferId, string> = {
+  business: 'Für euer Team im Büro.',
+  zuhause: 'An euren Wunschort geliefert.',
+  event: 'Bei uns im Restaurant.',
+};
+const OFFER_ICONS: Record<OfferId, IconName> = { business: 'office', zuhause: 'bag', event: 'party' };
 
 function asText(data: FormData) {
   return Object.keys(LABELS)
@@ -37,6 +48,21 @@ export function CateringForm() {
   const [today, setToday] = useState('');
   const steps = useRef<(HTMLFieldSetElement | null)[]>([]);
   const moved = useRef(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    const form = formRef.current;
+    if (!form) return;
+    const offers = form.querySelector('.hx-wizard-offers');
+    if (!offers) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      form.classList.add('is-visible');
+      observer.disconnect();
+    }, { threshold: .85, rootMargin: '-88px 0px -24px 0px' });
+    observer.observe(offers);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const wanted = new URLSearchParams(window.location.search).get('angebot');
@@ -139,7 +165,7 @@ export function CateringForm() {
   }
 
   return (
-    <form className="hx-wizard" onSubmit={submit} onKeyDown={onKeyDown}>
+    <form ref={formRef} className="hx-wizard" onSubmit={submit} onKeyDown={onKeyDown}>
       <div className="hx-wizard-top">
         <span className="hx-wizard-count" aria-live="polite">Schritt {step + 1} von {STEPS.length}</span>
         {current && step > 0 && (
@@ -150,11 +176,13 @@ export function CateringForm() {
 
       <fieldset ref={(el) => { steps.current[0] = el; }} className="hx-wizard-step" hidden={step !== 0}>
         <legend className="hx-wizard-question" tabIndex={-1}>{STEPS[0]}</legend>
+        <p className="hx-wizard-selection-hint">Wählt ein Angebot aus, um fortzufahren.</p>
         <div className="hx-wizard-offers">
           {CATERING.map((c) => (
-            <button key={c.id} type="button" className="hx-wizard-offer" aria-pressed={offer === c.id} onClick={() => choose(c.id)}>
-              <span className="hx-wizard-offer-photo"><Image src={c.img} alt="" fill sizes="(max-width: 640px) 100px, 200px" /></span>
-              <span className="hx-wizard-offer-text"><strong>{c.title}</strong><small>{c.label}</small></span>
+            <button key={c.id} type="button" className={`hx-wizard-offer hx-wizard-offer--${c.id}`} aria-label={`${c.title} auswählen`} onClick={() => choose(c.id)}>
+              <Icon name={OFFER_ICONS[c.id]} size={40} className="hx-wizard-offer-icon" />
+              <span className="hx-wizard-offer-text"><strong>{OFFER_TITLES[c.id]}</strong><small>{OFFER_DESCRIPTIONS[c.id]}</small></span>
+              <span className="hx-wizard-offer-select" aria-hidden="true">Auswählen <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></span>
             </button>
           ))}
         </div>

@@ -4,11 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { GlfButton } from '@/components/GloriaFood';
-import { BRAND, CONTACT } from '@/components/site-data';
+import { ReservationLink } from '@/components/ReservationLink';
+import { BRAND, CONTACT, GLORIAFOOD } from '@/components/site-data';
 
 const MOBILE_LINKS = [
   ['/menu', 'Speisekarte'], ['#raum', 'Restaurant'], ['/catering', 'Feiern & Catering'],
-  ['#reservieren', 'Tisch anfragen'], ['#kontakt', 'Anfahrt & Zeiten'],
+  [GLORIAFOOD.reservationUrl, 'Tisch reservieren'], ['#kontakt', 'Kontakt'],
 ] as const;
 
 /**
@@ -87,13 +88,13 @@ export function SiteHeader({ home = false, current, solid = false, onMenuChange 
       <header className={`hc-site-header${scrolled || solid ? ' is-scrolled' : ''}${menuOpen ? ' menu-header' : ''}`}>
         <div className="hc-nav-shell">
           <nav className="hc-split-nav hc-split-nav--left" aria-label="Hauptnavigation" inert={menuOpen}>
-            {navLink('/menu', 'Speisekarte')}{navLink('#raum', 'Restaurant')}
+            {navLink('/menu', 'Speisekarte')}{navLink('/catering', 'Feiern & Catering')}
           </nav>
           <a className="hc-brand" href={home ? '#top' : '/'} inert={menuOpen} aria-label={`${BRAND.name} ${BRAND.place} – Startseite`}>
             <Image src="/go-dc-tower-logo.png" alt="" width={706} height={706} priority />
           </a>
           <nav className="hc-split-nav hc-split-nav--right" aria-label="Service" inert={menuOpen}>
-            {navLink('/catering', 'Feiern & Catering')}
+            {navLink('#kontakt', 'Anfahrt & Zeiten')}
             <GlfButton kind="reservation" className="hx-btn hx-btn--line hx-btn--sm">Tisch reservieren</GlfButton>
           </nav>
           <button ref={menuButtonRef} className="hc-menu-button" type="button"
@@ -107,6 +108,7 @@ export function SiteHeader({ home = false, current, solid = false, onMenuChange 
       <div ref={mobilePanelRef} id="mobile-navigation" className="hc-mobile-panel" inert={!menuOpen} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile Navigation">
           {MOBILE_LINKS.map(([href, label]) => {
+            if (href === GLORIAFOOD.reservationUrl) return <ReservationLink key={href} onNavigate={() => setMenuOpen(false)}>{label}</ReservationLink>;
             const target = to(href);
             return target.startsWith('#')
               ? <a key={href} href={target} onClick={() => setMenuOpen(false)}>{label}</a>

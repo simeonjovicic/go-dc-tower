@@ -2,6 +2,7 @@
 
 import { useRef, type ReactNode } from 'react';
 import { GLORIAFOOD } from '@/components/site-data';
+import { ReservationLink } from '@/components/ReservationLink';
 
 let requested = false;
 
@@ -41,15 +42,18 @@ export function GlfButton({ kind, className, children }: {
     }, 1400);
   };
 
+  if (kind === 'reservation') {
+    return <ReservationLink className={className}>{children}</ReservationLink>;
+  }
+
   return (
     <span
       ref={ref}
       role="button"
       tabIndex={0}
-      className={`glf-button${kind === 'reservation' ? ' reservation' : ''} ${className ?? ''}`}
+      className={`glf-button ${className ?? ''}`}
       data-glf-cuid={GLORIAFOOD.cuid}
       data-glf-ruid={GLORIAFOOD.ruid}
-      {...(kind === 'reservation' ? { 'data-glf-reservation': 'true' } : {})}
       onPointerEnter={loadWidget}
       onFocus={loadWidget}
       onTouchStart={loadWidget}
