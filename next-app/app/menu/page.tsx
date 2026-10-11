@@ -21,7 +21,7 @@ export default function MenuPage() {
       <main id="main">
         <PhotoHero id="menu-title" short img="/foto/shooting-2021-09/gyoza1.webp" alt="Hausgemachte Gyoza mit Dip auf einem Teller"
           eyebrow="Speisekarte" title={['Die ganze Karte.', 'Frisch gekocht.']}
-          lead={MENU_CARDS.map((card, i) => <span key={card.id}>{i > 0 && <br />}{card.title} · {card.times.join(' · ')}</span>)}>
+          lead={MENU_CARDS.map((card, i) => <span key={card.id}>{i > 0 && <br />}{card.title} · {card.times.map((time, j) => <span key={time}>{j > 0 && ' · '}<span className="mc-nowrap">{time}</span></span>)}</span>)}>
           <GlfButton kind="order" className="hx-btn hx-btn--solid">Online bestellen</GlfButton>
         </PhotoHero>
         <div id="speisekarte">

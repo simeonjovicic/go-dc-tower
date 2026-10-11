@@ -109,6 +109,7 @@
 .mc-allergens b { min-width: 14px; color: var(--hc-red); }
 .hc-menu-page .hc-sub-footer { margin-top: clamp(80px, 9vw, 120px); }
 .mc-mobile-switch { display: none; }
+.mc-nowrap { white-space: nowrap; }
 
 @media (max-width: 1200px) {
   .mc-layout { grid-template-columns: 190px minmax(0, 1fr); gap: 36px; }
@@ -122,8 +123,9 @@
   .mc-layout { display: block; padding-top: 40px; }
   .mc-sidebar { position: static; }
   .mc-nav-label, .mc-allergen-link { display: none; }
-  .mc-categories { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 20px; }
-  .mc-categories a { justify-content: center; min-height: 44px; padding: 10px 6px; border: 1px solid #ffecd626; border-radius: 999px; font-size: var(--fs-meta); }
+  .mc-categories { position: relative; display: flex; gap: 8px; margin: 0 -20px 20px; padding: 0 20px; overflow-x: auto; scroll-padding-inline: 20px; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .mc-categories::-webkit-scrollbar { display: none; }
+  .mc-categories a { flex: none; justify-content: center; min-height: 44px; padding: 10px 18px; border: 1px solid #ffecd626; border-radius: 999px; font-size: var(--fs-meta); white-space: nowrap; }
   .mc-categories a[aria-current] { background: var(--hc-red); border-color: var(--hc-red); color: #fff; }
   .mc-categories small, .mc-category-full { display: none; }
   .mc-category-short { display: inline; }

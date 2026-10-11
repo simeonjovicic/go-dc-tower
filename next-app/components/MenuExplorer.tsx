@@ -52,6 +52,7 @@ export function MenuExplorer() {
   const [expandedDish, setExpandedDish] = useState<string | null>(null);
   const [anchor, setAnchor] = useState('');
   const resultsRef = useRef<HTMLDivElement>(null);
+  const categoriesRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const readLocation = () => {
@@ -92,6 +93,14 @@ export function MenuExplorer() {
     return () => cancelAnimationFrame(frame);
   }, [active, expandedDish, anchor]);
 
+  // Auf dem Handy sind die Kategorien eine wischbare Leiste: die aktive bleibt sichtbar.
+  useEffect(() => {
+    const nav = categoriesRef.current;
+    const chip = nav?.querySelector<HTMLElement>('[aria-current]');
+    if (!nav || !chip || nav.scrollWidth <= nav.clientWidth) return;
+    nav.scrollTo({ left: chip.offsetLeft - (nav.clientWidth - chip.offsetWidth) / 2, behavior: 'smooth' });
+  }, [active]);
+
   function chooseCategory(id: Selection) {
     setActive(id);
     setQuery('');
@@ -121,7 +130,7 @@ export function MenuExplorer() {
     <div className="mc-layout">
       <aside className="mc-sidebar">
         <p className="mc-nav-label">Unsere Karte</p>
-        <nav className="mc-categories" aria-label="Speisekategorien">
+        <nav ref={categoriesRef} className="mc-categories" aria-label="Speisekategorien">
           {SECTIONS.map((section) => (
             <a key={section.id} href={'#' + section.id}
               aria-current={!searching && active === section.id ? 'true' : undefined}
@@ -145,7 +154,7 @@ export function MenuExplorer() {
           <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.4" /><path d="m16 16 5 5" stroke="currentColor" strokeWidth="1.4" /></svg>
           <label className="mc-sr-only" htmlFor="menu-search">Speisekarte durchsuchen</label>
           <input id="menu-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)}
-            placeholder="Worauf hast du Lust? z. B. Ente, Gyoza, Tofu" autoComplete="off" />
+            placeholder="Suche, z. B. Ente oder Tofu" autoComplete="off" />
           {query && <button type="button" aria-label="Suche zurücksetzen" onClick={() => setQuery('')}>×</button>}
         </div>
 
