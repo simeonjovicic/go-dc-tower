@@ -423,7 +423,7 @@
   .hc-hero-media img { object-position: center; }
   .hc-hero-media::after { background: linear-gradient(180deg, #08050375, #0805031a 44%, transparent 68%, #08050399); }
   .hc-hero-place { font-size: var(--fs-label); letter-spacing: .14em; margin-bottom: 22px; }
-  .hc-hero-glyph { top: 84px; left: auto; right: -4vw; transform: none; font-size: 68vw; opacity: .09; }
+  .hc-hero-glyph { top: 84px; left: auto; right: -4vw; transform: none; font-size: 68vw; opacity: .22; text-shadow: 0 2px 24px #0006; }
   .hc-hero-wordmark { font-size: clamp(44px, 11.8vw, 68px); letter-spacing: .21em; line-height: 1.14; }
   .hc-hero-invitation { margin-top: 20px; font-size: var(--fs-body); line-height: 1.65; }
   .hc-hero-actions { margin-top: 20px; gap: 22px; }
@@ -1113,7 +1113,7 @@
 .hx-lunch-tabs button[aria-selected="true"] { color: var(--hx-paper); }
 .hx-lunch-tabs button[aria-selected="true"]::after { transform: scaleX(1); }
 /* Einmaliger Hinweis: Linie unter „Zum Mitnehmen“ läuft voll, dann wechselt der Reiter. */
-.hx-lunch-tabs button.is-hinting::after { opacity: .85; animation: hx-tab-hint 3.5s linear forwards; }
+.hx-lunch-tabs button.is-hinting::after { opacity: .85; animation: hx-tab-hint 2.5s linear forwards; }
 @keyframes hx-tab-hint { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .hx-lunch-tabs button:focus-visible { outline: 2px solid var(--hc-red); outline-offset: 6px; }
 .hx-lunch-stage { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: center; }

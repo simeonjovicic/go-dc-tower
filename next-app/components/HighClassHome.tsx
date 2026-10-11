@@ -59,11 +59,11 @@ const LUNCH_TABS = [
  * Reiter über einem großen Bild. Alle Panels bleiben im DOM (nur `hidden`),
  * damit das GloriaFood-Widget sich auch an die Knöpfe in verdeckten Panels hängt.
  */
-const HINT_MS = 3500;
+const HINT_MS = 2500;
 
 function LunchTabs() {
   const [active, setActive] = useState(0);
-  // Einmaliger Hinweis: bleibt der Block 3,5 s im Bild, wechselt er von selbst auf „Zum Mitnehmen“.
+  // Einmaliger Hinweis: bleibt der Block 2,5 s im Bild, wechselt er von selbst auf „Zum Mitnehmen“.
   const [hint, setHint] = useState<'idle' | 'running' | 'done'>('idle');
   const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const listRef = useRef<HTMLDivElement>(null);
