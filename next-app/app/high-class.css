@@ -953,7 +953,8 @@
 @media (max-width: 760px) {
   .hc-catering-page > main > .hx-request { order: 1; }
   .hc-catering-page > main > .hx-offers { order: 2; }
-  .hx-request { gap: 24px; padding-top: 48px; padding-bottom: 56px; }
+  .hx-request { gap: 24px; padding-top: 48px; padding-bottom: 32px; }
+  .hx-lunch.hx-offers { padding-top: 40px; }
   .hx-request-aside .hx-title { font-size: 32px; line-height: 1.15; }
   .hx-request-aside > p:not(.hc-eyebrow) { margin-top: 12px; line-height: 1.6; }
   .hx-request-desktop-details { display: none; }
@@ -1364,7 +1365,7 @@
 }
 
 /* ── Speisekarte: Bildreihe, die beim Scrollen seitwärts gleitet ─── */
-.hx-reel { padding: clamp(90px, 10vw, 140px) 0; overflow: hidden; border-top: 1px solid #ffecd612; }
+.hx-reel { padding: clamp(56px, 6vw, 88px) 0 clamp(90px, 10vw, 140px); overflow: hidden; border-top: 1px solid #ffecd612; }
 .hx-reel-head { display: flex; justify-content: space-between; align-items: end; gap: 24px 48px; flex-wrap: wrap; margin-bottom: clamp(40px, 5vw, 64px); }
 .hx-reel-head p { margin: 0; color: #9c9183; font-size: var(--fs-small); letter-spacing: .02em; }
 .hx-menu-cards { display: flex; flex-wrap: wrap; gap: 12px 40px; }
