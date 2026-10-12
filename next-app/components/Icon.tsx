@@ -12,6 +12,8 @@ const PATHS = {
   bag: <><path d="M5.5 8.5h13l-1 12h-11l-1-12Z" /><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" /></>,
   pin: <><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z" /><circle cx="12" cy="10" r="2.3" /></>,
   menu: <path d="M4 8h16M4 16h16" />,
+  /** Gabel und Messer, für alles rund um die Speisekarte. */
+  dish: <path d="M6 3v6a2 2 0 0 0 4 0V3M8 3v18M17 21V3c-2.2 1.4-3 4.2-3 7.5 0 1.4.9 2.5 3 2.5" />,
   close: <path d="m6 6 12 12M18 6 6 18" />,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   access: <><circle cx="12" cy="4.8" r="1.6" /><path d="M7 8.5h10M12 8.5v5.5M12 14l-3 6.5M12 14l3 6.5" /></>,

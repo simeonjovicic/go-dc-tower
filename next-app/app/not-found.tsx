@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SiteHeader } from '@/components/SiteHeader';
 import { HcFooter } from '@/components/HcChrome';
+import { Icon } from '@/components/Icon';
 
 export default function NotFound() {
   return (
@@ -16,7 +17,7 @@ export default function NotFound() {
         <p>Diese Seite gibt es leider nicht. Zurück ins go?</p>
         <div className="hc-not-found-actions">
           <Link href="/" className="hx-btn hx-btn--solid">Zur Startseite</Link>
-          <Link href="/menu" className="hx-btn hx-btn--line">Zur Speisekarte</Link>
+          <Link href="/menu" className="hx-btn hx-btn--line"><Icon name="dish" size={18} />Zur Speisekarte</Link>
         </div>
       </main>
       <HcFooter />

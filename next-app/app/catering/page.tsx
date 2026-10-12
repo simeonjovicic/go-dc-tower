@@ -15,7 +15,7 @@ export default function CateringPage() {
   const requestDetails = <dl>
     <div><dt>Im Restaurant</dt><dd>Erdgeschoss bis {KAPAZITAET.erdgeschoss.gruppe} Personen, Obergeschoss bis {KAPAZITAET.obergeschoss.event} (geschlossene Gesellschaft)</dd></div>
     <div><dt>Lieferung</dt><dd>Ohne Service-Personal vor Ort</dd></div>
-    <div><dt>Lieber direkt?</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> · <a href={CONTACT.phoneHref}>{CONTACT.phone}</a></dd></div>
+    <div><dt>Lieber direkt?</dt><dd><a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a><span className="hx-request-sep" aria-hidden="true"> · </span><a href={CONTACT.phoneHref}>{CONTACT.phone}</a></dd></div>
   </dl>;
   return (
     <div className="hc-page hc-sub-page hx-sub hc-catering-page">
@@ -37,7 +37,7 @@ export default function CateringPage() {
           </div>
           <CateringForm />
           <details className="hx-request-mobile-details">
-            <summary>Kapazitäten, Lieferung & Kontakt</summary>
+            <summary>Kapazitäten, Lieferung & Kontakt<span className="hx-request-toggle" aria-hidden="true">+</span></summary>
             {requestDetails}
           </details>
         </section>

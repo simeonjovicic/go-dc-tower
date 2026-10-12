@@ -10,6 +10,7 @@ import { DISHES, dishesOf, fmt, priceFrom, type CategoryId } from '@/components/
 import { onScrollFrame, requestScrollFrame, useScrollMotion } from '@/components/useScrollMotion';
 import { GlfButton } from '@/components/GloriaFood';
 import { SiteHeader } from '@/components/SiteHeader';
+import { Icon } from '@/components/Icon';
 import { MadeBy } from '@/components/HcChrome';
 
 /** Eine Auswahl, kein Katalog: die Bildreihe gleitet beim Scrollen seitwärts. */
@@ -497,7 +498,7 @@ export function HighClassHome() {
             </ul>
           </div>
           <div className="hx-shell hx-reel-actions" data-reveal="fade">
-            <Link className="hx-btn hx-btn--solid" href="/menu">Zur Speisekarte</Link>
+            <Link className="hx-btn hx-btn--solid" href="/menu"><Icon name="dish" size={18} />Zur Speisekarte</Link>
             <GlfButton kind="order" className="hx-btn hx-btn--line">Online bestellen</GlfButton>
           </div>
         </section>
@@ -585,7 +586,7 @@ export function HighClassHome() {
               <p>Zu zweit, mit Freunden oder dem ganzen Team.</p>
               <div className="hx-actions">
                 <GlfButton kind="reservation" className="hx-btn hx-btn--ink">Tisch reservieren</GlfButton>
-                <a className="hx-btn hx-btn--line-light" href={CONTACT.phoneHref}>{CONTACT.phone}</a>
+                <a className="hx-btn hx-btn--line-light" href={CONTACT.phoneHref}><Icon name="phone" size={18} />{CONTACT.phone}</a>
               </div>
             </div>
           </div>

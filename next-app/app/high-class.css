@@ -953,14 +953,24 @@
 @media (max-width: 760px) {
   .hc-catering-page > main > .hx-request { order: 1; }
   .hc-catering-page > main > .hx-offers { order: 2; }
-  .hx-request { gap: 24px; padding-top: 48px; }
+  .hx-request { gap: 24px; padding-top: 48px; padding-bottom: 56px; }
   .hx-request-aside .hx-title { font-size: 32px; line-height: 1.15; }
   .hx-request-aside > p:not(.hc-eyebrow) { margin-top: 12px; line-height: 1.6; }
   .hx-request-desktop-details { display: none; }
   .hx-request-aside { display: none; }
-  .hx-request-mobile-details { display: block; border-top: 1px solid #ffecd626; }
-  .hx-request-mobile-details summary { min-height: 52px; padding-block: 16px; color: #b3a899; font-size: var(--fs-small); cursor: pointer; }
-  .hx-request-mobile-details dl { margin-top: 0; }
+  /* Aufklapp-Box im selben Kasten-Look wie das Formular darüber. */
+  .hx-request-mobile-details { display: block; border: 1px solid #ffecd633; border-radius: 12px; background: #1d1916; }
+  .hx-request-mobile-details summary { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 56px; padding: 0 20px; color: var(--hx-paper); font-size: var(--fs-small); font-weight: 500; list-style: none; cursor: pointer; }
+  .hx-request-mobile-details summary::-webkit-details-marker { display: none; }
+  .hx-request-mobile-details summary:focus-visible { outline: 2px solid var(--hc-red); outline-offset: 2px; border-radius: 12px; }
+  .hx-request-toggle { flex: none; color: var(--hc-red); font-size: 24px; font-weight: 300; line-height: 1; transition: transform .25s var(--hx-ease); }
+  .hx-request-mobile-details[open] .hx-request-toggle { transform: rotate(45deg); }
+  .hx-request-mobile-details dl { margin: 0; padding: 0 20px 6px; }
+  .hx-request-mobile-details dl > div { padding: 14px 0; }
+  .hx-request-mobile-details dd { line-height: 1.55; }
+  /* Kontakt: Mail und Telefon untereinander, gut antippbar. */
+  .hx-request-mobile-details .hx-request-sep { display: none; }
+  .hx-request-mobile-details dd a { display: block; width: fit-content; padding-block: 4px; }
 }
 @media (min-width: 980px) {
   .hx-request { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 72px; align-items: start; }
@@ -983,6 +993,9 @@
 .hx-wizard-step { min-width: 0; margin: 0; padding: 0; border: 0; animation: hxStep .5s var(--hx-ease) both; }
 .hx-wizard-question { display: block; padding: 0; margin: 0 0 clamp(24px, 3vw, 36px); font-family: var(--hx-mincho); font-weight: 600; font-size: clamp(26px, 2.6vw, 36px); line-height: 1.2; color: var(--hx-paper); outline: none; }
 .hx-wizard-hint { margin: 0; color: #9c9183; font-size: var(--fs-meta); }
+/* Erster Schritt: kein Zurück-Knopf, der Hinweis steht mittig unter den Angeboten. */
+.hx-wizard-actions:has(> .hx-wizard-hint) { justify-content: center; text-align: center; }
+.hx-wizard-actions:has(> .hx-wizard-hint) > span:empty { display: none; }
 .hx-wizard-selection-hint { margin: -12px 0 24px; color: #b3a899; font-size: var(--fs-small); line-height: 1.6; }
 .hx-wizard-offers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .hx-wizard-offer { display: flex; flex-direction: column; align-items: center; gap: 16px; min-width: 0; padding: 24px 12px 16px; border: 1px solid #ffecd65c; border-radius: 12px; background: #29231f; color: var(--hx-paper); text-align: center; font: inherit; cursor: pointer; transition: border-color .2s, background-color .2s, transform .2s; }
@@ -1230,6 +1243,14 @@
 .hx-reserve-contact > p { margin: 0 0 24px; font-size: var(--fs-lead); line-height: 1.8; }
 .hx-reserve-contact .hc-button-dark { width: 100%; }
 .hx-reserve-contact > small { display: block; font-size: var(--fs-label); line-height: 1.5; }
+/* Zwei gleich breite Buttons; das Telefon als helle Glasfläche statt dünnem Rand auf dem Rot. */
+.hx-reserve-contact .hx-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.hx-reserve-contact .hx-btn { width: 100%; padding: 0 20px; }
+.hx-reserve .hx-btn--line-light { background: #ffffff24; border-color: transparent; }
+.hx-reserve .hx-btn--line-light:hover { background: #fff; color: var(--hc-red); }
+@media (max-width: 900px) {
+  .hx-reserve-contact .hx-actions { grid-template-columns: 1fr; }
+}
 
 /* Catering: die eine helle Fläche */
 .hx-catering { background: var(--hc-paper); color: var(--hc-ink); padding: clamp(90px, 11vw, 150px) 0 clamp(70px, 8vw, 110px); }
