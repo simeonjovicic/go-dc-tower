@@ -91,14 +91,19 @@ function LunchTabs() {
     if (!list) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { setHint('done'); return; }
     let timer = 0;
-    // Uhr läuft, sobald die Reiterleiste sichtbar ist (unter der Kopfleiste, über der Handy-Leiste),
+    // Uhr startet, sobald die Reiterleiste ganz sichtbar ist (unter der Kopfleiste, über der Handy-Leiste),
     // damit es auf Handy und Desktop gleich 2,5 s dauert, egal wie hoch der Block ist.
+    // Einmal gestartet läuft sie weiter: kleine Scrollbewegungen oder die ein- und ausfahrende
+    // Adressleiste am Handy setzen sie nicht zurück. Abbruch nur, wenn die Leiste ganz verschwindet.
     const observer = new IntersectionObserver(([entry]) => {
-      window.clearTimeout(timer);
-      if (!entry.isIntersecting) { setHint('idle'); return; }
+      if (!entry.isIntersecting) {
+        if (timer) { window.clearTimeout(timer); timer = 0; setHint('idle'); }
+        return;
+      }
+      if (timer || entry.intersectionRatio < 0.99) return;
       setHint('running');
       timer = window.setTimeout(() => { setActive(1); reveal(1); setHint('done'); }, HINT_MS);
-    }, { threshold: 1, rootMargin: '-72px 0px -84px 0px' });
+    }, { threshold: [0, 1], rootMargin: '-72px 0px -84px 0px' });
     observer.observe(list);
     return () => { observer.disconnect(); window.clearTimeout(timer); };
   }, [done]);
