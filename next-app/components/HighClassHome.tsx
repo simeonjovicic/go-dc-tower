@@ -13,18 +13,22 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { Icon } from '@/components/Icon';
 import { MadeBy } from '@/components/HcChrome';
 
-/** Eine Auswahl, kein Katalog: die Bildreihe gleitet beim Scrollen seitwärts. */
-const REEL: { name: string; cat: CategoryId; dish?: string; img: string; alt: string }[] = [
-  { name: 'La Mien', cat: 'nudelsuppen', dish: 'lamien', img: '/foto/gericht-enhanced/lamien-rind.webp', alt: 'La Mien mit Rind' },
+/**
+ * Eine Auswahl, kein Katalog: die Bildreihe gleitet beim Scrollen seitwärts.
+ * Nur unbearbeitete Fotos der echten Gerichte (Wolt-Aufnahmen, hochkant zugeschnitten).
+ */
+const REEL: { name: string; cat: CategoryId; dish?: string; img: string; alt: string; soon?: boolean }[] = [
+  { name: 'La Mien', cat: 'nudelsuppen', dish: 'lamien', img: '/foto/gericht-echt/hoch/lamien-rind.webp', alt: 'La Mien mit Rind' },
   { name: 'Gyoza', cat: 'gyoza', img: '/foto/shooting-2021-09/gyoza1.webp', alt: 'Hausgemachte Gyoza' },
-  { name: 'Poké Maguro', cat: 'poke', dish: 'poke-maguro', img: '/foto/gericht-enhanced/poke-maguro.webp', alt: 'Poké Bowl mit Thunfisch' },
-  { name: 'Knusprige Ente', cat: 'main', dish: 'knusprige-ente', img: '/foto/gericht-enhanced/knusprige-ente.webp', alt: 'Knusprige Ente mit Gemüse' },
-  { name: 'Tuna-Tataki', cat: 'vorspeisen', dish: 'tuna-tataki', img: '/foto/gericht-enhanced/tuna-tataki.webp', alt: 'Tuna-Tataki' },
-  { name: 'Xiao Long Bao', cat: 'vorspeisen', dish: 'xiao-long-bao', img: '/foto/gericht-enhanced/xiao-long-bao.webp', alt: 'Xiao Long Bao' },
-  { name: 'Sushi', cat: 'sushi', img: '/foto/sushi/sushi-maki.webp', alt: 'Maki-Auswahl' },
+  { name: 'Poké Maguro', cat: 'poke', dish: 'poke-maguro', img: '/foto/gericht-echt/hoch/poke-maguro.webp', alt: 'Poké Bowl mit Thunfisch' },
+  { name: 'Knusprige Ente', cat: 'main', dish: 'knusprige-ente', img: '/foto/gericht-echt/hoch/knusprige-ente.webp', alt: 'Knusprige Ente mit Gemüse' },
+  { name: 'Tuna-Tataki', cat: 'vorspeisen', dish: 'tuna-tataki', img: '/foto/gericht-echt/hoch/tuna-tataki.webp', alt: 'Tuna-Tataki' },
+  { name: 'Xiao Long Bao', cat: 'vorspeisen', dish: 'xiao-long-bao', img: '/foto/gericht-echt/hoch/xiao-long-bao.webp', alt: 'Xiao Long Bao' },
+  { name: 'Sushi', cat: 'sushi', img: '/foto/sushi/sushi-maki.webp', alt: 'Maki-Auswahl', soon: true },
 ];
 
 const reelPrice = (item: (typeof REEL)[number]) => {
+  if (item.soon) return 'Coming soon';
   const dishes = item.dish ? DISHES.filter((d) => d.id === item.dish) : dishesOf(item.cat);
   const min = Math.min(...dishes.map((d) => priceFrom(d) ?? Infinity));
   return Number.isFinite(min) ? `ab € ${fmt(min)}` : 'nach Tagesangebot';
@@ -445,13 +449,13 @@ export function HighClassHome() {
           <div className="hc-hero">
             <div className="hc-hero-media" aria-hidden="true">
               <picture>
-                {/* WebP mit eingerechneter Helligkeit (npm run images); die JPGs bleiben als Fallback. */}
-                <source media="(max-width: 640px)" type="image/webp" srcSet="/_img/hero-ramen-dark-tall.webp" />
-                <source media="(max-width: 640px)" srcSet="/hero-ramen-dark-tall.jpg" />
-                <source type="image/webp" srcSet="/_img/hero-ramen-dark.webp" />
+                {/* Eigene Gerichte von oben. WebP mit eingerechneter Helligkeit (npm run images); die JPGs bleiben als Fallback. */}
+                <source media="(max-width: 640px)" type="image/webp" srcSet="/_img/hero-tafel-tall.webp" />
+                <source media="(max-width: 640px)" srcSet="/hero-tafel-tall.jpg" />
+                <source type="image/webp" srcSet="/_img/hero-tafel.webp" />
                 {/* The portrait photograph preserves the composition on phones. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/hero-ramen-dark.jpg" alt="" loading="eager" fetchPriority="high" />
+                <img src="/hero-tafel.jpg" alt="" loading="eager" fetchPriority="high" />
               </picture>
             </div>
             <span className="hc-hero-glyph" lang="zh" aria-hidden="true">面</span>
@@ -473,7 +477,7 @@ export function HighClassHome() {
         <div ref={coverRef} className="hc-cover">
         <nav className="hc-visit-strip" aria-label="Dein Besuch auf einen Blick">
           <a href="#kontakt"><small>Hier sind wir</small><span>Donau City · 2 Min. von der U1</span></a>
-          <a href="#kontakt"><small>Öffnungszeiten</small><span>Mo–Fr 11–22 · So 11–17</span></a>
+          <a href="#kontakt"><small>Öffnungszeiten</small><span>Mo–Fr 11–21 · So 11–17</span></a>
           <GlfButton kind="order"><small>Lieber mitnehmen?</small><span>Online bestellen</span></GlfButton>
         </nav>
 
@@ -556,16 +560,18 @@ export function HighClassHome() {
           {/* Desktop: der ganze Anfahrt-Block bleibt stehen, bis der rote Faden durchgezogen ist. */}
           <div className="hx-route-track--desk">
           <div className="hx-shell hx-arrival">
-            {ANFAHRT_VIDEOS.filter((video) => video.src).slice(0, 1).map((video) => (
-              <ArrivalVideo key={video.title} src={video.src!} poster={video.poster} title={video.title} text={video.text} />
-            ))}
+            <div className="hx-arrival-videos">
+              {ANFAHRT_VIDEOS.filter((video) => video.src).map((video) => (
+                <ArrivalVideo key={video.title} src={video.src!} poster={video.poster} title={video.title} text={video.text} />
+              ))}
+            </div>
             <div className="hx-arrival-route" data-reveal="fade">
               {/* Handy: Überschrift und Route bleiben stehen, bis der rote Faden durchgezogen ist. */}
               <div className="hx-route-track">
               <div className="hx-route-pin">
               <h2 id="arrival-title">So kommst du zu uns.</h2>
               <ol ref={routeRef} className="hx-arrival-steps">
-                <li><i className="hx-route-icon" aria-hidden="true">U1</i><span>01</span><div><strong>U1 bis Kaisermühlen · VIC</strong><p>Oder ab Donauinsel – von dort rund fünf Minuten zu Fuß, das Video zeigt dir den Weg.</p></div></li>
+                <li><i className="hx-route-icon" aria-hidden="true">U1</i><span>01</span><div><strong>U1 bis Kaisermühlen · VIC</strong><p>Oder ab Donauinsel – von dort rund fünf Minuten zu Fuß. Die Videos zeigen dir beide Wege.</p></div></li>
                 <li><i className="hx-route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="13" cy="4" r="2" /><path d="M10 21l2-6 3 3v3M9 12l2-4 4 1 2 3M11 8l-2 5" /></svg></i><span>02</span><div><strong>Zwei Minuten zu Fuß</strong><p>Vom Ausgang Kaisermühlen · VIC sind es zwei Gehminuten bis zum DC Tower.</p></div></li>
                 <li><i className="hx-route-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg></i><span>03</span><div><strong>Erdgeschoss DC Tower</strong><p>{CONTACT.street}, {CONTACT.zip} {CONTACT.city} – durch die Glastür, und du bist da.</p></div></li>
               </ol>
@@ -614,7 +620,7 @@ export function HighClassHome() {
             </div>
             <footer className="hc-footer">
               <span>© {new Date().getFullYear()} {BRAND.name} {BRAND.place}</span>
-              <Image className="hc-footer-logo" src="/go-dc-tower-logo.png" alt={`${BRAND.name} ${BRAND.place}`} width={706} height={706} sizes="120px" />
+              <Image className="hc-footer-logo" src="/ramien-go-logo.png" alt={`${BRAND.name} ${BRAND.place}`} width={513} height={634} sizes="120px" />
               <span className="hc-footer-links"><a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer">Instagram</a><a href={SOCIAL.facebook} target="_blank" rel="noopener noreferrer">Facebook</a><Link href="/impressum">Impressum</Link><Link href="/datenschutz">Datenschutz</Link></span>
               <MadeBy />
             </footer>

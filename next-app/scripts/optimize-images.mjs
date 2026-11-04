@@ -21,11 +21,14 @@ const OUT = join(PUBLIC, '_img');
 const WIDTHS = [480, 828, 1200, 1920];
 const QUALITY = 74;
 /** Bilder, die per next/image laufen, aber nicht unter /foto/ liegen. */
-const EXTRA = ['/go-dc-tower-logo.png'];
-/** Hero als <picture>: einmal als WebP, Helligkeit/Sättigung fest eingerechnet statt per CSS-Filter. */
+const EXTRA = ['/ramien-go-logo.png'];
+/**
+ * Hero als <picture>: einmal als WebP, Helligkeit/Sättigung fest eingerechnet statt per CSS-Filter.
+ * Die Wolt-Tafel ist hell fotografiert; abgedunkelt bleibt die weiße Wortmarke darüber lesbar.
+ */
 const HERO = [
-  { src: '/hero-ramen-dark.jpg', out: '/_img/hero-ramen-dark.webp' },
-  { src: '/hero-ramen-dark-tall.jpg', out: '/_img/hero-ramen-dark-tall.webp' },
+  { src: '/hero-tafel.jpg', out: '/_img/hero-tafel.webp', brightness: 0.58 },
+  { src: '/hero-tafel-tall.jpg', out: '/_img/hero-tafel-tall.webp', brightness: 0.58 },
 ];
 
 function codeFiles(dir) {
@@ -61,13 +64,13 @@ for (const src of [...used].sort()) {
   }
 }
 
-for (const { src, out } of HERO) {
+for (const { src, out, brightness } of HERO) {
   const source = join(PUBLIC, src);
   const target = join(PUBLIC, out);
   if (fresh(target, source)) continue;
   mkdirSync(dirname(target), { recursive: true });
-  // linear(1.12) entspricht CSS brightness(1.12): jeder Farbkanal mal 1,12.
-  await sharp(source).linear(1.12, 0).modulate({ saturation: 1.04 }).webp({ quality: 80 }).toFile(target);
+  // linear(x) entspricht CSS brightness(x): jeder Farbkanal mal x.
+  await sharp(source).linear(brightness, 0).modulate({ saturation: 1.04 }).webp({ quality: 80 }).toFile(target);
   written++;
 }
 

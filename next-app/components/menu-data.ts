@@ -102,7 +102,7 @@ export const DISHES: Dish[] = [
   { id: 'garnelen-tempura', cat: 'vorspeisen', name: 'Garnelen Tempura', sub: '3 Stk.', desc: 'Shrimps Tempura, Chili-Mayo', price: 6.8, allergens: 'AHCF', img: '/foto/gericht-enhanced/garnelen-tempura.webp' },
   { id: 'xiao-long-bao', cat: 'vorspeisen', name: 'Xiao Long Bao', sub: '4 Stk.', desc: "gedämpfte 'Shanghai'-Teigtaschen mit Schweinefleisch", price: 6.9, allergens: 'AF', img: '/foto/gericht-enhanced/xiao-long-bao.webp' },
   { id: 'gebackene-wantan', cat: 'vorspeisen', name: 'Gebackene Wantan', sub: '3 Stk.', desc: 'mit Garnelen und Schweinefleisch', price: 6.2, allergens: 'ABCF', img: '/foto/gericht-enhanced/gebackene-wantan.webp' },
-  { id: 'garnelenrollen', cat: 'vorspeisen', name: 'Garnelenrollen', sub: '3 Stk.', desc: 'gebacken mit Bambussprossen', price: 7.8, allergens: 'ABCF' },
+  { id: 'garnelenrollen', cat: 'vorspeisen', name: 'Garnelenrollen', sub: '3 Stk.', desc: 'gebacken mit Bambussprossen', price: 7.8, allergens: 'ABCF', img: '/foto/gericht-enhanced/fruehlingsrollen.webp' },
   { id: 'gruener-salat', cat: 'vorspeisen', name: 'Grüner Salat', price: 6.0, tags: ['vegan'], img: '/foto/gericht-enhanced/gruener-salat.webp' },
 
   // ── GYOZA ─────────────────────────────────────────────────────────────────
@@ -144,7 +144,7 @@ export const DISHES: Dish[] = [
   // ── MAIN ──────────────────────────────────────────────────────────────────
   {
     id: 'kokos-curry', cat: 'main', name: 'Kokos-Curry mit Reis', sub: 'coconut curry with rice',
-    allergens: 'AF', tags: ['scharf'], img: '/foto/gericht-enhanced/kokos-curry.webp',
+    allergens: 'AF', tags: ['scharf'], img: '/foto/gericht-echt/kokos-curry.webp',
     variants: [
       { label: 'Garnelen', price: 17.2, allergens: 'H' },
       { label: 'Huhn', price: 16.2 },
@@ -187,7 +187,7 @@ export const DISHES: Dish[] = [
   },
   { id: 'knusprige-ente', cat: 'main', name: 'Knusprige Ente', desc: 'mit Teriyakisauce oder Knoblauchsauce, dazu gebratenes Gemüse', price: 18.9, allergens: 'AFLR', img: '/foto/gericht-enhanced/knusprige-ente.webp' },
   { id: 'lachs-gegrillt', cat: 'main', name: 'Lachs gegrillt', desc: 'mit Mangosauce oder Teriyakisauce, dazu gebratenes Gemüse', price: 17.2, allergens: 'ADFNO', img: '/foto/gericht-enhanced/lachs-gegrillt.webp' },
-  { id: 'tofu-teriyaki', cat: 'main', name: 'Tofu', desc: 'gegrillt mit Gemüse und Teriyakisauce', price: 15.8, allergens: 'AF', tags: ['vegetarisch'] },
+  { id: 'tofu-teriyaki', cat: 'main', name: 'Tofu', desc: 'gegrillt mit Gemüse und Teriyakisauce', price: 15.8, allergens: 'AF', tags: ['vegetarisch'], img: '/foto/gericht-echt/tofu-teriyaki.webp' },
   { id: 'mapo-tofu', cat: 'main', name: 'Mapo Tofu', price: 15.8, allergens: 'AF', tags: ['scharf'], img: '/foto/gericht-enhanced/mapo-tofu.webp' },
 
   // ── POKÉ BOWL ─────────────────────────────────────────────────────────────

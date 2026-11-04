@@ -87,6 +87,7 @@
 .mc-sushi h3 { margin: 0 0 18px; font-family: var(--hx-mincho); font-weight: 600; font-size: clamp(26px, 2.6vw, 36px); color: var(--hx-paper); }
 .mc-sushi p { color: #b3a899; font-size: var(--fs-body); line-height: 1.8; }
 .mc-sushi .hx-link { margin-top: 12px; }
+.mc-sushi .mc-kicker { color: var(--hc-red); }
 
 .mc-drinks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
 .mc-drinks h3 { position: relative; margin: 0 0 10px; padding-bottom: 14px; border-bottom: 1px solid var(--mc-line); font-family: var(--hx-mincho); font-size: clamp(22px, 2vw, 28px); font-weight: 600; color: var(--hx-paper); }

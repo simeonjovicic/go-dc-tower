@@ -7,7 +7,7 @@ import {
   ALLERGENS, CATEGORIES, DISHES, DRINKS, EXTRAS, POKE_SAUCEN,
   TAG_LABEL, fmt, priceFrom, type CategoryId, type Dish,
 } from '@/components/menu-data';
-import { ARROW_NE, CONTACT } from '@/components/site-data';
+import { ARROW_NE } from '@/components/site-data';
 
 type Selection = CategoryId | 'alle' | 'getraenke';
 
@@ -18,7 +18,7 @@ const SECTIONS: { id: Selection; label: string; short: string; intro?: string }[
   { id: 'nudelsuppen', label: 'Nudelsuppen', short: 'Nudelsuppen', intro: 'La Mien mit frisch gehobelten Weizennudeln oder Pho mit Reisbandnudeln. Die Einlage suchst du dir aus.' },
   { id: 'main', label: 'Wok & Reis', short: 'Wok & Reis', intro: 'Von knuspriger Ente bis Kokos-Curry. Hier findest du etwas für den großen Hunger.' },
   { id: 'poke', label: 'Poké Bowls', short: 'Bowls', intro: 'Sushi-Reis, Avocado, Gurke, Salat und Kräuter. Dazu dein Topping und eine Sauce nach Wahl.' },
-  { id: 'sushi', label: 'Sushi', short: 'Sushi', intro: 'Unsere Auswahl wechselt. Die aktuelle Sushi-Karte und die Preise erfährst du bei uns im Restaurant.' },
+  { id: 'sushi', label: 'Sushi', short: 'Sushi · Coming soon' },
   { id: 'kinder', label: 'Für Kinder', short: 'Für Kinder', intro: 'Kleine Portionen für unsere kleinen Gäste.' },
   { id: 'dessert', label: 'Dessert', short: 'Dessert', intro: 'Noch etwas Süßes zum Schluss?' },
   { id: 'getraenke', label: 'Getränke', short: 'Getränke' },
@@ -30,6 +30,7 @@ const PHOTO_NOTES: Record<string, string> = {
   eierreis: 'Abbildung: mit Rind',
   'chili-basilikum': 'Abbildung: mit Rind',
   bulgogi: 'Abbildung: mit Rind',
+  'kokos-curry': 'Abbildung: mit Huhn',
 };
 
 const normalize = (value: string) => value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
@@ -139,7 +140,7 @@ export function MenuExplorer() {
                 event.preventDefault(); chooseCategory(section.id);
               }}>
               <span className="mc-category-full">{section.label}</span><span className="mc-category-short">{section.short}</span>
-              <small>{section.id === 'sushi' ? ARROW_NE : section.id === 'getraenke' ? DRINKS.reduce((n, group) => n + group.items.length, 0) : pricedDishes.filter((dish) => section.id === 'alle' || dish.cat === section.id).length}</small>
+              <small>{section.id === 'sushi' ? 'Coming soon' : section.id === 'getraenke' ? DRINKS.reduce((n, group) => n + group.items.length, 0) : pricedDishes.filter((dish) => section.id === 'alle' || dish.cat === section.id).length}</small>
             </a>
           ))}
         </nav>
@@ -162,7 +163,7 @@ export function MenuExplorer() {
           <div className="mc-results-head">
             <div><p className="mc-kicker">{searching ? 'In der ganzen Karte' : 'Frisch aus unserer Küche'}</p>
               <h2>{searching ? 'Deine Suche: ' + query.trim() : current.label}</h2></div>
-            <span className="mc-count" role="status">{showSushi && total === 0 ? 'Nach Tagesangebot' : total + (searching ? ' Treffer' : active === 'getraenke' ? ' Getränke' : ' Gerichte')}{showSushi && total > 0 ? ' + Sushi' : ''}</span>
+            <span className="mc-count" role="status">{showSushi && total === 0 ? 'Coming soon' : total + (searching ? ' Treffer' : active === 'getraenke' ? ' Getränke' : ' Gerichte')}{showSushi && total > 0 ? ' + Sushi' : ''}</span>
           </div>
           {!searching && current.intro && <p className="mc-intro">{current.intro}</p>}
           {total === 0 && !showSushi && <div className="mc-empty"><h3>Da haben wir gerade nichts gefunden.</h3><p>Versuch einen anderen Suchbegriff oder schau dir die ganze Karte an.</p><button type="button" onClick={() => chooseCategory('alle')}>Alle Gerichte ansehen <span aria-hidden="true">{ARROW_NE}</span></button></div>}
@@ -173,7 +174,7 @@ export function MenuExplorer() {
               {category.id === 'sushi' ? (
                 <div className="mc-sushi">
                   <div className="mc-sushi-photo"><Image src="/foto/sushi/sushi-platte.webp" alt="Sushi-Auswahl im go DC Tower" fill sizes="(max-width: 760px) 90vw, 45vw" /></div>
-                  <div><h3>Sushi nach Tagesangebot.</h3><p>Die aktuelle Auswahl und Preise erfährst du im Restaurant oder telefonisch. Wir helfen dir gerne bei der Auswahl.</p><a className="hx-link" href={CONTACT.phoneHref}>{CONTACT.phone} <span aria-hidden="true">{ARROW_NE}</span></a></div>
+                  <div><p className="mc-kicker">Coming soon</p><h3>Sushi kommt bald.</h3><p>Unsere Sushi-Karte ist in Vorbereitung. Bis dahin gibt es frischen Fisch in unseren Poké Bowls.</p><a className="hx-link" href="#poke">Zu den Poké Bowls <span aria-hidden="true">{ARROW_NE}</span></a></div>
                 </div>
               ) : (
                 <ul className="mc-dishes">

@@ -25,8 +25,9 @@ export const CONTACT = {
   building: 'DC Tower, Erdgeschoss',
   phone: '+43 1 9165156',
   phoneHref: 'tel:+4319165156',
-  email: 'office@godctower.com',
-  maps: 'https://maps.google.com/?q=Donau-City-Stra%C3%9Fe+7,+1220+Wien',
+  email: 'info@godctower.com',
+  /** Sucht nach dem Lokal, nicht nach der Adresse: sonst zeigt Google nur „DC Tower“. */
+  maps: 'https://www.google.com/maps/search/?api=1&query=Ra%27mien+Go+DC+Tower',
 } as const;
 
 export const SOCIAL = {
@@ -50,7 +51,7 @@ export const GLORIAFOOD = {
 
 /**
  * Catering-Anfragen laufen über Web3Forms und kommen als E-Mail bei CONTACT.email an.
- * TODO: Access Key unter web3forms.com mit office@godctower.com anlegen und hier eintragen.
+ * TODO: Access Key unter web3forms.com mit info@godctower.com anlegen und hier eintragen.
  * Solange er leer ist, öffnet das Formular eine vorausgefüllte E-Mail.
  */
 export const FORM = {
@@ -61,7 +62,7 @@ export const FORM = {
 export type Hours = { days: string; time: string; note?: string; closed?: boolean };
 
 export const HOURS: Hours[] = [
-  { days: 'Montag – Freitag', time: '11:00 – 22:00', note: 'Küche bis 21:00' },
+  { days: 'Montag – Freitag', time: '11:00 – 21:00' },
   { days: 'Sonntag', time: '11:00 – 17:00' },
   { days: 'Samstag & Feiertage', time: 'geschlossen', closed: true },
 ];
@@ -74,6 +75,12 @@ export const ANFAHRT = [
 
 /** Wegbeschreibungen als Video. TODO: Dateien nach /public/videos legen und `src` setzen. */
 export const ANFAHRT_VIDEOS: { title: string; text: string; src: string | null; poster?: string }[] = [
+  {
+    title: 'Von der U1 Kaisermühlen zu uns',
+    text: 'Zwei Gehminuten vom Ausgang VIC bis zum DC Tower.',
+    src: '/videos/anfahrt-u1-kaisermuehlen.mp4',
+    poster: '/videos/anfahrt-u1-kaisermuehlen-poster.webp',
+  },
   {
     title: 'Von der U1 Donauinsel zu uns',
     text: 'Rund fünf Minuten zu Fuß bis zum DC Tower – und hereinspaziert.',

@@ -1,4 +1,39 @@
 {
+  "/foto/gericht-echt/hoch/knusprige-ente.webp": [
+    480,
+    828,
+    1200
+  ],
+  "/foto/gericht-echt/hoch/lamien-rind.webp": [
+    480,
+    828,
+    1200
+  ],
+  "/foto/gericht-echt/hoch/poke-maguro.webp": [
+    480,
+    828,
+    1200
+  ],
+  "/foto/gericht-echt/hoch/tuna-tataki.webp": [
+    480,
+    828,
+    1200
+  ],
+  "/foto/gericht-echt/hoch/xiao-long-bao.webp": [
+    480,
+    828,
+    1200
+  ],
+  "/foto/gericht-echt/kokos-curry.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/tofu-teriyaki.webp": [
+    480,
+    828,
+    1000
+  ],
   "/foto/gericht-enhanced/bulgogi-rind.webp": [
     480,
     828,
@@ -60,11 +95,6 @@
     1000
   ],
   "/foto/gericht-enhanced/knusprige-ente.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/kokos-curry.webp": [
     480,
     828,
     1000
@@ -235,8 +265,8 @@
     1200,
     1400
   ],
-  "/go-dc-tower-logo.png": [
+  "/ramien-go-logo.png": [
     480,
-    706
+    513
   ]
 }
