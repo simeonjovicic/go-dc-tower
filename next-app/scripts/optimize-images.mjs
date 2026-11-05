@@ -24,11 +24,11 @@ const QUALITY = 74;
 const EXTRA = ['/ramien-go-logo.png'];
 /**
  * Hero als <picture>: einmal als WebP, Helligkeit/Sättigung fest eingerechnet statt per CSS-Filter.
- * Die Wolt-Tafel ist hell fotografiert; abgedunkelt bleibt die weiße Wortmarke darüber lesbar.
+ * Die Teller-Komposition ist schon dunkel abgestimmt und bleibt deshalb unverändert hell.
  */
 const HERO = [
-  { src: '/hero-tafel.jpg', out: '/_img/hero-tafel.webp', brightness: 0.58 },
-  { src: '/hero-tafel-tall.jpg', out: '/_img/hero-tafel-tall.webp', brightness: 0.58 },
+  { src: '/hero-teller.jpg', out: '/_img/hero-teller.webp', brightness: 1 },
+  { src: '/hero-teller-tall.jpg', out: '/_img/hero-teller-tall.webp', brightness: 1 },
 ];
 
 function codeFiles(dir) {

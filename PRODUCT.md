@@ -71,7 +71,7 @@ Asian Fusion in großer Vielfalt an einer Adresse: Nudelsuppen (La Mien), Sushi,
 - **Catering-Texte:** `docs/Catering_und_Events_Ramiengo_DC_Tower.docx`. Die Kapazitäten darin sind veraltet, es gelten die Zahlen oben.
 - **Fotos:**
   - Echte Fotos in `next-app/public/foto/`: Location, Shootings 2021/09, 2021/11 und 2022/03, Wolt 2026, Gerichte, Haus, Leben. Übersicht in `docs/fotoarchiv.md`.
-  - Die Gerichtsfotos in `foto/gericht-enhanced/` sind mit KI bearbeitet (nur der Hintergrund, siehe `docs/food-photography.md`).
+  - Die Gerichtsfotos in `foto/gericht-echt/` sind die Wolt-Fotos 2026. Gemini hat dort nur den weißen Hintergrund durch Nussholz ersetzt, jedes Bild ist gegen das Original geprüft (siehe `docs/food-photography.md`). Weiße Hintergründe passen laut Nutzer nicht zur Website.
 - **Videos:** Anfahrt von der U1 Kaisermühlen (`next-app/public/videos/anfahrt-u1-kaisermuehlen.mp4`) und von der U1 Donauinsel (`anfahrt-u1-donauinsel.mp4`).
 - **Nicht vorhanden, also nicht erfinden:** Bewertungen, Testimonials, Pressestimmen, Auszeichnungen, Preise für Catering.
 

@@ -449,13 +449,14 @@ export function HighClassHome() {
           <div className="hc-hero">
             <div className="hc-hero-media" aria-hidden="true">
               <picture>
-                {/* Eigene Gerichte von oben. WebP mit eingerechneter Helligkeit (npm run images); die JPGs bleiben als Fallback. */}
-                <source media="(max-width: 640px)" type="image/webp" srcSet="/_img/hero-tafel-tall.webp" />
-                <source media="(max-width: 640px)" srcSet="/hero-tafel-tall.jpg" />
-                <source type="image/webp" srcSet="/_img/hero-tafel.webp" />
+                {/* Echte Teller des Hauses, freigestellt auf dunklem Schiefer, links Platz für die Wortmarke.
+                    WebP per npm run images; die JPGs bleiben als Fallback. */}
+                <source media="(max-width: 640px)" type="image/webp" srcSet="/_img/hero-teller-tall.webp" />
+                <source media="(max-width: 640px)" srcSet="/hero-teller-tall.jpg" />
+                <source type="image/webp" srcSet="/_img/hero-teller.webp" />
                 {/* The portrait photograph preserves the composition on phones. */}
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/hero-tafel.jpg" alt="" loading="eager" fetchPriority="high" />
+                <img src="/hero-teller.jpg" alt="" loading="eager" fetchPriority="high" />
               </picture>
             </div>
             <span className="hc-hero-glyph" lang="zh" aria-hidden="true">面</span>

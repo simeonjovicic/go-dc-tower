@@ -1,84 +1,26 @@
-# Food photography refresh
+# Food photography
 
-Created with the built-in Imagegen tool (not the CLI), editing the restaurant's existing photographs. Original files remain in `next-app/public/foto/gericht/`.
+The dish photos on the website are the house's Wolt pack shots from 2026 (`Woltbilder_2026/`, 2880 × 1620, white background). Gemini (gemini.google.com, one temporary chat per photo, 2026-11-04/05) replaced only the white background with a dark warm walnut tabletop. The food, portions, arrangement and blue-and-white tableware stay those of the original photo.
+
+Every result was checked side by side against its original before use. Three first attempts were rejected and redone: Chili-Mayo (Gemini put the sauce into the miso soup of the style reference), Tuna-Tataki (zoomed in, plate cut off) and Teriyakisauce (different wood).
+
+Earlier AI edits (`foto/gericht-enhanced/`, built from the older 1100 px Wolt files) are no longer used and have been removed.
 
 ## Output and use
 
-31 enhanced images are saved in `next-app/public/foto/gericht-enhanced/` as 1000 × 1000 WebP files (quality 85). Matching 400 × 400 WebP thumbnails (quality 82) are in its `thumbs/` subdirectory. The shared menu data uses the large images; MenuExplorer uses the thumbnails. Both sizes were exported directly from the generated PNGs using cwebp, with no further image retouching.
+- `next-app/public/foto/gericht-echt/<name>.webp`: square 1000 × 1000 crops for /menu. `<name>` is the old menu photo name. The matching new shot was found by comparing the images, not the file names, because several Wolt file names are wrong (for example, the photo labelled "Garnelenrollen" is the one the menu has always shown for Frühlingsrollen).
+- `next-app/public/foto/gericht-echt/hoch/<name>.webp`: 3:4 crops for the dish reel on the home page.
+- `next-app/public/hero-teller.jpg` and `hero-teller-tall.jpg`: the home page hero. The checked plates were cut out along the plate rim and placed on an empty dark slate table that Gemini generated. The food itself was not regenerated for the hero, only moved and scaled.
 
-The intended edit is a walnut tabletop background with restrained lighting/color enhancement. Food, portion, arrangement and blue/white tableware were constrained to the originals and visually compared. These are generative edits, not pixel-identical food cutouts.
+The full-size results (2752 × 1536) and the scripts are kept locally in `.gemini-work/`, outside Git.
 
-## Final prompts
+## Prompt
 
-### First image / series style reference: misosuppe
-
-```text
-Use case: precise-object-edit.
-Asset type: an existing restaurant menu food photo, modest premium photographic enhancement.
-Input image 1 is the exact edit target, a bowl of miso soup. Replace only the blank white surrounding table/background with a refined dark warm walnut restaurant tabletop, subtle fine natural grain, no rustic planks.
-Preserve the actual soup ingredients, exact portions, arrangement, broth, bowl silhouette, and blue ceramic rim design as closely as possible. This is the restaurant's real dish and must remain recognizable; do not invent a better or different dish.
-Keep the same near-overhead camera angle, with the whole bowl centered and fully visible, including rim. Produce a square composition with the bowl approximately 75 percent of image width and breathing room on all sides.
-Use soft warm natural light from upper left, believable soft contact shadow, gently improved clarity and appetizing but realistic color. Elegant restrained restaurant editorial photography, not dramatic artificial gloss.
-No added food, garnish, utensils, napkins, props, steam, hands, text, logos, or borders. Change only background and gentle photographic lighting/color.
-```
-
-### Remaining 30 images
-
-Image 1 was each matching original file. Image 2 was the first enhanced misosuppe image, used only for background and lighting.
+Image 1 was the original photo, image 2 a walnut style reference.
 
 ```text
-Use case: precise-object-edit.
-Asset type: photo for a premium restaurant's real menu.
-Input image 1 is the exact food-photo EDIT TARGET. Input image 2 is ONLY the approved background and lighting STYLE reference. Never transfer the soup, bowl or ingredients from image 2.
-Replace only the blank white surrounding background of image 1 with the same warm dark walnut restaurant tabletop as image 2, refined subtle grain.
-Preserve image 1's exact dish, food ingredients and quantities, food arrangement, sauces, garnish, and original blue-and-white ceramic plate or bowl pattern and silhouette. Preserve baskets if present. Do not re-plate or invent food.
-Retain the source overhead angle and orientation. Square composition, complete plate centered and fully visible with comfortable margins, approximately 75 percent of frame width.
-Match the soft warm natural lighting, realistic contact shadows and restrained photographic enhancement of image 2. Gently improve clarity and natural food color only. Keep real food textures.
-No added utensils, props, side dishes, extra garnish, napkins, fake steam, text, logos, borders, or hands. Output one single finished menu photograph.
-Target dish filename: {filename_without_extension}.
+Edit image 1 only. Image 1 is a real menu photo of a dish from our restaurant. Image 2 is ONLY a reference for the background and lighting style: never copy its bowl, soup or food.
+Replace only the plain white / light grey background of image 1 with the same dark warm walnut restaurant tabletop as in image 2 (refined, subtle natural wood grain), with soft warm natural light from the upper left and a realistic soft contact shadow under the plate.
+Keep everything else from image 1 exactly as it is: the same dish, every ingredient, the quantities, the arrangement, the sauces and garnish, and the blue-and-white plate, bowl or basket with its exact pattern and shape. Do not re-plate, add, remove or improve any food. Keep the same overhead camera angle, the same framing, the same size and position of the plate, and the same 16:9 landscape format.
+No added props, utensils, napkins, steam, hands, text, logos or borders. Output one single finished photo.
 ```
-
-Additional constraint for `kokos-curry`:
-
-> Keep the plain smooth orange coconut curry surface with NO garnish, ingredients or noodles added.
-
-Additional constraint for `mochi` and `eis-mochi`:
-
-> Keep just ONE mochi, same exact original shape and color, uncut, no fillings exposed, no new decorations.
-
-## Files
-
-Each listed filename exists in both the output directory and `thumbs/`, and maps to the same filename in the original directory.
-
-- `misosuppe.webp`
-- `wantansuppe.webp`
-- `edamame.webp`
-- `wakame.webp`
-- `fruehlingsrollen.webp`
-- `chaoshou.webp`
-- `tuna-tataki.webp`
-- `chicken-tempura.webp`
-- `garnelen-tempura.webp`
-- `xiao-long-bao.webp`
-- `gebackene-wantan.webp`
-- `gruener-salat.webp`
-- `lamien-rind.webp`
-- `udon-meeresfruechte.webp`
-- `wantansuppe-ente.webp`
-- `kokos-curry.webp`
-- `wok-nudeln-rind.webp`
-- `eierreis-rind.webp`
-- `chili-rind.webp`
-- `bulgogi-rind.webp`
-- `knusprige-ente.webp`
-- `lachs-gegrillt.webp`
-- `mapo-tofu.webp`
-- `poke-lachs.webp`
-- `poke-maguro.webp`
-- `poke-shrimps.webp`
-- `poke-tofu.webp`
-- `poke-crispy-chicken.webp`
-- `hong-tang-ci-ba.webp`
-- `mochi.webp`
-- `eis-mochi.webp`
-

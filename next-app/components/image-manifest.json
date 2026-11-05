@@ -1,30 +1,145 @@
 {
+  "/foto/gericht-echt/bulgogi-rind.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/chaoshou.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/chicken-tempura.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/chili-rind.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/edamame.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/eierreis-rind.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/eis-mochi.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/fruehlingsrollen.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/garnelen-tempura.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/gebackene-wantan.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/gruener-salat.webp": [
+    480,
+    828,
+    1000
+  ],
   "/foto/gericht-echt/hoch/knusprige-ente.webp": [
     480,
     828,
-    1200
+    1152
   ],
   "/foto/gericht-echt/hoch/lamien-rind.webp": [
     480,
     828,
-    1200
+    1152
   ],
   "/foto/gericht-echt/hoch/poke-maguro.webp": [
     480,
     828,
-    1200
+    1152
   ],
   "/foto/gericht-echt/hoch/tuna-tataki.webp": [
     480,
     828,
-    1200
+    1152
   ],
   "/foto/gericht-echt/hoch/xiao-long-bao.webp": [
     480,
     828,
-    1200
+    1152
+  ],
+  "/foto/gericht-echt/hong-tang-ci-ba.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/knusprige-ente.webp": [
+    480,
+    828,
+    1000
   ],
   "/foto/gericht-echt/kokos-curry.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/lachs-gegrillt.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/lamien-rind.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/mapo-tofu.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/misosuppe.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/mochi.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/poke-crispy-chicken.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/poke-lachs.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/poke-maguro.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/poke-shrimps.webp": [
+    480,
+    828,
+    1000
+  ],
+  "/foto/gericht-echt/poke-tofu.webp": [
     480,
     828,
     1000
@@ -34,152 +149,37 @@
     828,
     1000
   ],
-  "/foto/gericht-enhanced/bulgogi-rind.webp": [
+  "/foto/gericht-echt/tuna-tataki.webp": [
     480,
     828,
     1000
   ],
-  "/foto/gericht-enhanced/chaoshou.webp": [
+  "/foto/gericht-echt/udon-meeresfruechte.webp": [
     480,
     828,
     1000
   ],
-  "/foto/gericht-enhanced/chicken-tempura.webp": [
+  "/foto/gericht-echt/wakame.webp": [
     480,
     828,
     1000
   ],
-  "/foto/gericht-enhanced/chili-rind.webp": [
+  "/foto/gericht-echt/wantansuppe-ente.webp": [
     480,
     828,
     1000
   ],
-  "/foto/gericht-enhanced/edamame.webp": [
+  "/foto/gericht-echt/wantansuppe.webp": [
     480,
     828,
     1000
   ],
-  "/foto/gericht-enhanced/eierreis-rind.webp": [
+  "/foto/gericht-echt/wok-nudeln-rind.webp": [
     480,
     828,
     1000
   ],
-  "/foto/gericht-enhanced/eis-mochi.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/fruehlingsrollen.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/garnelen-tempura.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/gebackene-wantan.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/gruener-salat.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/hong-tang-ci-ba.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/knusprige-ente.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/lachs-gegrillt.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/lamien-rind.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/mapo-tofu.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/misosuppe.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/mochi.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/poke-crispy-chicken.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/poke-lachs.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/poke-maguro.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/poke-shrimps.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/poke-tofu.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/tuna-tataki.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/udon-meeresfruechte.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/wakame.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/wantansuppe-ente.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/wantansuppe.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/wok-nudeln-rind.webp": [
-    480,
-    828,
-    1000
-  ],
-  "/foto/gericht-enhanced/xiao-long-bao.webp": [
+  "/foto/gericht-echt/xiao-long-bao.webp": [
     480,
     828,
     1000

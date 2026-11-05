@@ -211,15 +211,13 @@ export function MenuExplorer() {
 function MenuDish({ dish, expandVariants }: { dish: Dish; expandVariants: boolean }) {
   const [open, setOpen] = useState(expandVariants);
   useEffect(() => { setOpen(expandVariants); }, [expandVariants]);
-  // The static export serves pre-sized thumbnails for the compact menu rows.
-  const photo = dish.img?.replace('/gericht-enhanced/', '/gericht-enhanced/thumbs/');
   const variants = dish.variants ?? [];
   const from = priceFrom(dish);
   const codes = [...new Set([dish.allergens ?? '', ...variants.map((variant) => variant.allergens ?? '')].join('').split(''))];
   return (
     <li className={'mc-dish' + (dish.img ? ' has-photo' : '')} id={'gericht-' + dish.id}>
       <div className="mc-dish-overview">
-        {dish.img && <div className="mc-dish-photo"><Image src={photo!} alt={dishName(dish)} fill sizes="(max-width: 760px) 120px, 160px" />{PHOTO_NOTES[dish.id] && <small>{PHOTO_NOTES[dish.id]}</small>}</div>}
+        {dish.img && <div className="mc-dish-photo"><Image src={dish.img} alt={dishName(dish)} fill sizes="(max-width: 760px) 120px, 160px" />{PHOTO_NOTES[dish.id] && <small>{PHOTO_NOTES[dish.id]}</small>}</div>}
         <div className="mc-dish-copy">
           <div className="mc-dish-title"><h3>{dishName(dish)}</h3><span className="mc-price">{variants.length > 0 ? <small>ab </small> : null}{from === null ? 'auf Anfrage' : '€ ' + fmt(from)}</span></div>
           {dish.sub && /^\d+\s*Stk/.test(dish.sub) && <p className="mc-portion">{dish.sub}</p>}
